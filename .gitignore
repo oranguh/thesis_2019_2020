@@ -9,3 +9,4 @@ __pycache__/
 generate_data_from_mne.py
 
 data_2/
+data/

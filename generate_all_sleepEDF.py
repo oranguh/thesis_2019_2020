@@ -33,7 +33,7 @@ event_id = {'Sleep stage W': 1,
 time_scale = 30.
 sampling_Hz = 100.
 
-folder_to_save = 'data_2'
+folder_to_save = 'data'
 datapoint_counter = 0
 labels_dict = {}
 
@@ -75,6 +75,8 @@ for test_subject in tqdm(fetch_data(subjects=np.arange(19), recording=[1, 2])):
 
     for i, signal in enumerate(no_wake_data):
         signal = torch.from_numpy(signal)
+        if not os.path.exists(folder_to_save):
+            os.makedirs(folder_to_save)
         torch.save(signal, os.path.join(folder_to_save, str(datapoint_counter)) + '.pt')
 
         labels_dict[str(datapoint_counter)] = no_wake_labels[i] - 2
