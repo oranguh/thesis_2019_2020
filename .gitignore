@@ -1,0 +1,11 @@
+.idea/
+venv/
+.ipynb_checkpoints/
+papers_random/
+__pycache__/
+
+*.pyc
+
+generate_data_from_mne.py
+
+data_2/
