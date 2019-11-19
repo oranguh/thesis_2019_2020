@@ -1,6 +1,6 @@
 # thesis_2019_2020
 
-One Paragraph of project description goes here
+Some sleepy EEG things
 
 ## Getting Started
 
