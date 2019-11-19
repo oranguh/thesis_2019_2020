@@ -104,4 +104,4 @@ save_obj(labels_dict, os.path.join(folder_to_save, 'labels'))
 
 # print(partition['train'], '\n\n', labels)
 print("{} Datapoint created. {} Training and {} Validation".format(len(labels_dict), len(partition['train']), len(partition['validation'])))
-plot_classes_distribution(labels_dict)
+plot_classes_distribution(labels_dict, ['N1', 'N2', 'N3/4', 'REM'])
