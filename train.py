@@ -12,6 +12,7 @@ import pickle as pkl
 from sklearn import metrics
 import logging
 from torch.utils.tensorboard import SummaryWriter
+from datetime import datetime
 
 
 def load_obj(name ):
@@ -23,7 +24,7 @@ def load_obj(name ):
 logger = logging.getLogger("My_app")
 logger.setLevel(logging.INFO)
 
-writer = SummaryWriter("Tensorboard_logs")
+writer = SummaryWriter(comment=str(datetime.now().strftime("%Y%m%d-%H%M%S")))
 
 # create console handler with a higher log level
 ch = logging.StreamHandler()
@@ -35,7 +36,7 @@ logger.addHandler(ch)
 
 
 # load metadata stuff
-data_folder = 'data/'
+data_folder = 'data_2/'
 sleep_stages = ['N1', 'N2', 'N3/4', 'REM']
 
 partition = load_obj(os.path.join(data_folder, 'partition.pkl'))
@@ -129,7 +130,7 @@ for epoch in range(max_epochs):
         logger.info("VALIDATION: epoch: {} Loss {:.3f} Accuracy: {:.3f}".format(epoch, loss.item(), acc))
         logger.info("VALIDATION Classification Report: \n{}\n".format(report))
 
-writer.close()
+
 
 np.set_printoptions(precision=2)
 
@@ -137,6 +138,10 @@ np.set_printoptions(precision=2)
 # print(y_test, "\n", y_pred)
 
 # Plot normalized confusion matrix
-plot_confusion_matrix(true_array, pred_array, classes=sleep_stages, normalize=True, title='Normalized confusion matrix')
+fig_confusion = plot_confusion_matrix(true_array, pred_array, classes=sleep_stages, normalize=True, title='Normalized confusion matrix')
+writer.add_figure("Confusion Matrix", fig_confusion)
 
-plot_classes_distribution(labels, classes=sleep_stages)
+fig_classes = plot_classes_distribution(labels, classes=sleep_stages)
+writer.add_figure("Class distribution", fig_classes)
+
+writer.close()

@@ -3,7 +3,7 @@ venv/
 .ipynb_checkpoints/
 papers_random/
 __pycache__/
-
+EEG_lookaround.ipynb
 *.pyc
 
 generate_data_from_mne.py

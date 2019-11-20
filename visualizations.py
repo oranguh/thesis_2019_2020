@@ -35,7 +35,7 @@ def plot_confusion_matrix(y_true, y_pred, classes,
 
     print(cm)
 
-    ax = plt.subplot()
+    fig, ax = plt.subplots()
     cmap = sns.diverging_palette(220, 20, n=7)
     cmap = 'RdYlGn'
     sns.heatmap(cm, annot=True, ax=ax, center=1/len(classes), cmap=cmap, robust=True)  # annot=True to annotate cells
@@ -52,6 +52,8 @@ def plot_confusion_matrix(y_true, y_pred, classes,
     plt.savefig(os.path.join('figures/', 'confusion_matrix.png'))
     plt.show()
 
+    return fig
+
 def plot_classes_distribution(labels, classes):
 
     # plt.bar(list(labels.keys()), labels.values(), 1, color='g')
@@ -59,10 +61,14 @@ def plot_classes_distribution(labels, classes):
     # ax.xaxis.set_ticklabels(['N1', 'N2', 'N3/4', 'REM'])
     # plt.show()
 
+    fig, ax = plt.subplots()
+
     df = pd.DataFrame(labels.values(), labels.keys())
     df = df.rename(columns={0: 'Classes'})
     sns.countplot(x='Classes', data=df)
-    ax = plt.gca()
+    # ax = plt.gca()
     ax.xaxis.set_ticklabels(classes)
     plt.savefig(os.path.join('figures/', 'class_distribution.png'))
     plt.show()
+
+    return fig
