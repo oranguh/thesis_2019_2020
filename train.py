@@ -99,6 +99,7 @@ for epoch in range(max_epochs):
     writer.add_scalar('Loss/train', loss.item(), global_step=epoch)
     writer.add_scalar('Accuracy/train', acc, global_step=epoch)
     report = metrics.classification_report(true_array, pred_array, target_names=sleep_stages)
+    writer.add_text('Report Training', report + '\n', global_step=epoch)
     logger.info("TRAINING: epoch: {} Loss {:.3f} Accuracy: {:.3f}".format(epoch, loss.item(), acc))
     logger.info("TRAINING Classification Report: \n{}\n".format(report))
 
@@ -125,6 +126,7 @@ for epoch in range(max_epochs):
         acc = accuracy(pred_array, true_array)
         # print(true_array, pred_array)
         report = metrics.classification_report(true_array, pred_array, target_names=sleep_stages)
+        writer.add_text('Report Validation', report + '\n', global_step=epoch)
         writer.add_scalar('Loss/validation', loss.item(), global_step=epoch)
         writer.add_scalar('Accuracy/validation', acc, global_step=epoch)
         logger.info("VALIDATION: epoch: {} Loss {:.3f} Accuracy: {:.3f}".format(epoch, loss.item(), acc))
