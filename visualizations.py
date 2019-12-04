@@ -36,9 +36,9 @@ def plot_confusion_matrix(y_true, y_pred, classes,
     print(cm)
 
     fig, ax = plt.subplots()
-    cmap = sns.diverging_palette(220, 20, n=7)
+    # cmap = sns.diverging_palette(220, 20, n=7)
     cmap = 'RdYlGn'
-    sns.heatmap(cm, annot=True, ax=ax, center=1/len(classes), cmap=cmap, robust=True)  # annot=True to annotate cells
+    sns.heatmap(cm, annot=True, ax=ax, center=1/len(classes), cmap=cmap, robust=True, cbar=True)  # annot=True to annotate cells
 
     # labels, title and ticks
     ax.set_xlabel('Predicted labels')
@@ -48,9 +48,10 @@ def plot_confusion_matrix(y_true, y_pred, classes,
     ax.yaxis.set_ticklabels(classes)
     ax.set_ylim(len(classes) + 0.5, -0.5)
 
+
     # plt.tight_layout()
     plt.savefig(os.path.join('figures/', 'confusion_matrix.png'))
-    plt.show()
+    # plt.show()
 
     return fig
 

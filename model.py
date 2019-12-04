@@ -60,7 +60,11 @@ class ConvNet(nn.Module):
 
         self.convoluter = nn.Sequential(self.layers)
 
-        self.classifier = nn.Sequential(nn.Linear(4096, n_classes))
+        self.classifier = nn.Sequential(
+            nn.Linear(4096, 2048),
+            nn.ReLU(),
+            nn.Dropout(p=0.5),
+            nn.Linear(2048, n_classes))
         print("Created model : {}".format(self))
 
     def forward(self, x):

@@ -52,7 +52,7 @@ device = torch.device("cuda:0" if use_cuda else "cpu")
 params = {'batch_size': 64,
           'shuffle': True,
           'num_workers': 0}
-max_epochs = 10
+max_epochs = 5
 
 # Generators
 
@@ -131,7 +131,7 @@ for epoch in range(max_epochs):
         writer.add_scalar('Accuracy/validation', acc, global_step=epoch)
         logger.info("VALIDATION: epoch: {} Loss {:.3f} Accuracy: {:.3f}".format(epoch, loss.item(), acc))
         logger.info("VALIDATION Classification Report: \n{}\n".format(report))
-
+        writer.add_figure("Validation Confusions", plot_confusion_matrix(true_array, pred_array, classes=sleep_stages, normalize=True, title='Normalized confusion matrix'), global_step=epoch)
 
 
 np.set_printoptions(precision=2)
