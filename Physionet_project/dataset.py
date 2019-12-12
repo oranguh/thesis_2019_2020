@@ -20,8 +20,8 @@ class Dataset(data.Dataset):
 
         # Load data and get label
 
-        X = torch.load(self.folder + ID + '_data.pt')
+        X = torch.load(self.folder + ID + '\\' + ID + '_data.pt')
 
-        Y = torch.load(self.folder + ID + '_labels.pt')
+        Y = torch.load(self.folder + ID + '\\' + ID + '_labels.pt')
 
         return X, Y
