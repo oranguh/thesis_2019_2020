@@ -31,14 +31,15 @@ class DCU1(nn.Module):
 
         self.activate = activation_func(activation)
 
+
         self.blocks = nn.Sequential(
-            nn.Conv1d(in_channels, in_channels, 51, stride=1, padding=1, groups=in_channels, dilation=dilation),
-            nn.Conv1d(in_channels, out_channels * 4, 1, stride=1, padding=1, groups=1, dilation=dilation),
+            nn.Conv1d(in_channels, in_channels, 51, padding=25, stride=1, groups=in_channels, dilation=dilation),
+            nn.Conv1d(in_channels, out_channels * 4, 1, stride=1, groups=1, dilation=dilation),
             self.activate,
             nn.BatchNorm1d(out_channels * 4),
-            nn.Conv1d(out_channels * 4, out_channels * 4, 1, stride=1, padding=1, groups=out_channels * 4,
+            nn.Conv1d(out_channels * 4, out_channels * 4, 1, stride=1, groups=out_channels * 4,
                       dilation=dilation),
-            nn.Conv1d(out_channels * 4, out_channels, 1, stride=1, padding=1, groups=1, dilation=dilation),
+            nn.Conv1d(out_channels * 4, out_channels, 1, stride=1, groups=1, dilation=dilation),
             self.activate,
             nn.BatchNorm1d(out_channels)
         )
@@ -47,7 +48,8 @@ class DCU1(nn.Module):
         input = x
 
         x = self.blocks(x)
-        x = torch.cat((x, input))
+        print(x.shape, input.shape)
+        x = torch.cat((x, input), dim=1)
         return x
 
 
@@ -61,13 +63,13 @@ class DCU2(nn.Module):
         self.activate = activation_func(activation)
 
         self.blocks = nn.Sequential(
-            nn.Conv1d(in_channels, in_channels, 25, stride=1, padding=1, groups=in_channels, dilation=dilation),
-            nn.Conv1d(in_channels, out_channels * 4, 1, stride=1, padding=1, groups=1, dilation=dilation),
+            nn.Conv1d(in_channels, in_channels, 25, padding=13, stride=1, groups=in_channels, dilation=dilation),
+            nn.Conv1d(in_channels, out_channels * 4, 1, stride=1, groups=1, dilation=dilation),
             self.activate,
             nn.BatchNorm1d(out_channels * 4),
-            nn.Conv1d(out_channels * 4, out_channels * 4, 1, stride=1, padding=1, groups=out_channels * 4,
+            nn.Conv1d(out_channels * 4, out_channels * 4, 1, stride=1, groups=out_channels * 4,
                       dilation=dilation),
-            nn.Conv1d(out_channels * 4, out_channels, 1, stride=1, padding=1, groups=1, dilation=dilation),
+            nn.Conv1d(out_channels * 4, out_channels, 1, stride=1, groups=1, dilation=dilation),
             self.activate,
             nn.BatchNorm2d(out_channels)
         )
@@ -76,7 +78,8 @@ class DCU2(nn.Module):
         input = x
 
         x = self.blocks(x)
-        x = torch.cat((x, input))
+        print(x.shape, input.shape)
+        x = torch.cat((x, input), dim=1)
         return x
 
 
@@ -85,7 +88,7 @@ class Howe_Patterson(nn.Module):
 
   """
 
-    def __init__(self, n_channels, n_classes):
+    def __init__(self):
         super(Howe_Patterson, self).__init__()
         """
         Initializes ConvNet object.
@@ -95,7 +98,7 @@ class Howe_Patterson(nn.Module):
           n_classes: number of classes of the classification problem
 
         """
-        self.n_classes = n_classes
+
         self.layers = OrderedDict()
 
         self.layers["conv_1"] = DCU1(12, 24)
@@ -121,9 +124,12 @@ class Howe_Patterson(nn.Module):
 
         self.lstm_conv1 = nn.Conv1d(348, 128, 1)
         self.lstm_conv2 = nn.Conv1d(256, 128, 1)
-        self.lstm_conv3 = nn.Conv1d(128, 4, 1)
+        self.lstm = nn.LSTM(348, 128, 1, bidirectional=True, batch_first=True)
 
-        self.lstm = nn.LSTM(348, 128, 1, bidirectional=True)
+        # The second argument denotes the output classes
+        self.lstm_conv3 = nn.Conv1d(128, 1, 1)
+
+
 
         print("Created model : {}".format(self))
 
