@@ -16,15 +16,25 @@ datapoint_counter = 0
 data_array = np.asarray([])
 counter = 0
 
+overwrite = False
+
 for root, dirs, files in tqdm(os.walk(folder_path), total=len(os.listdir(folder_path))):
 
     if counter == 0:
         counter += 1
         continue
+
+    if counter == 505:
+        break
+
     head_tail = os.path.split(root)
     file = os.path.join(root, head_tail[-1])
 
-    # print(file)
+    if os.path.isfile(file + "_labels.pt") and not overwrite:
+        print(f"{head_tail[-1]} exists, skipping saving")
+        data_array = np.append(data_array, head_tail[-1])
+        counter += 1
+        continue
 
     X = scipy.io.loadmat(file + ".mat")
     X = X['val']
@@ -45,14 +55,19 @@ for root, dirs, files in tqdm(os.walk(folder_path), total=len(os.listdir(folder_
             f['data']['sleep_stages'][key].read_direct(temp_array_)
             Y[i + 1] = np.squeeze(temp_array_)
 
+    # # # # TODO Pre-processing # # # #
+    # Mean and RMS?
+    # Some kind of anti aliasing filter?
+    # moving window?
+
     torch.save(X, file + '_data.pt')
     torch.save(Y, file + '_labels.pt')
+
+    print(f"Saved {head_tail[-1]}")
 
     counter += 1
     data_array = np.append(data_array, head_tail[-1])
 
-    if counter == 10:
-        break
 
 print('\n', data_array, '\n\n')
 
