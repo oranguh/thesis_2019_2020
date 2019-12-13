@@ -87,9 +87,28 @@ for epoch in range(max_epochs):
         # for now only look at arousals, not sleep stages
         local_labels = local_labels[:, 0, :]
 
+        local_labels += 1
+
         print(local_batch.shape, local_labels.shape)
-        local_batch = local_batch[:, :, ::5]
+        bat_ = int(local_batch.shape[-1]*.2)
+        lab_ = int(local_labels.shape[-1]*.2)
+
+        local_batch = local_batch[:, :, 0:bat_]
+        local_labels = local_labels[:, 0:lab_]
+        print(local_batch.shape, local_labels.shape)
+
+        local_batch = local_batch[:, :, ::4]
+
+        local_labels = local_labels[:, ::4]
+        local_labels = local_labels[:, ::2]
         local_labels = local_labels[:, ::5]
+        local_labels = local_labels[:, ::5]
+
+        # import matplotlib.pyplot as plt
+        # print(local_labels)
+        # plt.plot(local_labels.squeeze().cpu().numpy())
+        # plt.show()
+
         # ALSO DOWNSAMPLE!
         print(local_batch.shape, local_labels.shape)
 
@@ -98,12 +117,13 @@ for epoch in range(max_epochs):
 
         # LSTM data should be sequence, batch, data. BUT only after the CNN part! but I will just set batch_first=True
         x = local_batch.view([batch_sz_, 12, data_sz]).type(torch.cuda.FloatTensor).to(device)
-        y = local_labels.view([batch_sz_, 1, data_sz]).type(torch.cuda.LongTensor).to(device)
+        y = local_labels.type(torch.cuda.LongTensor).to(device)
 
         out = network.forward(x)
-        print("raw", out.shape)
+        print("ouput", out.shape)
+        print(y.shape)
         loss = criterion(out, y)
-        print("downsampled ", loss.item)
+        print("Loss ", loss.item())
 
         optimizer.zero_grad()
         loss.backward()

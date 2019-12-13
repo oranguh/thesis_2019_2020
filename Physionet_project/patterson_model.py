@@ -22,6 +22,12 @@ def activation_func(activation):
     })[activation]
 
 
+def primary_school_maths(dilation, kernel):
+
+    padding = 0.5*dilation*(kernel - 1)
+
+    return int(padding)
+
 class DCU1(nn.Module):
     def __init__(self, in_channels, out_channels, activation='selu', dilation=1):
         super().__init__()
@@ -33,7 +39,7 @@ class DCU1(nn.Module):
 
 
         self.blocks = nn.Sequential(
-            nn.Conv1d(in_channels, in_channels, 51, padding=25, stride=1, groups=in_channels, dilation=dilation),
+            nn.Conv1d(in_channels, in_channels, 51, padding=primary_school_maths(dilation, 51), stride=1, groups=in_channels, dilation=dilation),
             nn.Conv1d(in_channels, out_channels * 4, 1, stride=1, groups=1, dilation=dilation),
             self.activate,
             nn.BatchNorm1d(out_channels * 4),
@@ -46,9 +52,8 @@ class DCU1(nn.Module):
 
     def forward(self, x):
         input = x
-
+        print("DCU1", x.shape)
         x = self.blocks(x)
-        print(x.shape, input.shape)
         x = torch.cat((x, input), dim=1)
         return x
 
@@ -63,23 +68,23 @@ class DCU2(nn.Module):
         self.activate = activation_func(activation)
 
         self.blocks = nn.Sequential(
-            nn.Conv1d(in_channels, in_channels, 25, padding=13, stride=1, groups=in_channels, dilation=dilation),
-            nn.Conv1d(in_channels, out_channels * 4, 1, stride=1, groups=1, dilation=dilation),
+            nn.Conv1d(in_channels, in_channels, 25, padding=primary_school_maths(dilation, 25), stride=1, groups=in_channels, dilation=dilation),
+            nn.Conv1d(in_channels, out_channels * 4, 1, padding=primary_school_maths(dilation, 1), stride=1, groups=1, dilation=dilation),
             self.activate,
             nn.BatchNorm1d(out_channels * 4),
-            nn.Conv1d(out_channels * 4, out_channels * 4, 1, stride=1, groups=out_channels * 4,
+            nn.Conv1d(out_channels * 4, out_channels * 4, 1, padding=primary_school_maths(dilation, 1), stride=1, groups=out_channels * 4,
                       dilation=dilation),
-            nn.Conv1d(out_channels * 4, out_channels, 1, stride=1, groups=1, dilation=dilation),
+            nn.Conv1d(out_channels * 4, out_channels, 1, padding=primary_school_maths(dilation, 1), stride=1, groups=1, dilation=dilation),
             self.activate,
-            nn.BatchNorm2d(out_channels)
+            nn.BatchNorm1d(out_channels)
         )
 
     def forward(self, x):
         input = x
-
+        print("DCU2", x.shape)
         x = self.blocks(x)
-        print(x.shape, input.shape)
         x = torch.cat((x, input), dim=1)
+
         return x
 
 
@@ -102,11 +107,11 @@ class Howe_Patterson(nn.Module):
         self.layers = OrderedDict()
 
         self.layers["conv_1"] = DCU1(12, 24)
-        self.layers["maxpool_1"] = nn.MaxPool1d(2, stride=1, padding=1)
+        self.layers["maxpool_1"] = nn.MaxPool1d(2, stride=2, padding=0, ceil_mode=True)
         self.layers["conv_2"] = DCU1(36, 24)
-        self.layers["maxpool_2"] = nn.MaxPool1d(5, stride=1, padding=1)
+        self.layers["maxpool_2"] = nn.MaxPool1d(5, stride=5, padding=0, ceil_mode=True)
         self.layers["conv_3"] = DCU1(60, 24)
-        self.layers["maxpool_3"] = nn.MaxPool1d(5, stride=1, padding=1)
+        self.layers["maxpool_3"] = nn.MaxPool1d(5, stride=5, padding=0, ceil_mode=True)
 
         self.layers["conv_4"] = DCU2(84, 24, dilation=1)
         self.layers["conv_5"] = DCU2(108, 24, dilation=2)
@@ -123,11 +128,12 @@ class Howe_Patterson(nn.Module):
         self.convoluter = nn.Sequential(self.layers)
 
         self.lstm_conv1 = nn.Conv1d(348, 128, 1)
+
+        self.lstm = nn.LSTM(348, 128, 1, bidirectional=True)
         self.lstm_conv2 = nn.Conv1d(256, 128, 1)
-        self.lstm = nn.LSTM(348, 128, 1, bidirectional=True, batch_first=True)
 
         # The second argument denotes the output classes
-        self.lstm_conv3 = nn.Conv1d(128, 1, 1)
+        self.lstm_conv3 = nn.Conv1d(128, 3, 1)
 
 
 
@@ -146,17 +152,20 @@ class Howe_Patterson(nn.Module):
 
         # hidden = torch.zeros(128)
         out = self.convoluter(x)
-
+        print(out.shape)
+        batch = out.shape[0]
+        sequence_length = out.shape[2]
+        channel_size = out.shape[1]
         out1 = self.lstm_conv1(out)
-
-        out2, hidden = self.lstm(out)
-        out2 = self.lstm_conv2(out2)
+        print(out1.shape)
+        out2, hidden = self.lstm(out.view(sequence_length, batch, channel_size))
+        out2 = self.lstm_conv2(out2.view(batch, 128*2, sequence_length))
 
         # not sure if addition or concatanation?
         out = out1 + out2
         out = out * (1 / (2 ** 0.5))
-        out = F.tanh(out)
+        out = torch.tanh(out)
 
         out = self.lstm_conv3(out)
-
+        print("DONE", out.shape)
         return out
