@@ -52,7 +52,7 @@ class DCU1(nn.Module):
 
     def forward(self, x):
         input = x
-        print("DCU1", x.shape)
+        # print("DCU1", x.shape)
         x = self.blocks(x)
         x = torch.cat((x, input), dim=1)
         return x
@@ -81,7 +81,7 @@ class DCU2(nn.Module):
 
     def forward(self, x):
         input = x
-        print("DCU2", x.shape)
+        # print("DCU2", x.shape)
         x = self.blocks(x)
         x = torch.cat((x, input), dim=1)
 
@@ -152,12 +152,12 @@ class Howe_Patterson(nn.Module):
 
         # hidden = torch.zeros(128)
         out = self.convoluter(x)
-        print(out.shape)
+        # print(out.shape)
         batch = out.shape[0]
         sequence_length = out.shape[2]
         channel_size = out.shape[1]
         out1 = self.lstm_conv1(out)
-        print(out1.shape)
+        # print(out1.shape)
         out2, hidden = self.lstm(out.view(sequence_length, batch, channel_size))
         out2 = self.lstm_conv2(out2.view(batch, 128*2, sequence_length))
 
@@ -167,5 +167,5 @@ class Howe_Patterson(nn.Module):
         out = torch.tanh(out)
 
         out = self.lstm_conv3(out)
-        print("DONE", out.shape)
+        # print("DONE", out.shape)
         return out

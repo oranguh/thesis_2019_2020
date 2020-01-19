@@ -43,7 +43,7 @@ partition = load_obj('data_partition.pkl')
 # CUDA for PyTorch
 use_cuda = torch.cuda.is_available()
 device = torch.device("cuda:0" if use_cuda else "cpu")
-device = 'cpu'
+# device = 'cpu'
 # cudnn.benchmark = True
 
 # Parameters
@@ -90,6 +90,7 @@ for epoch in range(max_epochs):
         local_labels += 1
 
         print(local_batch.shape, local_labels.shape)
+        # only use first 1/5 of data for memory
         bat_ = int(local_batch.shape[-1]*.2)
         lab_ = int(local_labels.shape[-1]*.2)
 
@@ -97,8 +98,10 @@ for epoch in range(max_epochs):
         local_labels = local_labels[:, 0:lab_]
         print(local_batch.shape, local_labels.shape)
 
+        # Downsample to 50Hz
         local_batch = local_batch[:, :, ::4]
 
+        # Downsample in similar way as model
         local_labels = local_labels[:, ::4]
         local_labels = local_labels[:, ::2]
         local_labels = local_labels[:, ::5]
@@ -110,7 +113,7 @@ for epoch in range(max_epochs):
         # plt.show()
 
         # ALSO DOWNSAMPLE!
-        print(local_batch.shape, local_labels.shape)
+        # print(local_batch.shape, local_labels.shape)
 
         batch_sz_ = local_batch.shape[0]
         data_sz = local_batch.shape[-1]
@@ -120,8 +123,8 @@ for epoch in range(max_epochs):
         y = local_labels.type(torch.cuda.LongTensor).to(device)
 
         out = network.forward(x)
-        print("ouput", out.shape)
-        print(y.shape)
+        # print("ouput", out.shape)
+        # print(y.shape)
         loss = criterion(out, y)
         print("Loss ", loss.item())
 
