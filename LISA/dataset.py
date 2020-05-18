@@ -34,7 +34,9 @@ class Dataset(data.Dataset):
         X[:X_.shape[0], :X_.shape[1]] = X_
         Y[:Y_.shape[0], :Y_.shape[1]] = Y_
 
-        y_arohhhh                                                                                         ggggggggggggggggggggggggggbbbbbbgggggggggggggggggggg]b        y_arousal += 1
+        y_arousal = Y[0, :]
+        # original: -1=unscored; 0=not_arousal; 1=arousal
+        y_arousal += 1
 
         # sleep stage labels ['nonrem1', 'nonrem2', 'nonrem3', 'rem', 'undefined', 'wake']
         categories_ = [1, 2, 3, 4, 5, 6]
