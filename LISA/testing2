@@ -1,0 +1,37 @@
+#!/bin/bash
+#SBATCH --job-name=Em_TE
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=3
+#SBATCH --ntasks-per-node=1
+#SBATCH --partition=gpu_shared
+#SBATCH --time=20:00:00
+
+srun python3 train.py \
+-exp_name "fs_exp_inter" \
+-root_data_dir data/fs \
+-log_dir log \
+-epochs 41 \
+-batch_size 8 \
+-lr 2e-5 \
+-dropout 0.5 \
+-att_heads 8 \
+-lstm_hidden_dim 50 \
+-dense_layer_dim 20 \
+-threshold 0.5 \
+-optimizer "adam" \
+-adapt_threshold True \
+-use_regularization False \
+-use_pretrained_embeddings True \
+-seq_length 64 \
+-vocab_size 20000 \
+-embedding_type "bert" \
+-word_embedding_size 200 \
+-bert 'bert-large-cased' \
+-efreq 2 \
+-save_freq 2
+
+module load 2019
+module load Python/3.7.5-foss-2018b
+module load CUDA/10.1.243
+module load cuDNN/7.6.5.32-CUDA-10.1.243
+module load NCCL/2.5.6-CUDA-10.1.243
