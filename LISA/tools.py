@@ -1,5 +1,11 @@
 import logging
+import os
+from dataset import Dataset_full, Dataset_IID_window, Dataset_full_SHHS
+import pickle as pkl
 
+def load_obj(name):
+    with open(name, 'rb') as f:
+        return pkl.load(f)
 
 def accuracy(predictions, targets):
     """
@@ -47,3 +53,65 @@ class CustomFormatter(logging.Formatter):
         log_fmt = self.FORMATS.get(record.levelno)
         formatter = logging.Formatter(log_fmt)
         return formatter.format(record)
+
+
+def get_dataloader(data_folder, model_name, data_name, size="default"):
+    """
+    Returns the correct dataset object given model name and dataset name for training and validation
+    """
+    training_set = None
+    validation_set = None
+
+    if model_name == "Howe_Patterson":
+        if size == "small":
+            partition = load_obj(os.path.join(data_folder, 'data_partition_small.pkl'))
+        elif size == "tiny":
+            partition = load_obj(os.path.join(data_folder, 'data_partition_tiny.pkl'))
+        else:
+            partition = load_obj(os.path.join(data_folder, 'data_partition.pkl'))
+
+        if data_name == "SHHS":
+            training_set = Dataset_full_SHHS(partition['train'], data_folder)
+            validation_set = Dataset_full_SHHS(partition['validation'], data_folder)
+        elif data_name == "snooze":
+            training_set = Dataset_full(partition['train'], data_folder)
+            validation_set = Dataset_full(partition['validation'], data_folder)
+        elif data_name == "philips":
+            print("{} not implemented data".format(data_name))
+            exit()
+        elif data_name == "HMC":
+            print("{} not implemented data".format(data_name))
+            exit()
+        elif data_name == "combined":
+            print("{} not implemented data".format(data_name))
+            exit()
+        else:
+            print("{} wrong data for dataloader".format(data_name))
+            exit()
+
+    elif model_name == "ConvNet_IID":
+        partition = load_obj(os.path.join(data_folder, 'data_partition_IID_windows_FULL.pkl'))
+        if data_name == "SHHS":
+            print("{} not implemented data".format(data_name))
+            exit()
+        elif data_name == "snooze":
+            training_set = Dataset_IID_window(partition['train'], data_folder)
+            validation_set = Dataset_IID_window(partition['validation'], data_folder)
+        elif data_name == "philips":
+            print("{} not implemented data".format(data_name))
+            exit()
+        elif data_name == "HMC":
+            print("{} not implemented data".format(data_name))
+            exit()
+        elif data_name == "combined":
+            print("{} not implemented data".format(data_name))
+            exit()
+        else:
+            print("{} wrong data for dataloader".format(data_name))
+            exit()
+
+    else:
+        print("{} wrong model for dataloader".format(model_name))
+        exit()
+
+    return training_set, validation_set
