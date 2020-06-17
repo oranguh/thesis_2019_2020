@@ -7,6 +7,7 @@ from dataset import Dataset_full, Dataset_IID_window, Dataset_full_SHHS
 import matplotlib.pyplot as plt
 from patterson_model import Howe_Patterson
 from ConvNet_IID import ConvNet_IID
+from deep_sleep import Deep_Sleep
 import torch.nn as nn
 import torch.optim as optim
 import os
@@ -49,6 +50,18 @@ def initialize_model(model_name, channels_to_use):
 
         # largest recording length 3422800 at 100Hz
         input_size = 3422800
+
+    elif model_name == "Deep_Sleep":
+        """ Deep_Sleep
+        """
+        # largest recording length 3422800 at 100Hz
+        # For deep sleep we use factors of 2.
+        input_size = 2**22
+
+        model_ft = Deep_Sleep(channels_to_use=channels_to_use, input_length=input_size)
+        # set_parameter_requires_grad(model_ft, feature_extract)
+        # num_ftrs = model_ft.classifier[6].in_features
+        # model_ft.classifier[6] = nn.Linear(num_ftrs,num_classes)
 
     else:
         print("Invalid model name, exiting...")
@@ -233,12 +246,20 @@ def run(_log, max_epochs, channels_to_use, dataloader_params, lr,
 
             writer.add_scalar('{}_Loss'.format(phase), epoch_loss, global_step=epoch)
             ex.log_scalar('{}_Loss'.format(phase), epoch_loss, epoch)
-            writer.add_scalar('{}_Accuracy_arousal'.format(phase), acc, global_step=epoch)
-            ex.log_scalar('{}_Accuracy_arousal'.format(phase), acc, epoch)
-            writer.add_scalar('{}_Accuracy_sleep_staging'.format(phase), acc_sleep, global_step=epoch)
-            ex.log_scalar('{}_Accuracy_sleep_staging'.format(phase), acc_sleep, epoch)
+            # writer.add_scalar('{}_Accuracy_arousal'.format(phase), acc, global_step=epoch)
+            # ex.log_scalar('{}_Accuracy_arousal'.format(phase), acc, epoch)
+            # writer.add_scalar('{}_Accuracy_sleep_staging'.format(phase), acc_sleep, global_step=epoch)
+            # ex.log_scalar('{}_Accuracy_sleep_staging'.format(phase), acc_sleep, epoch)
 
             # todo
+            balanced_arousal = metrics.balanced_accuracy_score(true_array, pred_array)
+            balanced_sleep = metrics.balanced_accuracy_score(true_array, pred_array)
+
+            writer.add_scalar('{}_Accuracy_arousal'.format(phase), balanced_arousal, global_step=epoch)
+            ex.log_scalar('{}_Accuracy_arousal'.format(phase), balanced_arousal, epoch)
+            writer.add_scalar('{}_Accuracy_sleep_staging'.format(phase), balanced_sleep, global_step=epoch)
+            ex.log_scalar('{}_Accuracy_sleep_staging'.format(phase), balanced_sleep, epoch)
+
             report = metrics.classification_report(true_array,
                                                    pred_array,
                                                    labels=[0, 1, 2],

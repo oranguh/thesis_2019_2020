@@ -62,7 +62,7 @@ def get_dataloader(data_folder, model_name, data_name, size="default"):
     training_set = None
     validation_set = None
 
-    if model_name == "Howe_Patterson":
+    if model_name == "Howe_Patterson" or "Deep_Sleep":
         if size == "small":
             partition = load_obj(os.path.join(data_folder, 'data_partition_small.pkl'))
         elif size == "tiny":

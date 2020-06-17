@@ -10,7 +10,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 import torch.optim as optim
 from collections import OrderedDict
-
+import numpy as np
 
 def activation_func(activation):
     return nn.ModuleDict({
@@ -28,6 +28,22 @@ def primary_school_maths(dilation, kernel):
 
     return int(padding)
 
+def calculatePadding(L, KSZ, S, D=1):
+    '''
+    :param L:       Input length (or width)
+    :param KSZ:     Kernel size (or width)
+    :param S:       Stride
+    :param D:       Dilation Factor
+    :return:        Returns padding such that output width is exactly half of input width
+    '''
+
+    # print(L, S, D, KSZ)
+    pad = int(np.ceil(((L - 1) * S + D * (KSZ - 1) + 1 - L * 2)/2))
+    # print("PAD", pad)
+    # output_size = (L - 1) * S - 2 * pad + D * (KSZ - 1) + 1
+    # print("OUTPUT SIZE", output_size)
+    return pad
+
 
 class PCC(nn.Module):
     def __init__(self, in_channels, out_channels, activation='relu', stride=4, pool=4, kernel=7):
@@ -39,7 +55,7 @@ class PCC(nn.Module):
 
         self.blocks = nn.Sequential(
             nn.MaxPool1d(pool),
-            nn.Conv1d(in_channels, in_channels, kernel, padding=primary_school_maths(1, kernel), stride=stride),
+            nn.Conv1d(in_channels, in_channels, kernel, stride=stride),
             self.activate,
             nn.BatchNorm1d(out_channels),
             nn.Conv1d(out_channels, out_channels, kernel, stride=stride),
@@ -66,10 +82,10 @@ class UCC(nn.Module):
 
         self.blocks = nn.Sequential(
             # in_channels = concatanated size
-            nn.Conv1d(in_channels, out_channels, kernel, padding=primary_school_maths(1, kernel), stride=stride),
+            nn.Conv1d(in_channels, out_channels, kernel, stride=stride),
             self.activate,
             nn.BatchNorm1d(out_channels),
-            nn.Conv1d(out_channels, out_channels, kernel, padding=primary_school_maths(1, kernel), stride=stride),
+            nn.Conv1d(out_channels, out_channels, kernel, stride=stride),
             self.activate,
             nn.BatchNorm1d(out_channels)
         )
@@ -89,7 +105,7 @@ class Deep_Sleep(nn.Module):
 
   """
 
-    def __init__(self, channels_to_use):
+    def __init__(self, channels_to_use, input_length):
         super(Deep_Sleep, self).__init__()
         """
         Initializes ConvNet object.
@@ -99,6 +115,7 @@ class Deep_Sleep(nn.Module):
           n_classes: number of classes of the classification problem
 
         """
+        self.INPUT_LENGTH = input_length
         self.INPUT_CHANNELS = channels_to_use
         self.AROUSAL_CLASSES = 3
         self.SLEEP_CLASSES = 6
