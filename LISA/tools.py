@@ -71,8 +71,8 @@ def get_dataloader(data_folder, model_name, data_name, size="default"):
             partition = load_obj(os.path.join(data_folder, 'data_partition.pkl'))
 
         if data_name == "SHHS":
-            training_set = Dataset_full_SHHS(partition['train'], data_folder)
-            validation_set = Dataset_full_SHHS(partition['validation'], data_folder)
+            training_set = Dataset_full_SHHS(partition['train'],)
+            validation_set = Dataset_full_SHHS(partition['validation'], data_folder, downsample_ratio=2, pre_allocation=2**22)
         elif data_name == "snooze":
             training_set = Dataset_full(partition['train'], data_folder)
             validation_set = Dataset_full(partition['validation'], data_folder)
