@@ -137,10 +137,12 @@ class Dataset_IID_window(data.Dataset):
 class Dataset_full_SHHS(data.Dataset):
     'Characterizes a dataset for PyTorch'
 
-    def __init__(self, list_IDs, folder):
+    def __init__(self, list_IDs, folder, downsample_ratio=2, pre_allocation=3597000):
         'Initialization'
         self.list_IDs = list_IDs
         self.folder = folder
+        self.downsample_ratio = downsample_ratio
+        self.pre_allocation = pre_allocation
 
     def __len__(self):
         'Denotes the total number of samples'
@@ -167,8 +169,8 @@ class Dataset_full_SHHS(data.Dataset):
             print(ID)
             print(Y_.shape)
 
-        X = np.full((X_.shape[0], 3597000), 0)
-        Y = np.full((Y_.shape[0], 3597000), 4)
+        X = np.full((X_.shape[0], self.pre_allocation), 0)
+        Y = np.full((Y_.shape[0], self.pre_allocation), 4)
 
         X[:X_.shape[0], :X_.shape[1]] = X_
         Y[:Y_.shape[0], :Y_.shape[1]] = Y_
@@ -204,12 +206,12 @@ class Dataset_full_SHHS(data.Dataset):
         # y_sleep[y_sleep < 0] = 0
 
         # Downsample from 100Hz to 50Hz
-        X = X[:, ::2]
+        X = X[:, ::self.downsample_ratio]
 
         # Downsample annotations in similar way as model from 100Hz to 1Hz
         def downsampler(to_down):
             # initial 100 to 50Hz
-            to_down = to_down[::2]
+            to_down = to_down[::self.downsample_ratio]
             # from 50 Hz to 1 Hz
             to_down = to_down[::2]
             to_down = to_down[::5]
