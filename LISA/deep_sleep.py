@@ -183,5 +183,5 @@ class Deep_Sleep(nn.Module):
         out_arousal = self.arousal_classifier(ucc8)
         out_sleep = self.arousal_classifier(ucc8)
 
-        # print("DONE", out.shape)
+        # print("DONE", out_arousal.shape)
         return out_arousal, out_sleep
