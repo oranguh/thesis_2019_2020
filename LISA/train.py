@@ -104,7 +104,7 @@ def cfg():
         data_folder = '/project/marcoh/you_snooze_you_win/marco/'
         data_folder = '/project/marcoh/shhs/polysomnography/shh1_numpy/'
         # Parameters for dataloader
-        dataloader_params = {'batch_size': 6,
+        dataloader_params = {'batch_size': 8,
                              'shuffle': True,
                              'num_workers': 8}
 
@@ -191,7 +191,7 @@ def run(_log, max_epochs, channels_to_use, dataloader_params, lr,
                 annotations_arousal = annotations_arousal.to(device)
                 annotations_sleep = annotations_sleep.to(device)
                 optimizer.zero_grad()
-
+                # print(inputs.shape, annotations_arousal.shape, annotations_sleep.shape)
                 # originally only use first 12, ignore cardiogram?
                 # ['F3-M2', 'F4-M1', 'C3-M2', 'C4-M1', 'O1-M2', 'O2-M1', 'E1-M2', 'Chin1-Chin2', 'ABD', 'CHEST', 'AIRFLOW', 'SaO2', 'ECG']
                 inputs = inputs[:, 0:channels_to_use, :]
@@ -206,7 +206,7 @@ def run(_log, max_epochs, channels_to_use, dataloader_params, lr,
                     annotations_sleep = annotations_sleep.type(torch.cuda.LongTensor).to(device)
 
                     arousal_out, sleep_out = model.forward(inputs)
-
+                    # print(arousal_out.shape, sleep_out.shape)
                     loss_arousal = criterion_arousal(arousal_out, annotations_arousal)
                     loss_sleep = criterion_sleep(sleep_out, annotations_sleep)
                     loss = loss_arousal + loss_sleep
@@ -219,6 +219,8 @@ def run(_log, max_epochs, channels_to_use, dataloader_params, lr,
 
                 true_array_ = annotations_arousal.cpu().numpy().squeeze().astype(int)
                 pred_array_ = arousal_out.argmax(dim=1).cpu().numpy().squeeze().astype(int)
+
+
                 # remove all 0 (unscored) ORDER of pred/True Matters
                 pred_array = np.append(pred_array, pred_array_[true_array_ != 0])
                 true_array = np.append(true_array, true_array_[true_array_ != 0])
@@ -235,8 +237,8 @@ def run(_log, max_epochs, channels_to_use, dataloader_params, lr,
                 # print("Max Mem GB  ", torch.cuda.max_memory_allocated(device=device) * 1e-9)
                 # print()
                 counters += 1
-                if counters == 100:
-                    pass
+                if counters == 50:
+                    break
 
             print("Max Mem GB  ", torch.cuda.max_memory_allocated(device=device) * 1e-9)
 
@@ -263,12 +265,14 @@ def run(_log, max_epochs, channels_to_use, dataloader_params, lr,
             report = metrics.classification_report(true_array,
                                                    pred_array,
                                                    labels=[0, 1, 2],
-                                                   target_names=arousal_annotation)
+                                                   target_names=arousal_annotation,
+                                                   zero_division=0)
             writer.add_text('Report Arousals {}'.format(phase), report + '\n', global_step=epoch)
             sleep_report = metrics.classification_report(true_array_sleep,
                                                          pred_array_sleep,
                                                          labels=[0, 1, 2, 3, 4, 5],
-                                                         target_names=sleep_stages)
+                                                         target_names=sleep_stages,
+                                                         zero_division=0)
             writer.add_text('Report Sleep staging {}'.format(phase), sleep_report + '\n', global_step=epoch)
 
             if True:
