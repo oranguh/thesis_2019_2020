@@ -25,11 +25,11 @@ import platform
 def main():
 
     if platform.system() == 'Windows':
-        patient_records_path = "F:\\shhs\\datasets\\shhs1-dataset-0.15.0.csv"
+        patient_records_path = "E:\\shhs\\datasets\\shhs1-dataset-0.15.0.csv"
 
-        arousal_xml_directory = 'F:\\shhs\\polysomnography\\annotations-events-nsrr\\shhs1'
-        edf_directory = 'F:\\shhs\\polysomnography\\edfs\\shhs1'
-        save_folder = "F:\\shhs\\polysomnography\\shh1_numpy\\"
+        arousal_xml_directory = 'E:\\shhs\\polysomnography\\annotations-events-nsrr\\shhs1'
+        edf_directory = 'E:\\shhs\\polysomnography\\edfs\\shhs1'
+        save_folder = "E:\\shhs\\polysomnography\\shh1_numpy\\"
     else:
         patient_records_path = "/project/marcoh/shhs/datasets/shhs1-dataset-0.15.0.csv"
 
@@ -206,7 +206,7 @@ def subject_to_edf(arousal_xml_path, edf_path):
     with pyedflib.EdfReader(edf_path) as f:
 
         for channel in list(range(f.signals_in_file)):
-            print(f.getLabel(channel))
+            # print(f.getLabel(channel))
             # Are these always in the same order? Order seems to be: EEG(sec), EMG, EEG
             # Why are there so many variants for the second EEG
             if f.getLabel(channel) in ["EEG", "EMG", "EEG 2", "EEG2", "EEG(SEC)", "EEG(sec)", "EEG sec"]:
