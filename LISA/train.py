@@ -56,7 +56,7 @@ def initialize_model(model_name, channels_to_use):
         """
         # largest recording length 3422800 at 100Hz
         # For deep sleep we use factors of 2.
-        input_size = 2**22
+        input_size = 2**21
 
         model_ft = Deep_Sleep(channels_to_use=channels_to_use, input_length=input_size)
         # set_parameter_requires_grad(model_ft, feature_extract)
@@ -95,7 +95,7 @@ def cfg():
 
     if platform.system() == 'Windows':
         data_folder = 'E:\\data\\you-snooze-you-win-the-physionet-computing-in-cardiology-challenge-2018-1.0.0\\marco'
-        data_folder = 'F:\\shhs\\polysomnography\\shh1_numpy'
+        data_folder = 'E:\\shhs\\polysomnography\\shh1_numpy'
         # Parameters for dataloader
         dataloader_params = {'batch_size': 1,
                              'shuffle': True,
@@ -122,6 +122,7 @@ def cfg():
     # model_name = "ConvNet_IID"
     # for howe use batchsize 6 on lisa?
     model_name = "Howe_Patterson"
+    model_name = "Deep_Sleep"
 
     # Dataset to use.... also determines path. Snooze, SHHS, Philips, HMC
     # data_name = "snooze"
@@ -168,6 +169,7 @@ def run(_log, max_epochs, channels_to_use, dataloader_params, lr,
     # optimizer = optim.SGD(model.parameters(), lr=0.01, momentum=0.9)
 
     print(torch.cuda.get_device_name(device=device))
+
     # Loop over epochs
     for epoch in range(max_epochs):
         for phase in ['train', 'val']:
@@ -185,7 +187,6 @@ def run(_log, max_epochs, channels_to_use, dataloader_params, lr,
             counters = 0
             for ID, inputs, annotations_arousal, annotations_sleep in dataloaders[phase]:
 
-                # print(ID)
                 # Transfer to GPU
                 inputs = inputs.to(device)
                 annotations_arousal = annotations_arousal.to(device)
@@ -228,6 +229,7 @@ def run(_log, max_epochs, channels_to_use, dataloader_params, lr,
                 pred_array_sleep_ = sleep_out.argmax(dim=1).cpu().numpy().squeeze().astype(int)
                 true_array_sleep_ = annotations_sleep.cpu().numpy().squeeze().astype(int)
                 # remove all 4 (undefined) ORDER of pred/True Matters
+                # TODO this might become very very large if doing 2**22 length records per sample
                 pred_array_sleep = np.append(pred_array_sleep, pred_array_sleep_[true_array_sleep_ != 4])
                 true_array_sleep = np.append(true_array_sleep, true_array_sleep_[true_array_sleep_ != 4])
 
@@ -241,13 +243,16 @@ def run(_log, max_epochs, channels_to_use, dataloader_params, lr,
                     break
 
             print("Max Mem GB  ", torch.cuda.max_memory_allocated(device=device) * 1e-9)
+            model_savepath = os.path.split(writer.log_dir)[-1]
+            model_savepath = os.path.join("models", model_savepath)
+            torch.save(model, model_savepath)
 
             epoch_loss = running_loss / len(dataloaders[phase].dataset)
             acc = accuracy(pred_array, true_array)
             acc_sleep = accuracy(pred_array_sleep, true_array_sleep)
 
-            writer.add_scalar('{}_Loss'.format(phase), epoch_loss, global_step=epoch)
-            ex.log_scalar('{}_Loss'.format(phase), epoch_loss, epoch)
+            writer.add_scalar('Loss/{}'.format(phase), epoch_loss, global_step=epoch)
+            ex.log_scalar('Loss/{}'.format(phase), epoch_loss, epoch)
             # writer.add_scalar('{}_Accuracy_arousal'.format(phase), acc, global_step=epoch)
             # ex.log_scalar('{}_Accuracy_arousal'.format(phase), acc, epoch)
             # writer.add_scalar('{}_Accuracy_sleep_staging'.format(phase), acc_sleep, global_step=epoch)
@@ -255,25 +260,28 @@ def run(_log, max_epochs, channels_to_use, dataloader_params, lr,
 
             # todo
             balanced_arousal = metrics.balanced_accuracy_score(true_array, pred_array)
-            balanced_sleep = metrics.balanced_accuracy_score(true_array, pred_array)
+            balanced_sleep = metrics.balanced_accuracy_score(true_array_sleep, pred_array_sleep)
+            cohen_kappa_arousal = metrics.cohen_kappa_score(true_array, pred_array)
+            cohen_kappa_sleep = metrics.cohen_kappa_score(true_array_sleep, pred_array_sleep)
 
-            writer.add_scalar('{}_Accuracy_arousal'.format(phase), balanced_arousal, global_step=epoch)
-            ex.log_scalar('{}_Accuracy_arousal'.format(phase), balanced_arousal, epoch)
-            writer.add_scalar('{}_Accuracy_sleep_staging'.format(phase), balanced_sleep, global_step=epoch)
-            ex.log_scalar('{}_Accuracy_sleep_staging'.format(phase), balanced_sleep, epoch)
-
+            writer.add_scalar('Accuracy_arousal/{}'.format(phase), balanced_arousal, global_step=epoch)
+            ex.log_scalar('Accuracy_arousal/{}'.format(phase), balanced_arousal, epoch)
+            writer.add_scalar('Accuracy_sleep_staging/{}'.format(phase), balanced_sleep, global_step=epoch)
+            ex.log_scalar('Accuracy_sleep_staging/{}'.format(phase), balanced_sleep, epoch)
+            writer.add_scalar('Kappa_arousal/{}'.format(phase), cohen_kappa_arousal, global_step=epoch)
+            writer.add_scalar('Kappa_sleep/{}'.format(phase), cohen_kappa_sleep, global_step=epoch)
             report = metrics.classification_report(true_array,
                                                    pred_array,
                                                    labels=[0, 1, 2],
                                                    target_names=arousal_annotation,
                                                    zero_division=0)
-            writer.add_text('Report Arousals {}'.format(phase), report + '\n', global_step=epoch)
+            writer.add_text('Report Arousals/{}'.format(phase), report + '\n', global_step=epoch)
             sleep_report = metrics.classification_report(true_array_sleep,
                                                          pred_array_sleep,
                                                          labels=[0, 1, 2, 3, 4, 5],
                                                          target_names=sleep_stages,
                                                          zero_division=0)
-            writer.add_text('Report Sleep staging {}'.format(phase), sleep_report + '\n', global_step=epoch)
+            writer.add_text('Report Sleep staging/{}'.format(phase), sleep_report + '\n', global_step=epoch)
 
             if True:
                 _log.info("\n{}: epoch: {} Loss {:.3f} Accuracy arousal: {:.3f} Accuracy Sleep: {:.3f}\n".format(phase, epoch, epoch_loss, acc, acc_sleep))
@@ -281,7 +289,7 @@ def run(_log, max_epochs, channels_to_use, dataloader_params, lr,
                 _log.info("\n{}: Sleep Report: \n{}\n".format(phase, sleep_report))
 
 
-    np.set_printoptions(precision=2)
+    # np.set_printoptions(precision=2)
 
     # Plot non-normalized confusion matrix
     # print(y_test, "\n", y_pred)
