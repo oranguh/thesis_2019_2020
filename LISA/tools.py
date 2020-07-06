@@ -62,7 +62,7 @@ def get_dataloader(data_folder, model_name, data_name, size="default"):
     training_set = None
     validation_set = None
 
-    if model_name == "Howe_Patterson" or "Deep_Sleep":
+    if model_name == "Howe_Patterson":
         if size == "small":
             partition = load_obj(os.path.join(data_folder, 'data_partition_small.pkl'))
         elif size == "tiny":
@@ -71,8 +71,8 @@ def get_dataloader(data_folder, model_name, data_name, size="default"):
             partition = load_obj(os.path.join(data_folder, 'data_partition.pkl'))
 
         if data_name == "SHHS":
-            training_set = Dataset_full_SHHS(partition['train'],)
-            validation_set = Dataset_full_SHHS(partition['validation'], data_folder, downsample_ratio=2, pre_allocation=2**22)
+            training_set = Dataset_full_SHHS(partition['train'], data_folder)
+            validation_set = Dataset_full_SHHS(partition['validation'], data_folder)
         elif data_name == "snooze":
             training_set = Dataset_full(partition['train'], data_folder)
             validation_set = Dataset_full(partition['validation'], data_folder)
@@ -88,7 +88,34 @@ def get_dataloader(data_folder, model_name, data_name, size="default"):
         else:
             print("{} wrong data for dataloader".format(data_name))
             exit()
+    elif model_name == "Deep_Sleep":
+        if size == "small":
+            partition = load_obj(os.path.join(data_folder, 'data_partition_small.pkl'))
+        elif size == "tiny":
+            partition = load_obj(os.path.join(data_folder, 'data_partition_tiny.pkl'))
+        else:
+            partition = load_obj(os.path.join(data_folder, 'data_partition.pkl'))
 
+        if data_name == "SHHS":
+            training_set = Dataset_full_SHHS(partition['train'], data_folder, downsample_ratio=2,
+                                             pre_allocation=2 ** 22, down_sample_annotation=False)
+            validation_set = Dataset_full_SHHS(partition['validation'], data_folder, downsample_ratio=2,
+                                               pre_allocation=2 ** 22, down_sample_annotation=False)
+        elif data_name == "snooze":
+            training_set = Dataset_full(partition['train'], data_folder)
+            validation_set = Dataset_full(partition['validation'], data_folder)
+        elif data_name == "philips":
+            print("{} not implemented data".format(data_name))
+            exit()
+        elif data_name == "HMC":
+            print("{} not implemented data".format(data_name))
+            exit()
+        elif data_name == "combined":
+            print("{} not implemented data".format(data_name))
+            exit()
+        else:
+            print("{} wrong data for dataloader".format(data_name))
+            exit()
     elif model_name == "ConvNet_IID":
         partition = load_obj(os.path.join(data_folder, 'data_partition_IID_windows_FULL.pkl'))
         if data_name == "SHHS":
