@@ -74,6 +74,7 @@ class Dataset_full(data.Dataset):
             # initial 100 to 50Hz
             to_down = to_down[::self.downsample_ratio]
             # from 50 Hz to 1 Hz
+
             to_down = to_down[::2]
             to_down = to_down[::5]
             to_down = to_down[::5]
@@ -137,12 +138,13 @@ class Dataset_IID_window(data.Dataset):
 class Dataset_full_SHHS(data.Dataset):
     'Characterizes a dataset for PyTorch'
 
-    def __init__(self, list_IDs, folder, downsample_ratio=2, pre_allocation=3597000):
+    def __init__(self, list_IDs, folder, downsample_ratio=2, pre_allocation=3597000, down_sample_annotation=True):
         'Initialization'
         self.list_IDs = list_IDs
         self.folder = folder
         self.downsample_ratio = downsample_ratio
         self.pre_allocation = pre_allocation
+        self.down_sample_annotation = down_sample_annotation
 
     def __len__(self):
         'Denotes the total number of samples'
@@ -152,22 +154,22 @@ class Dataset_full_SHHS(data.Dataset):
         'Generates one sample of data'
         # Select sample
         ID = self.list_IDs[index]
-
+        # print(ID)
         # Load data and get label
         folder_ = os.path.join(self.folder, ID)
 
         X_ = np.load(os.path.join(folder_, ID + '_data.npy'))
         Y_ = np.load(os.path.join(folder_, ID + '_labels.npy'))
 
-        if X_.shape[0] != 3:
-            print("Size of EEG not corrext")
-            print(ID)
-            print(X_.shape)
-
-        if Y_.shape[0] != 2:
-            print("Size of annotation not correct")
-            print(ID)
-            print(Y_.shape)
+        # if X_.shape[0] != 3:
+        #     print("Size of EEG not corrext")
+        #     print(ID)
+        #     print(X_.shape)
+        #
+        # if Y_.shape[0] != 2:
+        #     print("Size of annotation not correct")
+        #     print(ID)
+        #     print(Y_.shape)
 
         X = np.full((X_.shape[0], self.pre_allocation), 0)
         Y = np.full((Y_.shape[0], self.pre_allocation), 4)
@@ -213,9 +215,10 @@ class Dataset_full_SHHS(data.Dataset):
             # initial 100 to 50Hz
             to_down = to_down[::self.downsample_ratio]
             # from 50 Hz to 1 Hz
-            to_down = to_down[::2]
-            to_down = to_down[::5]
-            to_down = to_down[::5]
+            if self.down_sample_annotation:
+                to_down = to_down[::2]
+                to_down = to_down[::5]
+                to_down = to_down[::5]
             return to_down
 
         y_arousal = downsampler(y_arousal)
