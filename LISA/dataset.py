@@ -14,12 +14,13 @@ def load_obj(name):
 class Dataset_full(data.Dataset):
     'Characterizes a dataset for PyTorch'
 
-    def __init__(self, list_IDs, folder, downsample_ratio=2, pre_allocation=3422800):
+    def __init__(self, list_IDs, folder, downsample_ratio=2, pre_allocation=3422800, down_sample_annotation=True):
         'Initialization'
         self.list_IDs = list_IDs
         self.folder = folder
         self.downsample_ratio = downsample_ratio
         self.pre_allocation = pre_allocation
+        self.down_sample_annotation = down_sample_annotation
 
     def __len__(self):
         'Denotes the total number of samples'
@@ -75,9 +76,10 @@ class Dataset_full(data.Dataset):
             to_down = to_down[::self.downsample_ratio]
             # from 50 Hz to 1 Hz
 
-            to_down = to_down[::2]
-            to_down = to_down[::5]
-            to_down = to_down[::5]
+            if self.down_sample_annotation:
+                to_down = to_down[::2]
+                to_down = to_down[::5]
+                to_down = to_down[::5]
             return to_down
 
         y_arousal = downsampler(y_arousal)
