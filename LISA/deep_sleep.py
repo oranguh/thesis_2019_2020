@@ -108,7 +108,7 @@ class Deep_Sleep(nn.Module):
 
   """
 
-    def __init__(self, channels_to_use, input_length):
+    def __init__(self, channels_to_use):
         super(Deep_Sleep, self).__init__()
         """
         Initializes ConvNet object.
@@ -118,7 +118,6 @@ class Deep_Sleep(nn.Module):
           n_classes: number of classes of the classification problem
 
         """
-        self.input_length = input_length
         self.INPUT_CHANNELS = channels_to_use
         self.AROUSAL_CLASSES = 3
         self.SLEEP_CLASSES = 6
