@@ -36,6 +36,9 @@ class Dataset_full(data.Dataset):
 
         # 6609000
         # try:
+        # F3-M2, F4-M1, C3-M2, C4-M1, O1-M2 and O2-M1; one electrooculography (EOG) signal at E1-M2;
+        # three electromyography (EMG) signals of chin, abdominal and chest movements; one measure of respiratory
+        #  airflow; one measure of oxygen saturation (SaO2); one electrocardiogram (ECG)
         X_ = torch.load(os.path.join(folder_, ID + '_data.pt'))
         Y_ = torch.load(os.path.join(folder_, ID + '_labels.pt'))
         # except:
