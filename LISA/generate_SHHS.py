@@ -188,7 +188,7 @@ def subject_to_edf(arousal_xml_path, edf_path):
     """
     returns the signal and annotations as numpy, also resamples
 
-    I made it so I only use the channels ["EEG", "EEG(sec)", "EMG"]
+    I made it so I only use the channels ["EEG", "EEG(sec)"]
     OMG this dataset is... ugh. the second electrode for EEG can be called "EEG 2" or "EEG(sec)" or "EEG(SEC)" or "EEG2"
     who why when who
     EEG (sec): 	C3 	A2
@@ -207,9 +207,9 @@ def subject_to_edf(arousal_xml_path, edf_path):
 
         for channel in list(range(f.signals_in_file)):
             # print(f.getLabel(channel))
-            # Are these always in the same order? Order seems to be: EEG(sec), EMG, EEG
+            # Are these always in the same order? Order seems to be: EEG(sec), EEG
             # Why are there so many variants for the second EEG
-            if f.getLabel(channel) in ["EEG", "EMG", "EEG 2", "EEG2", "EEG(SEC)", "EEG(sec)", "EEG sec"]:
+            if f.getLabel(channel) in ["EEG", "EEG 2", "EEG2", "EEG(SEC)", "EEG(sec)", "EEG sec"]:
 
                 ch_dict = {'label': f.getLabel(channel), 'dimension': f.getPhysicalDimension(channel),
                            'sample_rate': f.getSampleFrequency(channel), 'physical_max': f.getPhysicalMaximum(channel),
@@ -223,8 +223,8 @@ def subject_to_edf(arousal_xml_path, edf_path):
             if MAX_DATA < f.getNSamples()[channel]:
                 MAX_DATA = f.getNSamples()[channel]
 
-        if len(data_list) != 3:
-            print("{} does not have 3 channels".format(arousal_xml_path.strip("-nsrr.xml")))
+        if len(data_list) != 2:
+            print("{} does not have 2 channels".format(arousal_xml_path.strip("-nsrr.xml")))
             print(channel_info)
     # Sample rate for the annotations are always 10
 
