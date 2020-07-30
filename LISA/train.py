@@ -21,7 +21,7 @@ from sacred.observers import MongoObserver
 from sacred.observers import FileStorageObserver
 from score2018 import Challenge2018Score
 import platform
-
+import time
 
 def initialize_model(model_name, channels_to_use):
     # Initialize these variables which will be set in this if statement. Each of these
@@ -52,7 +52,7 @@ def initialize_model(model_name, channels_to_use):
         """
         # largest recording length 3422800 at 100Hz
 
-        model_ft = Deep_Sleep(channels_to_use=channels_to_use, input_length=input_size)
+        model_ft = Deep_Sleep(channels_to_use=channels_to_use)
         # set_parameter_requires_grad(model_ft, feature_extract)
         # num_ftrs = model_ft.classifier[6].in_features
         # model_ft.classifier[6] = nn.Linear(num_ftrs,num_classes)
@@ -76,10 +76,6 @@ Challenge2018Scorer = Challenge2018Score()
 @ex.config
 def cfg():
 
-    # load metadata stuff
-    arousal_annotation = ["not_scored", "not_arousal", "Arousal"]
-    sleep_stages = ['nonrem1', 'nonrem2', 'nonrem3', 'rem', 'undefined', 'wake']
-
     weights_sleep, weights_arousal = [.2, .2, .2, .2, .0, .2], [.0, .5, .5] # default weights?
 
     # models to train... Howe_Patterson, U-Net, CNN, cNN + LSTM, wavenet? Model also determines the way the data is loaded.
@@ -91,42 +87,48 @@ def cfg():
     model_name = "Deep_Sleep"
 
     # Dataset to use.... also determines path. Snooze, SHHS, Philips, HMC
-    data_name = "snooze"
+    # data_name = "snooze"
     data_name = "SHHS"
     # Predicting future labels is a thing I want to focus on.
     # pred_future = True
     pretrained = False
-    pretrained = "models\\Jul09_23-59-04_BananaDeep_Sleep_SHHS"
+    # pretrained = "models\\Jul09_23-59-04_BananaDeep_Sleep_SHHS"
+    # pretrained = "models\\Jul08_00-46-48_DESKTOP-5TLTVUT20200708-004648"
+    # pretrained = "models\\Jul15_18-22-19_BananaDeep_Sleep_SHHS"
+
+    comment = "C3_A2_(sec)_norm_off"
 
     if platform.system() == 'Windows':
         if data_name == "SHHS":
             data_folder = 'E:\\shhs\\polysomnography\\shh1_numpy'
             weights_sleep = [.3, .05, .3, .3, .0, .05]  # for SHHS
             weights_arousal = [.0, .05, .95]  # SHHS
-        else:
+        elif data_name == "snooze":
             data_folder = 'F:\\you-snooze-you-win-the-physionet-computing-in-cardiology-challenge-2018-1.0.0\\marco'
             data_folder = 'D:\\data\\snooze\\marco'
             weights_sleep = [.2, .1, .3, .2, .0, .2]  # for Snooze
-            weights_arousal = [.0, .1, .9]  # Snooze
-
+            weights_arousal = [.0, .05, .95]  # Snooze
+        else:
+            print("data not found")
 
         # Parameters for dataloader
-        dataloader_params = {'batch_size': 1,
+        dataloader_params = {'batch_size': 2,
                              'shuffle': True,
-                             'num_workers': 0}
+                             'num_workers': 2}
     else:
         if data_name == "SHHS":
             data_folder = '/project/marcoh/shhs/polysomnography/shh1_numpy/'
-        else:
+        elif data_name == "snooze":
             data_folder = '/project/marcoh/you_snooze_you_win/marco/'
-
+        else:
+            print("data not found")
         # Parameters for dataloader
         dataloader_params = {'batch_size': 3,
                              'shuffle': True,
                              'num_workers': 4}
 
-    max_epochs = 2000
-    # full PSG has 12, we use 1
+    max_epochs = 40
+    # full PSG has 12, we use 1, always
     channels_to_use = 1
 
     optimizer_params = {"lr": 1e-4,
@@ -134,15 +136,12 @@ def cfg():
     lr = 1e-4
 
 
-
-@ex.automain
-def run(_log, max_epochs, channels_to_use, dataloader_params, lr,
-        data_folder, sleep_stages, arousal_annotation,
-        weights_arousal, weights_sleep, model_name, data_name, pretrained):
-
+def training(_log, max_epochs, channels_to_use, dataloader_params, lr,
+        data_folder, weights_arousal, weights_sleep, model_name, data_name, pretrained, comment):
     # writer = SummaryWriter(comment=str(datetime.now().strftime("%Y%m%d-%H%M%S")))
-    writer = SummaryWriter(comment=model_name + "_" + data_name)
+    writer = SummaryWriter(comment=model_name + "_" + data_name + comment)
 
+    print(comment)
     # for saving log to file
     # fh = logging.FileHandler('spam.log')
     # _log.addHandler(fh)
@@ -182,7 +181,6 @@ def run(_log, max_epochs, channels_to_use, dataloader_params, lr,
     # optimizer = optim.SGD(model.parameters(), lr=0.01, momentum=0.9)
 
     print(torch.cuda.get_device_name(device=device))
-
     # Loop over epochs
     for epoch in range(max_epochs):
         for phase in ['train', 'val']:
@@ -208,8 +206,17 @@ def run(_log, max_epochs, channels_to_use, dataloader_params, lr,
                 optimizer.zero_grad()
                 # print(inputs.shape, annotations_arousal.shape, annotations_sleep.shape)
                 # originally only use first 12, ignore cardiogram?
-                # ['F3-M2', 'F4-M1', 'C3-M2', 'C4-M1', 'O1-M2', 'O2-M1', 'E1-M2', 'Chin1-Chin2', 'ABD', 'CHEST', 'AIRFLOW', 'SaO2', 'ECG']
-                inputs = inputs[:, 0:channels_to_use, :]
+
+                # SHHS [C3-A2 (sec), C4-A1]
+                # snooze ['F3-M2', 'F4-M1', 'C3-M2', 'C4-M1', 'O1-M2', 'O2-M1', 'E1-M2', 'Chin1-Chin2', 'ABD', 'CHEST', 'AIRFLOW', 'SaO2', 'ECG']
+
+                # rand_channel = np.random.randint(0, 2)
+                inputs = inputs[:, 0, :]
+
+                m = torch.mean(inputs.float())
+                s = torch.std(inputs.float())
+                inputs = inputs - m
+                inputs = inputs / s
 
                 batch_sz_ = inputs.shape[0]
                 data_sz = inputs.shape[-1]
@@ -225,7 +232,9 @@ def run(_log, max_epochs, channels_to_use, dataloader_params, lr,
                     # print(annotations_arousal.shape, annotations_sleep.shape)
                     loss_arousal = criterion_arousal(arousal_out, annotations_arousal)
                     loss_sleep = criterion_sleep(sleep_out, annotations_sleep)
-                    loss = loss_arousal + loss_sleep
+
+                    # loss = 5*loss_arousal + loss_sleep
+                    loss = loss_arousal
                     # print(epoch, phase, "Loss ", loss.item())
                     # print("Max Mem GB  ", torch.cuda.max_memory_allocated(device=device) * 1e-9)
 
@@ -276,12 +285,12 @@ def run(_log, max_epochs, channels_to_use, dataloader_params, lr,
 
             writer.add_scalar('Loss/{}'.format(phase), epoch_loss, global_step=epoch)
             ex.log_scalar('Loss/{}'.format(phase), epoch_loss, epoch)
-            # writer.add_scalar('{}_Accuracy_arousal'.format(phase), acc, global_step=epoch)
-            # ex.log_scalar('{}_Accuracy_arousal'.format(phase), acc, epoch)
-            # writer.add_scalar('{}_Accuracy_sleep_staging'.format(phase), acc_sleep, global_step=epoch)
-            # ex.log_scalar('{}_Accuracy_sleep_staging'.format(phase), acc_sleep, epoch)
 
-            # todo
+            writer.add_scalar('Accuracy_arousal/{}'.format(phase), acc, global_step=epoch)
+            ex.log_scalar('Accuracy_arousal/{}'.format(phase), acc, epoch)
+            writer.add_scalar('Accuracy_sleep_staging/{}'.format(phase), acc_sleep, global_step=epoch)
+            ex.log_scalar('Accuracy_sleep_staging/{}'.format(phase), acc_sleep, epoch)
+
             AUROC_arousal = Challenge2018Scorer.gross_auroc()
             writer.add_scalar('AUROC_arousal/{}'.format(phase), AUROC_arousal, global_step=epoch)
             ex.log_scalar('AUROC_arousal/{}'.format(phase), AUROC_arousal, epoch)
@@ -290,35 +299,50 @@ def run(_log, max_epochs, channels_to_use, dataloader_params, lr,
             writer.add_scalar('AUPRC_arousal_arousal/{}'.format(phase), AUPRC_arousal, global_step=epoch)
             ex.log_scalar('AUPRC_arousal_arousal/{}'.format(phase), AUPRC_arousal, epoch)
 
-            # print("PRC", Challenge2018Scorer.gross_auprc(), metrics.average_precision_score(true_array, pred_array))
-            # print("ROC", Challenge2018Scorer.gross_auroc(), metrics.roc_auc_score(true_array, pred_array))
 
-            balanced_arousal = metrics.balanced_accuracy_score(true_array, pred_array)
-            balanced_sleep = metrics.balanced_accuracy_score(true_array_sleep, pred_array_sleep)
-            writer.add_scalar('Accuracy_arousal/{}'.format(phase), balanced_arousal, global_step=epoch)
-            ex.log_scalar('Accuracy_arousal/{}'.format(phase), balanced_arousal, epoch)
-            writer.add_scalar('Accuracy_sleep_staging/{}'.format(phase), balanced_sleep, global_step=epoch)
-            ex.log_scalar('Accuracy_sleep_staging/{}'.format(phase), balanced_sleep, epoch)
 
-            cohen_kappa_arousal = metrics.cohen_kappa_score(true_array, pred_array)
-            cohen_kappa_sleep = metrics.cohen_kappa_score(true_array_sleep, pred_array_sleep)
-            writer.add_scalar('Kappa_arousal/{}'.format(phase), cohen_kappa_arousal, global_step=epoch)
-            writer.add_scalar('Kappa_sleep/{}'.format(phase), cohen_kappa_sleep, global_step=epoch)
+            print("\n\nEpoch ", epoch, "phase: ", phase)
+            print("PRC ", AUPRC_arousal)
+            print("ROC ", AUROC_arousal)
+            print("loss ", loss.item())
+            print("acc arousal ", acc)
+            print("acc sleep ", acc_sleep)
+            if epoch % 10 == 0:
+                report = metrics.classification_report(true_array,
+                                                       pred_array,
+                                                       labels=[0, 1, 2],
+                                                       target_names=["not_scored", "not_arousal", "Arousal"],
+                                                       zero_division=0)
+                writer.add_text('Report Arousals/{}'.format(phase), report + '\n', global_step=epoch)
+                print(report)
 
-            report = metrics.classification_report(true_array,
-                                                   pred_array,
-                                                   labels=[0, 1, 2],
-                                                   target_names=arousal_annotation,
-                                                   zero_division=0)
-            writer.add_text('Report Arousals/{}'.format(phase), report + '\n', global_step=epoch)
-            sleep_report = metrics.classification_report(true_array_sleep,
-                                                         pred_array_sleep,
-                                                         labels=[0, 1, 2, 3, 4, 5],
-                                                         target_names=sleep_stages,
-                                                         zero_division=0)
-            writer.add_text('Report Sleep staging/{}'.format(phase), sleep_report + '\n', global_step=epoch)
+            if False:
+                balanced_arousal = metrics.balanced_accuracy_score(true_array, pred_array)
+                balanced_sleep = metrics.balanced_accuracy_score(true_array_sleep, pred_array_sleep)
+                writer.add_scalar('Balanced_Accuracy_arousal/{}'.format(phase), balanced_arousal, global_step=epoch)
+                ex.log_scalar('Balanced_Accuracy_arousal/{}'.format(phase), balanced_arousal, epoch)
+                writer.add_scalar('Balanced_Accuracy_sleep_staging/{}'.format(phase), balanced_sleep, global_step=epoch)
+                ex.log_scalar('Balanced_Accuracy_sleep_staging/{}'.format(phase), balanced_sleep, epoch)
 
-            if True:
+                cohen_kappa_arousal = metrics.cohen_kappa_score(true_array, pred_array, labels=[0, 1, 2])
+                cohen_kappa_sleep = metrics.cohen_kappa_score(true_array_sleep, pred_array_sleep, labels=[0, 1, 2, 3, 4, 5])
+                writer.add_scalar('Kappa_arousal/{}'.format(phase), cohen_kappa_arousal, global_step=epoch)
+                writer.add_scalar('Kappa_sleep/{}'.format(phase), cohen_kappa_sleep, global_step=epoch)
+
+                report = metrics.classification_report(true_array,
+                                                       pred_array,
+                                                       labels=[0, 1, 2],
+                                                       target_names=["not_scored", "not_arousal", "Arousal"],
+                                                       zero_division=0)
+                writer.add_text('Report Arousals/{}'.format(phase), report + '\n', global_step=epoch)
+                sleep_report = metrics.classification_report(true_array_sleep,
+                                                             pred_array_sleep,
+                                                             labels=[0, 1, 2, 3, 4, 5],
+                                                             target_names=['nonrem1', 'nonrem2', 'nonrem3', 'rem', 'undefined', 'wake'],
+                                                             zero_division=0)
+                writer.add_text('Report Sleep staging/{}'.format(phase), sleep_report + '\n', global_step=epoch)
+
+
                 _log.info("\n{}: epoch: {} Loss {:.3f} Accuracy arousal: {:.3f} Accuracy Sleep: {:.3f}\n".format(phase, epoch, epoch_loss, acc, acc_sleep))
                 _log.info("\n{}: Arousal Report: \n{}\n".format(phase, report))
                 _log.info("\n{}: Sleep Report: \n{}\n".format(phase, sleep_report))
@@ -337,3 +361,39 @@ def run(_log, max_epochs, channels_to_use, dataloader_params, lr,
     # writer.add_figure("Class distribution", fig_classes)
 
     # writer.close()
+
+@ex.automain
+def run(_log, max_epochs, channels_to_use, dataloader_params, lr,
+        data_folder, weights_arousal, weights_sleep, model_name, data_name, pretrained, comment):
+    data_name = "SHHS"
+    # training(_log, max_epochs, channels_to_use, dataloader_params, lr,
+    #     data_folder, [.0, .02, .98], weights_sleep, model_name, data_name, pretrained, "weights_1_50")
+    #
+    # training(_log, max_epochs, channels_to_use, dataloader_params, lr,
+    #     data_folder, [.0, .05, .95], weights_sleep, model_name, data_name, pretrained, "weights_1_20")
+
+    # training(_log, max_epochs, channels_to_use, dataloader_params, lr,
+    #     data_folder, [.0, .1, .9], weights_sleep, model_name, data_name, pretrained, "weights_1_10")
+
+    # training(_log, max_epochs, channels_to_use, dataloader_params, lr,
+    #     data_folder, [.0, .2, .8], weights_sleep, model_name, data_name, pretrained, "weights_1_5")
+    #
+    # training(_log, max_epochs, channels_to_use, dataloader_params, lr,
+    #     data_folder, [.0, .5, .5], weights_sleep, model_name, data_name, pretrained, "weights_1_1")
+
+    data_name = "snooze"
+    data_folder = 'D:\\data\\snooze\\marco'
+    # training(_log, max_epochs, channels_to_use, dataloader_params, lr,
+    #     data_folder, [.0, .02, .98], weights_sleep, model_name, data_name, pretrained, "weights_1_50")
+    #
+    # training(_log, max_epochs, channels_to_use, dataloader_params, lr,
+    #     data_folder, [.0, .05, .95], weights_sleep, model_name, data_name, pretrained, "weights_1_20")
+
+    training(_log, max_epochs, channels_to_use, dataloader_params, lr,
+        data_folder, [.0, .1, .9], weights_sleep, model_name, data_name, pretrained, "weights_1_10")
+
+    # training(_log, max_epochs, channels_to_use, dataloader_params, lr,
+    #     data_folder, [.0, .2, .8], weights_sleep, model_name, data_name, pretrained, "weights_1_5")
+
+    training(_log, max_epochs, channels_to_use, dataloader_params, lr,
+        data_folder, [.0, .5, .5], weights_sleep, model_name, data_name, pretrained, "weights_1_1")
