@@ -1,14 +1,18 @@
-import torch
-import numpy as np
 import os
 import pickle as pkl
+import platform
+
+import numpy as np
+import pandas as pd
+import torch
 from sklearn import metrics
 from torch.utils import data
-from tools import accuracy, CustomFormatter, get_dataloader
 import torch.nn as nn
 from torch.utils.tensorboard import SummaryWriter
+
+from tools import accuracy, CustomFormatter, get_dataloader
 from score2018 import Challenge2018Score
-import platform
+from visualizations import plot_confusion_matrix, plot_classes_distribution
 
 
 def main():
@@ -194,7 +198,7 @@ def validate(data_name, model_name, pre_trained_model, channel_index, comment):
             if counters == 2:
                 print("Max Mem GB  ", torch.cuda.max_memory_allocated(device=device) * 1e-9)
                 save_metrics(running_loss, dataloaders, phase, pred_array, true_array, pred_array_sleep, true_array_sleep,
-                             Challenge2018Scorer, writer, epoch)
+                             Challenge2018Scorer, writer, epoch, comment)
                 epoch += 1
 
                 true_array = np.empty(0)
@@ -214,7 +218,7 @@ def validate(data_name, model_name, pre_trained_model, channel_index, comment):
     print("END")
 
 def save_metrics(running_loss, dataloaders, phase, pred_array, true_array, pred_array_sleep, true_array_sleep,
-                 Challenge2018Scorer, writer, epoch):
+                 Challenge2018Scorer, writer, epoch, comment):
 
     epoch_loss = running_loss / len(dataloaders[phase].dataset)
     acc = accuracy(pred_array, true_array)
@@ -250,26 +254,43 @@ def save_metrics(running_loss, dataloaders, phase, pred_array, true_array, pred_
     writer.add_scalar('Kappa_arousal/{}'.format(phase), cohen_kappa_arousal, global_step=epoch)
     writer.add_scalar('Kappa_sleep/{}'.format(phase), cohen_kappa_sleep, global_step=epoch)
 
-    arousal_annotation = ["\tnot_scored", "\tnot_arousal", "\tArousal"]
-    sleep_stages = ['nonrem1', 'nonrem2', 'nonrem3', 'rem', '\tundefined', 'wake']
+    arousal_annotation = ["not_scored", "not_arousal", "Arousal"]
+    sleep_stages = ['\tundefined', '\tnonrem1', '\tnonrem2', '\tnonrem3', '\trem', '\twake']
 
     report = metrics.classification_report(true_array,
                                            pred_array,
                                            labels=[0, 1, 2],
                                            target_names=arousal_annotation,
+                                           output_dict=True,
                                            zero_division=0)
-    writer.add_text('Report Arousals/{}'.format(phase), report + '\n', global_step=epoch)
+
+    df = pd.DataFrame.from_dict(report, orient='index', dtype="object")
+    df = df.astype(dtype={"precision": "float64", "recall": "float64", "f1-score": "float64", "support": "object"})
+    df = df.round(2)
+    writer.add_text('Report Arousals/{}'.format(phase), df.to_markdown(), global_step=epoch)
+
     sleep_report = metrics.classification_report(true_array_sleep,
                                                  pred_array_sleep,
-                                                 labels=[0, 1, 2, 3, 4, 5],
+                                                 labels=[4, 0, 1, 2, 3, 5],
                                                  target_names=sleep_stages,
+                                                 output_dict=True,
                                                  zero_division=0)
-    writer.add_text('Report Sleep staging/{}'.format(phase), sleep_report + '\n', global_step=epoch)
+    del sleep_report["accuracy"]
+    df2 = pd.DataFrame.from_dict(sleep_report, orient='index', dtype="object")
+    df2 = df2.astype(dtype={"precision": "float64", "recall": "float64", "f1-score": "float64", "support": "object"})
+    df2 = df2.round(2)
+
+    writer.add_text('Report Sleep staging/{}'.format(phase), df2.to_markdown(), global_step=epoch)
 
     print("\n{}: epoch: {} Loss {:.3f} Accuracy arousal: {:.3f} Accuracy Sleep: {:.3f}\n".format(phase, epoch, epoch_loss, acc, acc_sleep))
-    print("\n{}: Arousal Report: \n{}\n".format(phase, report))
-    print("\n{}: Sleep Report: \n{}\n".format(phase, sleep_report))
+    print("\n{}: Arousal Report: \n{}\n".format(phase, df.to_markdown()))
+    print("\n{}: Sleep Report: \n{}\n".format(phase, df2.to_markdown()))
 
+    # Plot normalized confusion matrix
+    fig_confusion = plot_confusion_matrix(true_array, pred_array, classes=arousal_annotation, normalize=True, title=comment)
+    writer.add_figure("Confusion Matrix/{}".format(phase), fig_confusion, global_step=epoch)
+
+    writer.close()
 
 def load_obj(name):
     with open(name, 'rb') as f:
