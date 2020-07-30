@@ -16,26 +16,48 @@ def main():
     channel = 0
     channel_index = 0
 
+    pre_traineds = ["models\\Jul29_18-28-48_BananaDeep_Sleep_snoozeweights_1_50",
+                    "models\\Jul29_20-39-34_BananaDeep_Sleep_snoozeweights_1_20",
+                    "models\\Jul30_02-21-24_BananaDeep_Sleep_snoozeweights_1_10",
+                    "models\\Jul30_00-28-59_BananaDeep_Sleep_snoozeweights_1_5",
+                    "models\\Jul30_04-07-52_BananaDeep_Sleep_snoozeweights_1_1"]
+
+    pre_traineds = ["models\\Jul29_18-28-48_BananaDeep_Sleep_snoozeweights_1_50",
+                    "models\\Jul29_20-39-34_BananaDeep_Sleep_snoozeweights_1_20",
+                    "models\\Jul30_02-21-24_BananaDeep_Sleep_snoozeweights_1_10",
+                    "models\\Jul30_00-28-59_BananaDeep_Sleep_snoozeweights_1_5",
+                    "models\\Jul30_04-07-52_BananaDeep_Sleep_snoozeweights_1_1"]
+
     for model_name in ["Deep_Sleep"]:
         # model_name = "ConvNet_IID"
         # for howe use batchsize 6 on lisa?
         # model_name = "Howe_Patterson"
         # model_name = "Deep_Sleep"
         pass
-    for pre_trained_model in ["models\\Jul21_00-09-01_BananaDeep_Sleep_SHHSrandom_channels", "models\\Jul20_17-19-29_BananaDeep_Sleep_snoozerandom_channels"]:
 
-        for data_name in ["snooze", "SHHS"]:
-            if data_name == "snooze":
-                for channel_index, channel in enumerate(["C3_A2", "C4_A1"]):
-                    comment = pre_trained_model + "_to_" + data_name + "_" + channel
-                    validate(data_name, model_name, pre_trained_model, channel_index, comment)
+    for pre_trained_model in pre_traineds:
+        # for data_name in ["snooze", "SHHS"]:
+        for data_name in ["snooze"]:
+            # comment = os.path.split(pre_trained_model)[-1] + "_to_" + data_name
+            comment = os.path.split(pre_trained_model)[-1]
+            channel_index = 0
+            model_name = "Deep_Sleep"
+            validate(data_name, model_name, pre_trained_model, channel_index, comment)
 
-            elif data_name == "SHHS":
-                for channel_index, channel in enumerate(["F3_M2", "F4_M1", "C3_M2", "C4_M1", "O1_M2", "O2_M1"]):
-                    comment = "_to_" + data_name + "_" + channel
-                    validate(data_name, model_name, pre_trained_model, channel_index, comment)
-            else:
-                print("data not found")
+    # for pre_trained_model in pre_traineds:
+    #
+    #     for data_name in ["snooze", "SHHS"]:
+    #         if data_name == "SHHS":
+    #             for channel_index, channel in enumerate(["C3_A2", "C4_A1"]):
+    #                 comment = os.path.split(pre_trained_model)[-1] + "_to_" + data_name + "_" + channel
+    #                 validate(data_name, model_name, pre_trained_model, channel_index, comment)
+    #
+    #         elif data_name == "snooze":
+    #             for channel_index, channel in enumerate(["F3_M2", "F4_M1", "C3_M2", "C4_M1", "O1_M2", "O2_M1"]):
+    #                 comment = os.path.split(pre_trained_model)[-1] + "_to_" + data_name + "_" + channel
+    #                 validate(data_name, model_name, pre_trained_model, channel_index, comment)
+    #         else:
+    #             print("data not found")
 
     # SHHS
     #     EEG (sec): 	C3 	A2
@@ -53,8 +75,6 @@ def main():
 def validate(data_name, model_name, pre_trained_model, channel_index, comment):
 
     Challenge2018Scorer = Challenge2018Score()
-    arousal_annotation = ["not_scored", "not_arousal", "Arousal"]
-    sleep_stages = ['nonrem1', 'nonrem2', 'nonrem3', 'rem', 'undefined', 'wake']
 
     model = torch.load(pre_trained_model)
     weights_sleep = None
@@ -121,6 +141,12 @@ def validate(data_name, model_name, pre_trained_model, channel_index, comment):
 
             inputs = inputs.to(device)
             inputs = inputs[:, channel_index, :]
+
+            m = torch.mean(inputs.float())
+            s = torch.std(inputs.float())
+            inputs = inputs - m
+            inputs = inputs / s
+
             annotations_arousal = annotations_arousal.to(device)
             annotations_sleep = annotations_sleep.to(device)
 
@@ -165,10 +191,10 @@ def validate(data_name, model_name, pre_trained_model, channel_index, comment):
 
             counters += 1
 
-            if counters == 5:
+            if counters == 2:
                 print("Max Mem GB  ", torch.cuda.max_memory_allocated(device=device) * 1e-9)
                 save_metrics(running_loss, dataloaders, phase, pred_array, true_array, pred_array_sleep, true_array_sleep,
-                             Challenge2018Scorer, writer, arousal_annotation, sleep_stages, epoch)
+                             Challenge2018Scorer, writer, epoch)
                 epoch += 1
 
                 true_array = np.empty(0)
@@ -183,10 +209,12 @@ def validate(data_name, model_name, pre_trained_model, channel_index, comment):
             del sleep_out
             del loss_arousal
             del loss_sleep
+        if epoch == 10:
+            break
     print("END")
 
 def save_metrics(running_loss, dataloaders, phase, pred_array, true_array, pred_array_sleep, true_array_sleep,
-                 Challenge2018Scorer, writer, arousal_annotation, sleep_stages, epoch):
+                 Challenge2018Scorer, writer, epoch):
 
     epoch_loss = running_loss / len(dataloaders[phase].dataset)
     acc = accuracy(pred_array, true_array)
@@ -194,10 +222,10 @@ def save_metrics(running_loss, dataloaders, phase, pred_array, true_array, pred_
 
     writer.add_scalar('Loss/{}'.format(phase), epoch_loss, global_step=epoch)
     # ex.log_scalar('Loss/{}'.format(phase), epoch_loss, epoch)
-    writer.add_scalar('{}_Accuracy_arousal'.format(phase), acc, global_step=epoch)
-    # ex.log_scalar('{}_Accuracy_arousal'.format(phase), acc, epoch)
-    writer.add_scalar('{}_Accuracy_sleep_staging'.format(phase), acc_sleep, global_step=epoch)
-    # ex.log_scalar('{}_Accuracy_sleep_staging'.format(phase), acc_sleep, epoch)
+    writer.add_scalar('Accuracy_arousal/{}'.format(phase), acc, global_step=epoch)
+    # ex.log_scalar('Accuracy_arousal/{}'.format(phase), acc, epoch)
+    writer.add_scalar('Accuracy_sleep_staging/{}'.format(phase), acc_sleep, global_step=epoch)
+    # ex.log_scalar('Accuracy_sleep_staging/{}'.format(phase), acc_sleep, epoch)
 
     AUROC_arousal = Challenge2018Scorer.gross_auroc()
     writer.add_scalar('AUROC_arousal/{}'.format(phase), AUROC_arousal, global_step=epoch)
@@ -212,15 +240,18 @@ def save_metrics(running_loss, dataloaders, phase, pred_array, true_array, pred_
 
     balanced_arousal = metrics.balanced_accuracy_score(true_array, pred_array)
     balanced_sleep = metrics.balanced_accuracy_score(true_array_sleep, pred_array_sleep)
-    writer.add_scalar('Accuracy_arousal/{}'.format(phase), balanced_arousal, global_step=epoch)
-    # ex.log_scalar('Accuracy_arousal/{}'.format(phase), balanced_arousal, epoch)
-    writer.add_scalar('Accuracy_sleep_staging/{}'.format(phase), balanced_sleep, global_step=epoch)
-    # ex.log_scalar('Accuracy_sleep_staging/{}'.format(phase), balanced_sleep, epoch)
+    writer.add_scalar('Balanced_Accuracy_arousal/{}'.format(phase), balanced_arousal, global_step=epoch)
+    # ex.log_scalar('Balanced_Accuracy_arousal/{}'.format(phase), balanced_arousal, epoch)
+    writer.add_scalar('Balanced_Accuracy_sleep_staging/{}'.format(phase), balanced_sleep, global_step=epoch)
+    # ex.log_scalar('Balanced_Accuracy_sleep_staging/{}'.format(phase), balanced_sleep, epoch)
 
     cohen_kappa_arousal = metrics.cohen_kappa_score(true_array, pred_array, labels=[0, 1, 2])
     cohen_kappa_sleep = metrics.cohen_kappa_score(true_array_sleep, pred_array_sleep, labels=[0, 1, 2, 3, 4, 5])
     writer.add_scalar('Kappa_arousal/{}'.format(phase), cohen_kappa_arousal, global_step=epoch)
     writer.add_scalar('Kappa_sleep/{}'.format(phase), cohen_kappa_sleep, global_step=epoch)
+
+    arousal_annotation = ["\tnot_scored", "\tnot_arousal", "\tArousal"]
+    sleep_stages = ['nonrem1', 'nonrem2', 'nonrem3', 'rem', '\tundefined', 'wake']
 
     report = metrics.classification_report(true_array,
                                            pred_array,
