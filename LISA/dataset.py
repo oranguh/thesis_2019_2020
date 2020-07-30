@@ -4,7 +4,7 @@ import os
 import numpy as np
 import matplotlib.pyplot as plt
 import pickle as pkl
-
+import random
 
 def load_obj(name):
     with open(name, 'rb') as f:
@@ -38,19 +38,21 @@ class Dataset_full(data.Dataset):
         # try:
         # F3-M2, F4-M1, C3-M2, C4-M1, O1-M2 and O2-M1; one electrooculography (EOG) signal at E1-M2;
         # three electromyography (EMG) signals of chin, abdominal and chest movements; one measure of respiratory
-        #  airflow; one measure of oxygen saturation (SaO2); one electrocardiogram (ECG)
+        # airflow; one measure of oxygen saturation (SaO2); one electrocardiogram (ECG)
+        # philips (Fpz - M2; Fpz - Fp1)
         X_ = torch.load(os.path.join(folder_, ID + '_data.pt'))
         Y_ = torch.load(os.path.join(folder_, ID + '_labels.pt'))
-        # except:
-        #     print(ID)
-        #     ID = ID + "ERRORRRR"
-        #     return ID, torch.zeros((13, 6845600)).double(), torch.zeros((1, 6845600)).long(), torch.zeros((1, 6845600)).long()
 
         X = np.zeros((X_.shape[0], self.pre_allocation))
         Y = np.full((Y_.shape[0], self.pre_allocation), -1)
 
         X[:X_.shape[0], :X_.shape[1]] = X_
         Y[:Y_.shape[0], :Y_.shape[1]] = Y_
+        del X_
+        del Y_
+
+        # X = X[random.randint(0, 3), :]
+        # X = np.expand_dims(X, axis=0)
 
         y_arousal = Y[0, :]
         # original: -1=unscored; 0=not_arousal; 1=arousal
@@ -62,6 +64,7 @@ class Dataset_full(data.Dataset):
         y_sleep = Y[1, :]
         y_sleep[y_sleep < 0] = 4
 
+        del Y
         # categories_ = [1, 2, 3, 4, 5, 6]
         # y_sleep = np.multiply(Y[1:, :].transpose(), categories_).transpose().sum(axis=0)
         # y_sleep[y_sleep < 0] = 0
@@ -166,21 +169,18 @@ class Dataset_full_SHHS(data.Dataset):
         X_ = np.load(os.path.join(folder_, ID + '_data.npy'))
         Y_ = np.load(os.path.join(folder_, ID + '_labels.npy'))
 
-        # if X_.shape[0] != 3:
-        #     print("Size of EEG not corrext")
-        #     print(ID)
-        #     print(X_.shape)
-        #
-        # if Y_.shape[0] != 2:
-        #     print("Size of annotation not correct")
-        #     print(ID)
-        #     print(Y_.shape)
-
         X = np.full((X_.shape[0], self.pre_allocation), 0)
         Y = np.full((Y_.shape[0], self.pre_allocation), 4)
 
+        #     EEG (sec): 	C3 	A2
+        #     EEG:    C4 	A1
+
         X[:X_.shape[0], :X_.shape[1]] = X_
         Y[:Y_.shape[0], :Y_.shape[1]] = Y_
+        del X_
+        del Y_
+        # X = X[random.randint(0, 1), :]
+        # X = np.expand_dims(X, axis=0)
 
         y_arousal = Y[-2, :]
         y_arousal[y_arousal == 4] = -1
@@ -204,6 +204,7 @@ class Dataset_full_SHHS(data.Dataset):
 
         y_sleep = np.asarray(list(map(dicto.get, Y[-1, :])))
 
+        del Y
         # turn the padding into undefined
         # y_sleep = Y[1, :]
         # y_sleep[y_sleep < 0] = 4
