@@ -97,14 +97,14 @@ def get_dataloader(data_folder, model_name, data_name, size="default"):
             partition = load_obj(os.path.join(data_folder, 'data_partition.pkl'))
 
         if data_name == "SHHS":
-            training_set = Dataset_full_SHHS(partition['train'], data_folder, downsample_ratio=2,
+            training_set = Dataset_full_SHHS(partition['train'], data_folder, downsample_ratio=4,
                                              pre_allocation=2 ** 22, down_sample_annotation=False)
-            validation_set = Dataset_full_SHHS(partition['validation'], data_folder, downsample_ratio=2,
+            validation_set = Dataset_full_SHHS(partition['validation'], data_folder, downsample_ratio=4,
                                                pre_allocation=2 ** 22, down_sample_annotation=False)
         elif data_name == "snooze":
-            training_set = Dataset_full(partition['train'], data_folder, downsample_ratio=2,
+            training_set = Dataset_full(partition['train'], data_folder, downsample_ratio=4,
                                              pre_allocation=2 ** 22, down_sample_annotation=False)
-            validation_set = Dataset_full(partition['validation'], data_folder, downsample_ratio=2,
+            validation_set = Dataset_full(partition['validation'], data_folder, downsample_ratio=4,
                                              pre_allocation=2 ** 22, down_sample_annotation=False)
         elif data_name == "philips":
             print("{} not implemented data".format(data_name))
