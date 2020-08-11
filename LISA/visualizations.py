@@ -9,47 +9,46 @@ from sklearn.utils.multiclass import unique_labels
 
 
 def plot_confusion_matrix(y_true, y_pred, classes,
-                          normalize=False,
                           title=None,
+                          labels=None,
                           cmap=plt.cm.Blues):
     """
     This function prints and plots the confusion matrix.
     Normalization can be applied by setting `normalize=True`.
     """
-    if not title:
-        if normalize:
-            title = 'Normalized confusion matrix'
-        else:
-            title = 'Confusion matrix, without normalization'
 
+    sub_titles = ['Normalized confusion matrix', 'Confusion matrix, without normalization']
+    fig, ax = plt.subplots(1, 2, figsize=(16, 8))
     # Compute confusion matrix
-    cm = confusion_matrix(y_true, y_pred)
+    cm = confusion_matrix(y_true, y_pred, labels=labels)
     # Only use the labels that appear in the data
     # classes = classes[unique_labels(y_true, y_pred)]
-
-    if normalize:
-        cm = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
-        print("Normalized confusion matrix")
-    else:
-        print('Confusion matrix, without normalization')
-
-    print("{}".format(cm))
-
-    fig, ax = plt.subplots()
-    # cmap = sns.diverging_palette(220, 20, n=7)
     cmap = 'RdYlGn'
-    # sns.heatmap(cm, annot=True, ax=ax, center=1/len(classes), cmap=cmap, robust=True, cbar=True)  # annot=True to annotate cells
-    sns.heatmap(cm, annot=True, ax=ax, cmap=cmap, robust=True, cbar=True)
-    # labels, title and ticks
-    ax.set_xlabel('Predicted labels')
-    ax.set_ylabel('True labels')
-    ax.set_title('Confusion Matrix')
-    ax.xaxis.set_ticklabels(classes)
-    ax.yaxis.set_ticklabels(classes)
-    # ax.set_ylim(len(classes) + 0.5, -0.5)
+
+    for i, normalization_flag in enumerate([True, False]):
+
+        if normalization_flag:
+            cm_plot = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
+            fmt = '.1%'
+        else:
+            cm_plot = cm
+            fmt = 'd'
+
+        # cmap = sns.diverging_palette(220, 20, n=7)
+
+        # sns.heatmap(cm, annot=True, ax=ax, center=1/len(classes), cmap=cmap, robust=True, cbar=True)  # annot=True to annotate cells
+        sns.heatmap(cm_plot, annot=True, ax=ax[i], cmap=cmap, robust=True, cbar=True, fmt=fmt)
+        # labels, title and ticks
+        ax[i].set_xlabel('Predicted labels')
+        ax[i].set_ylabel('True labels')
+        ax[i].set_title(sub_titles[i])
+        ax[i].xaxis.set_ticklabels(classes)
+        ax[i].yaxis.set_ticklabels(classes)
+        # ax.set_ylim(len(classes) + 0.5, -0.5)
 
 
     # plt.tight_layout()
+    os.makedirs('figures/', exist_ok=True)
     plt.savefig(os.path.join('figures/', title + '.png'))
     # plt.show()
 
