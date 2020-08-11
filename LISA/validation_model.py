@@ -287,7 +287,7 @@ def save_metrics(running_loss, dataloaders, phase, pred_array, true_array, pred_
     print("\n{}: Sleep Report: \n{}\n".format(phase, df2.to_markdown()))
 
     # Plot normalized confusion matrix
-    fig_confusion = plot_confusion_matrix(true_array, pred_array, classes=arousal_annotation, normalize=True, title=comment)
+    fig_confusion = plot_confusion_matrix(true_array, pred_array, classes=["not arousal", "arousal"], title=comment+"_"+str(epoch), labels=[1, 2])
     writer.add_figure("Confusion Matrix/{}".format(phase), fig_confusion, global_step=epoch)
 
     writer.close()
