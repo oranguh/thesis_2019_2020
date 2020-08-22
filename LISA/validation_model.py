@@ -1,6 +1,7 @@
 import os
 import pickle as pkl
 import platform
+from pathlib import Path
 
 import numpy as np
 import pandas as pd
@@ -9,6 +10,7 @@ from sklearn import metrics
 from torch.utils import data
 import torch.nn as nn
 from torch.utils.tensorboard import SummaryWriter
+import matplotlib.pyplot as plt
 
 from tools import accuracy, CustomFormatter, get_dataloader
 from score2018 import Challenge2018Score
@@ -32,6 +34,12 @@ def main():
                     "models\\Jul30_00-28-59_BananaDeep_Sleep_snoozeweights_1_5",
                     "models\\Jul30_04-07-52_BananaDeep_Sleep_snoozeweights_1_1"]
 
+    pre_traineds = []
+    pre_traineds += sorted(Path("models/weights").glob("*SHHSweights*"))
+    pre_traineds += sorted(Path("models/channels").glob("*"))
+    pre_traineds += sorted(Path("models/weights").glob("*"))
+    pre_traineds += sorted(Path("models/sleep_staging").glob("*"))
+
     for model_name in ["Deep_Sleep"]:
         # model_name = "ConvNet_IID"
         # for howe use batchsize 6 on lisa?
@@ -41,11 +49,13 @@ def main():
 
     for pre_trained_model in pre_traineds:
         # for data_name in ["snooze", "SHHS"]:
-        for data_name in ["snooze"]:
-            # comment = os.path.split(pre_trained_model)[-1] + "_to_" + data_name
-            comment = os.path.split(pre_trained_model)[-1]
+        for data_name in ["SHHS"]:
+            comment = pre_trained_model.name + "_to_" + data_name
+            # comment = pre_trained_model.name
+
             channel_index = 0
             model_name = "Deep_Sleep"
+            print(pre_trained_model)
             validate(data_name, model_name, pre_trained_model, channel_index, comment)
 
     # for pre_trained_model in pre_traineds:
@@ -86,7 +96,7 @@ def validate(data_name, model_name, pre_trained_model, channel_index, comment):
 
     if platform.system() == 'Windows':
         if data_name == "SHHS":
-            data_folder = 'E:\\shhs\\polysomnography\\shh1_numpy'
+            data_folder = 'K:\\shhs\\polysomnography\\shh1_numpy'
             weights_sleep = [.3, .05, .3, .3, .0, .05]  # for SHHS
             weights_arousal = [.0, .05, .95]  # SHHS
         else:
@@ -130,11 +140,11 @@ def validate(data_name, model_name, pre_trained_model, channel_index, comment):
 
     model.eval()
 
+    accuracies = np.empty(0)
     true_array = np.empty(0)
     pred_array = np.empty(0)
     true_array_sleep = np.empty(0)
     pred_array_sleep = np.empty(0)
-    Challenge2018Scorer._pos_values, Challenge2018Scorer._neg_values = 0, 0
 
     running_loss = 0.0
     counters = 0
@@ -175,11 +185,13 @@ def validate(data_name, model_name, pre_trained_model, channel_index, comment):
 
             prediction_prob_arousal = torch.nn.functional.softmax(arousal_out, dim=1)[:, 2,
                                       :].detach().cpu().numpy().squeeze()
-            Challenge2018Scorer.score_record(true_array_[true_array_ != 0] - 1,
-                                             prediction_prob_arousal[true_array_ != 0])
+
+            do_auroc(Challenge2018Scorer, true_array_, prediction_prob_arousal, ID, comment)
 
             # set all 0 (unscored) to predictions to 1 (not-arousal)
             pred_array_[pred_array_ == 0] = 1
+
+            accuracies = np.append(accuracies, do_stats_arousal(true_array_, pred_array_, ID))
             # remove all 0 (unscored) ORDER of pred/True Matters
             pred_array = np.append(pred_array, pred_array_[true_array_ != 0])
             true_array = np.append(true_array, true_array_[true_array_ != 0])
@@ -197,23 +209,33 @@ def validate(data_name, model_name, pre_trained_model, channel_index, comment):
 
             if counters == 2:
                 print("Max Mem GB  ", torch.cuda.max_memory_allocated(device=device) * 1e-9)
-                save_metrics(running_loss, dataloaders, phase, pred_array, true_array, pred_array_sleep, true_array_sleep,
-                             Challenge2018Scorer, writer, epoch, comment)
+                # save_metrics(running_loss, dataloaders, phase, pred_array, true_array, pred_array_sleep, true_array_sleep,
+                #              Challenge2018Scorer, writer, epoch, comment)
                 epoch += 1
 
                 true_array = np.empty(0)
                 pred_array = np.empty(0)
                 true_array_sleep = np.empty(0)
                 pred_array_sleep = np.empty(0)
-                Challenge2018Scorer._pos_values, Challenge2018Scorer._neg_values = 0, 0
+
+                print(Challenge2018Scorer.gross_auprc(), Challenge2018Scorer.gross_auroc())
+
+                del Challenge2018Scorer
+                Challenge2018Scorer = Challenge2018Score()
+
+                print(asda)
 
                 running_loss = 0.0
                 counters = 0
+
             del arousal_out
             del sleep_out
             del loss_arousal
             del loss_sleep
+
         if epoch == 10:
+            Path("statistics").mkdir(parents=True, exist_ok=True)
+            np.save(os.path.join("statistics", comment), accuracies)
             break
     print("END")
 
@@ -250,8 +272,8 @@ def save_metrics(running_loss, dataloaders, phase, pred_array, true_array, pred_
     # ex.log_scalar('Balanced_Accuracy_sleep_staging/{}'.format(phase), balanced_sleep, epoch)
 
     cohen_kappa_arousal = metrics.cohen_kappa_score(true_array, pred_array, labels=[0, 1, 2])
-    cohen_kappa_sleep = metrics.cohen_kappa_score(true_array_sleep, pred_array_sleep, labels=[0, 1, 2, 3, 4, 5])
     writer.add_scalar('Kappa_arousal/{}'.format(phase), cohen_kappa_arousal, global_step=epoch)
+    cohen_kappa_sleep = metrics.cohen_kappa_score(true_array_sleep, pred_array_sleep, labels=[0, 1, 2, 3, 4, 5])
     writer.add_scalar('Kappa_sleep/{}'.format(phase), cohen_kappa_sleep, global_step=epoch)
 
     arousal_annotation = ["not_scored", "not_arousal", "Arousal"]
@@ -284,18 +306,75 @@ def save_metrics(running_loss, dataloaders, phase, pred_array, true_array, pred_
 
     print("\n{}: epoch: {} Loss {:.3f} Accuracy arousal: {:.3f} Accuracy Sleep: {:.3f}\n".format(phase, epoch, epoch_loss, acc, acc_sleep))
     print("\n{}: Arousal Report: \n{}\n".format(phase, df.to_markdown()))
+
     print("\n{}: Sleep Report: \n{}\n".format(phase, df2.to_markdown()))
 
     # Plot normalized confusion matrix
     fig_confusion = plot_confusion_matrix(true_array, pred_array, classes=["not arousal", "arousal"], title=comment+"_"+str(epoch), labels=[1, 2])
     writer.add_figure("Confusion Matrix/{}".format(phase), fig_confusion, global_step=epoch)
 
-    writer.close()
 
 def load_obj(name):
     with open(name, 'rb') as f:
         return pkl.load(f)
 
+def do_stats_arousal(true, pred, id):
+
+    accuracies = []
+
+    for i, _ in enumerate(true):
+        pred_record = pred[i][true[i] != 0]
+        true_record = true[i][true[i] != 0]
+        accuracies.append(metrics.balanced_accuracy_score(true_record, pred_record))
+
+    return accuracies
+
+def do_auroc(Challenge2018Scorer, true_array_, prediction_prob_arousal, ID, comment):
+
+    fpr, tpr = 0, 0
+    fig, ax = plt.subplots(1, 2, figsize=(16, 8))
+    fig.suptitle('{}'.format(comment), fontsize=16)
+    lw = 2
+    ax[0].plot([0, 1], [0, 1], color='navy', lw=lw, linestyle='--')
+
+    for i, _ in enumerate(true_array_):
+        true = true_array_[i]
+        pred = prediction_prob_arousal[i]
+
+        Challenge2018Scorer.score_record(true[true != 0] - 1, pred[true != 0], ID[i])
+
+        # print(Challenge2018Scorer._record_auc)
+
+        fpr, tpr, _ = metrics.roc_curve(true[true != 0] - 1, pred[true != 0])
+        prec, recall, _ = metrics.precision_recall_curve(true[true != 0] - 1, pred[true != 0], pos_label=1)
+
+        # print(fpr.shape, recall.shape, true[true != 0].shape)
+
+        roc_auc = metrics.auc(fpr, tpr)
+        prc_auc = metrics.auc(recall, prec)
+
+
+
+        ax[0].plot(fpr, tpr, color='darkorange',
+                 lw=lw, label='{} (area = {:0.2f})'.format(ID[i], roc_auc), alpha=0.3)
+        ax[0].set_xlim([0.0, 1.0])
+        ax[0].set_ylim([0.0, 1.05])
+        ax[0].set_xlabel('False Positive Rate')
+        ax[0].set_ylabel('True Positive Rate')
+        ax[0].set_title('Receiver operating characteristic')
+        ax[0].legend(loc="lower right")
+
+        ax[1].plot(recall, prec, color='darkorange',
+                 lw=lw, label='{} (area = {:0.2f})'.format(ID[i], prc_auc), alpha=0.3)
+        ax[1].set_xlim([0.0, 1.0])
+        ax[1].set_ylim([0.0, 1.05])
+        ax[1].set_xlabel('Recall')
+        ax[1].set_ylabel('Precision')
+        ax[1].set_title('Precision Recall curve')
+        ax[1].legend(loc="upper right")
+
+        # plt.hold(True)
+    plt.show()
 
 if __name__ == '__main__':
     main()
