@@ -35,10 +35,13 @@ def main():
                     "models\\Jul30_04-07-52_BananaDeep_Sleep_snoozeweights_1_1"]
 
     pre_traineds = []
-    pre_traineds += sorted(Path("models/weights").glob("*SHHSweights*"))
+    # pre_traineds += sorted(Path("models/weights").glob("*SHHSweights*"))
     pre_traineds += sorted(Path("models/channels").glob("*"))
-    pre_traineds += sorted(Path("models/weights").glob("*"))
-    pre_traineds += sorted(Path("models/sleep_staging").glob("*"))
+    # pre_traineds += sorted(Path("models/weights").glob("*"))
+    # pre_traineds += sorted(Path("models/sleep_staging").glob("*"))
+
+    # pre_traineds += sorted(Path("models/weights").glob("*1_100"))
+    # pre_traineds += sorted(Path("models/weights").glob("*1_200"))
 
     for model_name in ["Deep_Sleep"]:
         # model_name = "ConvNet_IID"
@@ -48,15 +51,33 @@ def main():
         pass
 
     for pre_trained_model in pre_traineds:
-        # for data_name in ["snooze", "SHHS"]:
-        for data_name in ["SHHS"]:
-            comment = pre_trained_model.name + "_to_" + data_name
-            # comment = pre_trained_model.name
+        for data_name in ["snooze", "SHHS"]:
+        # for data_name in ["snooze"]:
 
-            channel_index = 0
-            model_name = "Deep_Sleep"
-            print(pre_trained_model)
+            comment = pre_trained_model.name + "_to_" + data_name
             validate(data_name, model_name, pre_trained_model, channel_index, comment)
+
+        if False:
+            if data_name == "SHHS":
+                for channel_index, channel in enumerate(["C3_A2", "C4_A1"]):
+                    comment = pre_trained_model.name + "_to_" + data_name + "_" + channel
+                    validate(data_name, model_name, pre_trained_model, channel_index, comment)
+
+            elif data_name == "snooze":
+                for channel_index, channel in enumerate(["F3_M2", "F4_M1", "C3_M2", "C4_M1"]):
+                    comment = pre_trained_model.name + "_to_" + data_name + "_" + channel
+                    validate(data_name, model_name, pre_trained_model, channel_index, comment)
+            else:
+                print("data not found")
+
+            if False:
+                comment = pre_trained_model.name + "_to_" + data_name
+                # comment = pre_trained_model.name
+
+                channel_index = 0
+                model_name = "Deep_Sleep"
+                print(pre_trained_model)
+                validate(data_name, model_name, pre_trained_model, channel_index, comment)
 
     # for pre_trained_model in pre_traineds:
     #
@@ -141,6 +162,8 @@ def validate(data_name, model_name, pre_trained_model, channel_index, comment):
     model.eval()
 
     accuracies = np.empty(0)
+    kappas = np.empty(0)
+
     true_array = np.empty(0)
     pred_array = np.empty(0)
     true_array_sleep = np.empty(0)
@@ -154,7 +177,19 @@ def validate(data_name, model_name, pre_trained_model, channel_index, comment):
         with torch.set_grad_enabled(False):
 
             inputs = inputs.to(device)
-            inputs = inputs[:, channel_index, :]
+
+            if channel_index == "random":
+                if data_name == "SHHS":
+                    max_chan = 2
+                elif data_name == "snooze":
+                    max_chan = 4
+                else:
+                    pass
+                rand_channel = np.random.randint(0, max_chan)
+                inputs = inputs[:, rand_channel, :]
+            else:
+                inputs = inputs[:, channel_index, :]
+
 
             m = torch.mean(inputs.float())
             s = torch.std(inputs.float())
@@ -186,12 +221,15 @@ def validate(data_name, model_name, pre_trained_model, channel_index, comment):
             prediction_prob_arousal = torch.nn.functional.softmax(arousal_out, dim=1)[:, 2,
                                       :].detach().cpu().numpy().squeeze()
 
-            do_auroc(Challenge2018Scorer, true_array_, prediction_prob_arousal, ID, comment)
+            do_auroc(Challenge2018Scorer, true_array_, prediction_prob_arousal, ID, comment, epoch)
 
             # set all 0 (unscored) to predictions to 1 (not-arousal)
             pred_array_[pred_array_ == 0] = 1
 
-            accuracies = np.append(accuracies, do_stats_arousal(true_array_, pred_array_, ID))
+            accuracies_, kappas_ = do_stats_arousal(true_array_, pred_array_, ID)
+            accuracies = np.append(accuracies, accuracies_)
+            kappas = np.append(kappas, kappas_)
+
             # remove all 0 (unscored) ORDER of pred/True Matters
             pred_array = np.append(pred_array, pred_array_[true_array_ != 0])
             true_array = np.append(true_array, true_array_[true_array_ != 0])
@@ -223,8 +261,6 @@ def validate(data_name, model_name, pre_trained_model, channel_index, comment):
                 del Challenge2018Scorer
                 Challenge2018Scorer = Challenge2018Score()
 
-                print(asda)
-
                 running_loss = 0.0
                 counters = 0
 
@@ -232,10 +268,14 @@ def validate(data_name, model_name, pre_trained_model, channel_index, comment):
             del sleep_out
             del loss_arousal
             del loss_sleep
+            plt.close("all")
 
         if epoch == 10:
             Path("statistics").mkdir(parents=True, exist_ok=True)
-            np.save(os.path.join("statistics", comment), accuracies)
+            Path("statistics/accuracies").mkdir(parents=True, exist_ok=True)
+            Path("statistics/kappas").mkdir(parents=True, exist_ok=True)
+            np.save(Path("statistics/accuracies") / comment, accuracies)
+            np.save(Path("statistics/kappas") / comment, kappas)
             break
     print("END")
 
@@ -313,6 +353,7 @@ def save_metrics(running_loss, dataloaders, phase, pred_array, true_array, pred_
     fig_confusion = plot_confusion_matrix(true_array, pred_array, classes=["not arousal", "arousal"], title=comment+"_"+str(epoch), labels=[1, 2])
     writer.add_figure("Confusion Matrix/{}".format(phase), fig_confusion, global_step=epoch)
 
+    plt.close("all")
 
 def load_obj(name):
     with open(name, 'rb') as f:
@@ -321,15 +362,17 @@ def load_obj(name):
 def do_stats_arousal(true, pred, id):
 
     accuracies = []
+    kappas = []
 
     for i, _ in enumerate(true):
         pred_record = pred[i][true[i] != 0]
         true_record = true[i][true[i] != 0]
         accuracies.append(metrics.balanced_accuracy_score(true_record, pred_record))
+        kappas.append(metrics.cohen_kappa_score(true_record, pred_record, labels=[0, 1, 2]))
 
-    return accuracies
+    return accuracies, kappas
 
-def do_auroc(Challenge2018Scorer, true_array_, prediction_prob_arousal, ID, comment):
+def do_auroc(Challenge2018Scorer, true_array_, prediction_prob_arousal, ID, comment, epoch):
 
     fpr, tpr = 0, 0
     fig, ax = plt.subplots(1, 2, figsize=(16, 8))
@@ -374,7 +417,10 @@ def do_auroc(Challenge2018Scorer, true_array_, prediction_prob_arousal, ID, comm
         ax[1].legend(loc="upper right")
 
         # plt.hold(True)
-    plt.show()
+    Path("figures/aurocs").mkdir(parents=True, exist_ok=True)
+    filename = comment + str(epoch) + '.png'
+    plt.savefig(Path("figures/aurocs") / filename)
+    plt.clf()
 
 if __name__ == '__main__':
     main()
