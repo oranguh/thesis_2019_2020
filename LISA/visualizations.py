@@ -4,6 +4,8 @@ from sklearn.metrics import confusion_matrix
 import numpy as np
 import pandas as pd
 import os
+from pathlib import Path
+
 
 from sklearn.utils.multiclass import unique_labels
 
@@ -48,8 +50,9 @@ def plot_confusion_matrix(y_true, y_pred, classes,
 
 
     # plt.tight_layout()
-    os.makedirs('figures/', exist_ok=True)
-    plt.savefig(os.path.join('figures/', title + '.png'))
+    Path("figures/confusions").mkdir(parents=True, exist_ok=True)
+    filename = title + '.png'
+    plt.savefig(Path("figures/confusions") / filename)
     # plt.show()
 
     return fig
