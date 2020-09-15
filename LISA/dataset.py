@@ -11,10 +11,23 @@ def load_obj(name):
         return pkl.load(f)
 
 
+class ConcatDataset(torch.utils.data.Dataset):
+    def __init__(self, *datasets):
+        self.datasets = datasets
+
+    def __getitem__(self, i):
+        # print(self.datasets)
+        # print(tuple(d[i] for d in self.datasets))
+        return random.choice(tuple(d[i] for d in self.datasets))
+
+    def __len__(self):
+        return min(len(d) for d in self.datasets)
+
+
 class Dataset_full(data.Dataset):
     'Characterizes a dataset for PyTorch'
 
-    def __init__(self, list_IDs, folder, downsample_ratio=2, pre_allocation=3422800, down_sample_annotation=True):
+    def __init__(self, list_IDs, folder, downsample_ratio=2, pre_allocation=3597000, down_sample_annotation=True):
         'Initialization'
         self.list_IDs = list_IDs
         self.folder = folder
@@ -30,10 +43,9 @@ class Dataset_full(data.Dataset):
         'Generates one sample of data'
         # Select sample
         ID = self.list_IDs[index]
-
+        # print(asasa)
         # Load data and get label
         folder_ = os.path.join(self.folder, ID)
-
         # 6609000
         # try:
         # F3-M2, F4-M1, C3-M2, C4-M1, O1-M2 and O2-M1; one electrooculography (EOG) signal at E1-M2;
@@ -43,7 +55,11 @@ class Dataset_full(data.Dataset):
         X_ = torch.load(os.path.join(folder_, ID + '_data.pt'))
         Y_ = torch.load(os.path.join(folder_, ID + '_labels.pt'))
 
-        X = np.zeros((X_.shape[0], self.pre_allocation))
+        if True:
+            X_ = X_[0, :]
+            X_ = np.expand_dims(X_, axis=0)
+
+        X = np.zeros((X_.shape[0], self.pre_allocation)).astype(float)
         Y = np.full((Y_.shape[0], self.pre_allocation), -1)
 
         X[:X_.shape[0], :X_.shape[1]] = X_
@@ -90,7 +106,8 @@ class Dataset_full(data.Dataset):
 
         y_arousal = downsampler(y_arousal)
         y_sleep = downsampler(y_sleep)
-
+        # print(X.shape, y_arousal.shape)
+        # print(asas)
         return ID, X, y_arousal, y_sleep
 
 
@@ -169,7 +186,14 @@ class Dataset_full_SHHS(data.Dataset):
         X_ = np.load(os.path.join(folder_, ID + '_data.npy'))
         Y_ = np.load(os.path.join(folder_, ID + '_labels.npy'))
 
-        X = np.full((X_.shape[0], self.pre_allocation), 0)
+        if True:
+            X_ = X_[0, :]
+            X_ = np.expand_dims(X_, axis=0)
+
+        # X_ = torch.load(os.path.join(folder_, ID + '_data.pt'))
+        # Y_ = torch.load(os.path.join(folder_, ID + '_labels.pt'))
+
+        X = np.full((X_.shape[0], self.pre_allocation), 0).astype(float)
         Y = np.full((Y_.shape[0], self.pre_allocation), 4)
 
         #     EEG (sec): 	C3 	A2
