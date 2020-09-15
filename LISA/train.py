@@ -112,9 +112,9 @@ def cfg():
             print("data not found")
 
         # Parameters for dataloader
-        dataloader_params = {'batch_size': 2,
+        dataloader_params = {'batch_size': 1,
                              'shuffle': True,
-                             'num_workers': 2}
+                             'num_workers': 1}
     else:
         if data_name == "SHHS":
             data_folder = '/project/marcoh/shhs/polysomnography/shh1_numpy/'
@@ -127,7 +127,7 @@ def cfg():
                              'shuffle': True,
                              'num_workers': 4}
 
-    max_epochs = 40
+    max_epochs = 30
     # full PSG has 12, we use 1, always
     channels_to_use = 1
 
@@ -141,7 +141,7 @@ def training(_log, max_epochs, channels_to_use, dataloader_params, lr,
         data_folder, weights_arousal, weights_sleep, model_name, data_name, pretrained, comment,
              channel_id, sleep_stage_importance):
     # writer = SummaryWriter(comment=str(datetime.now().strftime("%Y%m%d-%H%M%S")))
-    writer = SummaryWriter(comment=model_name + "_" + data_name + comment)
+    writer = SummaryWriter(comment=model_name + "_" + data_name + "_" + comment)
 
     print(comment)
     # for saving log to file
@@ -200,6 +200,7 @@ def training(_log, max_epochs, channels_to_use, dataloader_params, lr,
             running_loss = 0.0
             counters = 0
             for ID, inputs, annotations_arousal, annotations_sleep in dataloaders[phase]:
+                # print(ID, inputs.shape, annotations_arousal.shape, annotations_sleep.shape)
 
                 # Transfer to GPU
                 inputs = inputs.to(device)
@@ -258,8 +259,12 @@ def training(_log, max_epochs, channels_to_use, dataloader_params, lr,
                 true_array_ = annotations_arousal.cpu().numpy().squeeze().astype(int)
                 pred_array_ = arousal_out.argmax(dim=1).cpu().numpy().squeeze().astype(int)
 
-                prediction_prob_arousal = torch.nn.functional.softmax(arousal_out, dim=1)[:, 2,
-                                          :].detach().cpu().numpy().squeeze()
+                if arousal_out.dim() == 3:
+                    prediction_prob_arousal = torch.nn.functional.softmax(arousal_out, dim=1)[:, 2, :]\
+                        .detach().cpu().numpy().squeeze()
+                else:
+                    prediction_prob_arousal = torch.nn.functional.softmax(arousal_out, dim=1)[:, 2]\
+                        .detach().cpu().numpy().squeeze()
                 Challenge2018Scorer.score_record(true_array_[true_array_ != 0] - 1,
                                                  prediction_prob_arousal[true_array_ != 0])
 
@@ -380,9 +385,15 @@ def run(_log, max_epochs, channels_to_use, dataloader_params, lr,
         data_folder, weights_arousal, weights_sleep, model_name, data_name, pretrained, comment, channel_id, sleep_stage_importance):
 
 
-    # data_name = "SHHS"
-    # data_folder = 'K:\\shhs\\polysomnography\\shh1_numpy'
+    data_name = "SHHS"
+    data_folder = 'K:\\shhs\\polysomnography\\shh1_numpy'
     # """" Experiments with weights"""
+    # training(_log, max_epochs, channels_to_use, dataloader_params, lr,
+    #     data_folder, [.0, .005, .995], weights_sleep, model_name, data_name, pretrained, "weights_1_200",
+    #     channel_id, sleep_stage_importance)
+    # training(_log, max_epochs, channels_to_use, dataloader_params, lr,
+    #     data_folder, [.0, .01, .99], weights_sleep, model_name, data_name, pretrained, "weights_1_100",
+    #     channel_id, sleep_stage_importance)
     # training(_log, max_epochs, channels_to_use, dataloader_params, lr,
     #     data_folder, [.0, .02, .98], weights_sleep, model_name, data_name, pretrained, "weights_1_50",
     #     channel_id, sleep_stage_importance)
@@ -405,6 +416,14 @@ def run(_log, max_epochs, channels_to_use, dataloader_params, lr,
     #
     data_name = "snooze"
     data_folder = 'D:\\data\\snooze\\marco'
+    # training(_log, max_epochs, channels_to_use, dataloader_params, lr,
+    #     data_folder, [.0, .005, .995], weights_sleep, model_name, data_name, pretrained, "weights_1_200",
+    #     channel_id, sleep_stage_importance)
+    #
+    # training(_log, max_epochs, channels_to_use, dataloader_params, lr,
+    #     data_folder, [.0, .01, .99], weights_sleep, model_name, data_name, pretrained, "weights_1_100",
+    #     channel_id, sleep_stage_importance)
+
     # training(_log, max_epochs, channels_to_use, dataloader_params, lr,
     #     data_folder, [.0, .02, .98], weights_sleep, model_name, data_name, pretrained, "weights_1_50",
     #     channel_id, sleep_stage_importance)
@@ -432,9 +451,9 @@ def run(_log, max_epochs, channels_to_use, dataloader_params, lr,
     #          data_folder, [.0, .1, .9], weights_sleep, model_name, data_name, pretrained, "random_channel",
     #          "random", sleep_stage_importance)
 
-    training(_log, max_epochs, channels_to_use, dataloader_params, lr,
-             data_folder, [.0, .1, .9], weights_sleep, model_name, data_name, pretrained, "F3-M2",
-             0, sleep_stage_importance)
+    # training(_log, max_epochs, channels_to_use, dataloader_params, lr,
+    #          data_folder, [.0, .1, .9], weights_sleep, model_name, data_name, pretrained, "F3-M2",
+    #          0, sleep_stage_importance)
     #
     # training(_log, max_epochs, channels_to_use, dataloader_params, lr,
     #          data_folder, [.0, .1, .9], weights_sleep, model_name, data_name, pretrained, "F4-M1",
@@ -451,53 +470,68 @@ def run(_log, max_epochs, channels_to_use, dataloader_params, lr,
     data_name = "SHHS"
     data_folder = 'K:\\shhs\\polysomnography\\shh1_numpy'
     """" # SHHS [C3-A2 (sec), C4-A1] """
-    training(_log, max_epochs, channels_to_use, dataloader_params, lr,
-             data_folder, [.0, .1, .9], weights_sleep, model_name, data_name, pretrained, "random_channel",
-             "random", sleep_stage_importance)
-
-    training(_log, max_epochs, channels_to_use, dataloader_params, lr,
-             data_folder, [.0, .1, .9], weights_sleep, model_name, data_name, pretrained, "C3-A2",
-             0, sleep_stage_importance)
-
-    training(_log, max_epochs, channels_to_use, dataloader_params, lr,
-             data_folder, [.0, .1, .9], weights_sleep, model_name, data_name, pretrained, "C4-A1",
-             1, sleep_stage_importance)
+    # training(_log, max_epochs, channels_to_use, dataloader_params, lr,
+    #          data_folder, [.0, .1, .9], weights_sleep, model_name, data_name, pretrained, "random_channel",
+    #          "random", sleep_stage_importance)
+    #
+    # training(_log, max_epochs, channels_to_use, dataloader_params, lr,
+    #          data_folder, [.0, .1, .9], weights_sleep, model_name, data_name, pretrained, "C3-A2",
+    #          0, sleep_stage_importance)
+    #
+    # training(_log, max_epochs, channels_to_use, dataloader_params, lr,
+    #          data_folder, [.0, .1, .9], weights_sleep, model_name, data_name, pretrained, "C4-A1",
+    #          1, sleep_stage_importance)
 
     data_name = "SHHS"
     data_folder = 'K:\\shhs\\polysomnography\\shh1_numpy'
     """" Adding sleep staging """
-    training(_log, max_epochs, channels_to_use, dataloader_params, lr,
-             data_folder, [.0, .1, .9], weights_sleep, model_name, data_name, pretrained, "sleep_1_1",
-             0, 1)
+    # training(_log, max_epochs, channels_to_use, dataloader_params, lr,
+    #          data_folder, [.0, .1, .9], weights_sleep, model_name, data_name, pretrained, "sleep_1_1",
+    #          0, 1)
+    #
+    # training(_log, max_epochs, channels_to_use, dataloader_params, lr,
+    #          data_folder, [.0, .1, .9], weights_sleep, model_name, data_name, pretrained, "sleep_1_2",
+    #          0, 0.5)
+    #
+    # training(_log, max_epochs, channels_to_use, dataloader_params, lr,
+    #          data_folder, [.0, .1, .9], weights_sleep, model_name, data_name, pretrained, "sleep_1_5",
+    #          0, 0.2)
+    #
+    # training(_log, max_epochs, channels_to_use, dataloader_params, lr,
+    #          data_folder, [.0, .1, .9], weights_sleep, model_name, data_name, pretrained, "sleep_1_10",
+    #          0, 0.1)
 
-    training(_log, max_epochs, channels_to_use, dataloader_params, lr,
-             data_folder, [.0, .1, .9], weights_sleep, model_name, data_name, pretrained, "sleep_1_2",
-             0, 0.5)
-
-    training(_log, max_epochs, channels_to_use, dataloader_params, lr,
-             data_folder, [.0, .1, .9], weights_sleep, model_name, data_name, pretrained, "sleep_1_5",
-             0, 0.2)
-
-    training(_log, max_epochs, channels_to_use, dataloader_params, lr,
-             data_folder, [.0, .1, .9], weights_sleep, model_name, data_name, pretrained, "sleep_1_10",
-             0, 0.1)
-
-
-    data_name = "snooze"
-    data_folder = 'D:\\data\\snooze\\marco'
+    # data_name = "snooze"
+    # data_folder = 'D:\\data\\snooze\\marco'
     """" Adding sleep staging """
-    training(_log, max_epochs, channels_to_use, dataloader_params, lr,
-             data_folder, [.0, .1, .9], weights_sleep, model_name, data_name, pretrained, "sleep_1_1",
-             0, 1)
+    # training(_log, max_epochs, channels_to_use, dataloader_params, lr,
+    #          data_folder, [.0, .1, .9], weights_sleep, model_name, data_name, pretrained, "sleep_1_1",
+    #          0, 1)
+    #
+    # training(_log, max_epochs, channels_to_use, dataloader_params, lr,
+    #          data_folder, [.0, .1, .9], weights_sleep, model_name, data_name, pretrained, "sleep_1_2",
+    #          0, 0.5)
+    #
+    # training(_log, max_epochs, channels_to_use, dataloader_params, lr,
+    #          data_folder, [.0, .1, .9], weights_sleep, model_name, data_name, pretrained, "sleep_1_5",
+    #          0, 0.2)
+    #
+    # training(_log, max_epochs, channels_to_use, dataloader_params, lr,
+    #          data_folder, [.0, .1, .9], weights_sleep, model_name, data_name, pretrained, "sleep_1_10",
+    #          0, 0.1)
+
+    # model_name = "ConvNet_IID"
+    # for howe use batchsize 6 on lisa?
+    # model_name = "Howe_Patterson"
+    model_name = "Deep_Sleep"
+
+    # data_name = "combined"
+    comment = "50Hz"
+    # data_folder = ['D:\\data\\snooze\\marco', 'K:\\shhs\\polysomnography\\shh1_numpy']
 
     training(_log, max_epochs, channels_to_use, dataloader_params, lr,
-             data_folder, [.0, .1, .9], weights_sleep, model_name, data_name, pretrained, "sleep_1_2",
-             0, 0.5)
+             data_folder, [.0, .1, .9], weights_sleep, model_name, data_name, pretrained, comment,
+             0, sleep_stage_importance)
 
-    training(_log, max_epochs, channels_to_use, dataloader_params, lr,
-             data_folder, [.0, .1, .9], weights_sleep, model_name, data_name, pretrained, "sleep_1_5",
-             0, 0.2)
-
-    training(_log, max_epochs, channels_to_use, dataloader_params, lr,
-             data_folder, [.0, .1, .9], weights_sleep, model_name, data_name, pretrained, "sleep_1_10",
-             0, 0.1)
+    data_name = "SHHS"
+    data_folder = 'K:\\shhs\\polysomnography\\shh1_numpy'
