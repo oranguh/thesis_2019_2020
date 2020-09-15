@@ -19,30 +19,19 @@ from visualizations import plot_confusion_matrix, plot_classes_distribution
 
 def main():
 
-    channel = 0
     channel_index = 0
-
-    pre_traineds = ["models\\Jul29_18-28-48_BananaDeep_Sleep_snoozeweights_1_50",
-                    "models\\Jul29_20-39-34_BananaDeep_Sleep_snoozeweights_1_20",
-                    "models\\Jul30_02-21-24_BananaDeep_Sleep_snoozeweights_1_10",
-                    "models\\Jul30_00-28-59_BananaDeep_Sleep_snoozeweights_1_5",
-                    "models\\Jul30_04-07-52_BananaDeep_Sleep_snoozeweights_1_1"]
-
-    pre_traineds = ["models\\Jul29_18-28-48_BananaDeep_Sleep_snoozeweights_1_50",
-                    "models\\Jul29_20-39-34_BananaDeep_Sleep_snoozeweights_1_20",
-                    "models\\Jul30_02-21-24_BananaDeep_Sleep_snoozeweights_1_10",
-                    "models\\Jul30_00-28-59_BananaDeep_Sleep_snoozeweights_1_5",
-                    "models\\Jul30_04-07-52_BananaDeep_Sleep_snoozeweights_1_1"]
-
     pre_traineds = []
     # pre_traineds += sorted(Path("models/weights").glob("*SHHSweights*"))
-    pre_traineds += sorted(Path("models/channels").glob("*"))
+    # pre_traineds += sorted(Path("models/weights").glob("*snoozeweights*"))
+    # pre_traineds += sorted(Path("models/channels").glob("*"))
     # pre_traineds += sorted(Path("models/weights").glob("*"))
     # pre_traineds += sorted(Path("models/sleep_staging").glob("*"))
 
     # pre_traineds += sorted(Path("models/weights").glob("*1_100"))
     # pre_traineds += sorted(Path("models/weights").glob("*1_200"))
-
+    # pre_traineds += sorted(Path("models/combined_dataset").glob("*sleep*"))
+    pre_traineds += sorted(Path("models/frequency").glob("*"))
+    # print(pre_traineds)
     for model_name in ["Deep_Sleep"]:
         # model_name = "ConvNet_IID"
         # for howe use batchsize 6 on lisa?
@@ -79,21 +68,6 @@ def main():
                 print(pre_trained_model)
                 validate(data_name, model_name, pre_trained_model, channel_index, comment)
 
-    # for pre_trained_model in pre_traineds:
-    #
-    #     for data_name in ["snooze", "SHHS"]:
-    #         if data_name == "SHHS":
-    #             for channel_index, channel in enumerate(["C3_A2", "C4_A1"]):
-    #                 comment = os.path.split(pre_trained_model)[-1] + "_to_" + data_name + "_" + channel
-    #                 validate(data_name, model_name, pre_trained_model, channel_index, comment)
-    #
-    #         elif data_name == "snooze":
-    #             for channel_index, channel in enumerate(["F3_M2", "F4_M1", "C3_M2", "C4_M1", "O1_M2", "O2_M1"]):
-    #                 comment = os.path.split(pre_trained_model)[-1] + "_to_" + data_name + "_" + channel
-    #                 validate(data_name, model_name, pre_trained_model, channel_index, comment)
-    #         else:
-    #             print("data not found")
-
     # SHHS
     #     EEG (sec): 	C3 	A2
     #     EEG:    C4 	A1
@@ -127,7 +101,7 @@ def validate(data_name, model_name, pre_trained_model, channel_index, comment):
             weights_arousal = [.0, .05, .95]  # Snooze
 
         # Parameters for dataloader
-        dataloader_params = {'batch_size': 8,
+        dataloader_params = {'batch_size': 4,
                              'shuffle': False,
                              'num_workers': 0}
     else:
@@ -245,7 +219,7 @@ def validate(data_name, model_name, pre_trained_model, channel_index, comment):
 
             counters += 1
 
-            if counters == 2:
+            if counters == 4:
                 print("Max Mem GB  ", torch.cuda.max_memory_allocated(device=device) * 1e-9)
                 # save_metrics(running_loss, dataloaders, phase, pred_array, true_array, pred_array_sleep, true_array_sleep,
                 #              Challenge2018Scorer, writer, epoch, comment)
