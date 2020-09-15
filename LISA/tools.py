@@ -1,6 +1,7 @@
 import logging
 import os
-from dataset import Dataset_full, Dataset_IID_window, Dataset_full_SHHS
+from torch.utils import data
+from dataset import Dataset_full, Dataset_IID_window, Dataset_full_SHHS, ConcatDataset
 import pickle as pkl
 
 def load_obj(name):
@@ -63,12 +64,18 @@ def get_dataloader(data_folder, model_name, data_name, size="default"):
     validation_set = None
 
     if model_name == "Howe_Patterson":
-        if size == "small":
+        if data_name == "combined":
+            partition = []
+            for data_fold in data_folder:
+                partition.append(load_obj(os.path.join(data_fold, 'data_partition.pkl')))
+
+        elif size == "small":
             partition = load_obj(os.path.join(data_folder, 'data_partition_small.pkl'))
         elif size == "tiny":
             partition = load_obj(os.path.join(data_folder, 'data_partition_tiny.pkl'))
         else:
             partition = load_obj(os.path.join(data_folder, 'data_partition.pkl'))
+
 
         if data_name == "SHHS":
             training_set = Dataset_full_SHHS(partition['train'], data_folder)
@@ -83,13 +90,26 @@ def get_dataloader(data_folder, model_name, data_name, size="default"):
             print("{} not implemented data".format(data_name))
             exit()
         elif data_name == "combined":
-            print("{} not implemented data".format(data_name))
-            exit()
+            training_set = ConcatDataset(
+                    Dataset_full(partition[0]['train'], data_folder[0], downsample_ratio=4,
+                                  pre_allocation=2 ** 22, down_sample_annotation=False),
+                    Dataset_full_SHHS(partition[1]['train'], data_folder[1], downsample_ratio=4,
+                                      pre_allocation=2 ** 22, down_sample_annotation=False))
+            validation_set = ConcatDataset(
+                    Dataset_full(partition[0]['validation'], data_folder[0], downsample_ratio=4,
+                                  pre_allocation=2 ** 22, down_sample_annotation=False),
+                    Dataset_full_SHHS(partition[1]['validation'], data_folder[1], downsample_ratio=4,
+                                      pre_allocation=2 ** 22, down_sample_annotation=False))
         else:
             print("{} wrong data for dataloader".format(data_name))
             exit()
     elif model_name == "Deep_Sleep":
-        if size == "small":
+        if data_name == "combined":
+            partition = []
+            for data_fold in data_folder:
+                partition.append(load_obj(os.path.join(data_fold, 'data_partition.pkl')))
+
+        elif size == "small":
             partition = load_obj(os.path.join(data_folder, 'data_partition_small.pkl'))
         elif size == "tiny":
             partition = load_obj(os.path.join(data_folder, 'data_partition_tiny.pkl'))
@@ -113,8 +133,17 @@ def get_dataloader(data_folder, model_name, data_name, size="default"):
             print("{} not implemented data".format(data_name))
             exit()
         elif data_name == "combined":
-            print("{} not implemented data".format(data_name))
-            exit()
+            # TODO combined dataset https://discuss.pytorch.org/t/train-simultaneously-on-two-datasets/649/17
+            training_set = ConcatDataset(
+                    Dataset_full(partition[0]['train'], data_folder[0], downsample_ratio=4,
+                                  pre_allocation=2 ** 22, down_sample_annotation=False),
+                    Dataset_full_SHHS(partition[1]['train'], data_folder[1], downsample_ratio=4,
+                                      pre_allocation=2 ** 22, down_sample_annotation=False))
+            validation_set = ConcatDataset(
+                    Dataset_full(partition[0]['validation'], data_folder[0], downsample_ratio=4,
+                                  pre_allocation=2 ** 22, down_sample_annotation=False),
+                    Dataset_full_SHHS(partition[1]['validation'], data_folder[1], downsample_ratio=4,
+                                      pre_allocation=2 ** 22, down_sample_annotation=False))
         else:
             print("{} wrong data for dataloader".format(data_name))
             exit()
