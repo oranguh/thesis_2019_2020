@@ -1,7 +1,7 @@
 import logging
 import os
 from torch.utils import data
-from dataset import Dataset_full, Dataset_IID_window, Dataset_full_SHHS, ConcatDataset
+from dataset import Dataset_full, Dataset_IID_window, Dataset_full_SHHS, ConcatDataset, Dataset_IID_window_SHHS
 import pickle as pkl
 
 def load_obj(name):
@@ -148,10 +148,15 @@ def get_dataloader(data_folder, model_name, data_name, size="default"):
             print("{} wrong data for dataloader".format(data_name))
             exit()
     elif model_name == "ConvNet_IID":
-        partition = load_obj(os.path.join(data_folder, 'data_partition_IID_windows_FULL.pkl'))
+        if data_name == "combined":
+            partition = []
+            for data_fold in data_folder:
+                partition.append(load_obj(os.path.join(data_fold, 'data_partition_IID_windows.pkl')))
+        else:
+            partition = load_obj(os.path.join(data_folder, 'data_partition_IID_windows.pkl'))
         if data_name == "SHHS":
-            print("{} not implemented data".format(data_name))
-            exit()
+            training_set = Dataset_IID_window_SHHS(partition['train'], data_folder)
+            validation_set = Dataset_IID_window_SHHS(partition['validation'], data_folder)
         elif data_name == "snooze":
             training_set = Dataset_IID_window(partition['train'], data_folder)
             validation_set = Dataset_IID_window(partition['validation'], data_folder)
@@ -162,8 +167,12 @@ def get_dataloader(data_folder, model_name, data_name, size="default"):
             print("{} not implemented data".format(data_name))
             exit()
         elif data_name == "combined":
-            print("{} not implemented data".format(data_name))
-            exit()
+            training_set = ConcatDataset(
+                Dataset_IID_window(partition[0]['train'], data_folder[0]),
+                             Dataset_IID_window_SHHS(partition[1]['train'], data_folder[1]))
+            validation_set = ConcatDataset(
+                Dataset_IID_window(partition[0]['validation'], data_folder[0]),
+                             Dataset_IID_window_SHHS(partition[1]['validation'], data_folder[1]))
         else:
             print("{} wrong data for dataloader".format(data_name))
             exit()
