@@ -12,6 +12,16 @@ def load_obj(name):
 
 
 class ConcatDataset(torch.utils.data.Dataset):
+    """
+    when combining, dataset order matters:
+    snooze
+    SHHS,
+    Philips?,
+    HMC?
+
+    is my convention for now
+
+    """
     def __init__(self, *datasets):
         self.datasets = datasets
 
@@ -115,14 +125,14 @@ class Dataset_IID_window(data.Dataset):
     'Characterizes a dataset for PyTorch'
 
     def __init__(self, partition, folder):
-        'Initialization, partition should be data_partition_IID_windows_FULL'
+        'Initialization, partition should be: data_partition_IID_windows'
         self.list_IDs = partition
         self.folder = folder
 
         # I have to use pickle because torch.save has memory issues with 10GB saving
-        self.recording_data = load_obj(os.path.join(folder, "data_IID_windows_FULL.pkl"))
-        self.sleep_annotation = torch.load(os.path.join(folder, "sleep_IID_windows_FULL.pt"))
-        self.arousal_annotation = torch.load(os.path.join(folder, "arousal_IID_windows_FULL.pt"))
+        self.recording_data = load_obj(os.path.join(folder, "data_IID_windows.pkl"))
+        self.sleep_annotation = torch.load(os.path.join(folder, "sleep_IID_windows.pt"))
+        self.arousal_annotation = torch.load(os.path.join(folder, "arousal_IID_windows.pt"))
         self.list_IDs = partition
 
     def __len__(self):
@@ -135,7 +145,6 @@ class Dataset_IID_window(data.Dataset):
         ID = self.list_IDs[index]
         row = ID[0]
         index = ID[1]
-
         y_arousal = self.arousal_annotation[row][index]
         # add 1 to remove negative annotations
 
@@ -155,9 +164,10 @@ class Dataset_IID_window(data.Dataset):
         X = self.recording_data[row][start: end]
 
         # need to expand dims to simulate "channels"
-        X = np.expand_dims(X, axis=0)
-
-        return ID, X, y_arousal, y_sleep
+        X = np.expand_dims(X, axis=0).astype(float)
+        # print(ID, type(X), type(y_arousal), type(y_sleep))
+        # print(asas)
+        return ID, X, y_arousal.astype(float), y_sleep
 
 
 class Dataset_full_SHHS(data.Dataset):
@@ -254,4 +264,63 @@ class Dataset_full_SHHS(data.Dataset):
         y_arousal = downsampler(y_arousal)
         y_sleep = downsampler(y_sleep)
 
+        return ID, X, y_arousal, y_sleep
+
+
+class Dataset_IID_window_SHHS(data.Dataset):
+    'Characterizes a dataset for PyTorch'
+
+    def __init__(self, partition, folder):
+        'Initialization, partition should be data_partition_IID_windows_FULL'
+        self.list_IDs = partition
+        self.folder = folder
+
+        self.recording_data = load_obj(os.path.join(folder, "data_IID_windows.pkl"))
+        self.sleep_annotation = torch.load(os.path.join(folder, "sleep_IID_windows.pt"))
+        self.arousal_annotation = torch.load(os.path.join(folder, "arousal_IID_windows.pt"))
+        self.list_IDs = partition
+
+    def __len__(self):
+        'Denotes the total number of samples'
+        return len(self.list_IDs)
+
+    def __getitem__(self, index):
+        'Generates one sample of data'
+        # Select sample, will return tuple (i, j) denoting row and index
+        ID = self.list_IDs[index]
+        row = ID[0]
+        index = ID[1]
+
+        y_arousal = self.arousal_annotation[row][index]
+        # add 1 to remove negative annotations
+
+        # original: -1=unscored; 0=not_arousal; 1=arousal
+        y_arousal += 1
+        # new: 0=unscored; 1=not_arousal; 2=arousal
+
+        y_sleep = self.sleep_annotation[row][index]
+
+        dicto = {0: 3,
+                 1: 5,
+                 -1: 0,
+                 -2: 1,
+                 -3: 2,
+                 -4: 2,
+                 4: 4}
+
+        y_sleep = dicto.get(y_sleep)
+
+        # get the window from the index, 3000 is window size
+        # sampling frequency
+        HZ = 100
+        # seconds
+        WINDOW = 30
+        start = index * HZ * WINDOW
+        end = (index + 1) * HZ * WINDOW
+        X = self.recording_data[row][start: end]
+
+        # need to expand dims to simulate "channels"
+        X = np.expand_dims(X, axis=0).astype(float)
+        # print(ID, type(X), type(y_arousal), type(y_sleep))
+        # print(asas)
         return ID, X, y_arousal, y_sleep
