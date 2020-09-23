@@ -30,14 +30,17 @@ def main():
     # pre_traineds += sorted(Path("models/weights").glob("*1_100"))
     # pre_traineds += sorted(Path("models/weights").glob("*1_200"))
     # pre_traineds += sorted(Path("models/combined_dataset").glob("*sleep*"))
-    pre_traineds += sorted(Path("models/frequency").glob("*"))
+    # pre_traineds += sorted(Path("models/frequency").glob("*"))
+    pre_traineds += sorted(Path("models/Convnet").glob("*"))
+
+
     # print(pre_traineds)
-    for model_name in ["Deep_Sleep"]:
-        # model_name = "ConvNet_IID"
-        # for howe use batchsize 6 on lisa?
-        # model_name = "Howe_Patterson"
-        # model_name = "Deep_Sleep"
-        pass
+    # model_name = "Deep_Sleep"
+    model_name = "ConvNet_IID"
+    # for howe use batchsize 6 on lisa?
+    # model_name = "Howe_Patterson"
+    # model_name = "Deep_Sleep"
+    # pass
 
     for pre_trained_model in pre_traineds:
         for data_name in ["snooze", "SHHS"]:
@@ -101,7 +104,7 @@ def validate(data_name, model_name, pre_trained_model, channel_index, comment):
             weights_arousal = [.0, .05, .95]  # Snooze
 
         # Parameters for dataloader
-        dataloader_params = {'batch_size': 4,
+        dataloader_params = {'batch_size': 2500,
                              'shuffle': False,
                              'num_workers': 0}
     else:
@@ -192,8 +195,13 @@ def validate(data_name, model_name, pre_trained_model, channel_index, comment):
             true_array_ = annotations_arousal.cpu().numpy().squeeze().astype(int)
             pred_array_ = arousal_out.argmax(dim=1).cpu().numpy().squeeze().astype(int)
 
-            prediction_prob_arousal = torch.nn.functional.softmax(arousal_out, dim=1)[:, 2,
-                                      :].detach().cpu().numpy().squeeze()
+            if arousal_out.dim() == 3:
+                prediction_prob_arousal = torch.nn.functional.softmax(arousal_out, dim=1)[:, 2, :] \
+                    .detach().cpu().numpy().squeeze()
+            else:
+                prediction_prob_arousal = torch.nn.functional.softmax(arousal_out, dim=1)[:, 2] \
+                    .detach().cpu().numpy().squeeze()
+
 
             do_auroc(Challenge2018Scorer, true_array_, prediction_prob_arousal, ID, comment, epoch)
 
@@ -219,10 +227,11 @@ def validate(data_name, model_name, pre_trained_model, channel_index, comment):
 
             counters += 1
 
-            if counters == 4:
+            if counters == 1:
                 print("Max Mem GB  ", torch.cuda.max_memory_allocated(device=device) * 1e-9)
-                # save_metrics(running_loss, dataloaders, phase, pred_array, true_array, pred_array_sleep, true_array_sleep,
-                #              Challenge2018Scorer, writer, epoch, comment)
+                print("epoch ", epoch)
+                save_metrics(running_loss, dataloaders, phase, pred_array, true_array, pred_array_sleep, true_array_sleep,
+                             Challenge2018Scorer, writer, epoch, comment)
                 epoch += 1
 
                 true_array = np.empty(0)
@@ -333,10 +342,14 @@ def load_obj(name):
     with open(name, 'rb') as f:
         return pkl.load(f)
 
+
 def do_stats_arousal(true, pred, id):
 
     accuracies = []
     kappas = []
+
+    if true.ndim == 1:
+        return metrics.balanced_accuracy_score(true, pred), metrics.cohen_kappa_score(true, pred, labels=[0, 1, 2])
 
     for i, _ in enumerate(true):
         pred_record = pred[i][true[i] != 0]
@@ -357,8 +370,14 @@ def do_auroc(Challenge2018Scorer, true_array_, prediction_prob_arousal, ID, comm
     for i, _ in enumerate(true_array_):
         true = true_array_[i]
         pred = prediction_prob_arousal[i]
+        identity = ID[i]
 
-        Challenge2018Scorer.score_record(true[true != 0] - 1, pred[true != 0], ID[i])
+        if true_array_.ndim == 1:
+            true = true_array_
+            pred = prediction_prob_arousal
+            identity = None
+
+        Challenge2018Scorer.score_record(true[true != 0] - 1, pred[true != 0], identity)
 
         # print(Challenge2018Scorer._record_auc)
 
@@ -391,6 +410,8 @@ def do_auroc(Challenge2018Scorer, true_array_, prediction_prob_arousal, ID, comm
         ax[1].legend(loc="upper right")
 
         # plt.hold(True)
+        if true_array_.ndim == 1:
+            break
     Path("figures/aurocs").mkdir(parents=True, exist_ok=True)
     filename = comment + str(epoch) + '.png'
     plt.savefig(Path("figures/aurocs") / filename)
