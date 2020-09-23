@@ -12,13 +12,112 @@ import seaborn as sns
 
 
 def main():
-    combined_data()
+    # combined_data()
     # weights()
     # sleep_staging()
     # channel_stats()
     # cross_dataset()
-    # different_models()
+    different_models()
+    # frequency()
     # future_predict()
+
+
+def frequency():
+    accuracies = sorted(Path("statistics/accuracies/frequency").glob("*"))
+    kappas = sorted(Path("statistics/kappas/frequency").glob("*"))
+
+    df_accuracies = pd.DataFrame()
+    df_kappas = pd.DataFrame()
+
+    df_accuracies = name_replace_frequency(df_accuracies, accuracies)
+    df_kappas = name_replace_frequency(df_kappas, kappas)
+
+    # print(df_accuracies.columns, df_kappas.columns)
+    for col in df_accuracies.columns:
+        if col[0] != col[2]:
+            df_accuracies = df_accuracies.drop(col, axis=1)
+            df_kappas = df_kappas.drop(col, axis=1)
+
+    # print(df_accuracies.columns)
+    names = ["from_data", "frequency", "to_data"]
+    df_accuracies.columns = pd.MultiIndex.from_tuples(df_accuracies.columns, names=names)
+    df_kappas.columns = pd.MultiIndex.from_tuples(df_kappas.columns, names=names)
+    df_accuracies = df_accuracies.sort_index(axis=1, level=[0], ascending=[True])
+    df_kappas = df_kappas.sort_index(axis=1, level=[0], ascending=[True])
+
+    y_labels = ["Accuracy", "Kappas"]
+
+    for i, df in enumerate([df_accuracies, df_kappas]):
+        # df = df.loc[:, (data_name, slice(None))]
+
+        # sns.violinplot(data=df, bw=.1)
+        sns.boxplot(data=df)
+        plt.gca().set_title('Frequency sampling Deep sleep')
+        plt.gca().set_xlabel('')
+        plt.gca().set_ylabel(y_labels[i])
+        plt.gca().set_ylim([-0.1, 1.1])
+        plt.xticks(rotation=0, horizontalalignment="center")
+        labels_figure = []
+        for text in plt.gca().get_xticklabels():
+            # print(text.get_text())
+            temp_text = text.get_text()
+            temp_text = list(temp_text.strip("()").replace("'", "").split(", "))
+            temp_text = tuple(temp_text)
+            correct_text = "{}, \n {} to {} \nmean: {:.2f}".format(temp_text[1], temp_text[0], temp_text[2], df.loc[:, temp_text].mean())
+            text.set_text(correct_text)
+            labels_figure.append(text)
+        plt.gca().set_xticklabels(labels_figure)
+
+        plt.show()
+
+
+def different_models():
+    accuracies = sorted(Path("statistics/accuracies/convnet").glob("*"))
+    kappas = sorted(Path("statistics/kappas/convnet").glob("*"))
+
+    df_accuracies = pd.DataFrame()
+    df_kappas = pd.DataFrame()
+
+    df_accuracies = name_replace_convnet(df_accuracies, accuracies)
+    df_kappas = name_replace_convnet(df_kappas, kappas)
+
+    # for col in df_accuracies.columns:
+    #     if col[0] == "combined+s":
+    #         df_accuracies = df_accuracies.drop(col, axis=1)
+    #         df_kappas = df_kappas.drop(col, axis=1)
+
+    # print(df_accuracies.columns)
+    names = ["from_data", "to_data"]
+    df_accuracies.columns = pd.MultiIndex.from_tuples(df_accuracies.columns, names=names)
+    df_kappas.columns = pd.MultiIndex.from_tuples(df_kappas.columns, names=names)
+    df_accuracies = df_accuracies.sort_index(axis=1, level=[1], ascending=[True])
+    df_kappas = df_kappas.sort_index(axis=1, level=[1], ascending=[True])
+
+    y_labels = ["Accuracy", "Kappas"]
+
+    for i, df in enumerate([df_accuracies, df_kappas]):
+        # df = df.loc[:, (data_name, slice(None))]
+
+        # sns.violinplot(data=df, bw=.1)
+        sns.boxplot(data=df)
+        plt.gca().set_title('Convnet results')
+        plt.gca().set_xlabel('Effect of mixed datasets')
+        plt.gca().set_ylabel(y_labels[i])
+        plt.gca().set_ylim([-0.1, 1.1])
+        plt.xticks(rotation=0, horizontalalignment="center")
+        labels_figure = []
+        for text in plt.gca().get_xticklabels():
+            # print(text.get_text())
+            temp_text = text.get_text()
+            temp_text = list(temp_text.strip("()").replace("'", "").split(", "))
+            temp_text = tuple(temp_text)
+            correct_text = "{} to {} \nmean: {:.2f}".format(temp_text[0], temp_text[1], df.loc[:, temp_text].mean())
+            text.set_text(correct_text)
+            labels_figure.append(text)
+        plt.gca().set_xticklabels(labels_figure)
+
+        plt.show()
+
 
 
 def combined_data():
@@ -207,6 +306,7 @@ def cross_dataset():
 
             plt.show()
 
+
 def sleep_staging():
     accuracies = sorted(Path("statistics/accuracies/sleep_staging").glob("*"))
     kappas = sorted(Path("statistics/kappas/sleep_staging").glob("*"))
@@ -256,6 +356,35 @@ def sleep_staging():
             plt.gca().set_xticklabels(labels_figure)
 
             plt.show()
+
+
+def name_replace_frequency(df, paths):
+    for i, _ in enumerate(paths):
+        data = np.load(paths[i])
+
+        name = paths[i].name.split("Banana")[-1].replace(".npy", "")
+        name = name.replace("Deep_Sleep_SHHS", "SHHS").replace("Deep_Sleep_snooze", "snooze")
+        name = name.replace("Deep_Sleep_combined_combined_dataset", "combined")
+        name = name.replace("_to_", "_")
+
+        df_name = tuple(name.split("_"))
+        df.insert(0, df_name, data)
+
+    return df
+
+
+def name_replace_convnet(df, paths):
+    for i, _ in enumerate(paths):
+        data = np.load(paths[i])
+
+        name = paths[i].name.split("Banana")[-1].replace(".npy", "")
+        name = name.replace("ConvNet_IID_SHHS", "SHHS").replace("ConvNet_IID_snooze", "snooze").replace("ConvNet_IID_combined", "combined")
+        name = name.replace("_to_", "")
+
+        df_name = tuple(name.split("_"))
+        df.insert(0, df_name, data)
+
+    return df
 
 
 def name_replace_combined_data(df, paths):
