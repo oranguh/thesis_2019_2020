@@ -112,7 +112,7 @@ def cfg():
             print("data not found")
 
         # Parameters for dataloader
-        dataloader_params = {'batch_size': 1,
+        dataloader_params = {'batch_size': 3,
                              'shuffle': True,
                              'num_workers': 1}
     else:
@@ -529,9 +529,45 @@ def run(_log, max_epochs, channels_to_use, dataloader_params, lr,
     comment = "50Hz"
     # data_folder = ['D:\\data\\snooze\\marco', 'K:\\shhs\\polysomnography\\shh1_numpy']
 
+    # training(_log, max_epochs, channels_to_use, dataloader_params, lr,
+    #          data_folder, [.0, .1, .9], weights_sleep, model_name, data_name, pretrained, comment,
+    #          0, sleep_stage_importance)
+
+
+
+    """
+    CONVNET EXPIRIMENTS
+    """
+    dataloader_params = {'batch_size': 300,
+                         'shuffle': True,
+                         'num_workers': 2}
+
+    model_name = "ConvNet_IID"
+    comment = ""
+    data_name = "SHHS"
+    data_folder = 'K:\\shhs\\polysomnography\\shh1_numpy'
+
+    # training(_log, max_epochs, channels_to_use, dataloader_params, lr,
+    #          data_folder, [.0, .1, .9], weights_sleep, model_name, data_name, pretrained, comment,
+    #          0, sleep_stage_importance)
+
+    dataloader_params = {'batch_size': 300,
+                         'shuffle': True,
+                         'num_workers': 2}
+
+    data_name = "snooze"
+    data_folder = 'D:\\data\\snooze\\marco'
+
     training(_log, max_epochs, channels_to_use, dataloader_params, lr,
              data_folder, [.0, .1, .9], weights_sleep, model_name, data_name, pretrained, comment,
              0, sleep_stage_importance)
 
-    data_name = "SHHS"
-    data_folder = 'K:\\shhs\\polysomnography\\shh1_numpy'
+    dataloader_params = {'batch_size': 50,
+                         'shuffle': True,
+                         'num_workers': 2}
+    data_name = "combined"
+    data_folder = ['D:\\data\\snooze\\marco', 'K:\\shhs\\polysomnography\\shh1_numpy']
+
+    # training(_log, max_epochs, channels_to_use, dataloader_params, lr,
+    #          data_folder, [.0, .1, .9], weights_sleep, model_name, data_name, pretrained, comment,
+    #          0, sleep_stage_importance)
