@@ -7,7 +7,6 @@ as provided by the smart sleep team for machine learning experiments.
 """
 
 
-from eeg_data import DataSet
 from config import DATA_PATHS
 import pathlib
 import sys
@@ -22,6 +21,20 @@ from pathlib import Path
 
 # Add current working directory to python path so we can import config.py
 sys.path.append(os.getcwd())
+
+class DataSet(object):
+
+    def __init__(self):
+        pass
+
+    def __size__(self):
+        raise NotImplementedError()
+
+    def get_test_index(self):
+        raise NotImplementedError()
+
+    def get_training_index(self):
+        raise NotImplementedError()
 
 
 class ACDryDry(DataSet):
