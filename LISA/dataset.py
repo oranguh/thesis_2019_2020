@@ -1,3 +1,5 @@
+from dry_dry_sham import ACDryDry
+
 import torch
 from torch.utils import data
 import os
@@ -323,4 +325,107 @@ class Dataset_IID_window_SHHS(data.Dataset):
         X = np.expand_dims(X, axis=0).astype(float)
         # print(ID, type(X), type(y_arousal), type(y_sleep))
         # print(asas)
+        return ID, X, y_arousal, y_sleep
+
+
+class Dataset_Philips_full(data.Dataset):
+    'Characterizes a dataset for PyTorch'
+
+    def __init__(self, list_IDs, downsample_ratio=2, pre_allocation=3597000, down_sample_annotation=True):
+        'Initialization'
+        self.list_IDs = list_IDs
+        self.downsample_ratio = downsample_ratio
+        self.loaders_object = ACDryDry()
+        self.pre_allocation = pre_allocation
+        self.down_sample_annotation = down_sample_annotation
+
+    def __len__(self):
+        'Denotes the total number of samples'
+        return len(self.list_IDs)
+
+    def __getitem__(self, index):
+        'Generates one sample of data'
+        # Select sample
+        ID = self.list_IDs[index]
+        # print(ID)
+        # Load data and get label
+        folder_ = os.path.join(self.folder, ID)
+
+        X_ = self.loaders_object.get_EEG(ID, channel='frontal', freq=100)
+        X_ = X_['frontal']
+        y_arousal_ = self.loaders_object.get_arousal('PP01_PSG2_20181129', length=X_.shape[0], freq=100)
+        y_sleep_ = self.loaders_object.get_hypnogram('PP01_PSG2_20181129', freq=100)
+
+        # Use only first channel
+        if True:
+            X_ = X_[0, :]
+            X_ = np.expand_dims(X_, axis=0)
+
+        X = np.full((X_.shape[0], self.pre_allocation), 0).astype(float)
+        y_arousal = np.full((X_.shape[0], self.pre_allocation), -1)
+        y_sleep = np.full((X_.shape[0], self.pre_allocation), 4)
+
+        X[:X_.shape[0], :X_.shape[1]] = X_
+        y_arousal[:y_arousal_.shape[0], :y_arousal_.shape[1]] = y_arousal_
+        y_sleep[:y_sleep_.shape[0], :y_sleep_.shape[1]] = y_sleep_
+
+        del X_
+        del y_arousal_
+        del y_sleep_
+        # X = X[random.randint(0, 1), :]
+        # X = np.expand_dims(X, axis=0)
+
+        # original: -1=unscored; 0=not_arousal; 1=arousal
+        y_arousal += 1
+        # new: 0=unscored; 1=not_arousal; 2=arousal
+
+        # "Wake"= 1 "REM sleep"= 0 "Stage 1 sleep" = -1 "Stage 2 sleep"= -2 "Stage 3 sleep"= -3  "Stage 4 sleep"= -4
+        # Combine sleep stage 4 and 3, add undefined as 4
+        # model sleep stage labels ['nonrem1', 'nonrem2', 'nonrem3', 'rem', 'undefined', 'wake']
+        # turn into [0, 1, 2, 3, 4, 5]
+        # ORDER MATTERS
+
+        #         int(1)  # WAKE -> 5
+        #         int(0)  # REM -> 3
+        #         int(-1)  # N1 -> 0
+        #         int(-2)  # N2 -> 1
+        #         int(-3)  # N3 -> 2
+        #         8 = undefined -> 4
+
+        dicto = {0: 3,
+                 1: 5,
+                 -1: 0,
+                 -2: 1,
+                 -3: 2,
+                 -4: 2,
+                 8: 4,
+                 4: 4}
+
+        y_sleep = np.asarray(list(map(dicto.get, y_sleep[-1, :])))
+
+        # turn the padding into undefined
+        # y_sleep = Y[1, :]
+        # y_sleep[y_sleep < 0] = 4
+
+        # categories_ = [1, 2, 3, 4, 5, 6]
+        # y_sleep = np.multiply(Y[1:, :].transpose(), categories_).transpose().sum(axis=0)
+        # y_sleep[y_sleep < 0] = 0
+
+        # Downsample from 100Hz to 50Hz
+        X = X[:, ::self.downsample_ratio]
+
+        # Downsample annotations in similar way as model from 100Hz to 1Hz
+        def downsampler(to_down):
+            # initial 100 to 50Hz
+            to_down = to_down[::self.downsample_ratio]
+            # from 50 Hz to 1 Hz
+            if self.down_sample_annotation:
+                to_down = to_down[::2]
+                to_down = to_down[::5]
+                to_down = to_down[::5]
+            return to_down
+
+        y_arousal = downsampler(y_arousal)
+        y_sleep = downsampler(y_sleep)
+
         return ID, X, y_arousal, y_sleep
