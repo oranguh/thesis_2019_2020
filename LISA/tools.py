@@ -1,12 +1,15 @@
 import logging
 import os
 from torch.utils import data
-from dataset import Dataset_full, Dataset_IID_window, Dataset_full_SHHS, ConcatDataset, Dataset_IID_window_SHHS
+from dataset import Dataset_full, Dataset_IID_window, Dataset_full_SHHS, ConcatDataset, \
+    Dataset_IID_window_SHHS, Dataset_Philips_full
 import pickle as pkl
+
 
 def load_obj(name):
     with open(name, 'rb') as f:
         return pkl.load(f)
+
 
 def accuracy(predictions, targets):
     """
@@ -31,6 +34,7 @@ def accuracy(predictions, targets):
     # print(summed, compare.size())
     # print(compare.size()[0])
     return summed/compare.size
+
 
 class CustomFormatter(logging.Formatter):
     """Logging Formatter to add colors and count warning / errors"""
@@ -84,8 +88,8 @@ def get_dataloader(data_folder, model_name, data_name, size="default"):
             training_set = Dataset_full(partition['train'], data_folder)
             validation_set = Dataset_full(partition['validation'], data_folder)
         elif data_name == "philips":
-            print("{} not implemented data".format(data_name))
-            exit()
+            training_set = Dataset_Philips_full(partition['train'], data_folder)
+            validation_set = Dataset_Philips_full(partition['validation'], data_folder)
         elif data_name == "HMC":
             print("{} not implemented data".format(data_name))
             exit()
@@ -127,8 +131,10 @@ def get_dataloader(data_folder, model_name, data_name, size="default"):
             validation_set = Dataset_full(partition['validation'], data_folder, downsample_ratio=4,
                                              pre_allocation=2 ** 22, down_sample_annotation=False)
         elif data_name == "philips":
-            print("{} not implemented data".format(data_name))
-            exit()
+            training_set = Dataset_Philips_full(partition['train'], data_folder, downsample_ratio=4,
+                                             pre_allocation=2 ** 22, down_sample_annotation=False)
+            validation_set = Dataset_Philips_full(partition['validation'], data_folder, downsample_ratio=4,
+                                             pre_allocation=2 ** 22, down_sample_annotation=False)
         elif data_name == "HMC":
             print("{} not implemented data".format(data_name))
             exit()
