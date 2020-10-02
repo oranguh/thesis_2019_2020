@@ -571,3 +571,38 @@ def run(_log, max_epochs, channels_to_use, dataloader_params, lr,
     # training(_log, max_epochs, channels_to_use, dataloader_params, lr,
     #          data_folder, [.0, .1, .9], weights_sleep, model_name, data_name, pretrained, comment,
     #          0, sleep_stage_importance)
+
+    """
+    Philips dataset
+    Only available on linux, only available on philips server
+    """
+
+    data_name = "philips"
+    data_folder = '/home/017320_arousal_data/'
+    """" Experiments with weights"""
+
+    training(_log, max_epochs, channels_to_use, dataloader_params, lr,
+        data_folder, [.0, .005, .995], weights_sleep, model_name, data_name, pretrained, "weights_1_200",
+        channel_id, sleep_stage_importance)
+    training(_log, max_epochs, channels_to_use, dataloader_params, lr,
+        data_folder, [.0, .01, .99], weights_sleep, model_name, data_name, pretrained, "weights_1_100",
+        channel_id, sleep_stage_importance)
+    training(_log, max_epochs, channels_to_use, dataloader_params, lr,
+        data_folder, [.0, .02, .98], weights_sleep, model_name, data_name, pretrained, "weights_1_50",
+        channel_id, sleep_stage_importance)
+
+    training(_log, max_epochs, channels_to_use, dataloader_params, lr,
+        data_folder, [.0, .05, .95], weights_sleep, model_name, data_name, pretrained, "weights_1_20",
+        channel_id, sleep_stage_importance)
+
+    training(_log, max_epochs, channels_to_use, dataloader_params, lr,
+        data_folder, [.0, .1, .9], weights_sleep, model_name, data_name, pretrained, "weights_1_10",
+        channel_id, sleep_stage_importance)
+
+    training(_log, max_epochs, channels_to_use, dataloader_params, lr,
+        data_folder, [.0, .2, .8], weights_sleep, model_name, data_name, pretrained, "weights_1_5",
+        channel_id, sleep_stage_importance)
+
+    training(_log, max_epochs, channels_to_use, dataloader_params, lr,
+        data_folder, [.0, .5, .5], weights_sleep, model_name, data_name, pretrained, "weights_1_1",
+        channel_id, sleep_stage_importance)
