@@ -131,9 +131,9 @@ def get_dataloader(data_folder, model_name, data_name, size="default"):
             validation_set = Dataset_full(partition['validation'], data_folder, downsample_ratio=4,
                                              pre_allocation=2 ** 22, down_sample_annotation=False)
         elif data_name == "philips":
-            training_set = Dataset_Philips_full(partition['train'], data_folder, downsample_ratio=4,
+            training_set = Dataset_Philips_full(partition['train'], downsample_ratio=4,
                                              pre_allocation=2 ** 22, down_sample_annotation=False)
-            validation_set = Dataset_Philips_full(partition['validation'], data_folder, downsample_ratio=4,
+            validation_set = Dataset_Philips_full(partition['validation'], downsample_ratio=4,
                                              pre_allocation=2 ** 22, down_sample_annotation=False)
         elif data_name == "HMC":
             print("{} not implemented data".format(data_name))
