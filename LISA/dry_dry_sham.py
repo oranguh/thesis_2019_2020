@@ -40,7 +40,7 @@ class DataSet(object):
 class ACDryDry(DataSet):
 
     def __init__(self):
-        self.path = DATA_PATHS['ac_dry_dry']
+        self.path = DATA_PATHS['dry_dry_sham']
 
         self.data_inventory_file_name = self.path / 'RecInfo_updated.xlsx'
         # , names=['ID', 'RecName', 'Use', 'Condition'])
@@ -65,7 +65,7 @@ class ACDryDry(DataSet):
         eeg_bin_filename = self.path / \
             str(row.RecName.values[0]) / \
             '{}_EEG.bin'.format(row.RecName.values[0])
-        print(eeg_bin_filename)
+        # print(eeg_bin_filename)
         fid = open(eeg_bin_filename, "r")
         data = np.fromfile(fid, dtype=np.float32)
         signal = {}
@@ -97,7 +97,7 @@ class ACDryDry(DataSet):
         eeg_bin_filename = self.path / \
             str(row.RecName.values[0]) / \
             '{}_EEG.bin'.format(row.RecName.values[0])
-        print(eeg_bin_filename)
+        # print(eeg_bin_filename)
         fid = open(eeg_bin_filename, "r")
         data = np.fromfile(fid, dtype=np.float32)
         dl_stages = data[2::10]
@@ -112,7 +112,7 @@ class ACDryDry(DataSet):
         sleep_staging_filename = self.path / \
             str(row.RecName.values[0]) / \
             '{}_manual_staging.csv'.format(row.RecName.values[0])
-        print(sleep_staging_filename)
+        # print(sleep_staging_filename)
 
         df = pd.read_csv(sleep_staging_filename, sep=',')
         hypno = np.array(df.user)
@@ -137,7 +137,7 @@ class ACDryDry(DataSet):
         arousals_filename = self.path / \
             str(row.RecName.values[0]) / \
             '{}_arousals.xlsx'.format(row.RecName.values[0])
-        print(arousals_filename)
+        # print(arousals_filename)
         arousals = pd.read_excel(arousals_filename)
 
         out = np.zeros(int(length))
@@ -160,6 +160,16 @@ if __name__ == '__main__':
     p = ACDryDry()
     print(p.subject_ids)
     print(p.recording_ids)
+    eeg_100 = p.get_EEG('PP01_PSG2_20181129', freq=100.0, channel='frontal')
+    # print(eeg_100)
+    # print(eeg_100['frontal'].shape)
+    arousal = p.get_arousal('PP01_PSG2_20181129',
+                            length=eeg_100['frontal'].shape[0], freq=100)
+    # print(arousal.shape)
+    slst = p.get_hypnogram('PP01_PSG2_20181129', freq=100)
+
+    print(eeg_100['frontal'].shape, arousal.shape, slst.shape)
+    print(asas)
 
     if 1:
         eeg_100 = p.get_EEG('PP01_PSG2_20181129')
