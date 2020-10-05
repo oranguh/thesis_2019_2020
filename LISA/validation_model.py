@@ -261,13 +261,18 @@ def validate(data_name, model_name, pre_trained_model, channel_index, comment):
             del loss_sleep
             plt.close("all")
 
-        # if epoch == 10:
+        if epoch == 10:
+            Path("statistics").mkdir(parents=True, exist_ok=True)
+            Path("statistics/accuracies").mkdir(parents=True, exist_ok=True)
+            Path("statistics/kappas").mkdir(parents=True, exist_ok=True)
+            np.save(Path("statistics/accuracies") / comment, accuracies)
+            np.save(Path("statistics/kappas") / comment, kappas)
+            break
     Path("statistics").mkdir(parents=True, exist_ok=True)
     Path("statistics/accuracies").mkdir(parents=True, exist_ok=True)
     Path("statistics/kappas").mkdir(parents=True, exist_ok=True)
     np.save(Path("statistics/accuracies") / comment, accuracies)
     np.save(Path("statistics/kappas") / comment, kappas)
-            # break
     print("END")
 
 
