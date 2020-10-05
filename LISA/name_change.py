@@ -1,13 +1,13 @@
 from pathlib import Path
 import pickle as pkl
-from tqdm import tqdm
+
 import hashlib
 import random
 
 
 def main():
 
-    folder_to_encrypt = Path("/home/017320_arousal_data/SHHS/")
+    folder_to_encrypt = Path("/home/017320_arousal_data/SHHS/shh1_numpy/")
     all_records = sorted(folder_to_encrypt.glob("*"))
     hash_records(all_records, folder_to_encrypt)
 
@@ -15,7 +15,7 @@ def main():
 def hash_records(all_records, folder_to_encrypt):
 
     partition_list = []
-    for i, record in tqdm(enumerate(all_records), total=len(all_records)):
+    for i, record in enumerate(all_records):
         if record.is_dir():
 
             hash = hashlib.sha1(bytes(record.name, encoding='utf8')).hexdigest()
