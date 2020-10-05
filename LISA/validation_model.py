@@ -31,20 +31,21 @@ def main():
     # pre_traineds += sorted(Path("models/weights").glob("*1_200"))
     # pre_traineds += sorted(Path("models/combined_dataset").glob("*sleep*"))
     # pre_traineds += sorted(Path("models/frequency").glob("*"))
-    pre_traineds += sorted(Path("models/Convnet").glob("*"))
+    # pre_traineds += sorted(Path("models/Convnet").glob("*"))
 
+    pre_traineds += sorted(Path("models/weights").glob("*"))
 
     # print(pre_traineds)
-    # model_name = "Deep_Sleep"
-    model_name = "ConvNet_IID"
+    model_name = "Deep_Sleep"
+    # model_name = "ConvNet_IID"
     # for howe use batchsize 6 on lisa?
     # model_name = "Howe_Patterson"
     # model_name = "Deep_Sleep"
     # pass
 
     for pre_trained_model in pre_traineds:
-        for data_name in ["snooze", "SHHS"]:
-        # for data_name in ["snooze"]:
+        # for data_name in ["snooze", "SHHS", "philips"]:
+        for data_name in ["philips"]:
 
             comment = pre_trained_model.name + "_to_" + data_name
             validate(data_name, model_name, pre_trained_model, channel_index, comment)
@@ -91,6 +92,9 @@ def validate(data_name, model_name, pre_trained_model, channel_index, comment):
     model = torch.load(pre_trained_model)
     weights_sleep = None
     weights_arousal = None
+    # TODO these don't really matter for validation
+    weights_sleep = [.2, .1, .3, .2, .0, .2]  # for Snooze
+    weights_arousal = [.0, .05, .95]  # Snooze
 
     if platform.system() == 'Windows':
         if data_name == "SHHS":
@@ -110,9 +114,12 @@ def validate(data_name, model_name, pre_trained_model, channel_index, comment):
     else:
         if data_name == "SHHS":
             data_folder = '/project/marcoh/shhs/polysomnography/shh1_numpy/'
-        else:
+        elif data_name == "snooze":
             data_folder = '/project/marcoh/you_snooze_you_win/marco/'
-
+        elif data_name == "philips":
+            data_folder = "."
+        else:
+            pass
         # Parameters for dataloader
         dataloader_params = {'batch_size': 3,
                              'shuffle': True,
@@ -262,6 +269,7 @@ def validate(data_name, model_name, pre_trained_model, channel_index, comment):
             break
     print("END")
 
+
 def save_metrics(running_loss, dataloaders, phase, pred_array, true_array, pred_array_sleep, true_array_sleep,
                  Challenge2018Scorer, writer, epoch, comment):
 
@@ -338,6 +346,7 @@ def save_metrics(running_loss, dataloaders, phase, pred_array, true_array, pred_
 
     plt.close("all")
 
+
 def load_obj(name):
     with open(name, 'rb') as f:
         return pkl.load(f)
@@ -358,6 +367,7 @@ def do_stats_arousal(true, pred, id):
         kappas.append(metrics.cohen_kappa_score(true_record, pred_record, labels=[0, 1, 2]))
 
     return accuracies, kappas
+
 
 def do_auroc(Challenge2018Scorer, true_array_, prediction_prob_arousal, ID, comment, epoch):
 
@@ -416,6 +426,7 @@ def do_auroc(Challenge2018Scorer, true_array_, prediction_prob_arousal, ID, comm
     filename = comment + str(epoch) + '.png'
     plt.savefig(Path("figures/aurocs") / filename)
     plt.clf()
+
 
 if __name__ == '__main__':
     main()
