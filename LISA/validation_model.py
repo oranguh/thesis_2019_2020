@@ -48,6 +48,7 @@ def main():
         for data_name in ["philips"]:
 
             comment = pre_trained_model.name + "_to_" + data_name
+            print(comment)
             validate(data_name, model_name, pre_trained_model, channel_index, comment)
 
         if False:
@@ -260,13 +261,13 @@ def validate(data_name, model_name, pre_trained_model, channel_index, comment):
             del loss_sleep
             plt.close("all")
 
-        if epoch == 10:
-            Path("statistics").mkdir(parents=True, exist_ok=True)
-            Path("statistics/accuracies").mkdir(parents=True, exist_ok=True)
-            Path("statistics/kappas").mkdir(parents=True, exist_ok=True)
-            np.save(Path("statistics/accuracies") / comment, accuracies)
-            np.save(Path("statistics/kappas") / comment, kappas)
-            break
+        # if epoch == 10:
+    Path("statistics").mkdir(parents=True, exist_ok=True)
+    Path("statistics/accuracies").mkdir(parents=True, exist_ok=True)
+    Path("statistics/kappas").mkdir(parents=True, exist_ok=True)
+    np.save(Path("statistics/accuracies") / comment, accuracies)
+    np.save(Path("statistics/kappas") / comment, kappas)
+            # break
     print("END")
 
 
@@ -328,7 +329,11 @@ def save_metrics(running_loss, dataloaders, phase, pred_array, true_array, pred_
                                                  target_names=sleep_stages,
                                                  output_dict=True,
                                                  zero_division=0)
-    del sleep_report["accuracy"]
+    try:
+        del sleep_report["accuracy"]
+    except KeyError:
+        print("no accuracy?")
+
     df2 = pd.DataFrame.from_dict(sleep_report, orient='index', dtype="object")
     df2 = df2.astype(dtype={"precision": "float64", "recall": "float64", "f1-score": "float64", "support": "object"})
     df2 = df2.round(2)
