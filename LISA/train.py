@@ -582,6 +582,7 @@ def run(_log, max_epochs, channels_to_use, dataloader_params, lr,
 
     model_name = "Deep_Sleep"
     data_name = "philips"
+    # TODO why can't I use paths properly on the philips server?
     data_folder = '.'
     # data_folder = '/home/017320_arousal_data/users/320086129/marco_sleep'
     """" Experiments with weights"""
