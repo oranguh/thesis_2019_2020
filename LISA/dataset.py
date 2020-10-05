@@ -4,7 +4,7 @@ import torch
 from torch.utils import data
 import os
 import numpy as np
-import matplotlib.pyplot as plt
+# import matplotlib.pyplot as plt
 import pickle as pkl
 import random
 
@@ -349,17 +349,15 @@ class Dataset_Philips_full(data.Dataset):
         ID = self.list_IDs[index]
         # print(ID)
         # Load data and get label
-        folder_ = os.path.join(self.folder, ID)
 
         X_ = self.loaders_object.get_EEG(ID, channel='frontal', freq=100)
         X_ = X_['frontal']
         y_arousal_ = self.loaders_object.get_arousal('PP01_PSG2_20181129', length=X_.shape[0], freq=100)
         y_sleep_ = self.loaders_object.get_hypnogram('PP01_PSG2_20181129', freq=100)
 
-        # Use only first channel
-        if True:
-            X_ = X_[0, :]
-            X_ = np.expand_dims(X_, axis=0)
+        X_ = np.expand_dims(X_, axis=0)
+        y_sleep_ = np.expand_dims(y_sleep_, axis=0)
+        y_arousal_ = np.expand_dims(y_arousal_, axis=0)
 
         X = np.full((X_.shape[0], self.pre_allocation), 0).astype(float)
         y_arousal = np.full((X_.shape[0], self.pre_allocation), -1)
@@ -424,6 +422,9 @@ class Dataset_Philips_full(data.Dataset):
                 to_down = to_down[::5]
                 to_down = to_down[::5]
             return to_down
+
+        y_arousal = np.squeeze(y_arousal)
+        y_sleep = np.squeeze(y_sleep)
 
         y_arousal = downsampler(y_arousal)
         y_sleep = downsampler(y_sleep)
