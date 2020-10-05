@@ -4,7 +4,7 @@ from torch.utils import data
 from tools import accuracy, CustomFormatter, get_dataloader
 from dataset import Dataset_full, Dataset_IID_window, Dataset_full_SHHS
 # from visualizations import plot_confusion_matrix, plot_classes_distribution
-import matplotlib.pyplot as plt
+# import matplotlib.pyplot as plt
 from patterson_model import Howe_Patterson
 from ConvNet_IID import ConvNet_IID
 from deep_sleep import Deep_Sleep
@@ -558,9 +558,9 @@ def run(_log, max_epochs, channels_to_use, dataloader_params, lr,
     data_name = "snooze"
     data_folder = 'D:\\data\\snooze\\marco'
 
-    training(_log, max_epochs, channels_to_use, dataloader_params, lr,
-             data_folder, [.0, .1, .9], weights_sleep, model_name, data_name, pretrained, comment,
-             0, sleep_stage_importance)
+    # training(_log, max_epochs, channels_to_use, dataloader_params, lr,
+    #          data_folder, [.0, .1, .9], weights_sleep, model_name, data_name, pretrained, comment,
+    #          0, sleep_stage_importance)
 
     dataloader_params = {'batch_size': 50,
                          'shuffle': True,
@@ -576,10 +576,19 @@ def run(_log, max_epochs, channels_to_use, dataloader_params, lr,
     Philips dataset
     Only available on linux, only available on philips server
     """
+    dataloader_params = {'batch_size': 4,
+                         'shuffle': True,
+                         'num_workers': 4}
 
+    model_name = "Deep_Sleep"
     data_name = "philips"
-    data_folder = '/home/017320_arousal_data/'
+    data_folder = '.'
+    # data_folder = '/home/017320_arousal_data/users/320086129/marco_sleep'
     """" Experiments with weights"""
+
+    training(_log, max_epochs, channels_to_use, dataloader_params, lr,
+        data_folder, [.0, .001, .999], weights_sleep, model_name, data_name, pretrained, "weights_1_1000",
+        channel_id, sleep_stage_importance)
 
     training(_log, max_epochs, channels_to_use, dataloader_params, lr,
         data_folder, [.0, .005, .995], weights_sleep, model_name, data_name, pretrained, "weights_1_200",
