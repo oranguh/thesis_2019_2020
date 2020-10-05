@@ -13,11 +13,11 @@ import seaborn as sns
 
 def main():
     # combined_data()
-    # weights()
+    weights()
     # sleep_staging()
     # channel_stats()
     # cross_dataset()
-    different_models()
+    # different_models()
     # frequency()
     # future_predict()
 
@@ -186,7 +186,7 @@ def weights():
     df_kappas = df_kappas.sort_index(axis=1, level=[1], ascending=[True])
 
     y_labels = ["Accuracy", "Kappas"]
-    dataset_names = ["snooze", "SHHS"]
+    dataset_names = ["snooze", "SHHS", "philips"]
 
     for data_name in dataset_names:
         for i, df in enumerate([df_accuracies, df_kappas]):
@@ -362,8 +362,11 @@ def name_replace_frequency(df, paths):
     for i, _ in enumerate(paths):
         data = np.load(paths[i])
 
-        name = paths[i].name.split("Banana")[-1].replace(".npy", "")
-        name = name.replace("Deep_Sleep_SHHS", "SHHS").replace("Deep_Sleep_snooze", "snooze")
+        name = paths[i].name
+        name = name.split("Banana")[-1]
+        name = name.split("ghildes")[-1]
+        name = name.replace(".npy", "")
+        name = name.replace("Deep_Sleep_SHHS", "SHHS_").replace("Deep_Sleep_snooze", "snooze_").replace("Deep_Sleep_philips", "philips_")
         name = name.replace("Deep_Sleep_combined_combined_dataset", "combined")
         name = name.replace("_to_", "_")
 
@@ -377,8 +380,12 @@ def name_replace_convnet(df, paths):
     for i, _ in enumerate(paths):
         data = np.load(paths[i])
 
-        name = paths[i].name.split("Banana")[-1].replace(".npy", "")
-        name = name.replace("ConvNet_IID_SHHS", "SHHS").replace("ConvNet_IID_snooze", "snooze").replace("ConvNet_IID_combined", "combined")
+        name = paths[i].name
+        name = name.split("Banana")[-1]
+        name = name.split("ghildes")[-1]
+        name = name.replace(".npy", "")
+        name = name.replace("Deep_Sleep_SHHS", "SHHS_").replace("Deep_Sleep_snooze", "snooze_")
+        name = name.replace("Deep_Sleep_philips", "philips").replace("ConvNet_IID_combined", "combined")
         name = name.replace("_to_", "")
 
         df_name = tuple(name.split("_"))
@@ -391,8 +398,11 @@ def name_replace_combined_data(df, paths):
     for i, _ in enumerate(paths):
         data = np.load(paths[i])
 
-        name = paths[i].name.split("Banana")[-1].replace(".npy", "")
-        name = name.replace("Deep_Sleep_SHHS", "SHHS_").replace("Deep_Sleep_snooze", "snooze_")
+        name = paths[i].name
+        name = name.split("Banana")[-1]
+        name = name.split("ghildes")[-1]
+        name = name.replace(".npy", "")
+        name = name.replace("Deep_Sleep_SHHS", "SHHS_").replace("Deep_Sleep_snooze", "snooze_").replace("Deep_Sleep_philips", "philips")
         name = name.replace("Deep_Sleep_combined_combined_dataset", "combined_").replace("Deep_Sleep_combined_sleep_staging", "combined+s_")
         name = name.replace("_to_", "")
 
@@ -406,8 +416,11 @@ def name_replace_sleep_stage(df, paths):
     for i, _ in enumerate(paths):
         data = np.load(paths[i])
 
-        name = paths[i].name.split("Banana")[-1].replace(".npy", "")
-        name = name.replace("Deep_Sleep_SHHS", "SHHS_").replace("Deep_Sleep_snooze", "snooze_")
+        name = paths[i].name
+        name = name.split("Banana")[-1]
+        name = name.split("ghildes")[-1]
+        name = name.replace(".npy", "")
+        name = name.replace("Deep_Sleep_SHHS", "SHHS_").replace("Deep_Sleep_snooze", "snooze_").replace("Deep_Sleep_philips", "philips")
         name = name.replace("sleep_", "")
         name = name.replace("_to_", "_")
         #TODO this is wrong
@@ -425,12 +438,17 @@ def name_replace_weights(df, paths):
     for i, _ in enumerate(paths):
         data = np.load(paths[i])
 
-        name = paths[i].name.split("Banana")[-1].replace(".npy", "")
-        name = name.replace("Deep_Sleep_SHHS", "SHHS_").replace("Deep_Sleep_snooze", "snooze_")
+        name = paths[i].name
+        name = name.split("Banana")[-1]
+        name = name.split("ghildes")[-1]
+        name = name.replace(".npy", "")
+        name = name.replace("Deep_Sleep_SHHS", "SHHS_").replace("Deep_Sleep_snooze", "snooze_").replace("Deep_Sleep_philips", "philips")
         name = name.replace("weights_", "")
         name = name.replace("_to_", "_")
         #TODO this is wrong
-        name = name.replace("1_200", "0.005")\
+        name = name \
+            .replace("1_1000", "0.001") \
+            .replace("1_200", "0.005")\
             .replace("1_100", "0.01") \
             .replace("1_50", "0.02")\
             .replace("1_5", "0.2")\
@@ -439,9 +457,11 @@ def name_replace_weights(df, paths):
             .replace("1_1", "1")
 
         df_name = list(name.split("_"))
+        # print(df_name)
         df_name[1] = float(df_name[1])
         df_name = tuple(df_name)
-        df.insert(0, df_name, data)
+        # print(data.shape)
+        df.insert(0, df_name, pd.Series(data))
 
     return df
 
@@ -449,8 +469,11 @@ def name_replace_channels(df, paths):
     for i, _ in enumerate(paths):
         data = np.load(paths[i])
 
-        name = paths[i].name.split("Banana")[-1].replace(".npy", "")
-        name = name.replace("Deep_Sleep_SHHS", "SHHS_").replace("Deep_Sleep_snooze", "snooze_")
+        name = paths[i].name
+        name = name.split("Banana")[-1]
+        name = name.split("ghildes")[-1]
+        name = name.replace(".npy", "")
+        name = name.replace("Deep_Sleep_SHHS", "SHHS_").replace("Deep_Sleep_snooze", "snooze_").replace("Deep_Sleep_philips", "philips")
         name = name.replace("_to_", "_")
         name = name.replace("random_channel", "random")
         name = name.replace("C3_M2", "C3-M2").replace("C4_M1", "C4-M1").replace("F3_M2", "F3-M2").replace("F4_M1", "F4-M1")
