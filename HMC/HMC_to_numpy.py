@@ -4,6 +4,9 @@ from collections import Counter
 from pathlib import Path
 from tqdm import tqdm
 import pandas as pd
+import random
+import pickle as pkl
+
 
 """
 HMC dataset has a lot of channels 27 in total. 
@@ -19,6 +22,9 @@ There are also a lot of annotations
 We will only use the hypnogram and the arousals. 
 
 Sampling frequency is 256 Hz, this will need to go down to 100
+
+
+!! SN4 session lasted 20.25 hours!! remove from data.
 """
 
 
@@ -59,6 +65,19 @@ def main():
         np.save(numpy_folder_to_save / file.replace(".edf", "_data"), data)
         np.save(numpy_folder_to_save / file.replace(".edf", "_labels"), labels)
 
+    partition_list = [i.replace(".edf", "") for i in files]
+
+    partition_list.remove("SN4")
+
+    random.shuffle(partition_list)
+    split_point = int(np.round(len(partition_list) / 3))
+
+    partition = {'validation': [str(x) for x in partition_list[:split_point]],
+                 'train': [str(x) for x in partition_list[split_point:]]}
+
+    save_obj(partition, numpy_folder / 'data_partition.pkl')
+
+    print('Training: ', partition['train'], '\nValidation: ', partition['validation'])
 
 
 def resample_signal(signal, input_freq, output_freq):
@@ -168,6 +187,12 @@ def numpy_from_edf(path, signal_edf):
 
     # print(cntr)
     return annotation_dict
+
+
+def save_obj(obj, name):
+    with open(name, 'wb') as f:
+        pkl.dump(obj, f, pkl.HIGHEST_PROTOCOL)
+
 
 if __name__ == '__main__':
     main()
