@@ -576,9 +576,9 @@ def run(_log, max_epochs, channels_to_use, dataloader_params, lr,
     Philips dataset
     Only available on linux, only available on philips server
     """
-    dataloader_params = {'batch_size': 4,
+    dataloader_params = {'batch_size': 2,
                          'shuffle': True,
-                         'num_workers': 4}
+                         'num_workers': 3}
 
     model_name = "Deep_Sleep"
     data_name = "philips"
@@ -587,9 +587,46 @@ def run(_log, max_epochs, channels_to_use, dataloader_params, lr,
     # data_folder = '/home/017320_arousal_data/users/320086129/marco_sleep'
     """" Experiments with weights"""
 
-    training(_log, max_epochs, channels_to_use, dataloader_params, lr,
-        data_folder, [.0, .001, .999], weights_sleep, model_name, data_name, pretrained, "weights_1_1000",
-        channel_id, sleep_stage_importance)
+    # training(_log, max_epochs, channels_to_use, dataloader_params, lr,
+    #     data_folder, [.0, .001, .999], weights_sleep, model_name, data_name, pretrained, "weights_1_1000",
+    #     channel_id, sleep_stage_importance)
+    #
+    # training(_log, max_epochs, channels_to_use, dataloader_params, lr,
+    #     data_folder, [.0, .005, .995], weights_sleep, model_name, data_name, pretrained, "weights_1_200",
+    #     channel_id, sleep_stage_importance)
+    # training(_log, max_epochs, channels_to_use, dataloader_params, lr,
+    #     data_folder, [.0, .01, .99], weights_sleep, model_name, data_name, pretrained, "weights_1_100",
+    #     channel_id, sleep_stage_importance)
+    # training(_log, max_epochs, channels_to_use, dataloader_params, lr,
+    #     data_folder, [.0, .02, .98], weights_sleep, model_name, data_name, pretrained, "weights_1_50",
+    #     channel_id, sleep_stage_importance)
+    #
+    # training(_log, max_epochs, channels_to_use, dataloader_params, lr,
+    #     data_folder, [.0, .05, .95], weights_sleep, model_name, data_name, pretrained, "weights_1_20",
+    #     channel_id, sleep_stage_importance)
+    #
+    # training(_log, max_epochs, channels_to_use, dataloader_params, lr,
+    #     data_folder, [.0, .1, .9], weights_sleep, model_name, data_name, pretrained, "weights_1_10",
+    #     channel_id, sleep_stage_importance)
+    #
+    # training(_log, max_epochs, channels_to_use, dataloader_params, lr,
+    #     data_folder, [.0, .2, .8], weights_sleep, model_name, data_name, pretrained, "weights_1_5",
+    #     channel_id, sleep_stage_importance)
+    #
+    # training(_log, max_epochs, channels_to_use, dataloader_params, lr,
+    #     data_folder, [.0, .5, .5], weights_sleep, model_name, data_name, pretrained, "weights_1_1",
+    #     channel_id, sleep_stage_importance)
+
+    model_name = "Deep_Sleep"
+    data_name = "HMC"
+    # TODO why can't I use paths properly on the philips server?
+    data_folder = 'E:\\HMC22\\test\\numpy'
+    # data_folder = '/home/017320_arousal_data/users/320086129/marco_sleep'
+    """" Experiments with weights"""
+
+    # training(_log, max_epochs, channels_to_use, dataloader_params, lr,
+    #     data_folder, [.0, .001, .999], weights_sleep, model_name, data_name, pretrained, "weights_1_1000",
+    #     channel_id, sleep_stage_importance)
 
     training(_log, max_epochs, channels_to_use, dataloader_params, lr,
         data_folder, [.0, .005, .995], weights_sleep, model_name, data_name, pretrained, "weights_1_200",
