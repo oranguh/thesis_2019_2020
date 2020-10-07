@@ -33,7 +33,7 @@ def main():
     # pre_traineds += sorted(Path("models/frequency").glob("*"))
     # pre_traineds += sorted(Path("models/Convnet").glob("*"))
 
-    pre_traineds += sorted(Path("models/weights").glob("*"))
+    pre_traineds += sorted(Path("models/weights").glob("*HMC*"))
 
     # print(pre_traineds)
     model_name = "Deep_Sleep"
@@ -44,8 +44,8 @@ def main():
     # pass
 
     for pre_trained_model in pre_traineds:
-        # for data_name in ["snooze", "SHHS", "philips"]:
-        for data_name in ["philips"]:
+        # for data_name in ["snooze", "SHHS", "philips", "HMC]:
+        for data_name in ["HMC"]:
 
             comment = pre_trained_model.name + "_to_" + data_name
             print(comment)
@@ -102,11 +102,16 @@ def validate(data_name, model_name, pre_trained_model, channel_index, comment):
             data_folder = 'K:\\shhs\\polysomnography\\shh1_numpy'
             weights_sleep = [.3, .05, .3, .3, .0, .05]  # for SHHS
             weights_arousal = [.0, .05, .95]  # SHHS
-        else:
+        elif data_name == "snooze":
             data_folder = 'F:\\you-snooze-you-win-the-physionet-computing-in-cardiology-challenge-2018-1.0.0\\marco'
             data_folder = 'D:\\data\\snooze\\marco'
             weights_sleep = [.2, .1, .3, .2, .0, .2]  # for Snooze
             weights_arousal = [.0, .05, .95]  # Snooze
+        elif data_name == "HMC":
+            data_folder = 'E:\\HMC22\\test\\numpy'
+        else:
+            print("{} wrong data for dataloader".format(data_name))
+            exit()
 
         # Parameters for dataloader
         dataloader_params = {'batch_size': 2500,

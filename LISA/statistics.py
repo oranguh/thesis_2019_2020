@@ -45,7 +45,7 @@ def frequency():
     df_accuracies = df_accuracies.sort_index(axis=1, level=[0], ascending=[True])
     df_kappas = df_kappas.sort_index(axis=1, level=[0], ascending=[True])
 
-    y_labels = ["Accuracy", "Kappas"]
+    y_labels = ["Balanced accuracy", "Kappas"]
 
     for i, df in enumerate([df_accuracies, df_kappas]):
         # df = df.loc[:, (data_name, slice(None))]
@@ -93,7 +93,7 @@ def different_models():
     df_accuracies = df_accuracies.sort_index(axis=1, level=[1], ascending=[True])
     df_kappas = df_kappas.sort_index(axis=1, level=[1], ascending=[True])
 
-    y_labels = ["Accuracy", "Kappas"]
+    y_labels = ["Balanced accuracy", "Kappas"]
 
     for i, df in enumerate([df_accuracies, df_kappas]):
         # df = df.loc[:, (data_name, slice(None))]
@@ -142,7 +142,7 @@ def combined_data():
     df_accuracies = df_accuracies.sort_index(axis=1, level=[1], ascending=[True])
     df_kappas = df_kappas.sort_index(axis=1, level=[1], ascending=[True])
 
-    y_labels = ["Accuracy", "Kappas"]
+    y_labels = ["Balanced accuracy", "Kappas"]
 
 
     for i, df in enumerate([df_accuracies, df_kappas]):
@@ -185,8 +185,8 @@ def weights():
     df_accuracies = df_accuracies.sort_index(axis=1, level=[1], ascending=[True])
     df_kappas = df_kappas.sort_index(axis=1, level=[1], ascending=[True])
 
-    y_labels = ["Accuracy", "Kappas"]
-    dataset_names = ["snooze", "SHHS", "philips"]
+    y_labels = ["Balanced accuracy", "Kappas"]
+    dataset_names = ["snooze", "SHHS", "philips", "HMC"]
 
     for data_name in dataset_names:
         for i, df in enumerate([df_accuracies, df_kappas]):
@@ -233,7 +233,7 @@ def channel_stats():
     df_accuracies.columns = pd.MultiIndex.from_tuples(df_accuracies.columns, names=names)
     df_kappas.columns = pd.MultiIndex.from_tuples(df_kappas.columns, names=names)
 
-    y_labels = ["Accuracy", "Kappas"]
+    y_labels = ["Balanced accuracy", "Kappas"]
     dataset_names = ["snooze", "SHHS"]
 
     for data_name in dataset_names:
@@ -279,7 +279,7 @@ def cross_dataset():
     df_accuracies.columns = pd.MultiIndex.from_tuples(df_accuracies.columns, names=names)
     df_kappas.columns = pd.MultiIndex.from_tuples(df_kappas.columns, names=names)
 
-    y_labels = ["Accuracy", "Kappas"]
+    y_labels = ["Balanced accuracy", "Kappas"]
     dataset_names = ["snooze", "SHHS"]
 
     for data_name in dataset_names:
@@ -328,7 +328,7 @@ def sleep_staging():
     df_accuracies = df_accuracies.sort_index(axis=1, level=[1], ascending=[True])
     df_kappas = df_kappas.sort_index(axis=1, level=[1], ascending=[True])
 
-    y_labels = ["Accuracy", "Kappas"]
+    y_labels = ["Balanced accuracy", "Kappas"]
     dataset_names = ["snooze", "SHHS"]
     # dataset_names = ["SHHS"]
 
@@ -442,7 +442,10 @@ def name_replace_weights(df, paths):
         name = name.split("Banana")[-1]
         name = name.split("ghildes")[-1]
         name = name.replace(".npy", "")
-        name = name.replace("Deep_Sleep_SHHS", "SHHS_").replace("Deep_Sleep_snooze", "snooze_").replace("Deep_Sleep_philips", "philips")
+        name = name.replace("Deep_Sleep_SHHS", "SHHS_")\
+            .replace("Deep_Sleep_snooze", "snooze_")\
+            .replace("Deep_Sleep_philips", "philips")\
+            .replace("Deep_Sleep_HMC", "HMC")
         name = name.replace("weights_", "")
         name = name.replace("_to_", "_")
         #TODO this is wrong
