@@ -91,8 +91,10 @@ def get_dataloader(data_folder, model_name, data_name, size="default"):
             training_set = Dataset_Philips_full(partition['train'], data_folder)
             validation_set = Dataset_Philips_full(partition['validation'], data_folder)
         elif data_name == "HMC":
-            print("{} not implemented data".format(data_name))
-            exit()
+            training_set = Dataset_full_SHHS(partition['train'], data_folder, downsample_ratio=4,
+                                             pre_allocation=2 ** 22, down_sample_annotation=False)
+            validation_set = Dataset_full_SHHS(partition['validation'], data_folder, downsample_ratio=4,
+                                               pre_allocation=2 ** 22, down_sample_annotation=False)
         elif data_name == "combined":
             training_set = ConcatDataset(
                     Dataset_full(partition[0]['train'], data_folder[0], downsample_ratio=4,
@@ -136,8 +138,10 @@ def get_dataloader(data_folder, model_name, data_name, size="default"):
             validation_set = Dataset_Philips_full(partition['validation'], downsample_ratio=4,
                                              pre_allocation=2 ** 22, down_sample_annotation=False)
         elif data_name == "HMC":
-            print("{} not implemented data".format(data_name))
-            exit()
+            training_set = Dataset_full_SHHS(partition['train'], data_folder, downsample_ratio=4,
+                                             pre_allocation=2 ** 22, down_sample_annotation=False)
+            validation_set = Dataset_full_SHHS(partition['validation'], data_folder, downsample_ratio=4,
+                                               pre_allocation=2 ** 22, down_sample_annotation=False)
         elif data_name == "combined":
             # TODO combined dataset https://discuss.pytorch.org/t/train-simultaneously-on-two-datasets/649/17
             training_set = ConcatDataset(
