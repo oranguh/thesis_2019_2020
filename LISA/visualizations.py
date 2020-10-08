@@ -21,6 +21,7 @@ def plot_confusion_matrix(y_true, y_pred, classes,
 
     sub_titles = ['Normalized confusion matrix', 'Confusion matrix, without normalization']
     fig, ax = plt.subplots(1, 2, figsize=(16, 8))
+    fig.suptitle('{}'.format(title), fontsize=16)
     # Compute confusion matrix
     cm = confusion_matrix(y_true, y_pred, labels=labels)
     # Only use the labels that appear in the data
@@ -50,9 +51,12 @@ def plot_confusion_matrix(y_true, y_pred, classes,
 
 
     # plt.tight_layout()
-    Path("figures/confusions").mkdir(parents=True, exist_ok=True)
+
+    Save_folder = Path("figures/confusions") / "_".join(title.split("_")[:-1])
+    Save_folder.mkdir(parents=True, exist_ok=True)
+
     filename = title + '.png'
-    plt.savefig(Path("figures/confusions") / filename)
+    plt.savefig(Save_folder / filename)
     # plt.show()
 
     return fig
