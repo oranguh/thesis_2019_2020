@@ -11,6 +11,9 @@ from torch.utils import data
 import torch.nn as nn
 from torch.utils.tensorboard import SummaryWriter
 import matplotlib.pyplot as plt
+import matplotlib
+import seaborn as sns
+
 
 from tools import accuracy, CustomFormatter, get_dataloader
 from score2018 import Challenge2018Score
@@ -29,11 +32,11 @@ def main():
 
     # pre_traineds += sorted(Path("models/weights").glob("*1_100"))
     # pre_traineds += sorted(Path("models/weights").glob("*1_200"))
-    # pre_traineds += sorted(Path("models/combined_dataset").glob("*sleep*"))
+    # pre_traineds += sorted(Path("models/combined_dataset").glob("*"))
     # pre_traineds += sorted(Path("models/frequency").glob("*"))
     # pre_traineds += sorted(Path("models/Convnet").glob("*"))
 
-    pre_traineds += sorted(Path("models/weights").glob("*HMC*"))
+    pre_traineds += sorted(Path("models/weights").glob("*"))
 
     # print(pre_traineds)
     model_name = "Deep_Sleep"
@@ -44,8 +47,8 @@ def main():
     # pass
 
     for pre_trained_model in pre_traineds:
-        # for data_name in ["snooze", "SHHS", "philips", "HMC]:
-        for data_name in ["HMC"]:
+        for data_name in ["snooze", "SHHS", "HMC"]:
+        # for data_name in ["HMC"]:
 
             comment = pre_trained_model.name + "_to_" + data_name
             print(comment)
@@ -114,9 +117,9 @@ def validate(data_name, model_name, pre_trained_model, channel_index, comment):
             exit()
 
         # Parameters for dataloader
-        dataloader_params = {'batch_size': 2500,
+        dataloader_params = {'batch_size': 4,
                              'shuffle': False,
-                             'num_workers': 0}
+                             'num_workers': 3}
     else:
         if data_name == "SHHS":
             data_folder = '/project/marcoh/shhs/polysomnography/shh1_numpy/'
@@ -205,6 +208,7 @@ def validate(data_name, model_name, pre_trained_model, channel_index, comment):
             # print(epoch, phase, "Loss ", loss.item())
             # print("Max Mem GB  ", torch.cuda.max_memory_allocated(device=device) * 1e-9)
 
+            annotations_sleep_ = annotations_sleep.cpu().numpy().squeeze().astype(int)
             true_array_ = annotations_arousal.cpu().numpy().squeeze().astype(int)
             pred_array_ = arousal_out.argmax(dim=1).cpu().numpy().squeeze().astype(int)
 
@@ -217,6 +221,7 @@ def validate(data_name, model_name, pre_trained_model, channel_index, comment):
 
 
             do_auroc(Challenge2018Scorer, true_array_, prediction_prob_arousal, ID, comment, epoch)
+            make_sleep_chart(true_array_, prediction_prob_arousal, annotations_sleep_, ID, comment, epoch)
 
             # set all 0 (unscored) to predictions to 1 (not-arousal)
             pred_array_[pred_array_ == 0] = 1
@@ -414,8 +419,6 @@ def do_auroc(Challenge2018Scorer, true_array_, prediction_prob_arousal, ID, comm
         roc_auc = metrics.auc(fpr, tpr)
         prc_auc = metrics.auc(recall, prec)
 
-
-
         ax[0].plot(fpr, tpr, color='darkorange',
                  lw=lw, label='{} (area = {:0.2f})'.format(ID[i], roc_auc), alpha=0.3)
         ax[0].set_xlim([0.0, 1.0])
@@ -437,10 +440,83 @@ def do_auroc(Challenge2018Scorer, true_array_, prediction_prob_arousal, ID, comm
         # plt.hold(True)
         if true_array_.ndim == 1:
             break
-    Path("figures/aurocs").mkdir(parents=True, exist_ok=True)
+    Save_folder = Path("figures/aurocs") / comment
+    Save_folder.mkdir(parents=True, exist_ok=True)
+
     filename = comment + str(epoch) + '.png'
-    plt.savefig(Path("figures/aurocs") / filename)
+    plt.savefig(Save_folder / filename)
     plt.clf()
+
+
+def make_sleep_chart(true_array, pred_array, annotations_sleep, ID, comment, epoch):
+    """
+    This plot is not as trivial as it seems. We take a heatmap as base then make it categorical.
+    Since we only use a single dimension (time), our "heatmap" is simply a multicolored single bar.
+
+        WAKE -> 5
+        REM -> 3
+        N1 -> 0
+        N2 -> 1
+        N3 -> 2
+        undefined -> 4
+
+    """
+    Save_folder = Path("figures/sleep_charts") / comment
+    Save_folder.mkdir(parents=True, exist_ok=True)
+
+    plt.close("all")
+
+    for j in range(len(ID)):
+        if j == 3:
+            break
+
+        fig, ((ax1, ax2, ax3)) = plt.subplots(3, 1, figsize=(16, 8), sharex='all')
+        ax1.set_title('{} ID: {}'.format(comment, ID[j]))
+
+        annotations_sleep_ = annotations_sleep[j, ::10]
+        true_array_ = true_array[j, ::10]
+        pred_array_ = pred_array[j, ::10]
+
+        annotations_sleep_ = np.expand_dims(annotations_sleep_, 0)
+        true_array_ = np.expand_dims(true_array_, 0)
+        pred_array_ = np.expand_dims(pred_array_, 0)
+
+        cmap = matplotlib.colors.ListedColormap(['royalblue', 'darkblue', 'indigo', 'cyan', 'grey', 'salmon'])
+        sns.heatmap(annotations_sleep_, annot=False, ax=ax1,
+                    cmap=cmap, cbar=True)
+
+        sns.heatmap(true_array_, annot=False, ax=ax2,
+                    cmap=["grey", "seagreen", "yellow"],
+                    vmin=0, vmax=2, cbar=True)
+
+        sns.heatmap(pred_array_, annot=False, ax=ax3,
+                    cmap="summer",
+                    vmin=0, vmax=1, cbar=True)
+
+        y_labels = ['Hypnogram', 'Ground Truth', 'Predictions']
+        cbar_labels = [["N1", "N2", "N3", "REM", "Undefined", "Wake"],
+                       ["Unscored", "Non-Arousal", "Arousal"],
+                       ["Non-Arousal", "Arousal"]]
+        for i, ax in enumerate([ax1, ax2, ax3]):
+            ax.tick_params(
+                axis='both',  # changes apply to the x-axis
+                which='both',  # both major and minor ticks are affected
+                left=False,
+                bottom=False,  # ticks along the bottom edge are off
+                top=False,  # ticks along the top edge are off
+                labelbottom=False,
+                labelleft=False)  # labels along the bottom edge are off
+
+            ax.set_ylabel(y_labels[i])
+            ax.collections[0].colorbar.set_ticks(list(range(len(cbar_labels[i]))))
+            ax.collections[0].colorbar.ax.set_yticklabels(cbar_labels[i])
+        # plt.show()
+
+        filename = comment + "_" + str(ID[j]) + '.png'
+        fig.savefig(Save_folder / filename)
+        plt.clf()
+
+        plt.close("all")
 
 
 if __name__ == '__main__':
