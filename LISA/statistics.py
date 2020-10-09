@@ -13,12 +13,12 @@ import seaborn as sns
 
 def main():
     # combined_data()
-    weights()
+    # weights()
     # sleep_staging()
     # channel_stats()
     # cross_dataset()
-    # different_models()
-    # frequency()
+    different_models()
+    frequency()
     # future_predict()
 
 
@@ -47,12 +47,15 @@ def frequency():
 
     y_labels = ["Balanced accuracy", "Kappas"]
 
+    title = 'Frequency sampling Deep sleep'
+
     for i, df in enumerate([df_accuracies, df_kappas]):
         # df = df.loc[:, (data_name, slice(None))]
 
         # sns.violinplot(data=df, bw=.1)
+        plt.subplots(figsize=(16, 8))
         sns.boxplot(data=df)
-        plt.gca().set_title('Frequency sampling Deep sleep')
+        plt.gca().set_title(title)
         plt.gca().set_xlabel('')
         plt.gca().set_ylabel(y_labels[i])
         plt.gca().set_ylim([-0.1, 1.1])
@@ -67,6 +70,12 @@ def frequency():
             text.set_text(correct_text)
             labels_figure.append(text)
         plt.gca().set_xticklabels(labels_figure)
+
+        Save_folder = Path("figures/statistics/frequency") / title + y_labels[i]
+        Save_folder.mkdir(parents=True, exist_ok=True)
+
+        filename = title + '.png'
+        plt.savefig(Save_folder / filename)
 
         plt.show()
 
@@ -94,13 +103,15 @@ def different_models():
     df_kappas = df_kappas.sort_index(axis=1, level=[1], ascending=[True])
 
     y_labels = ["Balanced accuracy", "Kappas"]
+    title = 'Convnet results'
 
     for i, df in enumerate([df_accuracies, df_kappas]):
         # df = df.loc[:, (data_name, slice(None))]
 
         # sns.violinplot(data=df, bw=.1)
+        plt.subplots(figsize=(16, 8))
         sns.boxplot(data=df)
-        plt.gca().set_title('Convnet results')
+        plt.gca().set_title(title)
         plt.gca().set_xlabel('Effect of mixed datasets')
         plt.gca().set_ylabel(y_labels[i])
         plt.gca().set_ylim([-0.1, 1.1])
@@ -114,7 +125,14 @@ def different_models():
             correct_text = "{} to {} \nmean: {:.2f}".format(temp_text[0], temp_text[1], df.loc[:, temp_text].mean())
             text.set_text(correct_text)
             labels_figure.append(text)
+
         plt.gca().set_xticklabels(labels_figure)
+
+        Save_folder = Path("figures/statistics/different_models")
+        Save_folder.mkdir(parents=True, exist_ok=True)
+
+        filename = title + y_labels[i] + '.png'
+        plt.savefig(Save_folder / filename)
 
         plt.show()
 
@@ -143,14 +161,15 @@ def combined_data():
     df_kappas = df_kappas.sort_index(axis=1, level=[1], ascending=[True])
 
     y_labels = ["Balanced accuracy", "Kappas"]
-
+    title = 'Inter dataset generalizability'
 
     for i, df in enumerate([df_accuracies, df_kappas]):
         # df = df.loc[:, (data_name, slice(None))]
 
         # sns.violinplot(data=df, bw=.1)
+        plt.subplots(figsize=(16, 8))
         sns.boxplot(data=df)
-        plt.gca().set_title('Inter dataset generalizability')
+        plt.gca().set_title(title)
         plt.gca().set_xlabel('Effect of mixed datasets')
         plt.gca().set_ylabel(y_labels[i])
         plt.gca().set_ylim([-0.1, 1.1])
@@ -165,6 +184,12 @@ def combined_data():
             text.set_text(correct_text)
             labels_figure.append(text)
         plt.gca().set_xticklabels(labels_figure)
+
+        Save_folder = Path("figures/statistics/combined_data")
+        Save_folder.mkdir(parents=True, exist_ok=True)
+
+        filename = title + y_labels[i] + '.png'
+        plt.savefig(Save_folder / filename)
 
         plt.show()
 
@@ -190,11 +215,14 @@ def weights():
 
     for data_name in dataset_names:
         for i, df in enumerate([df_accuracies, df_kappas]):
+            title = 'Weight ratio on {}'.format(data_name)
+
             df = df.loc[:, (data_name, slice(None), data_name, slice(None))]
 
             # sns.violinplot(data=df, bw=.1)
+            plt.subplots(figsize=(16, 8))
             sns.boxplot(data=df)
-            plt.gca().set_title('Weight ratio on {} (intra data)'.format(data_name))
+            plt.gca().set_title(title)
             plt.gca().set_xlabel('Non-Arousal importance')
             plt.gca().set_ylabel(y_labels[i])
             plt.gca().set_ylim([-0.1, 1.1])
@@ -210,6 +238,12 @@ def weights():
                 text.set_text(correct_text)
                 labels_figure.append(text)
             plt.gca().set_xticklabels(labels_figure)
+
+            Save_folder = Path("figures/statistics/weights")
+            Save_folder.mkdir(parents=True, exist_ok=True)
+
+            filename = title + y_labels[i] + '.png'
+            plt.savefig(Save_folder / filename)
 
             plt.show()
 
@@ -238,11 +272,13 @@ def channel_stats():
 
     for data_name in dataset_names:
         for i, df in enumerate([df_accuracies, df_kappas]):
+            title = 'Channels on {} (intra data)'.format(data_name)
             df = df.loc[:, (data_name, slice(None), slice(None), slice(None))]
 
             # sns.violinplot(data=df, bw=.1)
+            plt.subplots(figsize=(16, 8))
             sns.boxplot(data=df)
-            plt.gca().set_title('Channels on {} (intra data)'.format(data_name))
+            plt.gca().set_title(title)
             plt.gca().set_xlabel('Channel Train to Test')
             plt.gca().set_ylabel(y_labels[i])
             plt.gca().set_ylim([-0.1, 1.1])
@@ -256,6 +292,12 @@ def channel_stats():
                 text.set_text(correct_text)
                 labels_figure.append(text)
             plt.gca().set_xticklabels(labels_figure)
+
+            Save_folder = Path("figures/statistics/channel_stats")
+            Save_folder.mkdir(parents=True, exist_ok=True)
+
+            filename = title + y_labels[i] + '.png'
+            plt.savefig(Save_folder / filename)
 
             plt.show()
 
@@ -284,13 +326,15 @@ def cross_dataset():
 
     for data_name in dataset_names:
         for i, df in enumerate([df_accuracies, df_kappas]):
+            title = 'Data generalization from {} (inter data)'.format(data_name)
             # df = df.loc[:, ("snooze", slice(None), slice(None), slice(None))]
             df = df.loc[:, (data_name, slice(None), slice(None), slice(None))]
 
             # sns.violinplot(data=df, bw=.1)
+            plt.subplots(figsize=(16, 8))
             sns.boxplot(data=df)
 
-            plt.gca().set_title('Data generalization from {} (inter data)'.format(data_name))
+            plt.gca().set_title(title)
             plt.gca().set_xlabel('Channel Train to Test')
             plt.gca().set_ylabel(y_labels[i])
             plt.xticks(rotation=15, horizontalalignment="right")
@@ -303,6 +347,12 @@ def cross_dataset():
                 text.set_text(correct_text)
                 labels_figure.append(text)
             plt.gca().set_xticklabels(labels_figure)
+
+            Save_folder = Path("figures/statistics/cross_dataset")
+            Save_folder.mkdir(parents=True, exist_ok=True)
+
+            filename = title + y_labels[i] + '.png'
+            plt.savefig(Save_folder / filename)
 
             plt.show()
 
@@ -334,11 +384,13 @@ def sleep_staging():
 
     for data_name in dataset_names:
         for i, df in enumerate([df_accuracies, df_kappas]):
+            title = 'Sleep staging effect on {} (intra data)'.format(data_name)
             df = df.loc[:, (data_name, slice(None), data_name)]
 
             # sns.violinplot(data=df, bw=.1)
+            plt.subplots(figsize=(16, 8))
             sns.boxplot(data=df)
-            plt.gca().set_title('Sleep staging effect on {} (intra data)'.format(data_name))
+            plt.gca().set_title(title)
             plt.gca().set_xlabel('Sleep staging importance')
             plt.gca().set_ylabel(y_labels[i])
             plt.gca().set_ylim([-0.1, 1.1])
@@ -354,6 +406,12 @@ def sleep_staging():
                 text.set_text(correct_text)
                 labels_figure.append(text)
             plt.gca().set_xticklabels(labels_figure)
+
+            Save_folder = Path("figures/statistics/sleep_staging")
+            Save_folder.mkdir(parents=True, exist_ok=True)
+
+            filename = title + y_labels[i] + '.png'
+            plt.savefig(Save_folder / filename)
 
             plt.show()
 
