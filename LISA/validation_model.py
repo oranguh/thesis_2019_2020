@@ -165,12 +165,12 @@ def validate(data_name, model_name, pre_trained_model, channel_index, comment):
     counters = 0
     epoch = 0
 
-    sleep_confusions = {'Undefined': [[0, 0], [0, 0]],
-                        'N1': [[0, 0], [0, 0]],
-                        'N2': [[0, 0], [0, 0]],
-                        'N3': [[0, 0], [0, 0]],
-                        'REM': [[0, 0], [0, 0]],
-                        'Wake': [[0, 0], [0, 0]]}
+    sleep_confusions = {'Undefined': np.asarray([[0, 0], [0, 0]]),
+                        'N1': np.asarray([[0, 0], [0, 0]]),
+                        'N2': np.asarray([[0, 0], [0, 0]]),
+                        'N3': np.asarray([[0, 0], [0, 0]]),
+                        'REM': np.asarray([[0, 0], [0, 0]]),
+                        'Wake': np.asarray([[0, 0], [0, 0]])}
 
     for ID, inputs, annotations_arousal, annotations_sleep in dataloaders[phase]:
         with torch.set_grad_enabled(False):
@@ -243,8 +243,8 @@ def validate(data_name, model_name, pre_trained_model, channel_index, comment):
             # print(temporary_pred_array_.shape, pred_array_.shape)
             # sleep staging loop
             for i, stage in enumerate(["N1", "N2", "N3", "REM", "Undefined", "Wake"]):
-                confusion_trues = temporary_pred_array_[temporary_sleep_array_ == i]
-                confusion_preds = temporary_true_array_[temporary_sleep_array_ == i]
+                confusion_trues = temporary_true_array_[temporary_sleep_array_ == i]
+                confusion_preds = temporary_pred_array_[temporary_sleep_array_ == i]
                 # print(confusion_trues.shape, confusion_preds.shape, np.unique(confusion_trues), np.unique(confusion_preds))
                 cm = metrics.confusion_matrix(confusion_trues, confusion_preds, labels=[1, 2])
                 # print(cm)
@@ -421,6 +421,7 @@ def do_auroc(Challenge2018Scorer, true_array_, prediction_prob_arousal, ID, comm
     fig.suptitle('{}'.format(comment), fontsize=16)
     lw = 2
     ax[0].plot([0, 1], [0, 1], color='navy', lw=lw, linestyle='--')
+    cmap = plt.cm.Paired(np.linspace(0, 1, len(true_array_)))
 
     for i, _ in enumerate(true_array_):
         true = true_array_[i]
@@ -444,8 +445,8 @@ def do_auroc(Challenge2018Scorer, true_array_, prediction_prob_arousal, ID, comm
         roc_auc = metrics.auc(fpr, tpr)
         prc_auc = metrics.auc(recall, prec)
 
-        ax[0].plot(fpr, tpr, color='darkorange',
-                 lw=lw, label='{} (area = {:0.2f})'.format(ID[i], roc_auc), alpha=0.3)
+        ax[0].plot(fpr, tpr, color=cmap[i],
+                 lw=lw, label='{} (area = {:0.2f})'.format(ID[i], roc_auc), alpha=0.7)
         ax[0].set_xlim([0.0, 1.0])
         ax[0].set_ylim([0.0, 1.05])
         ax[0].set_xlabel('False Positive Rate')
@@ -453,8 +454,8 @@ def do_auroc(Challenge2018Scorer, true_array_, prediction_prob_arousal, ID, comm
         ax[0].set_title('Receiver operating characteristic')
         ax[0].legend(loc="lower right")
 
-        ax[1].plot(recall, prec, color='darkorange',
-                 lw=lw, label='{} (area = {:0.2f})'.format(ID[i], prc_auc), alpha=0.3)
+        ax[1].plot(recall, prec, color=cmap[i],
+                 lw=lw, label='{} (area = {:0.2f})'.format(ID[i], prc_auc), alpha=0.7)
         ax[1].set_xlim([0.0, 1.0])
         ax[1].set_ylim([0.0, 1.05])
         ax[1].set_xlabel('Recall')
