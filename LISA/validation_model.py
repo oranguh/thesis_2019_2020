@@ -14,10 +14,9 @@ import matplotlib.pyplot as plt
 import matplotlib
 import seaborn as sns
 
-
 from tools import accuracy, CustomFormatter, get_dataloader
 from score2018 import Challenge2018Score
-from visualizations import plot_confusion_matrix, plot_classes_distribution
+from visualizations import plot_confusion_matrix, plot_classes_distribution, sleep_staging_confusion
 
 
 def main():
@@ -117,9 +116,9 @@ def validate(data_name, model_name, pre_trained_model, channel_index, comment):
             exit()
 
         # Parameters for dataloader
-        dataloader_params = {'batch_size': 4,
+        dataloader_params = {'batch_size': 7,
                              'shuffle': False,
-                             'num_workers': 3}
+                             'num_workers': 4}
     else:
         if data_name == "SHHS":
             data_folder = '/project/marcoh/shhs/polysomnography/shh1_numpy/'
@@ -165,6 +164,13 @@ def validate(data_name, model_name, pre_trained_model, channel_index, comment):
     running_loss = 0.0
     counters = 0
     epoch = 0
+
+    sleep_confusions = {'Undefined': [[0, 0], [0, 0]],
+                        'N1': [[0, 0], [0, 0]],
+                        'N2': [[0, 0], [0, 0]],
+                        'N3': [[0, 0], [0, 0]],
+                        'REM': [[0, 0], [0, 0]],
+                        'Wake': [[0, 0], [0, 0]]}
 
     for ID, inputs, annotations_arousal, annotations_sleep in dataloaders[phase]:
         with torch.set_grad_enabled(False):
@@ -230,6 +236,21 @@ def validate(data_name, model_name, pre_trained_model, channel_index, comment):
             accuracies = np.append(accuracies, accuracies_)
             kappas = np.append(kappas, kappas_)
 
+            temporary_sleep_array_ = annotations_sleep_[true_array_ != 0].flatten()
+            temporary_pred_array_ = pred_array_[true_array_ != 0].flatten()
+            temporary_true_array_ = true_array_[true_array_ != 0].flatten()
+
+            # print(temporary_pred_array_.shape, pred_array_.shape)
+            # sleep staging loop
+            for i, stage in enumerate(["N1", "N2", "N3", "REM", "Undefined", "Wake"]):
+                confusion_trues = temporary_pred_array_[temporary_sleep_array_ == i]
+                confusion_preds = temporary_true_array_[temporary_sleep_array_ == i]
+                # print(confusion_trues.shape, confusion_preds.shape, np.unique(confusion_trues), np.unique(confusion_preds))
+                cm = metrics.confusion_matrix(confusion_trues, confusion_preds, labels=[1, 2])
+                # print(cm)
+                sleep_confusions[stage] += cm
+            # print(sleep_confusions)
+
             # remove all 0 (unscored) ORDER of pred/True Matters
             pred_array = np.append(pred_array, pred_array_[true_array_ != 0])
             true_array = np.append(true_array, true_array_[true_array_ != 0])
@@ -277,7 +298,11 @@ def validate(data_name, model_name, pre_trained_model, channel_index, comment):
             Path("statistics/kappas").mkdir(parents=True, exist_ok=True)
             np.save(Path("statistics/accuracies") / comment, accuracies)
             np.save(Path("statistics/kappas") / comment, kappas)
+            fig_confusion = sleep_staging_confusion(sleep_confusions, title=comment)
+            writer.add_figure("Confusion Matrix/{}".format(phase), fig_confusion)
             break
+    fig_confusion = sleep_staging_confusion(sleep_confusions, title=comment)
+    writer.add_figure("Confusion Matrix/{}".format(phase), fig_confusion)
     Path("statistics").mkdir(parents=True, exist_ok=True)
     Path("statistics/accuracies").mkdir(parents=True, exist_ok=True)
     Path("statistics/kappas").mkdir(parents=True, exist_ok=True)
@@ -361,8 +386,8 @@ def save_metrics(running_loss, dataloaders, phase, pred_array, true_array, pred_
     print("\n{}: Sleep Report: \n{}\n".format(phase, df2.to_markdown()))
 
     # Plot normalized confusion matrix
-    fig_confusion = plot_confusion_matrix(true_array, pred_array, classes=["not arousal", "arousal"], title=comment+"_"+str(epoch), labels=[1, 2])
-    writer.add_figure("Confusion Matrix/{}".format(phase), fig_confusion, global_step=epoch)
+    # fig_confusion = plot_confusion_matrix(true_array, pred_array, classes=["not arousal", "arousal"], title=comment+"_"+str(epoch), labels=[1, 2])
+    # writer.add_figure("Confusion Matrix/{}".format(phase), fig_confusion, global_step=epoch)
 
     plt.close("all")
 
@@ -467,37 +492,47 @@ def make_sleep_chart(true_array, pred_array, annotations_sleep, ID, comment, epo
     plt.close("all")
 
     for j in range(len(ID)):
-        if j == 3:
+        if j == 2:
             break
 
         fig, ((ax1, ax2, ax3)) = plt.subplots(3, 1, figsize=(16, 8), sharex='all')
         ax1.set_title('{} ID: {}'.format(comment, ID[j]))
 
-        annotations_sleep_ = annotations_sleep[j, ::10]
-        true_array_ = true_array[j, ::10]
-        pred_array_ = pred_array[j, ::10]
+        # Downsampling essential since it's too slow. 10 or 15? maybe
+        Downsamping = 15
+        annotations_sleep_ = annotations_sleep[j, ::Downsamping]
+        true_array_ = true_array[j, ::Downsamping]
+        pred_array_ = pred_array[j, ::Downsamping]
 
         annotations_sleep_ = np.expand_dims(annotations_sleep_, 0)
         true_array_ = np.expand_dims(true_array_, 0)
         pred_array_ = np.expand_dims(pred_array_, 0)
 
         cmap = matplotlib.colors.ListedColormap(['royalblue', 'darkblue', 'indigo', 'cyan', 'grey', 'salmon'])
+
         sns.heatmap(annotations_sleep_, annot=False, ax=ax1,
-                    cmap=cmap, cbar=True)
+                    cmap=cmap, cbar=False)
 
         sns.heatmap(true_array_, annot=False, ax=ax2,
                     cmap=["grey", "seagreen", "yellow"],
-                    vmin=0, vmax=2, cbar=True)
+                    vmin=0, vmax=2, cbar=False)
 
-        sns.heatmap(pred_array_, annot=False, ax=ax3,
-                    cmap="summer",
-                    vmin=0, vmax=1, cbar=True)
+        # sns.heatmap(pred_array_, annot=False, ax=ax3,
+        #             cmap="summer",
+        #             vmin=0, vmax=1, cbar=True)
+        # print(pred_array_.shape, len(pred_array_))
+        _temp = np.arange(0, len(pred_array_.flatten()), 1)
+
+        sns.lineplot(_temp, pred_array_.flatten(), ax=ax3, alpha=0)
+        ax3.fill_between(_temp, 0, pred_array_.flatten(), facecolor='yellow')
+        ax3.fill_between(_temp, 1, pred_array_.flatten(), facecolor='seagreen')
 
         y_labels = ['Hypnogram', 'Ground Truth', 'Predictions']
         cbar_labels = [["N1", "N2", "N3", "REM", "Undefined", "Wake"],
                        ["Unscored", "Non-Arousal", "Arousal"],
                        ["Non-Arousal", "Arousal"]]
         for i, ax in enumerate([ax1, ax2, ax3]):
+        # for i, ax in enumerate([]):
             ax.tick_params(
                 axis='both',  # changes apply to the x-axis
                 which='both',  # both major and minor ticks are affected
@@ -508,16 +543,30 @@ def make_sleep_chart(true_array, pred_array, annotations_sleep, ID, comment, epo
                 labelleft=False)  # labels along the bottom edge are off
 
             ax.set_ylabel(y_labels[i])
-            ax.collections[0].colorbar.set_ticks(list(range(len(cbar_labels[i]))))
-            ax.collections[0].colorbar.ax.set_yticklabels(cbar_labels[i])
+            if i == 2:
+                continue
+            # ax.collections[0].colorbar.set_ticks(list(range(len(cbar_labels[i]))))
+            # ax.collections[0].colorbar.ax.set_yticklabels(cbar_labels[i])
+        red_patch = [matplotlib.patches.Patch(color=x) for x in ['royalblue', 'darkblue', 'indigo', 'cyan', 'grey', 'salmon', 'yellow', 'seagreen']]
+        #matplotlib.patches.Patch(color='red', label='The red data')
+        ax1.legend(red_patch, ["N1", "N2", "N3", "REM", "Undefined", "Wake", "Arousal", "non-arousal"], loc='upper right')
         # plt.show()
 
         filename = comment + "_" + str(ID[j]) + '.png'
         fig.savefig(Save_folder / filename)
+        # plt.show()
         plt.clf()
-
+        # print(asas)
         plt.close("all")
 
+
+def arousal_stats_per_hyponogram(true_array, pred_array, annotations_sleep, hypno_dict):
+    """
+        hypno-dict is a dictionary containing the arousal metrics per sleep stage.
+        sleep stages include: Wake, REM, N1, N2, N3,
+
+    """
+    pass
 
 if __name__ == '__main__':
     main()
