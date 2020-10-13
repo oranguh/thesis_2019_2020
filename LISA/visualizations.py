@@ -24,6 +24,7 @@ def plot_confusion_matrix(y_true, y_pred, classes,
     fig.suptitle('{}'.format(title), fontsize=16)
     # Compute confusion matrix
     cm = confusion_matrix(y_true, y_pred, labels=labels)
+    # print(cm)
     # Only use the labels that appear in the data
     # classes = classes[unique_labels(y_true, y_pred)]
     cmap = 'RdYlGn'
@@ -121,6 +122,7 @@ def sleep_staging_confusion(cm_dict,
     filename = title + '.png'
     plt.savefig(Save_folder / filename)
     # plt.show()
+    # print(asas)
 
     return fig
 
