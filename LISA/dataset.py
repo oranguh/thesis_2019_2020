@@ -352,8 +352,8 @@ class Dataset_Philips_full(data.Dataset):
 
         X_ = self.loaders_object.get_EEG(ID, channel='frontal', freq=100)
         X_ = X_['frontal']
-        y_arousal_ = self.loaders_object.get_arousal('PP01_PSG2_20181129', length=X_.shape[0], freq=100)
-        y_sleep_ = self.loaders_object.get_hypnogram('PP01_PSG2_20181129', freq=100)
+        y_arousal_ = self.loaders_object.get_arousal(ID, length=X_.shape[0], freq=100)
+        y_sleep_ = self.loaders_object.get_hypnogram(ID, freq=100)
 
         X_ = np.expand_dims(X_, axis=0)
         y_sleep_ = np.expand_dims(y_sleep_, axis=0)
