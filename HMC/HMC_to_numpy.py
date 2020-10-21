@@ -29,45 +29,60 @@ Sampling frequency is 256 Hz, this will need to go down to 100
 
 
 def main():
-    data_folder = Path("E:\\HMC22\\test")
-    signal_folder = data_folder / "edf"
-    annotation_folder = data_folder / "scorings"
+    data_folder1 = Path("E:\\HMC22\\test")
+    data_folder2 = Path("E:\\HMC22\\HMC_M")
+    data_folder3 = Path("E:\\HMC22\\HMC22")
 
-    numpy_folder = data_folder / "numpy"
-    numpy_folder.mkdir(parents=True, exist_ok=True)
-    files = [x.parts[-1] for x in annotation_folder.glob("*.edf")]
+    partition_list = []
+    for data_folder in [data_folder1, data_folder2, data_folder3]:
 
-    for file in tqdm(files, total=len(files)):
-        signal_path = signal_folder / file
-        annotation_path = annotation_folder / file
-        numpy_folder_to_save = numpy_folder / file
-        numpy_folder_to_save = numpy_folder_to_save.with_suffix("")
-        numpy_folder_to_save.mkdir(parents=True, exist_ok=True)
+        dataset_name = data_folder.parts[-1]
+        print(dataset_name)
+        # continue
+        signal_folder = data_folder / "edf"
+        annotation_folder = data_folder / "scorings"
 
-        edf_signal = mne.io.read_raw_edf(signal_path, preload=True)
-        annotation_dict = numpy_from_edf(annotation_path, edf_signal)
-        print(file)
-        print(annotation_dict["arousals"].shape, annotation_dict["hypnogram"].shape, edf_signal._data.shape)
+        # numpy_folder = data_folder / "numpy"
+        numpy_folder = Path("E:\\HMC22\\combined_HMC")
+        numpy_folder.mkdir(parents=True, exist_ok=True)
 
-        arousals = resample_signal(annotation_dict["arousals"], 256, 100)
-        hypnogram = resample_signal(annotation_dict["hypnogram"], 256, 100)
+        files = [x.parts[-1] for x in annotation_folder.glob("*.edf")]
+        print(files)
+        for file in tqdm(files, total=len(files)):
+            signal_path = signal_folder / file
+            annotation_path = annotation_folder / file
 
-        length_signal = len(arousals)
-        labels = np.zeros((2, length_signal))
-        data = np.zeros((12, length_signal))
+            numpy_folder_to_save = numpy_folder / (dataset_name + file)
+            print(numpy_folder_to_save)
+            numpy_folder_to_save = numpy_folder_to_save.with_suffix("")
+            numpy_folder_to_save.mkdir(parents=True, exist_ok=True)
 
-        labels[0] = arousals
-        labels[1] = hypnogram
+            edf_signal = mne.io.read_raw_edf(signal_path, preload=True)
+            annotation_dict = numpy_from_edf(annotation_path, edf_signal)
+            print(file)
+            print(annotation_dict["arousals"].shape, annotation_dict["hypnogram"].shape, edf_signal._data.shape)
 
-        for i in range(12):
-            data[i] = resample_signal(edf_signal._data[i], 256, 100)
+            arousals = resample_signal(annotation_dict["arousals"], 256, 100)
+            hypnogram = resample_signal(annotation_dict["hypnogram"], 256, 100)
 
-        np.save(numpy_folder_to_save / file.replace(".edf", "_data"), data)
-        np.save(numpy_folder_to_save / file.replace(".edf", "_labels"), labels)
+            length_signal = len(arousals)
+            labels = np.zeros((2, length_signal))
+            data = np.zeros((12, length_signal))
 
-    partition_list = [i.replace(".edf", "") for i in files]
+            labels[0] = arousals
+            labels[1] = hypnogram
 
-    partition_list.remove("SN4")
+            for i in range(12):
+                data[i] = resample_signal(edf_signal._data[i], 256, 100)
+
+            data_name = dataset_name + file.replace(".edf", "_data")
+            label_name = dataset_name + file.replace(".edf", "_labels")
+            np.save(numpy_folder_to_save / data_name, data)
+            np.save(numpy_folder_to_save / label_name, labels)
+
+        partition_list += [dataset_name + i.replace(".edf", "") for i in files]
+
+    partition_list.remove("testSN4")
 
     random.shuffle(partition_list)
     split_point = int(np.round(len(partition_list) / 3))
@@ -125,6 +140,8 @@ def numpy_from_edf(path, signal_edf):
             texts = [x.split(":") for x in texts]
 
     print("This session lasted {} hours \n".format(total_length / sfreq / seconds_to_hour))
+    if total_length / sfreq / seconds_to_hour > 10:
+        print("WARNING SESSION OVER 10 HOURS")
 
     hypnogram = np.zeros(total_length)
     limb_movement = np.zeros(total_length)
@@ -194,5 +211,36 @@ def save_obj(obj, name):
         pkl.dump(obj, f, pkl.HIGHEST_PROTOCOL)
 
 
+def fix_directories():
+    HMC_M = Path("E:\\HMC22\\HMC_M")
+    HMC_22 = Path("E:\\HMC22\\HMC22")
+
+    for dataset in [HMC_M, HMC_22]:
+        edf_path = Path(dataset / "edf")
+        edf_path.mkdir(parents=True, exist_ok=True)
+        scoring_path = Path(dataset / "scorings")
+        scoring_path.mkdir(parents=True, exist_ok=True)
+
+        files = [x.parts[-1] for x in dataset.glob("*.edf")]
+        for file in files:
+            if "sleepscoring" in file:
+                Path(dataset / file).rename(scoring_path / file)
+                # print(Path(dataset / file), scoring_path / file)
+            else:
+                Path(dataset / file).rename(edf_path / file)
+
+def fix_names():
+    HMC_M = Path("E:\\HMC22\\HMC_M\\scorings")
+    HMC_22 = Path("E:\\HMC22\\HMC22\\scorings")
+    for folder in [HMC_M, HMC_22]:
+        files = list(folder.glob("*"))
+        for file in tqdm(files):
+            new_name = file.parts[-1]
+            new_name = new_name.replace("_sleepscoring.edf", ".edf")
+            file.rename(file.parent / new_name)
+
+
 if __name__ == '__main__':
+    # fix_directories()
+    # fix_names()
     main()
