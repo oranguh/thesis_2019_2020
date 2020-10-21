@@ -18,7 +18,7 @@ def main():
     # channel_stats()
     # cross_dataset()
     different_models()
-    frequency()
+    # frequency()
     # future_predict()
 
 
@@ -71,10 +71,10 @@ def frequency():
             labels_figure.append(text)
         plt.gca().set_xticklabels(labels_figure)
 
-        Save_folder = Path("figures/statistics/frequency") / title + y_labels[i]
+        Save_folder = Path("figures/statistics/frequency")
         Save_folder.mkdir(parents=True, exist_ok=True)
 
-        filename = title + '.png'
+        filename = title + y_labels[i] + '.png'
         plt.savefig(Save_folder / filename)
 
         plt.show()
@@ -95,7 +95,7 @@ def different_models():
     #         df_accuracies = df_accuracies.drop(col, axis=1)
     #         df_kappas = df_kappas.drop(col, axis=1)
 
-    # print(df_accuracies.columns)
+    print(df_accuracies.columns)
     names = ["from_data", "to_data"]
     df_accuracies.columns = pd.MultiIndex.from_tuples(df_accuracies.columns, names=names)
     df_kappas.columns = pd.MultiIndex.from_tuples(df_kappas.columns, names=names)
@@ -424,7 +424,7 @@ def name_replace_frequency(df, paths):
         name = name.split("Banana")[-1]
         name = name.split("ghildes")[-1]
         name = name.replace(".npy", "")
-        name = name.replace("Deep_Sleep_SHHS", "SHHS_").replace("Deep_Sleep_snooze", "snooze_").replace("Deep_Sleep_philips", "philips_")
+        name = name.replace("Deep_Sleep_SHHS", "SHHS").replace("Deep_Sleep_snooze", "snooze").replace("Deep_Sleep_philips", "philips_")
         name = name.replace("Deep_Sleep_combined_combined_dataset", "combined")
         name = name.replace("_to_", "_")
 
@@ -443,7 +443,7 @@ def name_replace_convnet(df, paths):
         name = name.split("ghildes")[-1]
         name = name.replace(".npy", "")
         name = name.replace("Deep_Sleep_SHHS", "SHHS_").replace("Deep_Sleep_snooze", "snooze_")
-        name = name.replace("Deep_Sleep_philips", "philips").replace("ConvNet_IID_combined", "combined")
+        name = name.replace("Deep_Sleep_philips", "philips").replace("ConvNet_IID_", "")
         name = name.replace("_to_", "")
 
         df_name = tuple(name.split("_"))
