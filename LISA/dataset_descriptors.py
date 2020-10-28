@@ -116,10 +116,13 @@ def dataset_stats():
 
 def plot_descriptors(sleep_collection, arousal_collection, datum):
 
-    print(datum, np.mean(sleep_collection, axis=1))
+    means = np.mean(sleep_collection, axis=1)
+    print(datum, means)
     print(datum, " arousal percentage: ", np.mean(arousal_collection))
 
-    labels = ['nonrem1', 'nonrem2', 'nonrem3', 'rem', 'undefined', 'wake']
+    labels = ['nonrem1\n{}'.format(means[0]), 'nonrem2\n{}'.format(means[1]),
+              'nonrem3\n{}'.format(means[2]), 'rem\n{}'.format(means[3]),
+              'undefined\n{}'.format(means[4]), 'wake\n{}'.format(means[5])]
     sleep_collection = np.asarray(sleep_collection).T
     df = pd.DataFrame(sleep_collection, columns=labels)
     # print(df.head())
@@ -140,7 +143,7 @@ def plot_descriptors(sleep_collection, arousal_collection, datum):
     plt.savefig(Save_folder / filename)
     plt.close("all")
     sns.barplot(y=arousal_collection)
-    plt.gca().set_title("Arousals " + datum + " " + np.mean(arousal_collection))
+    plt.gca().set_title("Arousals " + datum + " " + str(np.mean(arousal_collection)))
     plt.gca().set_xlabel('Arousal distribution')
     plt.show()
 
@@ -153,8 +156,8 @@ def predict_1():
 
     data_name = "SHHS"
     data_folder = 'K:\\shhs\\polysomnography\\shh1_numpy'
-    # data_name = "snooze"
-    # data_folder = 'D:\\data\\snooze\\marco'
+    data_name = "snooze"
+    data_folder = 'D:\\data\\snooze\\marco'
     # data_name = "HMC"
     # data_folder = 'K:\\combined_HMC'
     # data_name = "philips"
@@ -298,8 +301,10 @@ def do_stats_arousal(true, pred, id):
         accuracies.append(metrics.balanced_accuracy_score(true_record, pred_record))
         kappas.append(metrics.cohen_kappa_score(true_record, pred_record, labels=[0, 1, 2]))
 
-    if kappas == None:
-        kappas = 0
+        # if kappas == None:
+        #     kappas = 0
+        # if kappas == np.nan():
+        #     kappas = 0
 
     return accuracies, kappas
 
