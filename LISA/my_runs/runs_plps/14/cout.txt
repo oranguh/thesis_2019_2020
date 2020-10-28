@@ -1,0 +1,233 @@
+INFO - hello - Running command 'run'
+INFO - hello - Started run with ID "14"
+weights_1_200
+Created model : Deep_Sleep(
+  (pcc1): PCC(
+    (activate): ReLU(inplace=True)
+    (blocks): Sequential(
+      (0): MaxPool1d(kernel_size=1, stride=1, padding=0, dilation=1, ceil_mode=False)
+      (1): Conv1d(1, 15, kernel_size=(7,), stride=(1,), padding=(3,))
+      (2): ReLU(inplace=True)
+      (3): BatchNorm1d(15, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (4): Conv1d(15, 15, kernel_size=(7,), stride=(1,), padding=(3,))
+      (5): ReLU(inplace=True)
+      (6): BatchNorm1d(15, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (pcc2): PCC(
+    (activate): ReLU(inplace=True)
+    (blocks): Sequential(
+      (0): MaxPool1d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+      (1): Conv1d(15, 18, kernel_size=(7,), stride=(1,), padding=(3,))
+      (2): ReLU(inplace=True)
+      (3): BatchNorm1d(18, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (4): Conv1d(18, 18, kernel_size=(7,), stride=(1,), padding=(3,))
+      (5): ReLU(inplace=True)
+      (6): BatchNorm1d(18, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (pcc3): PCC(
+    (activate): ReLU(inplace=True)
+    (blocks): Sequential(
+      (0): MaxPool1d(kernel_size=4, stride=4, padding=0, dilation=1, ceil_mode=False)
+      (1): Conv1d(18, 21, kernel_size=(7,), stride=(1,), padding=(3,))
+      (2): ReLU(inplace=True)
+      (3): BatchNorm1d(21, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (4): Conv1d(21, 21, kernel_size=(7,), stride=(1,), padding=(3,))
+      (5): ReLU(inplace=True)
+      (6): BatchNorm1d(21, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (pcc4): PCC(
+    (activate): ReLU(inplace=True)
+    (blocks): Sequential(
+      (0): MaxPool1d(kernel_size=4, stride=4, padding=0, dilation=1, ceil_mode=False)
+      (1): Conv1d(21, 25, kernel_size=(7,), stride=(1,), padding=(3,))
+      (2): ReLU(inplace=True)
+      (3): BatchNorm1d(25, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (4): Conv1d(25, 25, kernel_size=(7,), stride=(1,), padding=(3,))
+      (5): ReLU(inplace=True)
+      (6): BatchNorm1d(25, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (pcc5): PCC(
+    (activate): ReLU(inplace=True)
+    (blocks): Sequential(
+      (0): MaxPool1d(kernel_size=4, stride=4, padding=0, dilation=1, ceil_mode=False)
+      (1): Conv1d(25, 30, kernel_size=(7,), stride=(1,), padding=(3,))
+      (2): ReLU(inplace=True)
+      (3): BatchNorm1d(30, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (4): Conv1d(30, 30, kernel_size=(7,), stride=(1,), padding=(3,))
+      (5): ReLU(inplace=True)
+      (6): BatchNorm1d(30, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (pcc6): PCC(
+    (activate): ReLU(inplace=True)
+    (blocks): Sequential(
+      (0): MaxPool1d(kernel_size=4, stride=4, padding=0, dilation=1, ceil_mode=False)
+      (1): Conv1d(30, 60, kernel_size=(7,), stride=(1,), padding=(3,))
+      (2): ReLU(inplace=True)
+      (3): BatchNorm1d(60, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (4): Conv1d(60, 60, kernel_size=(7,), stride=(1,), padding=(3,))
+      (5): ReLU(inplace=True)
+      (6): BatchNorm1d(60, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (pcc7): PCC(
+    (activate): ReLU(inplace=True)
+    (blocks): Sequential(
+      (0): MaxPool1d(kernel_size=4, stride=4, padding=0, dilation=1, ceil_mode=False)
+      (1): Conv1d(60, 120, kernel_size=(7,), stride=(1,), padding=(3,))
+      (2): ReLU(inplace=True)
+      (3): BatchNorm1d(120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (4): Conv1d(120, 120, kernel_size=(7,), stride=(1,), padding=(3,))
+      (5): ReLU(inplace=True)
+      (6): BatchNorm1d(120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (pcc8): PCC(
+    (activate): ReLU(inplace=True)
+    (blocks): Sequential(
+      (0): MaxPool1d(kernel_size=4, stride=4, padding=0, dilation=1, ceil_mode=False)
+      (1): Conv1d(120, 240, kernel_size=(7,), stride=(1,), padding=(3,))
+      (2): ReLU(inplace=True)
+      (3): BatchNorm1d(240, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (4): Conv1d(240, 240, kernel_size=(7,), stride=(1,), padding=(3,))
+      (5): ReLU(inplace=True)
+      (6): BatchNorm1d(240, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (pcc9): PCC(
+    (activate): ReLU(inplace=True)
+    (blocks): Sequential(
+      (0): MaxPool1d(kernel_size=4, stride=4, padding=0, dilation=1, ceil_mode=False)
+      (1): Conv1d(240, 480, kernel_size=(7,), stride=(1,), padding=(3,))
+      (2): ReLU(inplace=True)
+      (3): BatchNorm1d(480, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (4): Conv1d(480, 480, kernel_size=(7,), stride=(1,), padding=(3,))
+      (5): ReLU(inplace=True)
+      (6): BatchNorm1d(480, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (ucc1): UCC(
+    (activate): ReLU(inplace=True)
+    (up): Sequential(
+      (0): ConvTranspose1d(480, 240, kernel_size=(4,), stride=(4,))
+    )
+    (blocks): Sequential(
+      (0): Conv1d(480, 240, kernel_size=(7,), stride=(1,), padding=(3,))
+      (1): ReLU(inplace=True)
+      (2): BatchNorm1d(240, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (3): Conv1d(240, 240, kernel_size=(7,), stride=(1,), padding=(3,))
+      (4): ReLU(inplace=True)
+      (5): BatchNorm1d(240, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (ucc2): UCC(
+    (activate): ReLU(inplace=True)
+    (up): Sequential(
+      (0): ConvTranspose1d(240, 120, kernel_size=(4,), stride=(4,))
+    )
+    (blocks): Sequential(
+      (0): Conv1d(240, 120, kernel_size=(7,), stride=(1,), padding=(3,))
+      (1): ReLU(inplace=True)
+      (2): BatchNorm1d(120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (3): Conv1d(120, 120, kernel_size=(7,), stride=(1,), padding=(3,))
+      (4): ReLU(inplace=True)
+      (5): BatchNorm1d(120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (ucc3): UCC(
+    (activate): ReLU(inplace=True)
+    (up): Sequential(
+      (0): ConvTranspose1d(120, 60, kernel_size=(4,), stride=(4,))
+    )
+    (blocks): Sequential(
+      (0): Conv1d(120, 60, kernel_size=(7,), stride=(1,), padding=(3,))
+      (1): ReLU(inplace=True)
+      (2): BatchNorm1d(60, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (3): Conv1d(60, 60, kernel_size=(7,), stride=(1,), padding=(3,))
+      (4): ReLU(inplace=True)
+      (5): BatchNorm1d(60, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (ucc4): UCC(
+    (activate): ReLU(inplace=True)
+    (up): Sequential(
+      (0): ConvTranspose1d(60, 30, kernel_size=(4,), stride=(4,))
+    )
+    (blocks): Sequential(
+      (0): Conv1d(60, 30, kernel_size=(7,), stride=(1,), padding=(3,))
+      (1): ReLU(inplace=True)
+      (2): BatchNorm1d(30, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (3): Conv1d(30, 30, kernel_size=(7,), stride=(1,), padding=(3,))
+      (4): ReLU(inplace=True)
+      (5): BatchNorm1d(30, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (ucc5): UCC(
+    (activate): ReLU(inplace=True)
+    (up): Sequential(
+      (0): ConvTranspose1d(30, 25, kernel_size=(4,), stride=(4,))
+    )
+    (blocks): Sequential(
+      (0): Conv1d(50, 25, kernel_size=(7,), stride=(1,), padding=(3,))
+      (1): ReLU(inplace=True)
+      (2): BatchNorm1d(25, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (3): Conv1d(25, 25, kernel_size=(7,), stride=(1,), padding=(3,))
+      (4): ReLU(inplace=True)
+      (5): BatchNorm1d(25, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (ucc6): UCC(
+    (activate): ReLU(inplace=True)
+    (up): Sequential(
+      (0): ConvTranspose1d(25, 21, kernel_size=(4,), stride=(4,))
+    )
+    (blocks): Sequential(
+      (0): Conv1d(42, 21, kernel_size=(7,), stride=(1,), padding=(3,))
+      (1): ReLU(inplace=True)
+      (2): BatchNorm1d(21, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (3): Conv1d(21, 21, kernel_size=(7,), stride=(1,), padding=(3,))
+      (4): ReLU(inplace=True)
+      (5): BatchNorm1d(21, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (ucc7): UCC(
+    (activate): ReLU(inplace=True)
+    (up): Sequential(
+      (0): ConvTranspose1d(21, 18, kernel_size=(4,), stride=(4,))
+    )
+    (blocks): Sequential(
+      (0): Conv1d(36, 18, kernel_size=(7,), stride=(1,), padding=(3,))
+      (1): ReLU(inplace=True)
+      (2): BatchNorm1d(18, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (3): Conv1d(18, 18, kernel_size=(7,), stride=(1,), padding=(3,))
+      (4): ReLU(inplace=True)
+      (5): BatchNorm1d(18, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (ucc8): UCC(
+    (activate): ReLU(inplace=True)
+    (up): Sequential(
+      (0): ConvTranspose1d(18, 15, kernel_size=(4,), stride=(2,), padding=(1,))
+    )
+    (blocks): Sequential(
+      (0): Conv1d(30, 15, kernel_size=(7,), stride=(1,), padding=(3,))
+      (1): ReLU(inplace=True)
+      (2): BatchNorm1d(15, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (3): Conv1d(15, 15, kernel_size=(7,), stride=(1,), padding=(3,))
+      (4): ReLU(inplace=True)
+      (5): BatchNorm1d(15, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (arousal_classifier): Sequential(
+    (0): Conv1d(15, 3, kernel_size=(1,), stride=(1,))
+  )
+  (sleep_classifier): Sequential(
+    (0): Conv1d(15, 6, kernel_size=(1,), stride=(1,))
+  )
+)
+Tesla T4
+/home/2015-0100_pwsl_pivotal/_FullFrontalStudy/EZDB/PP03_PSG4_20181207/PP03_PSG4_20181207_EEG.bin

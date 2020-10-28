@@ -1,0 +1,175 @@
+{
+  "artifacts": [],
+  "command": "run",
+  "experiment": {
+    "base_dir": "/home/320086129/PycharmProjects/thesis_2019_2020/LISA",
+    "dependencies": [
+      "numpy==1.19.1",
+      "sacred==0.8.1",
+      "scikit-learn==0.23.2",
+      "torch==1.4.0"
+    ],
+    "mainfile": "train.py",
+    "name": "hello",
+    "repositories": [
+      {
+        "commit": "29a45d32c424b82a5333e799f8a942c132f7aa09",
+        "dirty": true,
+        "url": "https://github.com/oranguh/thesis_2019_2020.git"
+      },
+      {
+        "commit": "29a45d32c424b82a5333e799f8a942c132f7aa09",
+        "dirty": true,
+        "url": "https://github.com/oranguh/thesis_2019_2020.git"
+      },
+      {
+        "commit": "29a45d32c424b82a5333e799f8a942c132f7aa09",
+        "dirty": true,
+        "url": "https://github.com/oranguh/thesis_2019_2020.git"
+      },
+      {
+        "commit": "29a45d32c424b82a5333e799f8a942c132f7aa09",
+        "dirty": true,
+        "url": "https://github.com/oranguh/thesis_2019_2020.git"
+      },
+      {
+        "commit": "29a45d32c424b82a5333e799f8a942c132f7aa09",
+        "dirty": true,
+        "url": "https://github.com/oranguh/thesis_2019_2020.git"
+      },
+      {
+        "commit": "29a45d32c424b82a5333e799f8a942c132f7aa09",
+        "dirty": true,
+        "url": "https://github.com/oranguh/thesis_2019_2020.git"
+      },
+      {
+        "commit": "29a45d32c424b82a5333e799f8a942c132f7aa09",
+        "dirty": true,
+        "url": "https://github.com/oranguh/thesis_2019_2020.git"
+      }
+    ],
+    "sources": [
+      [
+        "ConvNet_IID.py",
+        "_sources/ConvNet_IID_b2d9d5204eaf760536c0625d42486171.py"
+      ],
+      [
+        "dataset.py",
+        "_sources/dataset_5262f1c3208094d77254296291ea9ebb.py"
+      ],
+      [
+        "deep_sleep.py",
+        "_sources/deep_sleep_6c6a2a099cd655482d7e40482915b0d8.py"
+      ],
+      [
+        "patterson_model.py",
+        "_sources/patterson_model_95368e227eb05a36d86ac2031b163674.py"
+      ],
+      [
+        "score2018.py",
+        "_sources/score2018_f3cfe6482b9d6a9381085c1d485ed11a.py"
+      ],
+      [
+        "tools.py",
+        "_sources/tools_589b4b2ac10a0629cc4dd72a5568dbe7.py"
+      ],
+      [
+        "train.py",
+        "_sources/train_f68e08c538355ac1d30265f99beabeb6.py"
+      ]
+    ]
+  },
+  "fail_trace": [
+    "Traceback (most recent call last):\n",
+    "  File \"/home/017320_arousal_data/users/320086129/marco_sleep/lib/python3.6/site-packages/sacred/stdout_capturing.py\", line 163, in tee_output_fd\n    yield out  # let the caller do their printing\n",
+    "  File \"/home/017320_arousal_data/users/320086129/marco_sleep/lib/python3.6/site-packages/sacred/run.py\", line 238, in __call__\n    self.result = self.main_function(*args)\n",
+    "  File \"/home/017320_arousal_data/users/320086129/marco_sleep/lib/python3.6/site-packages/sacred/config/captured_function.py\", line 42, in captured_function\n    result = wrapped(*args, **kwargs)\n",
+    "  File \"/home/320086129/PycharmProjects/thesis_2019_2020/LISA/train.py\", line 587, in run\n    channel_id, sleep_stage_importance)\n",
+    "  File \"/home/320086129/PycharmProjects/thesis_2019_2020/LISA/train.py\", line 202, in training\n    for ID, inputs, annotations_arousal, annotations_sleep in dataloaders[phase]:\n",
+    "  File \"/home/017320_arousal_data/users/320086129/marco_sleep/lib/python3.6/site-packages/torch/utils/data/dataloader.py\", line 345, in __next__\n    data = self._next_data()\n",
+    "  File \"/home/017320_arousal_data/users/320086129/marco_sleep/lib/python3.6/site-packages/torch/utils/data/dataloader.py\", line 856, in _next_data\n    return self._process_data(data)\n",
+    "  File \"/home/017320_arousal_data/users/320086129/marco_sleep/lib/python3.6/site-packages/torch/utils/data/dataloader.py\", line 881, in _process_data\n    data.reraise()\n",
+    "  File \"/home/017320_arousal_data/users/320086129/marco_sleep/lib/python3.6/site-packages/torch/_utils.py\", line 394, in reraise\n    raise self.exc_type(msg)\n",
+    "IndexError: Caught IndexError in DataLoader worker process 0.\nOriginal Traceback (most recent call last):\n  File \"/home/017320_arousal_data/users/320086129/marco_sleep/lib/python3.6/site-packages/torch/utils/data/_utils/worker.py\", line 178, in _worker_loop\n    data = fetcher.fetch(index)\n  File \"/home/017320_arousal_data/users/320086129/marco_sleep/lib/python3.6/site-packages/torch/utils/data/_utils/fetch.py\", line 44, in fetch\n    data = [self.dataset[idx] for idx in possibly_batched_index]\n  File \"/home/017320_arousal_data/users/320086129/marco_sleep/lib/python3.6/site-packages/torch/utils/data/_utils/fetch.py\", line 44, in <listcomp>\n    data = [self.dataset[idx] for idx in possibly_batched_index]\n  File \"/home/320086129/PycharmProjects/thesis_2019_2020/LISA/dataset.py\", line 369, in __getitem__\n    y_arousal[:y_arousal_.shape[0], :y_arousal_.shape[1]] = y_arousal_\nIndexError: tuple index out of range\n\n",
+    "\nDuring handling of the above exception, another exception occurred:\n\n",
+    "Traceback (most recent call last):\n",
+    "  File \"/home/017320_arousal_data/users/320086129/marco_sleep/lib/python3.6/contextlib.py\", line 99, in __exit__\n    self.gen.throw(type, value, traceback)\n",
+    "  File \"/home/017320_arousal_data/users/320086129/marco_sleep/lib/python3.6/site-packages/sacred/stdout_capturing.py\", line 175, in tee_output_fd\n    tee_stdout.wait(timeout=1)\n",
+    "  File \"/home/017320_arousal_data/users/320086129/marco_sleep/lib/python3.6/subprocess.py\", line 1469, in wait\n    raise TimeoutExpired(self.args, timeout)\n",
+    "subprocess.TimeoutExpired: Command '['tee', '-a', '/tmp/tmpgf2dbkqw']' timed out after 1 seconds\n"
+  ],
+  "heartbeat": "2020-10-02T15:11:23.818001",
+  "host": {
+    "ENV": {},
+    "cpu": "Intel(R) Xeon(R) Gold 5218 CPU @ 2.30GHz",
+    "gpus": {
+      "driver_version": "418.87.00",
+      "gpus": [
+        {
+          "model": "Tesla T4",
+          "persistence_mode": true,
+          "total_memory": 15079
+        },
+        {
+          "model": "Tesla T4",
+          "persistence_mode": true,
+          "total_memory": 15079
+        },
+        {
+          "model": "Tesla T4",
+          "persistence_mode": true,
+          "total_memory": 15079
+        },
+        {
+          "model": "Tesla T4",
+          "persistence_mode": true,
+          "total_memory": 15079
+        },
+        {
+          "model": "Tesla T4",
+          "persistence_mode": true,
+          "total_memory": 15079
+        }
+      ]
+    },
+    "hostname": "ghildes",
+    "os": [
+      "Linux",
+      "Linux-3.10.0-1062.12.1.el7.x86_64-x86_64-with-redhat-7.7-Nitrogen"
+    ],
+    "python_version": "3.6.12"
+  },
+  "meta": {
+    "command": "run",
+    "options": {
+      "--beat-interval": null,
+      "--capture": null,
+      "--comment": null,
+      "--debug": false,
+      "--enforce_clean": false,
+      "--file_storage": null,
+      "--force": false,
+      "--help": false,
+      "--loglevel": null,
+      "--mongo_db": null,
+      "--name": null,
+      "--pdb": false,
+      "--print-config": false,
+      "--priority": null,
+      "--queue": false,
+      "--s3": null,
+      "--sql": null,
+      "--tiny_db": null,
+      "--unobserved": false,
+      "COMMAND": null,
+      "UPDATE": [],
+      "help": false,
+      "with": false
+    }
+  },
+  "resources": [],
+  "result": null,
+  "start_time": "2020-10-02T15:11:15.381354",
+  "status": "FAILED",
+  "stop_time": "2020-10-02T15:11:23.839486"
+}

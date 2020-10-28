@@ -1,0 +1,6643 @@
+INFO - hello - Running command 'run'
+INFO - hello - Started run with ID "23"
+weights_1_1000
+Created model : Deep_Sleep(
+  (pcc1): PCC(
+    (activate): ReLU(inplace=True)
+    (blocks): Sequential(
+      (0): MaxPool1d(kernel_size=1, stride=1, padding=0, dilation=1, ceil_mode=False)
+      (1): Conv1d(1, 15, kernel_size=(7,), stride=(1,), padding=(3,))
+      (2): ReLU(inplace=True)
+      (3): BatchNorm1d(15, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (4): Conv1d(15, 15, kernel_size=(7,), stride=(1,), padding=(3,))
+      (5): ReLU(inplace=True)
+      (6): BatchNorm1d(15, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (pcc2): PCC(
+    (activate): ReLU(inplace=True)
+    (blocks): Sequential(
+      (0): MaxPool1d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+      (1): Conv1d(15, 18, kernel_size=(7,), stride=(1,), padding=(3,))
+      (2): ReLU(inplace=True)
+      (3): BatchNorm1d(18, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (4): Conv1d(18, 18, kernel_size=(7,), stride=(1,), padding=(3,))
+      (5): ReLU(inplace=True)
+      (6): BatchNorm1d(18, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (pcc3): PCC(
+    (activate): ReLU(inplace=True)
+    (blocks): Sequential(
+      (0): MaxPool1d(kernel_size=4, stride=4, padding=0, dilation=1, ceil_mode=False)
+      (1): Conv1d(18, 21, kernel_size=(7,), stride=(1,), padding=(3,))
+      (2): ReLU(inplace=True)
+      (3): BatchNorm1d(21, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (4): Conv1d(21, 21, kernel_size=(7,), stride=(1,), padding=(3,))
+      (5): ReLU(inplace=True)
+      (6): BatchNorm1d(21, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (pcc4): PCC(
+    (activate): ReLU(inplace=True)
+    (blocks): Sequential(
+      (0): MaxPool1d(kernel_size=4, stride=4, padding=0, dilation=1, ceil_mode=False)
+      (1): Conv1d(21, 25, kernel_size=(7,), stride=(1,), padding=(3,))
+      (2): ReLU(inplace=True)
+      (3): BatchNorm1d(25, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (4): Conv1d(25, 25, kernel_size=(7,), stride=(1,), padding=(3,))
+      (5): ReLU(inplace=True)
+      (6): BatchNorm1d(25, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (pcc5): PCC(
+    (activate): ReLU(inplace=True)
+    (blocks): Sequential(
+      (0): MaxPool1d(kernel_size=4, stride=4, padding=0, dilation=1, ceil_mode=False)
+      (1): Conv1d(25, 30, kernel_size=(7,), stride=(1,), padding=(3,))
+      (2): ReLU(inplace=True)
+      (3): BatchNorm1d(30, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (4): Conv1d(30, 30, kernel_size=(7,), stride=(1,), padding=(3,))
+      (5): ReLU(inplace=True)
+      (6): BatchNorm1d(30, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (pcc6): PCC(
+    (activate): ReLU(inplace=True)
+    (blocks): Sequential(
+      (0): MaxPool1d(kernel_size=4, stride=4, padding=0, dilation=1, ceil_mode=False)
+      (1): Conv1d(30, 60, kernel_size=(7,), stride=(1,), padding=(3,))
+      (2): ReLU(inplace=True)
+      (3): BatchNorm1d(60, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (4): Conv1d(60, 60, kernel_size=(7,), stride=(1,), padding=(3,))
+      (5): ReLU(inplace=True)
+      (6): BatchNorm1d(60, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (pcc7): PCC(
+    (activate): ReLU(inplace=True)
+    (blocks): Sequential(
+      (0): MaxPool1d(kernel_size=4, stride=4, padding=0, dilation=1, ceil_mode=False)
+      (1): Conv1d(60, 120, kernel_size=(7,), stride=(1,), padding=(3,))
+      (2): ReLU(inplace=True)
+      (3): BatchNorm1d(120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (4): Conv1d(120, 120, kernel_size=(7,), stride=(1,), padding=(3,))
+      (5): ReLU(inplace=True)
+      (6): BatchNorm1d(120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (pcc8): PCC(
+    (activate): ReLU(inplace=True)
+    (blocks): Sequential(
+      (0): MaxPool1d(kernel_size=4, stride=4, padding=0, dilation=1, ceil_mode=False)
+      (1): Conv1d(120, 240, kernel_size=(7,), stride=(1,), padding=(3,))
+      (2): ReLU(inplace=True)
+      (3): BatchNorm1d(240, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (4): Conv1d(240, 240, kernel_size=(7,), stride=(1,), padding=(3,))
+      (5): ReLU(inplace=True)
+      (6): BatchNorm1d(240, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (pcc9): PCC(
+    (activate): ReLU(inplace=True)
+    (blocks): Sequential(
+      (0): MaxPool1d(kernel_size=4, stride=4, padding=0, dilation=1, ceil_mode=False)
+      (1): Conv1d(240, 480, kernel_size=(7,), stride=(1,), padding=(3,))
+      (2): ReLU(inplace=True)
+      (3): BatchNorm1d(480, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (4): Conv1d(480, 480, kernel_size=(7,), stride=(1,), padding=(3,))
+      (5): ReLU(inplace=True)
+      (6): BatchNorm1d(480, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (ucc1): UCC(
+    (activate): ReLU(inplace=True)
+    (up): Sequential(
+      (0): ConvTranspose1d(480, 240, kernel_size=(4,), stride=(4,))
+    )
+    (blocks): Sequential(
+      (0): Conv1d(480, 240, kernel_size=(7,), stride=(1,), padding=(3,))
+      (1): ReLU(inplace=True)
+      (2): BatchNorm1d(240, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (3): Conv1d(240, 240, kernel_size=(7,), stride=(1,), padding=(3,))
+      (4): ReLU(inplace=True)
+      (5): BatchNorm1d(240, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (ucc2): UCC(
+    (activate): ReLU(inplace=True)
+    (up): Sequential(
+      (0): ConvTranspose1d(240, 120, kernel_size=(4,), stride=(4,))
+    )
+    (blocks): Sequential(
+      (0): Conv1d(240, 120, kernel_size=(7,), stride=(1,), padding=(3,))
+      (1): ReLU(inplace=True)
+      (2): BatchNorm1d(120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (3): Conv1d(120, 120, kernel_size=(7,), stride=(1,), padding=(3,))
+      (4): ReLU(inplace=True)
+      (5): BatchNorm1d(120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (ucc3): UCC(
+    (activate): ReLU(inplace=True)
+    (up): Sequential(
+      (0): ConvTranspose1d(120, 60, kernel_size=(4,), stride=(4,))
+    )
+    (blocks): Sequential(
+      (0): Conv1d(120, 60, kernel_size=(7,), stride=(1,), padding=(3,))
+      (1): ReLU(inplace=True)
+      (2): BatchNorm1d(60, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (3): Conv1d(60, 60, kernel_size=(7,), stride=(1,), padding=(3,))
+      (4): ReLU(inplace=True)
+      (5): BatchNorm1d(60, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (ucc4): UCC(
+    (activate): ReLU(inplace=True)
+    (up): Sequential(
+      (0): ConvTranspose1d(60, 30, kernel_size=(4,), stride=(4,))
+    )
+    (blocks): Sequential(
+      (0): Conv1d(60, 30, kernel_size=(7,), stride=(1,), padding=(3,))
+      (1): ReLU(inplace=True)
+      (2): BatchNorm1d(30, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (3): Conv1d(30, 30, kernel_size=(7,), stride=(1,), padding=(3,))
+      (4): ReLU(inplace=True)
+      (5): BatchNorm1d(30, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (ucc5): UCC(
+    (activate): ReLU(inplace=True)
+    (up): Sequential(
+      (0): ConvTranspose1d(30, 25, kernel_size=(4,), stride=(4,))
+    )
+    (blocks): Sequential(
+      (0): Conv1d(50, 25, kernel_size=(7,), stride=(1,), padding=(3,))
+      (1): ReLU(inplace=True)
+      (2): BatchNorm1d(25, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (3): Conv1d(25, 25, kernel_size=(7,), stride=(1,), padding=(3,))
+      (4): ReLU(inplace=True)
+      (5): BatchNorm1d(25, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (ucc6): UCC(
+    (activate): ReLU(inplace=True)
+    (up): Sequential(
+      (0): ConvTranspose1d(25, 21, kernel_size=(4,), stride=(4,))
+    )
+    (blocks): Sequential(
+      (0): Conv1d(42, 21, kernel_size=(7,), stride=(1,), padding=(3,))
+      (1): ReLU(inplace=True)
+      (2): BatchNorm1d(21, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (3): Conv1d(21, 21, kernel_size=(7,), stride=(1,), padding=(3,))
+      (4): ReLU(inplace=True)
+      (5): BatchNorm1d(21, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (ucc7): UCC(
+    (activate): ReLU(inplace=True)
+    (up): Sequential(
+      (0): ConvTranspose1d(21, 18, kernel_size=(4,), stride=(4,))
+    )
+    (blocks): Sequential(
+      (0): Conv1d(36, 18, kernel_size=(7,), stride=(1,), padding=(3,))
+      (1): ReLU(inplace=True)
+      (2): BatchNorm1d(18, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (3): Conv1d(18, 18, kernel_size=(7,), stride=(1,), padding=(3,))
+      (4): ReLU(inplace=True)
+      (5): BatchNorm1d(18, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (ucc8): UCC(
+    (activate): ReLU(inplace=True)
+    (up): Sequential(
+      (0): ConvTranspose1d(18, 15, kernel_size=(4,), stride=(2,), padding=(1,))
+    )
+    (blocks): Sequential(
+      (0): Conv1d(30, 15, kernel_size=(7,), stride=(1,), padding=(3,))
+      (1): ReLU(inplace=True)
+      (2): BatchNorm1d(15, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (3): Conv1d(15, 15, kernel_size=(7,), stride=(1,), padding=(3,))
+      (4): ReLU(inplace=True)
+      (5): BatchNorm1d(15, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (arousal_classifier): Sequential(
+    (0): Conv1d(15, 3, kernel_size=(1,), stride=(1,))
+  )
+  (sleep_classifier): Sequential(
+    (0): Conv1d(15, 6, kernel_size=(1,), stride=(1,))
+  )
+)
+Tesla T4
+Max Mem GB   6.31115264
+
+
+Epoch  0 phase:  train
+PRC  0.00450858058282991
+ROC  0.49409091784445397
+loss  1.0447757244110107
+acc arousal  0.5014743465582279
+acc sleep  0.16221143224149004
+              precision    recall  f1-score   support
+
+  not_scored       0.00      0.00      0.00         0
+ not_arousal       1.00      0.50      0.67  23254100
+     Arousal       0.00      0.49      0.01    107775
+
+   micro avg       0.50      0.50      0.50  23361875
+   macro avg       0.33      0.33      0.23  23361875
+weighted avg       0.99      0.50      0.66  23361875
+
+Max Mem GB   6.31115264
+
+
+Epoch  0 phase:  val
+PRC  0.004838207614341638
+ROC  0.505385964467379
+loss  1.0714677572250366
+acc arousal  0.9687320964719696
+acc sleep  0.06068629717783067
+              precision    recall  f1-score   support
+
+  not_scored       0.00      0.00      0.00         0
+ not_arousal       1.00      0.97      0.98  12379275
+     Arousal       0.01      0.05      0.01     55425
+
+   micro avg       0.97      0.97      0.97  12434700
+   macro avg       0.33      0.34      0.33  12434700
+weighted avg       0.99      0.97      0.98  12434700
+
+Max Mem GB   6.31115264
+
+
+Epoch  1 phase:  train
+PRC  0.004550262328039215
+ROC  0.49775269470462763
+loss  1.039249062538147
+acc arousal  0.3280982369779823
+acc sleep  0.12356653237578093
+Max Mem GB   6.31115264
+
+
+Epoch  1 phase:  val
+PRC  0.004932254312833537
+ROC  0.5030348962767747
+loss  1.0626496076583862
+acc arousal  0.6072690937457277
+acc sleep  0.0602937776266576
+Max Mem GB   6.31115264
+
+
+Epoch  2 phase:  train
+PRC  0.004579049016485368
+ROC  0.5003238798074644
+loss  0.9363791346549988
+acc arousal  0.21806075068888947
+acc sleep  0.1011253342675308
+Max Mem GB   6.31115264
+
+
+Epoch  2 phase:  val
+PRC  0.005038104214179022
+ROC  0.5113635587027261
+loss  1.0557644367218018
+acc arousal  0.5486058368919234
+acc sleep  0.06221548226226907
+Max Mem GB   6.31115264
+
+
+Epoch  3 phase:  train
+PRC  0.00459310054249211
+ROC  0.5007879401905939
+loss  1.0044397115707397
+acc arousal  0.13757876882741646
+acc sleep  0.08544618438722484
+Max Mem GB   6.31115264
+
+
+Epoch  3 phase:  val
+PRC  0.00528201703066562
+ROC  0.512633027726756
+loss  0.9913419485092163
+acc arousal  0.3941653598398031
+acc sleep  0.09537635724810155
+Max Mem GB   6.31115264
+
+
+Epoch  4 phase:  train
+PRC  0.004654380769387425
+ROC  0.5045991148411562
+loss  0.8667229413986206
+acc arousal  0.08623824072340085
+acc sleep  0.07652571962398552
+Max Mem GB   6.31115264
+
+
+Epoch  4 phase:  val
+PRC  0.00551634511003968
+ROC  0.5022676919121049
+loss  1.2142306566238403
+acc arousal  0.148389426363322
+acc sleep  0.08087299104612944
+Max Mem GB   6.31115264
+
+
+Epoch  5 phase:  train
+PRC  0.0047152470650514144
+ROC  0.5095236552503201
+loss  0.8965682983398438
+acc arousal  0.04289912517723855
+acc sleep  0.06776210661528581
+Max Mem GB   6.31115264
+
+
+Epoch  5 phase:  val
+PRC  0.005345518161311816
+ROC  0.5049269277631492
+loss  0.8843961954116821
+acc arousal  0.04563769129934779
+acc sleep  0.06520013600816049
+Max Mem GB   6.31115264
+
+
+Epoch  6 phase:  train
+PRC  0.004732783413663839
+ROC  0.5110487618309728
+loss  0.9189649820327759
+acc arousal  0.02406266620294818
+acc sleep  0.06427773690663864
+Max Mem GB   6.31115264
+
+
+Epoch  6 phase:  val
+PRC  0.0053631493826364
+ROC  0.5061223420380409
+loss  0.8572190999984741
+acc arousal  0.018413874078184435
+acc sleep  0.06264816955684008
+Max Mem GB   6.31115264
+
+
+Epoch  7 phase:  train
+PRC  0.004742119055718907
+ROC  0.5122590412866241
+loss  0.8846207857131958
+acc arousal  0.015586462987238824
+acc sleep  0.06307874116891458
+Max Mem GB   6.31115264
+
+
+Epoch  7 phase:  val
+PRC  0.005361065339000112
+ROC  0.5086938881941001
+loss  0.845878541469574
+acc arousal  0.01256588417895084
+acc sleep  0.062050005667006684
+Max Mem GB   6.31115264
+
+
+Epoch  8 phase:  train
+PRC  0.004768497582933693
+ROC  0.5133979254618731
+loss  0.759891152381897
+acc arousal  0.020350763797854412
+acc sleep  0.06289124773749051
+Max Mem GB   6.31115264
+
+
+Epoch  8 phase:  val
+PRC  0.005585425225342175
+ROC  0.5112152012082173
+loss  0.8170517086982727
+acc arousal  0.012720532059478717
+acc sleep  0.061889606709735916
+Max Mem GB   6.31115264
+
+
+Epoch  9 phase:  train
+PRC  0.004782825092255144
+ROC  0.5152625669657526
+loss  0.7815625071525574
+acc arousal  0.022192139971641833
+acc sleep  0.061403024464296144
+Max Mem GB   6.31115264
+
+
+Epoch  9 phase:  val
+PRC  0.005224211582541952
+ROC  0.5070895514413627
+loss  0.7698903679847717
+acc arousal  0.013474551054709804
+acc sleep  0.06131855377989346
+Max Mem GB   6.31115264
+
+
+Epoch  10 phase:  train
+PRC  0.0048312257933703475
+ROC  0.5172324308873356
+loss  0.8400359749794006
+acc arousal  0.020738018673586774
+acc sleep  0.06062843463537105
+              precision    recall  f1-score   support
+
+  not_scored       0.00      0.00      0.00         0
+ not_arousal       1.00      0.02      0.03  23254100
+     Arousal       0.00      0.99      0.01    107775
+
+   micro avg       0.02      0.02      0.02  23361875
+   macro avg       0.33      0.34      0.01  23361875
+weighted avg       0.99      0.02      0.03  23361875
+
+Max Mem GB   6.31115264
+
+
+Epoch  10 phase:  val
+PRC  0.005072756616658953
+ROC  0.5021149586637376
+loss  0.7707871198654175
+acc arousal  0.01510876820510346
+acc sleep  0.06094335260115607
+              precision    recall  f1-score   support
+
+  not_scored       0.00      0.00      0.00         0
+ not_arousal       0.99      0.01      0.02  12379275
+     Arousal       0.00      0.98      0.01     55425
+
+   micro avg       0.02      0.02      0.02  12434700
+   macro avg       0.33      0.33      0.01  12434700
+weighted avg       0.99      0.02      0.02  12434700
+
+Max Mem GB   6.31115264
+
+
+Epoch  11 phase:  train
+PRC  0.0048665198620668326
+ROC  0.522293924501764
+loss  0.7335631251335144
+acc arousal  0.026339752267315872
+acc sleep  0.059711940211362176
+Max Mem GB   6.31115264
+
+
+Epoch  11 phase:  val
+PRC  0.004894615743694948
+ROC  0.5004240931244132
+loss  0.7362818121910095
+acc arousal  0.013819392506453714
+acc sleep  0.05992474215119574
+Max Mem GB   6.31115264
+
+
+Epoch  12 phase:  train
+PRC  0.0048202084445187615
+ROC  0.51683105684979
+loss  0.8215925097465515
+acc arousal  0.02416514085449049
+acc sleep  0.05949086238103579
+Max Mem GB   6.31115264
+
+
+Epoch  12 phase:  val
+PRC  0.00485733008118823
+ROC  0.5051681379433746
+loss  0.7545106410980225
+acc arousal  0.017282121804305692
+acc sleep  0.0595514450867052
+Max Mem GB   6.31115264
+
+
+Epoch  13 phase:  train
+PRC  0.004912756904750252
+ROC  0.5230969894001855
+loss  0.7226065397262573
+acc arousal  0.024982455389389764
+acc sleep  0.05882356513107958
+Max Mem GB   6.31115264
+
+
+Epoch  13 phase:  val
+PRC  0.004954000707832849
+ROC  0.5075705594896214
+loss  0.7316353917121887
+acc arousal  0.020623336308877575
+acc sleep  0.05963069250821716
+Max Mem GB   6.31115264
+
+
+Epoch  14 phase:  train
+PRC  0.004945830366846627
+ROC  0.5273666180509398
+loss  0.7835739254951477
+acc arousal  0.023743128494609272
+acc sleep  0.05861178256553979
+Max Mem GB   6.31115264
+
+
+Epoch  14 phase:  val
+PRC  0.005007813912549476
+ROC  0.5150192880523451
+loss  0.7902787923812866
+acc arousal  0.02121353953050737
+acc sleep  0.05970767312705429
+Max Mem GB   6.31115264
+
+
+Epoch  15 phase:  train
+PRC  0.005131521090191775
+ROC  0.5406789720049183
+loss  0.708069920539856
+acc arousal  0.02116803552797025
+acc sleep  0.058765971857301334
+Max Mem GB   6.31115264
+
+
+Epoch  15 phase:  val
+PRC  0.005373483916368081
+ROC  0.5361137730989844
+loss  0.7170934081077576
+acc arousal  0.02418305226503253
+acc sleep  0.06174761419018474
+Max Mem GB   6.31115264
+
+
+Epoch  16 phase:  train
+PRC  0.005935979691626276
+ROC  0.5733045009402348
+loss  0.7117225527763367
+acc arousal  0.028429182161106504
+acc sleep  0.06173349681788988
+Max Mem GB   6.31115264
+
+
+Epoch  16 phase:  val
+PRC  0.0072540842914399625
+ROC  0.589727911902519
+loss  0.9868062734603882
+acc arousal  0.04961808487538903
+acc sleep  0.07090576901280743
+Max Mem GB   6.31115264
+
+
+Epoch  17 phase:  train
+PRC  0.011186258148842672
+ROC  0.6842940085042791
+loss  0.6460758447647095
+acc arousal  0.07947683993686294
+acc sleep  0.08697345711449758
+Max Mem GB   6.31115264
+
+
+Epoch  17 phase:  val
+PRC  0.01440599890444225
+ROC  0.730624746334515
+loss  0.7063981294631958
+acc arousal  0.1947874898469605
+acc sleep  0.12533061317012353
+Max Mem GB   6.31115264
+
+
+Epoch  18 phase:  train
+PRC  0.026081697888054787
+ROC  0.81619496506564
+loss  0.4788295030593872
+acc arousal  0.26103512667540596
+acc sleep  0.1731179541075495
+Max Mem GB   6.31115264
+
+
+Epoch  18 phase:  val
+PRC  0.031209045659540184
+ROC  0.8480226008784726
+loss  0.577862024307251
+acc arousal  0.3674232591055675
+acc sleep  0.2144877705995693
+Max Mem GB   6.31115264
+
+
+Epoch  19 phase:  train
+PRC  0.046438384697840646
+ROC  0.9051466203249111
+loss  0.4007912278175354
+acc arousal  0.378206886219535
+acc sleep  0.2233566182051731
+Max Mem GB   6.31115264
+
+
+Epoch  19 phase:  val
+PRC  0.04252385361437494
+ROC  0.8799565625717102
+loss  0.3801526427268982
+acc arousal  0.5736931329264076
+acc sleep  0.31514668480108804
+Max Mem GB   6.31115264
+
+
+Epoch  20 phase:  train
+PRC  0.076228618662425
+ROC  0.9464242048849908
+loss  0.28502607345581055
+acc arousal  0.6116526177800369
+acc sleep  0.3447824837975127
+              precision    recall  f1-score   support
+
+  not_scored       0.00      0.00      0.00         0
+ not_arousal       1.00      0.61      0.76  23254100
+     Arousal       0.01      0.99      0.02    107775
+
+   micro avg       0.61      0.61      0.61  23361875
+   macro avg       0.34      0.53      0.26  23361875
+weighted avg       1.00      0.61      0.75  23361875
+
+Max Mem GB   6.31115264
+
+
+Epoch  20 phase:  val
+PRC  0.060508551296395666
+ROC  0.9217489261905828
+loss  0.39863741397857666
+acc arousal  0.6983556499151568
+acc sleep  0.3965940836450187
+              precision    recall  f1-score   support
+
+  not_scored       0.00      0.00      0.00         0
+ not_arousal       1.00      0.70      0.82  12379275
+     Arousal       0.01      0.95      0.03     55425
+
+   micro avg       0.70      0.70      0.70  12434700
+   macro avg       0.34      0.55      0.28  12434700
+weighted avg       1.00      0.70      0.82  12434700
+
+Max Mem GB   6.31115264
+
+
+Epoch  21 phase:  train
+PRC  0.09507302885576686
+ROC  0.9609252549594419
+loss  0.3036186099052429
+acc arousal  0.6222769362476257
+acc sleep  0.3328272785660069
+Max Mem GB   6.31115264
+
+
+Epoch  21 phase:  val
+PRC  0.06284052912600879
+ROC  0.9296213345076739
+loss  0.24840466678142548
+acc arousal  0.7238433577006281
+acc sleep  0.40017273036382184
+Max Mem GB   6.31115264
+
+
+Epoch  22 phase:  train
+PRC  0.10683455877408919
+ROC  0.9658336326231225
+loss  0.22806257009506226
+acc arousal  0.7201992134621044
+acc sleep  0.3841397092310387
+Max Mem GB   6.31115264
+
+
+Epoch  22 phase:  val
+PRC  0.0807222617938163
+ROC  0.9459587530658878
+loss  0.43365952372550964
+acc arousal  0.7793711147032095
+acc sleep  0.4339248781593562
+Max Mem GB   6.31115264
+
+
+Epoch  23 phase:  train
+PRC  0.12432242397927218
+ROC  0.971601388472486
+loss  0.3861556351184845
+acc arousal  0.7420155702399743
+acc sleep  0.38547028668184735
+Max Mem GB   6.31115264
+
+
+Epoch  23 phase:  val
+PRC  0.09324067181297992
+ROC  0.9587351016210186
+loss  0.5658009052276611
+acc arousal  0.7854986449210677
+acc sleep  0.43154546072764366
+Max Mem GB   6.31115264
+
+
+Epoch  24 phase:  train
+PRC  0.10364330081544063
+ROC  0.9701298651044843
+loss  0.23939724266529083
+acc arousal  0.7602892319216672
+acc sleep  0.38779914754481226
+Max Mem GB   6.31115264
+
+
+Epoch  24 phase:  val
+PRC  0.08073395874107661
+ROC  0.9572618768112953
+loss  0.3406775891780853
+acc arousal  0.7734967470063613
+acc sleep  0.41231970984925764
+Max Mem GB   6.31115264
+
+
+Epoch  25 phase:  train
+PRC  0.11683995346195003
+ROC  0.9765004705162199
+loss  0.15327684581279755
+acc arousal  0.7787596243880254
+acc sleep  0.3949915338354645
+Max Mem GB   6.31115264
+
+
+Epoch  25 phase:  val
+PRC  0.09223514864210862
+ROC  0.9566922448520673
+loss  0.19703415036201477
+acc arousal  0.8166969850499007
+acc sleep  0.4337362801768106
+Max Mem GB   6.31115264
+
+
+Epoch  26 phase:  train
+PRC  0.13369967799246577
+ROC  0.976847991712141
+loss  0.20214185118675232
+acc arousal  0.8172799914390433
+acc sleep  0.40896348455654813
+Max Mem GB   6.31115264
+
+
+Epoch  26 phase:  val
+PRC  0.12160436273864925
+ROC  0.9656276244069872
+loss  0.3943438231945038
+acc arousal  0.8403883487337853
+acc sleep  0.44120430692508217
+Max Mem GB   6.31115264
+
+
+Epoch  27 phase:  train
+PRC  0.1593081795542212
+ROC  0.981549538139328
+loss  0.19228355586528778
+acc arousal  0.8197714438588513
+acc sleep  0.4213438430548257
+Max Mem GB   6.31115264
+
+
+Epoch  27 phase:  val
+PRC  0.11186228302785603
+ROC  0.9622243023886079
+loss  0.20036371052265167
+acc arousal  0.8339107497567292
+acc sleep  0.4365850164343194
+Max Mem GB   6.31115264
+
+
+Epoch  28 phase:  train
+PRC  0.1504058580861171
+ROC  0.981148268773152
+loss  0.17454153299331665
+acc arousal  0.8367009497311324
+acc sleep  0.42875884860162317
+Max Mem GB   6.31115264
+
+
+Epoch  28 phase:  val
+PRC  0.11746197588950952
+ROC  0.9693831737058137
+loss  0.19518689811229706
+acc arousal  0.8668032200213918
+acc sleep  0.47039138614983567
+Max Mem GB   6.31115264
+
+
+Epoch  29 phase:  train
+PRC  0.16913702387751883
+ROC  0.9827522041901886
+loss  0.3682963252067566
+acc arousal  0.8669000240776907
+acc sleep  0.4400085011969405
+Max Mem GB   6.31115264
+
+
+Epoch  29 phase:  val
+PRC  0.12138874774559656
+ROC  0.9714634699805322
+loss  0.18953725695610046
+acc arousal  0.8818876209317474
+acc sleep  0.479462405077638
+weights_1_200
+Created model : Deep_Sleep(
+  (pcc1): PCC(
+    (activate): ReLU(inplace=True)
+    (blocks): Sequential(
+      (0): MaxPool1d(kernel_size=1, stride=1, padding=0, dilation=1, ceil_mode=False)
+      (1): Conv1d(1, 15, kernel_size=(7,), stride=(1,), padding=(3,))
+      (2): ReLU(inplace=True)
+      (3): BatchNorm1d(15, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (4): Conv1d(15, 15, kernel_size=(7,), stride=(1,), padding=(3,))
+      (5): ReLU(inplace=True)
+      (6): BatchNorm1d(15, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (pcc2): PCC(
+    (activate): ReLU(inplace=True)
+    (blocks): Sequential(
+      (0): MaxPool1d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+      (1): Conv1d(15, 18, kernel_size=(7,), stride=(1,), padding=(3,))
+      (2): ReLU(inplace=True)
+      (3): BatchNorm1d(18, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (4): Conv1d(18, 18, kernel_size=(7,), stride=(1,), padding=(3,))
+      (5): ReLU(inplace=True)
+      (6): BatchNorm1d(18, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (pcc3): PCC(
+    (activate): ReLU(inplace=True)
+    (blocks): Sequential(
+      (0): MaxPool1d(kernel_size=4, stride=4, padding=0, dilation=1, ceil_mode=False)
+      (1): Conv1d(18, 21, kernel_size=(7,), stride=(1,), padding=(3,))
+      (2): ReLU(inplace=True)
+      (3): BatchNorm1d(21, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (4): Conv1d(21, 21, kernel_size=(7,), stride=(1,), padding=(3,))
+      (5): ReLU(inplace=True)
+      (6): BatchNorm1d(21, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (pcc4): PCC(
+    (activate): ReLU(inplace=True)
+    (blocks): Sequential(
+      (0): MaxPool1d(kernel_size=4, stride=4, padding=0, dilation=1, ceil_mode=False)
+      (1): Conv1d(21, 25, kernel_size=(7,), stride=(1,), padding=(3,))
+      (2): ReLU(inplace=True)
+      (3): BatchNorm1d(25, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (4): Conv1d(25, 25, kernel_size=(7,), stride=(1,), padding=(3,))
+      (5): ReLU(inplace=True)
+      (6): BatchNorm1d(25, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (pcc5): PCC(
+    (activate): ReLU(inplace=True)
+    (blocks): Sequential(
+      (0): MaxPool1d(kernel_size=4, stride=4, padding=0, dilation=1, ceil_mode=False)
+      (1): Conv1d(25, 30, kernel_size=(7,), stride=(1,), padding=(3,))
+      (2): ReLU(inplace=True)
+      (3): BatchNorm1d(30, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (4): Conv1d(30, 30, kernel_size=(7,), stride=(1,), padding=(3,))
+      (5): ReLU(inplace=True)
+      (6): BatchNorm1d(30, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (pcc6): PCC(
+    (activate): ReLU(inplace=True)
+    (blocks): Sequential(
+      (0): MaxPool1d(kernel_size=4, stride=4, padding=0, dilation=1, ceil_mode=False)
+      (1): Conv1d(30, 60, kernel_size=(7,), stride=(1,), padding=(3,))
+      (2): ReLU(inplace=True)
+      (3): BatchNorm1d(60, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (4): Conv1d(60, 60, kernel_size=(7,), stride=(1,), padding=(3,))
+      (5): ReLU(inplace=True)
+      (6): BatchNorm1d(60, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (pcc7): PCC(
+    (activate): ReLU(inplace=True)
+    (blocks): Sequential(
+      (0): MaxPool1d(kernel_size=4, stride=4, padding=0, dilation=1, ceil_mode=False)
+      (1): Conv1d(60, 120, kernel_size=(7,), stride=(1,), padding=(3,))
+      (2): ReLU(inplace=True)
+      (3): BatchNorm1d(120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (4): Conv1d(120, 120, kernel_size=(7,), stride=(1,), padding=(3,))
+      (5): ReLU(inplace=True)
+      (6): BatchNorm1d(120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (pcc8): PCC(
+    (activate): ReLU(inplace=True)
+    (blocks): Sequential(
+      (0): MaxPool1d(kernel_size=4, stride=4, padding=0, dilation=1, ceil_mode=False)
+      (1): Conv1d(120, 240, kernel_size=(7,), stride=(1,), padding=(3,))
+      (2): ReLU(inplace=True)
+      (3): BatchNorm1d(240, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (4): Conv1d(240, 240, kernel_size=(7,), stride=(1,), padding=(3,))
+      (5): ReLU(inplace=True)
+      (6): BatchNorm1d(240, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (pcc9): PCC(
+    (activate): ReLU(inplace=True)
+    (blocks): Sequential(
+      (0): MaxPool1d(kernel_size=4, stride=4, padding=0, dilation=1, ceil_mode=False)
+      (1): Conv1d(240, 480, kernel_size=(7,), stride=(1,), padding=(3,))
+      (2): ReLU(inplace=True)
+      (3): BatchNorm1d(480, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (4): Conv1d(480, 480, kernel_size=(7,), stride=(1,), padding=(3,))
+      (5): ReLU(inplace=True)
+      (6): BatchNorm1d(480, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (ucc1): UCC(
+    (activate): ReLU(inplace=True)
+    (up): Sequential(
+      (0): ConvTranspose1d(480, 240, kernel_size=(4,), stride=(4,))
+    )
+    (blocks): Sequential(
+      (0): Conv1d(480, 240, kernel_size=(7,), stride=(1,), padding=(3,))
+      (1): ReLU(inplace=True)
+      (2): BatchNorm1d(240, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (3): Conv1d(240, 240, kernel_size=(7,), stride=(1,), padding=(3,))
+      (4): ReLU(inplace=True)
+      (5): BatchNorm1d(240, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (ucc2): UCC(
+    (activate): ReLU(inplace=True)
+    (up): Sequential(
+      (0): ConvTranspose1d(240, 120, kernel_size=(4,), stride=(4,))
+    )
+    (blocks): Sequential(
+      (0): Conv1d(240, 120, kernel_size=(7,), stride=(1,), padding=(3,))
+      (1): ReLU(inplace=True)
+      (2): BatchNorm1d(120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (3): Conv1d(120, 120, kernel_size=(7,), stride=(1,), padding=(3,))
+      (4): ReLU(inplace=True)
+      (5): BatchNorm1d(120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (ucc3): UCC(
+    (activate): ReLU(inplace=True)
+    (up): Sequential(
+      (0): ConvTranspose1d(120, 60, kernel_size=(4,), stride=(4,))
+    )
+    (blocks): Sequential(
+      (0): Conv1d(120, 60, kernel_size=(7,), stride=(1,), padding=(3,))
+      (1): ReLU(inplace=True)
+      (2): BatchNorm1d(60, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (3): Conv1d(60, 60, kernel_size=(7,), stride=(1,), padding=(3,))
+      (4): ReLU(inplace=True)
+      (5): BatchNorm1d(60, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (ucc4): UCC(
+    (activate): ReLU(inplace=True)
+    (up): Sequential(
+      (0): ConvTranspose1d(60, 30, kernel_size=(4,), stride=(4,))
+    )
+    (blocks): Sequential(
+      (0): Conv1d(60, 30, kernel_size=(7,), stride=(1,), padding=(3,))
+      (1): ReLU(inplace=True)
+      (2): BatchNorm1d(30, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (3): Conv1d(30, 30, kernel_size=(7,), stride=(1,), padding=(3,))
+      (4): ReLU(inplace=True)
+      (5): BatchNorm1d(30, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (ucc5): UCC(
+    (activate): ReLU(inplace=True)
+    (up): Sequential(
+      (0): ConvTranspose1d(30, 25, kernel_size=(4,), stride=(4,))
+    )
+    (blocks): Sequential(
+      (0): Conv1d(50, 25, kernel_size=(7,), stride=(1,), padding=(3,))
+      (1): ReLU(inplace=True)
+      (2): BatchNorm1d(25, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (3): Conv1d(25, 25, kernel_size=(7,), stride=(1,), padding=(3,))
+      (4): ReLU(inplace=True)
+      (5): BatchNorm1d(25, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (ucc6): UCC(
+    (activate): ReLU(inplace=True)
+    (up): Sequential(
+      (0): ConvTranspose1d(25, 21, kernel_size=(4,), stride=(4,))
+    )
+    (blocks): Sequential(
+      (0): Conv1d(42, 21, kernel_size=(7,), stride=(1,), padding=(3,))
+      (1): ReLU(inplace=True)
+      (2): BatchNorm1d(21, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (3): Conv1d(21, 21, kernel_size=(7,), stride=(1,), padding=(3,))
+      (4): ReLU(inplace=True)
+      (5): BatchNorm1d(21, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (ucc7): UCC(
+    (activate): ReLU(inplace=True)
+    (up): Sequential(
+      (0): ConvTranspose1d(21, 18, kernel_size=(4,), stride=(4,))
+    )
+    (blocks): Sequential(
+      (0): Conv1d(36, 18, kernel_size=(7,), stride=(1,), padding=(3,))
+      (1): ReLU(inplace=True)
+      (2): BatchNorm1d(18, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (3): Conv1d(18, 18, kernel_size=(7,), stride=(1,), padding=(3,))
+      (4): ReLU(inplace=True)
+      (5): BatchNorm1d(18, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (ucc8): UCC(
+    (activate): ReLU(inplace=True)
+    (up): Sequential(
+      (0): ConvTranspose1d(18, 15, kernel_size=(4,), stride=(2,), padding=(1,))
+    )
+    (blocks): Sequential(
+      (0): Conv1d(30, 15, kernel_size=(7,), stride=(1,), padding=(3,))
+      (1): ReLU(inplace=True)
+      (2): BatchNorm1d(15, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (3): Conv1d(15, 15, kernel_size=(7,), stride=(1,), padding=(3,))
+      (4): ReLU(inplace=True)
+      (5): BatchNorm1d(15, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (arousal_classifier): Sequential(
+    (0): Conv1d(15, 3, kernel_size=(1,), stride=(1,))
+  )
+  (sleep_classifier): Sequential(
+    (0): Conv1d(15, 6, kernel_size=(1,), stride=(1,))
+  )
+)
+Tesla T4
+Max Mem GB   6.31115264
+
+
+Epoch  0 phase:  train
+PRC  0.004616984343906973
+ROC  0.5006369380893144
+loss  1.033060073852539
+acc arousal  0.6570456780545226
+acc sleep  0.12236492088515209
+              precision    recall  f1-score   support
+
+  not_scored       0.00      0.00      0.00         0
+ not_arousal       1.00      0.66      0.79  23254100
+     Arousal       0.00      0.34      0.01    107775
+
+   micro avg       0.66      0.66      0.66  23361875
+   macro avg       0.33      0.33      0.27  23361875
+weighted avg       0.99      0.66      0.79  23361875
+
+Max Mem GB   6.31115264
+
+
+Epoch  0 phase:  val
+PRC  0.00438397755786889
+ROC  0.4862074293062315
+loss  0.972184419631958
+acc arousal  0.9948934031379929
+acc sleep  0.07349409497903207
+              precision    recall  f1-score   support
+
+  not_scored       0.00      0.00      0.00         0
+ not_arousal       1.00      1.00      1.00  12379275
+     Arousal       0.01      0.00      0.00     55425
+
+   micro avg       0.99      0.99      0.99  12434700
+   macro avg       0.34      0.33      0.33  12434700
+weighted avg       0.99      0.99      0.99  12434700
+
+Max Mem GB   6.31115264
+
+
+Epoch  1 phase:  train
+PRC  0.004641002832889286
+ROC  0.502818457185917
+loss  0.9860162138938904
+acc arousal  0.6551652211134594
+acc sleep  0.11426486833654463
+Max Mem GB   6.31115264
+
+
+Epoch  1 phase:  val
+PRC  0.004470887783827509
+ROC  0.4858734065315948
+loss  0.9696434140205383
+acc arousal  0.6900695633991974
+acc sleep  0.07095237447580188
+Max Mem GB   6.31115264
+
+
+Epoch  2 phase:  train
+PRC  0.004652877291494048
+ROC  0.5034712921412271
+loss  0.9236464500427246
+acc arousal  0.7110234516707242
+acc sleep  0.09777973959245635
+Max Mem GB   6.31115264
+
+
+Epoch  2 phase:  val
+PRC  0.004700395443116559
+ROC  0.49663025709647035
+loss  0.9640396237373352
+acc arousal  0.5107614980658962
+acc sleep  0.06708375835883486
+Max Mem GB   6.31115264
+
+
+Epoch  3 phase:  train
+PRC  0.004616256386038851
+ROC  0.503470360400505
+loss  0.8805397152900696
+acc arousal  0.7616798737258889
+acc sleep  0.07479054125065686
+Max Mem GB   6.31115264
+
+
+Epoch  3 phase:  val
+PRC  0.004896972912703976
+ROC  0.5012755846414833
+loss  0.91986483335495
+acc arousal  0.6735851287123935
+acc sleep  0.05583715289584042
+Max Mem GB   6.31115264
+
+
+Epoch  4 phase:  train
+PRC  0.004649512543559546
+ROC  0.5052183639896407
+loss  0.8498807549476624
+acc arousal  0.7374029267770673
+acc sleep  0.05580919016757167
+Max Mem GB   6.31115264
+
+
+Epoch  4 phase:  val
+PRC  0.004914969995290509
+ROC  0.5074203558194185
+loss  0.8692787289619446
+acc arousal  0.7734994008701457
+acc sleep  0.043769602176130566
+Max Mem GB   6.31115264
+
+
+Epoch  5 phase:  train
+PRC  0.004659330009355202
+ROC  0.5049676010932169
+loss  0.823915958404541
+acc arousal  0.7090394927633163
+acc sleep  0.03975444619606469
+Max Mem GB   6.31115264
+
+
+Epoch  5 phase:  val
+PRC  0.004918269630854444
+ROC  0.5087932336944129
+loss  0.8305178880691528
+acc arousal  0.7856725132090039
+acc sleep  0.034675915221579964
+Max Mem GB   6.31115264
+
+
+Epoch  6 phase:  train
+PRC  0.0046721593399179475
+ROC  0.5055694869105738
+loss  0.8038913607597351
+acc arousal  0.6856049011477032
+acc sleep  0.03385844572896596
+Max Mem GB   6.31115264
+
+
+Epoch  6 phase:  val
+PRC  0.0050683116796335324
+ROC  0.5092333046251274
+loss  0.8272333741188049
+acc arousal  0.7751790553853329
+acc sleep  0.029702368808795194
+Max Mem GB   6.31115264
+
+
+Epoch  7 phase:  train
+PRC  0.004661821483506657
+ROC  0.506062649218615
+loss  0.7928487062454224
+acc arousal  0.7161323737927714
+acc sleep  0.02810364920885152
+Max Mem GB   6.31115264
+
+
+Epoch  7 phase:  val
+PRC  0.005024051582145511
+ROC  0.5087101703853474
+loss  0.7965765595436096
+acc arousal  0.790310502062776
+acc sleep  0.026910755978692056
+Max Mem GB   6.31115264
+
+
+Epoch  8 phase:  train
+PRC  0.004697369734448252
+ROC  0.5088773666326659
+loss  0.78586745262146
+acc arousal  0.7692381711656278
+acc sleep  0.02700592047644071
+Max Mem GB   6.31115264
+
+
+Epoch  8 phase:  val
+PRC  0.004915150646178222
+ROC  0.5058723158695189
+loss  0.793631374835968
+acc arousal  0.8286576274457768
+acc sleep  0.025987713929502436
+Max Mem GB   6.31115264
+
+
+Epoch  9 phase:  train
+PRC  0.00469264908352811
+ROC  0.5077885133642873
+loss  0.766380250453949
+acc arousal  0.820495229941946
+acc sleep  0.02645096047176972
+Max Mem GB   6.31115264
+
+
+Epoch  9 phase:  val
+PRC  0.004885046534695603
+ROC  0.504931752098028
+loss  0.7796386480331421
+acc arousal  0.8568429475580432
+acc sleep  0.025375949223620083
+Max Mem GB   6.31115264
+
+
+Epoch  10 phase:  train
+PRC  0.004690253431076848
+ROC  0.5088078801618989
+loss  0.8001806139945984
+acc arousal  0.8640498675727013
+acc sleep  0.027562982425410172
+              precision    recall  f1-score   support
+
+  not_scored       0.00      0.00      0.00         0
+ not_arousal       1.00      0.87      0.93  23254100
+     Arousal       0.00      0.13      0.01    107775
+
+   micro avg       0.86      0.86      0.86  23361875
+   macro avg       0.33      0.33      0.31  23361875
+weighted avg       0.99      0.86      0.92  23361875
+
+Max Mem GB   6.31115264
+
+
+Epoch  10 phase:  val
+PRC  0.004808363951922737
+ROC  0.5034696853886462
+loss  0.7775075435638428
+acc arousal  0.8817939314981463
+acc sleep  0.026764411198005215
+              precision    recall  f1-score   support
+
+  not_scored       0.00      0.00      0.00         0
+ not_arousal       1.00      0.89      0.94  12379275
+     Arousal       0.01      0.13      0.01     55425
+
+   micro avg       0.88      0.88      0.88  12434700
+   macro avg       0.33      0.34      0.32  12434700
+weighted avg       0.99      0.88      0.93  12434700
+
+Max Mem GB   6.31115264
+
+
+Epoch  11 phase:  train
+PRC  0.0047226322117782955
+ROC  0.5098792281926834
+loss  0.7801718711853027
+acc arousal  0.9036713876775729
+acc sleep  0.026020342149821917
+Max Mem GB   6.31115264
+
+
+Epoch  11 phase:  val
+PRC  0.004829257722541103
+ROC  0.5034524766739346
+loss  0.7657134532928467
+acc arousal  0.9042231819022574
+acc sleep  0.026479700782046922
+Max Mem GB   6.31115264
+
+
+Epoch  12 phase:  train
+PRC  0.004720224082218873
+ROC  0.5096261315245342
+loss  0.7809867858886719
+acc arousal  0.9157816742020921
+acc sleep  0.026860933029719158
+Max Mem GB   6.31115264
+
+
+Epoch  12 phase:  val
+PRC  0.004821582896327233
+ROC  0.5021290098967527
+loss  0.7725172638893127
+acc arousal  0.9297368653847701
+acc sleep  0.024932109259888927
+Max Mem GB   6.31115264
+
+
+Epoch  13 phase:  train
+PRC  0.004706202415614447
+ROC  0.5099137025563111
+loss  0.7747916579246521
+acc arousal  0.9249808074052275
+acc sleep  0.027583674899281835
+Max Mem GB   6.31115264
+
+
+Epoch  13 phase:  val
+PRC  0.004772793452106637
+ROC  0.5014383243993856
+loss  0.7688301205635071
+acc arousal  0.9405585176964463
+acc sleep  0.02496892213532812
+Max Mem GB   6.31115264
+
+
+Epoch  14 phase:  train
+PRC  0.004702625532140859
+ROC  0.5096415208495872
+loss  0.7957186102867126
+acc arousal  0.9417283501431285
+acc sleep  0.0268571028201086
+Max Mem GB   6.31115264
+
+
+Epoch  14 phase:  val
+PRC  0.004903529019760875
+ROC  0.5053053810914647
+loss  0.7595639824867249
+acc arousal  0.9458731613951281
+acc sleep  0.026955638671653633
+Max Mem GB   6.31115264
+
+
+Epoch  15 phase:  train
+PRC  0.004730295403889013
+ROC  0.5105252934831392
+loss  0.7807003855705261
+acc arousal  0.9559742957275476
+acc sleep  0.027988883050154727
+Max Mem GB   6.31115264
+
+
+Epoch  15 phase:  val
+PRC  0.004678951998904622
+ROC  0.49864485598372776
+loss  0.7527779936790466
+acc arousal  0.9583386008508448
+acc sleep  0.027697245834750084
+Max Mem GB   6.31115264
+
+
+Epoch  16 phase:  train
+PRC  0.0047424364169841885
+ROC  0.511207400824693
+loss  0.769633412361145
+acc arousal  0.9565059311378047
+acc sleep  0.029067740993752554
+Max Mem GB   6.31115264
+
+
+Epoch  16 phase:  val
+PRC  0.004735319274807232
+ROC  0.5003032189933221
+loss  0.7735047936439514
+acc arousal  0.9610612238333052
+acc sleep  0.029062042389210018
+Max Mem GB   6.31115264
+
+
+Epoch  17 phase:  train
+PRC  0.004720211188700406
+ROC  0.5100682105269297
+loss  0.7658365964889526
+acc arousal  0.9676053398967335
+acc sleep  0.029644514509254392
+Max Mem GB   6.31115264
+
+
+Epoch  17 phase:  val
+PRC  0.004688646923593875
+ROC  0.499851629304474
+loss  0.7617970705032349
+acc arousal  0.9661564814591426
+acc sleep  0.030565023234727418
+Max Mem GB   6.31115264
+
+
+Epoch  18 phase:  train
+PRC  0.004728342650508863
+ROC  0.5099966215924109
+loss  0.7763952016830444
+acc arousal  0.97251385002274
+acc sleep  0.028744275121153733
+Max Mem GB   6.31115264
+
+
+Epoch  18 phase:  val
+PRC  0.00465443478219657
+ROC  0.4957807204035213
+loss  0.7511006593704224
+acc arousal  0.9701371967156425
+acc sleep  0.032231123200725374
+Max Mem GB   6.31115264
+
+
+Epoch  19 phase:  train
+PRC  0.0047305104824988346
+ROC  0.5099448029164102
+loss  0.7600182890892029
+acc arousal  0.9746513068835443
+acc sleep  0.030390658025340106
+Max Mem GB   6.31115264
+
+
+Epoch  19 phase:  val
+PRC  0.00468618214015592
+ROC  0.49964503439915076
+loss  0.7499050498008728
+acc arousal  0.9715312794036044
+acc sleep  0.032468049416298314
+Max Mem GB   6.31115264
+
+
+Epoch  20 phase:  train
+PRC  0.004734229703418419
+ROC  0.511353155458799
+loss  0.7507876753807068
+acc arousal  0.9726627250595254
+acc sleep  0.030568155543878088
+              precision    recall  f1-score   support
+
+  not_scored       0.00      0.00      0.00         0
+ not_arousal       1.00      0.98      0.99  23254100
+     Arousal       0.00      0.02      0.01    107775
+
+   micro avg       0.97      0.97      0.97  23361875
+   macro avg       0.33      0.33      0.33  23361875
+weighted avg       0.99      0.97      0.98  23361875
+
+Max Mem GB   6.31115264
+
+
+Epoch  20 phase:  val
+PRC  0.0046566998200105155
+ROC  0.49760172983111167
+loss  0.7474415898323059
+acc arousal  0.9758352031009996
+acc sleep  0.029658211492689563
+              precision    recall  f1-score   support
+
+  not_scored       0.00      0.00      0.00         0
+ not_arousal       1.00      0.98      0.99  12379275
+     Arousal       0.01      0.03      0.01     55425
+
+   micro avg       0.98      0.98      0.98  12434700
+   macro avg       0.33      0.34      0.33  12434700
+weighted avg       0.99      0.98      0.98  12434700
+
+Max Mem GB   6.31115264
+
+
+Epoch  21 phase:  train
+PRC  0.004731611801903745
+ROC  0.5102889028725497
+loss  0.740325927734375
+acc arousal  0.9740659942748602
+acc sleep  0.030776388159047117
+Max Mem GB   6.31115264
+
+
+Epoch  21 phase:  val
+PRC  0.004619625760012008
+ROC  0.4959708482341128
+loss  0.7423911094665527
+acc arousal  0.9798089218075225
+acc sleep  0.02975776946616797
+Max Mem GB   6.31115264
+
+
+Epoch  22 phase:  train
+PRC  0.004734091475540192
+ROC  0.5108905641303685
+loss  0.7446796298027039
+acc arousal  0.9822439337595976
+acc sleep  0.029592573130145385
+Max Mem GB   6.31115264
+
+
+Epoch  22 phase:  val
+PRC  0.004635868378261606
+ROC  0.49406195711269213
+loss  0.7368938326835632
+acc arousal  0.9817501829557609
+acc sleep  0.028688745324719482
+Max Mem GB   6.31115264
+
+
+Epoch  23 phase:  train
+PRC  0.004750339029375025
+ROC  0.5119771766469376
+loss  0.7398216724395752
+acc arousal  0.9835384360202253
+acc sleep  0.02868397267472412
+Max Mem GB   6.31115264
+
+
+Epoch  23 phase:  val
+PRC  0.004639725671454706
+ROC  0.4944199205368844
+loss  0.744323194026947
+acc arousal  0.984416994378634
+acc sleep  0.027228289697381843
+Max Mem GB   6.31115264
+
+
+Epoch  24 phase:  train
+PRC  0.0047309076758939505
+ROC  0.5111975377382758
+loss  0.7503795027732849
+acc arousal  0.9804707456058215
+acc sleep  0.030000630583289542
+Max Mem GB   6.31115264
+
+
+Epoch  24 phase:  val
+PRC  0.004609395267234675
+ROC  0.49417641771400006
+loss  0.7379785776138306
+acc arousal  0.9848129830233138
+acc sleep  0.025033934036042163
+Max Mem GB   6.31115264
+
+
+Epoch  25 phase:  train
+PRC  0.004733268008817444
+ROC  0.511486687365426
+loss  0.7554680109024048
+acc arousal  0.9829177238556409
+acc sleep  0.027402393881006598
+Max Mem GB   6.31115264
+
+
+Epoch  25 phase:  val
+PRC  0.004636216432627525
+ROC  0.4951857525305518
+loss  0.7351090312004089
+acc arousal  0.9826713149492952
+acc sleep  0.026834954097245834
+Max Mem GB   6.31115264
+
+
+Epoch  26 phase:  train
+PRC  0.00476081859843547
+ROC  0.5124252369263409
+loss  0.7409231662750244
+acc arousal  0.9840181492281762
+acc sleep  0.026482956734979857
+Max Mem GB   6.31115264
+
+
+Epoch  26 phase:  val
+PRC  0.004681582276088256
+ROC  0.49735918665630113
+loss  0.7404701709747314
+acc arousal  0.9829892156626215
+acc sleep  0.026656058030148477
+Max Mem GB   6.31115264
+
+
+Epoch  27 phase:  train
+PRC  0.004752760675267538
+ROC  0.5111674978937901
+loss  0.7226788997650146
+acc arousal  0.9809312394660104
+acc sleep  0.027023716938167804
+Max Mem GB   6.31115264
+
+
+Epoch  27 phase:  val
+PRC  0.0047684247397070355
+ROC  0.4987076508516909
+loss  0.863752007484436
+acc arousal  0.9809039220889929
+acc sleep  0.02976103366201972
+Max Mem GB   6.31115264
+
+
+Epoch  28 phase:  train
+PRC  0.004758647768393167
+ROC  0.5124197970802828
+loss  0.7214652299880981
+acc arousal  0.9819270071430483
+acc sleep  0.024975956092719097
+Max Mem GB   6.31115264
+
+
+Epoch  28 phase:  val
+PRC  0.004679179325161441
+ROC  0.4965009943621421
+loss  0.7278789281845093
+acc arousal  0.9808183550869743
+acc sleep  0.029090513430805848
+Max Mem GB   6.31115264
+
+
+Epoch  29 phase:  train
+PRC  0.004728309533267055
+ROC  0.5103597777409876
+loss  0.7408961057662964
+acc arousal  0.975694930308462
+acc sleep  0.030478472587143108
+Max Mem GB   6.31115264
+
+
+Epoch  29 phase:  val
+PRC  0.0046917995491417295
+ROC  0.4977929049240194
+loss  0.7355072498321533
+acc arousal  0.9805844933934876
+acc sleep  0.029960874985832484
+weights_1_100
+Created model : Deep_Sleep(
+  (pcc1): PCC(
+    (activate): ReLU(inplace=True)
+    (blocks): Sequential(
+      (0): MaxPool1d(kernel_size=1, stride=1, padding=0, dilation=1, ceil_mode=False)
+      (1): Conv1d(1, 15, kernel_size=(7,), stride=(1,), padding=(3,))
+      (2): ReLU(inplace=True)
+      (3): BatchNorm1d(15, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (4): Conv1d(15, 15, kernel_size=(7,), stride=(1,), padding=(3,))
+      (5): ReLU(inplace=True)
+      (6): BatchNorm1d(15, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (pcc2): PCC(
+    (activate): ReLU(inplace=True)
+    (blocks): Sequential(
+      (0): MaxPool1d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+      (1): Conv1d(15, 18, kernel_size=(7,), stride=(1,), padding=(3,))
+      (2): ReLU(inplace=True)
+      (3): BatchNorm1d(18, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (4): Conv1d(18, 18, kernel_size=(7,), stride=(1,), padding=(3,))
+      (5): ReLU(inplace=True)
+      (6): BatchNorm1d(18, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (pcc3): PCC(
+    (activate): ReLU(inplace=True)
+    (blocks): Sequential(
+      (0): MaxPool1d(kernel_size=4, stride=4, padding=0, dilation=1, ceil_mode=False)
+      (1): Conv1d(18, 21, kernel_size=(7,), stride=(1,), padding=(3,))
+      (2): ReLU(inplace=True)
+      (3): BatchNorm1d(21, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (4): Conv1d(21, 21, kernel_size=(7,), stride=(1,), padding=(3,))
+      (5): ReLU(inplace=True)
+      (6): BatchNorm1d(21, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (pcc4): PCC(
+    (activate): ReLU(inplace=True)
+    (blocks): Sequential(
+      (0): MaxPool1d(kernel_size=4, stride=4, padding=0, dilation=1, ceil_mode=False)
+      (1): Conv1d(21, 25, kernel_size=(7,), stride=(1,), padding=(3,))
+      (2): ReLU(inplace=True)
+      (3): BatchNorm1d(25, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (4): Conv1d(25, 25, kernel_size=(7,), stride=(1,), padding=(3,))
+      (5): ReLU(inplace=True)
+      (6): BatchNorm1d(25, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (pcc5): PCC(
+    (activate): ReLU(inplace=True)
+    (blocks): Sequential(
+      (0): MaxPool1d(kernel_size=4, stride=4, padding=0, dilation=1, ceil_mode=False)
+      (1): Conv1d(25, 30, kernel_size=(7,), stride=(1,), padding=(3,))
+      (2): ReLU(inplace=True)
+      (3): BatchNorm1d(30, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (4): Conv1d(30, 30, kernel_size=(7,), stride=(1,), padding=(3,))
+      (5): ReLU(inplace=True)
+      (6): BatchNorm1d(30, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (pcc6): PCC(
+    (activate): ReLU(inplace=True)
+    (blocks): Sequential(
+      (0): MaxPool1d(kernel_size=4, stride=4, padding=0, dilation=1, ceil_mode=False)
+      (1): Conv1d(30, 60, kernel_size=(7,), stride=(1,), padding=(3,))
+      (2): ReLU(inplace=True)
+      (3): BatchNorm1d(60, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (4): Conv1d(60, 60, kernel_size=(7,), stride=(1,), padding=(3,))
+      (5): ReLU(inplace=True)
+      (6): BatchNorm1d(60, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (pcc7): PCC(
+    (activate): ReLU(inplace=True)
+    (blocks): Sequential(
+      (0): MaxPool1d(kernel_size=4, stride=4, padding=0, dilation=1, ceil_mode=False)
+      (1): Conv1d(60, 120, kernel_size=(7,), stride=(1,), padding=(3,))
+      (2): ReLU(inplace=True)
+      (3): BatchNorm1d(120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (4): Conv1d(120, 120, kernel_size=(7,), stride=(1,), padding=(3,))
+      (5): ReLU(inplace=True)
+      (6): BatchNorm1d(120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (pcc8): PCC(
+    (activate): ReLU(inplace=True)
+    (blocks): Sequential(
+      (0): MaxPool1d(kernel_size=4, stride=4, padding=0, dilation=1, ceil_mode=False)
+      (1): Conv1d(120, 240, kernel_size=(7,), stride=(1,), padding=(3,))
+      (2): ReLU(inplace=True)
+      (3): BatchNorm1d(240, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (4): Conv1d(240, 240, kernel_size=(7,), stride=(1,), padding=(3,))
+      (5): ReLU(inplace=True)
+      (6): BatchNorm1d(240, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (pcc9): PCC(
+    (activate): ReLU(inplace=True)
+    (blocks): Sequential(
+      (0): MaxPool1d(kernel_size=4, stride=4, padding=0, dilation=1, ceil_mode=False)
+      (1): Conv1d(240, 480, kernel_size=(7,), stride=(1,), padding=(3,))
+      (2): ReLU(inplace=True)
+      (3): BatchNorm1d(480, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (4): Conv1d(480, 480, kernel_size=(7,), stride=(1,), padding=(3,))
+      (5): ReLU(inplace=True)
+      (6): BatchNorm1d(480, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (ucc1): UCC(
+    (activate): ReLU(inplace=True)
+    (up): Sequential(
+      (0): ConvTranspose1d(480, 240, kernel_size=(4,), stride=(4,))
+    )
+    (blocks): Sequential(
+      (0): Conv1d(480, 240, kernel_size=(7,), stride=(1,), padding=(3,))
+      (1): ReLU(inplace=True)
+      (2): BatchNorm1d(240, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (3): Conv1d(240, 240, kernel_size=(7,), stride=(1,), padding=(3,))
+      (4): ReLU(inplace=True)
+      (5): BatchNorm1d(240, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (ucc2): UCC(
+    (activate): ReLU(inplace=True)
+    (up): Sequential(
+      (0): ConvTranspose1d(240, 120, kernel_size=(4,), stride=(4,))
+    )
+    (blocks): Sequential(
+      (0): Conv1d(240, 120, kernel_size=(7,), stride=(1,), padding=(3,))
+      (1): ReLU(inplace=True)
+      (2): BatchNorm1d(120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (3): Conv1d(120, 120, kernel_size=(7,), stride=(1,), padding=(3,))
+      (4): ReLU(inplace=True)
+      (5): BatchNorm1d(120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (ucc3): UCC(
+    (activate): ReLU(inplace=True)
+    (up): Sequential(
+      (0): ConvTranspose1d(120, 60, kernel_size=(4,), stride=(4,))
+    )
+    (blocks): Sequential(
+      (0): Conv1d(120, 60, kernel_size=(7,), stride=(1,), padding=(3,))
+      (1): ReLU(inplace=True)
+      (2): BatchNorm1d(60, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (3): Conv1d(60, 60, kernel_size=(7,), stride=(1,), padding=(3,))
+      (4): ReLU(inplace=True)
+      (5): BatchNorm1d(60, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (ucc4): UCC(
+    (activate): ReLU(inplace=True)
+    (up): Sequential(
+      (0): ConvTranspose1d(60, 30, kernel_size=(4,), stride=(4,))
+    )
+    (blocks): Sequential(
+      (0): Conv1d(60, 30, kernel_size=(7,), stride=(1,), padding=(3,))
+      (1): ReLU(inplace=True)
+      (2): BatchNorm1d(30, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (3): Conv1d(30, 30, kernel_size=(7,), stride=(1,), padding=(3,))
+      (4): ReLU(inplace=True)
+      (5): BatchNorm1d(30, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (ucc5): UCC(
+    (activate): ReLU(inplace=True)
+    (up): Sequential(
+      (0): ConvTranspose1d(30, 25, kernel_size=(4,), stride=(4,))
+    )
+    (blocks): Sequential(
+      (0): Conv1d(50, 25, kernel_size=(7,), stride=(1,), padding=(3,))
+      (1): ReLU(inplace=True)
+      (2): BatchNorm1d(25, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (3): Conv1d(25, 25, kernel_size=(7,), stride=(1,), padding=(3,))
+      (4): ReLU(inplace=True)
+      (5): BatchNorm1d(25, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (ucc6): UCC(
+    (activate): ReLU(inplace=True)
+    (up): Sequential(
+      (0): ConvTranspose1d(25, 21, kernel_size=(4,), stride=(4,))
+    )
+    (blocks): Sequential(
+      (0): Conv1d(42, 21, kernel_size=(7,), stride=(1,), padding=(3,))
+      (1): ReLU(inplace=True)
+      (2): BatchNorm1d(21, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (3): Conv1d(21, 21, kernel_size=(7,), stride=(1,), padding=(3,))
+      (4): ReLU(inplace=True)
+      (5): BatchNorm1d(21, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (ucc7): UCC(
+    (activate): ReLU(inplace=True)
+    (up): Sequential(
+      (0): ConvTranspose1d(21, 18, kernel_size=(4,), stride=(4,))
+    )
+    (blocks): Sequential(
+      (0): Conv1d(36, 18, kernel_size=(7,), stride=(1,), padding=(3,))
+      (1): ReLU(inplace=True)
+      (2): BatchNorm1d(18, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (3): Conv1d(18, 18, kernel_size=(7,), stride=(1,), padding=(3,))
+      (4): ReLU(inplace=True)
+      (5): BatchNorm1d(18, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (ucc8): UCC(
+    (activate): ReLU(inplace=True)
+    (up): Sequential(
+      (0): ConvTranspose1d(18, 15, kernel_size=(4,), stride=(2,), padding=(1,))
+    )
+    (blocks): Sequential(
+      (0): Conv1d(30, 15, kernel_size=(7,), stride=(1,), padding=(3,))
+      (1): ReLU(inplace=True)
+      (2): BatchNorm1d(15, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (3): Conv1d(15, 15, kernel_size=(7,), stride=(1,), padding=(3,))
+      (4): ReLU(inplace=True)
+      (5): BatchNorm1d(15, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (arousal_classifier): Sequential(
+    (0): Conv1d(15, 3, kernel_size=(1,), stride=(1,))
+  )
+  (sleep_classifier): Sequential(
+    (0): Conv1d(15, 6, kernel_size=(1,), stride=(1,))
+  )
+)
+Tesla T4
+Max Mem GB   6.31115264
+
+
+Epoch  0 phase:  train
+PRC  0.004540009300546593
+ROC  0.497603138267755
+loss  1.2079918384552002
+acc arousal  0.43521951898124617
+acc sleep  0.10358180650434985
+              precision    recall  f1-score   support
+
+  not_scored       0.00      0.00      0.00         0
+ not_arousal       1.00      0.43      0.61  23254100
+     Arousal       0.00      0.56      0.01    107775
+
+   micro avg       0.44      0.44      0.44  23361875
+   macro avg       0.33      0.33      0.20  23361875
+weighted avg       0.99      0.44      0.60  23361875
+
+Max Mem GB   6.31115264
+
+
+Epoch  0 phase:  val
+PRC  0.00546191317927978
+ROC  0.5079254178572481
+loss  1.1310107707977295
+acc arousal  0.0068339405051991604
+acc sleep  0.07623828629717783
+              precision    recall  f1-score   support
+
+  not_scored       0.00      0.00      0.00         0
+ not_arousal       0.97      0.00      0.00  12379275
+     Arousal       0.00      0.98      0.01     55425
+
+   micro avg       0.01      0.01      0.01  12434700
+   macro avg       0.32      0.33      0.00  12434700
+weighted avg       0.96      0.01      0.00  12434700
+
+Max Mem GB   6.31115264
+
+
+Epoch  1 phase:  train
+PRC  0.004518088632017523
+ROC  0.4961742317705495
+loss  1.1335450410842896
+acc arousal  0.42906568929077826
+acc sleep  0.10319635662988264
+Max Mem GB   6.31115264
+
+
+Epoch  1 phase:  val
+PRC  0.005155013138522248
+ROC  0.5075061319584945
+loss  1.0955147743225098
+acc arousal  0.0075222562667374366
+acc sleep  0.07671114133514678
+Max Mem GB   6.31115264
+
+
+Epoch  2 phase:  train
+PRC  0.004540104037727326
+ROC  0.4974457395381066
+loss  1.0798192024230957
+acc arousal  0.5079798175446106
+acc sleep  0.0999475448122847
+Max Mem GB   6.31115264
+
+
+Epoch  2 phase:  val
+PRC  0.0050700953279311884
+ROC  0.5051346413904556
+loss  1.1009925603866577
+acc arousal  0.08591522111510531
+acc sleep  0.07710674373795762
+Max Mem GB   6.31115264
+
+
+Epoch  3 phase:  train
+PRC  0.004541573884888715
+ROC  0.4968108847984283
+loss  1.0310747623443604
+acc arousal  0.7035350544423339
+acc sleep  0.09607702458107083
+Max Mem GB   6.31115264
+
+
+Epoch  3 phase:  val
+PRC  0.00500217208831237
+ROC  0.4991011759147655
+loss  1.0762189626693726
+acc arousal  0.541088084151608
+acc sleep  0.07956894480335487
+Max Mem GB   6.31115264
+
+
+Epoch  4 phase:  train
+PRC  0.004540857023510067
+ROC  0.49710533908507254
+loss  0.9604979753494263
+acc arousal  0.878109312715696
+acc sleep  0.08928643662054067
+Max Mem GB   6.31115264
+
+
+Epoch  4 phase:  val
+PRC  0.004828352223381059
+ROC  0.5003838855447599
+loss  1.0195516347885132
+acc arousal  0.8654767706498749
+acc sleep  0.08309454833956705
+Max Mem GB   6.31115264
+
+
+Epoch  5 phase:  train
+PRC  0.004531904551120174
+ROC  0.49641498416297786
+loss  0.9142969846725464
+acc arousal  0.9539509136145964
+acc sleep  0.08309242716179133
+Max Mem GB   6.31115264
+
+
+Epoch  5 phase:  val
+PRC  0.004822999235593011
+ROC  0.4998576377688643
+loss  0.905112624168396
+acc arousal  0.9503251385236475
+acc sleep  0.08054176583928369
+Max Mem GB   6.31115264
+
+
+Epoch  6 phase:  train
+PRC  0.004568847722249081
+ROC  0.4993196347464615
+loss  0.855802595615387
+acc arousal  0.9777829476443992
+acc sleep  0.08027666257955275
+Max Mem GB   6.31115264
+
+
+Epoch  6 phase:  val
+PRC  0.0048979384232262745
+ROC  0.5001549789321288
+loss  0.8642419576644897
+acc arousal  0.9823244629946842
+acc sleep  0.07868933469341494
+Max Mem GB   6.31115264
+
+
+Epoch  7 phase:  train
+PRC  0.004531718893482385
+ROC  0.49696179769032583
+loss  0.8390756845474243
+acc arousal  0.9863524652879959
+acc sleep  0.07893169848776785
+Max Mem GB   6.31115264
+
+
+Epoch  7 phase:  val
+PRC  0.0048365207482968355
+ROC  0.4982110778760083
+loss  0.839728057384491
+acc arousal  0.9889436013735755
+acc sleep  0.0788012240734444
+Max Mem GB   6.31115264
+
+
+Epoch  8 phase:  train
+PRC  0.004543688721958672
+ROC  0.4980007732755893
+loss  0.8509163856506348
+acc arousal  0.9892647743385323
+acc sleep  0.07946535879021428
+Max Mem GB   6.31115264
+
+
+Epoch  8 phase:  val
+PRC  0.004934291715019514
+ROC  0.5024464258720972
+loss  0.831460177898407
+acc arousal  0.9906399028525015
+acc sleep  0.0789128414371529
+Max Mem GB   6.31115264
+
+
+Epoch  9 phase:  train
+PRC  0.004553009188427357
+ROC  0.4993780700309476
+loss  0.7696213722229004
+acc arousal  0.9914834746782953
+acc sleep  0.0788401938459742
+Max Mem GB   6.31115264
+
+
+Epoch  9 phase:  val
+PRC  0.00478180009523169
+ROC  0.4990422977681368
+loss  0.7746642231941223
+acc arousal  0.9920574682139497
+acc sleep  0.07845549132947977
+Max Mem GB   6.31115264
+
+
+Epoch  10 phase:  train
+PRC  0.004624350515881543
+ROC  0.5039898770236141
+loss  0.7718281149864197
+acc arousal  0.99273868214773
+acc sleep  0.07832825363461202
+              precision    recall  f1-score   support
+
+  not_scored       0.00      0.00      0.00         0
+ not_arousal       1.00      1.00      1.00  23254100
+     Arousal       0.01      0.00      0.00    107775
+
+   micro avg       0.99      0.99      0.99  23361875
+   macro avg       0.33      0.33      0.33  23361875
+weighted avg       0.99      0.99      0.99  23361875
+
+Max Mem GB   6.31115264
+
+
+Epoch  10 phase:  val
+PRC  0.004839714555679209
+ROC  0.497951826648674
+loss  0.7756969928741455
+acc arousal  0.9921284791752113
+acc sleep  0.0779712116060297
+              precision    recall  f1-score   support
+
+  not_scored       0.00      0.00      0.00         0
+ not_arousal       1.00      1.00      1.00  12379275
+     Arousal       0.01      0.01      0.01     55425
+
+   micro avg       0.99      0.99      0.99  12434700
+   macro avg       0.34      0.34      0.34  12434700
+weighted avg       0.99      0.99      0.99  12434700
+
+Max Mem GB   6.31115264
+
+
+Epoch  11 phase:  train
+PRC  0.004576168069549216
+ROC  0.5015392250260899
+loss  0.8109003305435181
+acc arousal  0.9928656411353969
+acc sleep  0.07820965726630466
+Max Mem GB   6.31115264
+
+
+Epoch  11 phase:  val
+PRC  0.004773895767684506
+ROC  0.5000066402185562
+loss  0.808822512626648
+acc arousal  0.9906411895743363
+acc sleep  0.07820650572367675
+Max Mem GB   6.31115264
+
+
+Epoch  12 phase:  train
+PRC  0.004585017629699416
+ROC  0.5002680318988871
+loss  0.7478494644165039
+acc arousal  0.9936923299178683
+acc sleep  0.07779211770888071
+Max Mem GB   6.31115264
+
+
+Epoch  12 phase:  val
+PRC  0.004908303361508198
+ROC  0.49963008407367965
+loss  0.761572539806366
+acc arousal  0.9929142641157406
+acc sleep  0.0771121840643772
+Max Mem GB   6.31115264
+
+
+Epoch  13 phase:  train
+PRC  0.004598948688177727
+ROC  0.5031974733985118
+loss  0.7279734015464783
+acc arousal  0.9943446748174108
+acc sleep  0.07716573830793484
+Max Mem GB   6.31115264
+
+
+Epoch  13 phase:  val
+PRC  0.004930177974650036
+ROC  0.5024323584553547
+loss  0.7220330834388733
+acc arousal  0.9935137960706732
+acc sleep  0.0763069250821716
+Max Mem GB   6.31115264
+
+
+Epoch  14 phase:  train
+PRC  0.004582672291177455
+ROC  0.5017786220970765
+loss  0.7299262285232544
+acc arousal  0.9942455817437599
+acc sleep  0.07690136042505985
+Max Mem GB   6.31115264
+
+
+Epoch  14 phase:  val
+PRC  0.004877807913117438
+ROC  0.5003208141943504
+loss  0.7136663794517517
+acc arousal  0.9940749676309039
+acc sleep  0.07616901280743511
+Max Mem GB   6.31115264
+
+
+Epoch  15 phase:  train
+PRC  0.0046305803925076215
+ROC  0.5044760944243503
+loss  0.7264074087142944
+acc arousal  0.994499242890393
+acc sleep  0.07679803818532142
+Max Mem GB   6.31115264
+
+
+Epoch  15 phase:  val
+PRC  0.0048036604412045655
+ROC  0.4990232781448153
+loss  0.7046783566474915
+acc arousal  0.994216507032739
+acc sleep  0.07654892893573614
+Max Mem GB   6.31115264
+
+
+Epoch  16 phase:  train
+PRC  0.004641980276312965
+ROC  0.5041893805453904
+loss  0.7138434052467346
+acc arousal  0.994353749431499
+acc sleep  0.07732371109943365
+Max Mem GB   6.31115264
+
+
+Epoch  16 phase:  val
+PRC  0.00489149255511499
+ROC  0.49955738868253924
+loss  0.6686964631080627
+acc arousal  0.9942091083821886
+acc sleep  0.07647222033321999
+Max Mem GB   6.31115264
+
+
+Epoch  17 phase:  train
+PRC  0.004652566800630359
+ROC  0.5061887345807291
+loss  0.7047942280769348
+acc arousal  0.9944804087856818
+acc sleep  0.07739952122379869
+Max Mem GB   6.31115264
+
+
+Epoch  17 phase:  val
+PRC  0.004792876898959842
+ROC  0.49809205654990835
+loss  0.7142547965049744
+acc arousal  0.9944396728509735
+acc sleep  0.07668121953983906
+Max Mem GB   6.31115264
+
+
+Epoch  18 phase:  train
+PRC  0.004649077630975376
+ROC  0.506096147637735
+loss  0.712946355342865
+acc arousal  0.9945619518981246
+acc sleep  0.07837799964967596
+Max Mem GB   6.31115264
+
+
+Epoch  18 phase:  val
+PRC  0.004762414538546111
+ROC  0.49772549179260656
+loss  0.7155662775039673
+acc arousal  0.9943867564155147
+acc sleep  0.07674505270316219
+Max Mem GB   6.31115264
+
+
+Epoch  19 phase:  train
+PRC  0.004625770486746953
+ROC  0.5026988163370162
+loss  0.7502463459968567
+acc arousal  0.9942770860643677
+acc sleep  0.08054781339405617
+Max Mem GB   6.31115264
+
+
+Epoch  19 phase:  val
+PRC  0.004786451586986729
+ROC  0.4982957228193609
+loss  0.7019323706626892
+acc arousal  0.9945121313742994
+acc sleep  0.07739009407231101
+Max Mem GB   6.31115264
+
+
+Epoch  20 phase:  train
+PRC  0.004595710353047134
+ROC  0.5015574953456302
+loss  0.6900470852851868
+acc arousal  0.9946037721715402
+acc sleep  0.08114724119810825
+              precision    recall  f1-score   support
+
+  not_scored       0.00      0.00      0.00         0
+ not_arousal       1.00      1.00      1.00  23254100
+     Arousal       0.00      0.00      0.00    107775
+
+   micro avg       0.99      0.99      0.99  23361875
+   macro avg       0.33      0.33      0.33  23361875
+weighted avg       0.99      0.99      0.99  23361875
+
+Max Mem GB   6.31115264
+
+
+Epoch  20 phase:  val
+PRC  0.004816518723721474
+ROC  0.4983617533643764
+loss  0.7029752731323242
+acc arousal  0.9945646457091848
+acc sleep  0.07802171596962484
+              precision    recall  f1-score   support
+
+  not_scored       0.00      0.00      0.00         0
+ not_arousal       1.00      1.00      1.00  12379275
+     Arousal       0.02      0.01      0.01     55425
+
+   micro avg       0.99      0.99      0.99  12434700
+   macro avg       0.34      0.33      0.34  12434700
+weighted avg       0.99      0.99      0.99  12434700
+
+Max Mem GB   6.31115264
+
+
+Epoch  21 phase:  train
+PRC  0.004679990136540736
+ROC  0.505992116558647
+loss  0.6874467134475708
+acc arousal  0.994659803633056
+acc sleep  0.08246287148946109
+Max Mem GB   6.31115264
+
+
+Epoch  21 phase:  val
+PRC  0.004765319899595632
+ROC  0.4967500218581521
+loss  0.6914402842521667
+acc arousal  0.9946345307888409
+acc sleep  0.07974784087045222
+Max Mem GB   6.31115264
+
+
+Epoch  22 phase:  train
+PRC  0.004664097821133948
+ROC  0.5050519075416381
+loss  0.6833545565605164
+acc arousal  0.9945361406137135
+acc sleep  0.08435658317276815
+Max Mem GB   6.31115264
+
+
+Epoch  22 phase:  val
+PRC  0.00474878930795021
+ROC  0.4956801832021498
+loss  0.6877567172050476
+acc arousal  0.9945968137550564
+acc sleep  0.07977921341947183
+Max Mem GB   6.31115264
+
+
+Epoch  23 phase:  train
+PRC  0.004664779850121156
+ROC  0.504487354131013
+loss  0.7003360986709595
+acc arousal  0.9946733299446213
+acc sleep  0.08586830151223215
+Max Mem GB   6.31115264
+
+
+Epoch  23 phase:  val
+PRC  0.004868017944389696
+ROC  0.49854134075798945
+loss  0.7001098990440369
+acc arousal  0.9944897745824186
+acc sleep  0.08077669726850277
+Max Mem GB   6.31115264
+
+
+Epoch  24 phase:  train
+PRC  0.004635283301770111
+ROC  0.5032775628779433
+loss  0.6899979114532471
+acc arousal  0.9947169480189412
+acc sleep  0.086145291060898
+Max Mem GB   6.31115264
+
+
+Epoch  24 phase:  val
+PRC  0.004752949359458951
+ROC  0.49746060512019147
+loss  0.6767476797103882
+acc arousal  0.9945985829975793
+acc sleep  0.08200312818769126
+Max Mem GB   6.31115264
+
+
+Epoch  25 phase:  train
+PRC  0.004641094907694153
+ROC  0.5042928635398582
+loss  0.6779174208641052
+acc arousal  0.9946587763182536
+acc sleep  0.08826143516085713
+Max Mem GB   6.31115264
+
+
+Epoch  25 phase:  val
+PRC  0.004694503992735549
+ROC  0.4966525215497443
+loss  0.6882860064506531
+acc arousal  0.9946490064094832
+acc sleep  0.08218873399070611
+Max Mem GB   6.31115264
+
+
+Epoch  26 phase:  train
+PRC  0.004695613238031871
+ROC  0.5070526850457222
+loss  0.6878772377967834
+acc arousal  0.9946708900719655
+acc sleep  0.08810322881999183
+Max Mem GB   6.31115264
+
+
+Epoch  26 phase:  val
+PRC  0.004765768720143131
+ROC  0.4965136169039396
+loss  0.6789730787277222
+acc arousal  0.9945512155500333
+acc sleep  0.0829141108466508
+Max Mem GB   6.31115264
+
+
+Epoch  27 phase:  train
+PRC  0.0046875226761832105
+ROC  0.5067350049103166
+loss  0.6854094862937927
+acc arousal  0.9945950828005029
+acc sleep  0.08874810533076428
+Max Mem GB   6.31115264
+
+
+Epoch  27 phase:  val
+PRC  0.0048715195503000915
+ROC  0.498539807513833
+loss  0.6302024126052856
+acc arousal  0.9945697925965242
+acc sleep  0.08450323019381163
+Max Mem GB   6.31115264
+
+
+Epoch  28 phase:  train
+PRC  0.00465825255092927
+ROC  0.503058452019113
+loss  0.6830443143844604
+acc arousal  0.9944437250862784
+acc sleep  0.08936920651602732
+Max Mem GB   6.31115264
+
+
+Epoch  28 phase:  val
+PRC  0.004816135460038323
+ROC  0.49878770630857455
+loss  0.6552132368087769
+acc arousal  0.9944303441176707
+acc sleep  0.08329139748384903
+Max Mem GB   6.31115264
+
+
+Epoch  29 phase:  train
+PRC  0.004650526500483745
+ROC  0.5056258075557539
+loss  0.6839652061462402
+acc arousal  0.9945699563926269
+acc sleep  0.0897132247328779
+Max Mem GB   6.31115264
+
+
+Epoch  29 phase:  val
+PRC  0.004854382684892853
+ROC  0.49901189074464564
+loss  0.6803969740867615
+acc arousal  0.9944662114888175
+acc sleep  0.08310506630397824
+weights_1_50
+Created model : Deep_Sleep(
+  (pcc1): PCC(
+    (activate): ReLU(inplace=True)
+    (blocks): Sequential(
+      (0): MaxPool1d(kernel_size=1, stride=1, padding=0, dilation=1, ceil_mode=False)
+      (1): Conv1d(1, 15, kernel_size=(7,), stride=(1,), padding=(3,))
+      (2): ReLU(inplace=True)
+      (3): BatchNorm1d(15, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (4): Conv1d(15, 15, kernel_size=(7,), stride=(1,), padding=(3,))
+      (5): ReLU(inplace=True)
+      (6): BatchNorm1d(15, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (pcc2): PCC(
+    (activate): ReLU(inplace=True)
+    (blocks): Sequential(
+      (0): MaxPool1d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+      (1): Conv1d(15, 18, kernel_size=(7,), stride=(1,), padding=(3,))
+      (2): ReLU(inplace=True)
+      (3): BatchNorm1d(18, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (4): Conv1d(18, 18, kernel_size=(7,), stride=(1,), padding=(3,))
+      (5): ReLU(inplace=True)
+      (6): BatchNorm1d(18, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (pcc3): PCC(
+    (activate): ReLU(inplace=True)
+    (blocks): Sequential(
+      (0): MaxPool1d(kernel_size=4, stride=4, padding=0, dilation=1, ceil_mode=False)
+      (1): Conv1d(18, 21, kernel_size=(7,), stride=(1,), padding=(3,))
+      (2): ReLU(inplace=True)
+      (3): BatchNorm1d(21, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (4): Conv1d(21, 21, kernel_size=(7,), stride=(1,), padding=(3,))
+      (5): ReLU(inplace=True)
+      (6): BatchNorm1d(21, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (pcc4): PCC(
+    (activate): ReLU(inplace=True)
+    (blocks): Sequential(
+      (0): MaxPool1d(kernel_size=4, stride=4, padding=0, dilation=1, ceil_mode=False)
+      (1): Conv1d(21, 25, kernel_size=(7,), stride=(1,), padding=(3,))
+      (2): ReLU(inplace=True)
+      (3): BatchNorm1d(25, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (4): Conv1d(25, 25, kernel_size=(7,), stride=(1,), padding=(3,))
+      (5): ReLU(inplace=True)
+      (6): BatchNorm1d(25, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (pcc5): PCC(
+    (activate): ReLU(inplace=True)
+    (blocks): Sequential(
+      (0): MaxPool1d(kernel_size=4, stride=4, padding=0, dilation=1, ceil_mode=False)
+      (1): Conv1d(25, 30, kernel_size=(7,), stride=(1,), padding=(3,))
+      (2): ReLU(inplace=True)
+      (3): BatchNorm1d(30, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (4): Conv1d(30, 30, kernel_size=(7,), stride=(1,), padding=(3,))
+      (5): ReLU(inplace=True)
+      (6): BatchNorm1d(30, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (pcc6): PCC(
+    (activate): ReLU(inplace=True)
+    (blocks): Sequential(
+      (0): MaxPool1d(kernel_size=4, stride=4, padding=0, dilation=1, ceil_mode=False)
+      (1): Conv1d(30, 60, kernel_size=(7,), stride=(1,), padding=(3,))
+      (2): ReLU(inplace=True)
+      (3): BatchNorm1d(60, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (4): Conv1d(60, 60, kernel_size=(7,), stride=(1,), padding=(3,))
+      (5): ReLU(inplace=True)
+      (6): BatchNorm1d(60, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (pcc7): PCC(
+    (activate): ReLU(inplace=True)
+    (blocks): Sequential(
+      (0): MaxPool1d(kernel_size=4, stride=4, padding=0, dilation=1, ceil_mode=False)
+      (1): Conv1d(60, 120, kernel_size=(7,), stride=(1,), padding=(3,))
+      (2): ReLU(inplace=True)
+      (3): BatchNorm1d(120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (4): Conv1d(120, 120, kernel_size=(7,), stride=(1,), padding=(3,))
+      (5): ReLU(inplace=True)
+      (6): BatchNorm1d(120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (pcc8): PCC(
+    (activate): ReLU(inplace=True)
+    (blocks): Sequential(
+      (0): MaxPool1d(kernel_size=4, stride=4, padding=0, dilation=1, ceil_mode=False)
+      (1): Conv1d(120, 240, kernel_size=(7,), stride=(1,), padding=(3,))
+      (2): ReLU(inplace=True)
+      (3): BatchNorm1d(240, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (4): Conv1d(240, 240, kernel_size=(7,), stride=(1,), padding=(3,))
+      (5): ReLU(inplace=True)
+      (6): BatchNorm1d(240, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (pcc9): PCC(
+    (activate): ReLU(inplace=True)
+    (blocks): Sequential(
+      (0): MaxPool1d(kernel_size=4, stride=4, padding=0, dilation=1, ceil_mode=False)
+      (1): Conv1d(240, 480, kernel_size=(7,), stride=(1,), padding=(3,))
+      (2): ReLU(inplace=True)
+      (3): BatchNorm1d(480, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (4): Conv1d(480, 480, kernel_size=(7,), stride=(1,), padding=(3,))
+      (5): ReLU(inplace=True)
+      (6): BatchNorm1d(480, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (ucc1): UCC(
+    (activate): ReLU(inplace=True)
+    (up): Sequential(
+      (0): ConvTranspose1d(480, 240, kernel_size=(4,), stride=(4,))
+    )
+    (blocks): Sequential(
+      (0): Conv1d(480, 240, kernel_size=(7,), stride=(1,), padding=(3,))
+      (1): ReLU(inplace=True)
+      (2): BatchNorm1d(240, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (3): Conv1d(240, 240, kernel_size=(7,), stride=(1,), padding=(3,))
+      (4): ReLU(inplace=True)
+      (5): BatchNorm1d(240, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (ucc2): UCC(
+    (activate): ReLU(inplace=True)
+    (up): Sequential(
+      (0): ConvTranspose1d(240, 120, kernel_size=(4,), stride=(4,))
+    )
+    (blocks): Sequential(
+      (0): Conv1d(240, 120, kernel_size=(7,), stride=(1,), padding=(3,))
+      (1): ReLU(inplace=True)
+      (2): BatchNorm1d(120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (3): Conv1d(120, 120, kernel_size=(7,), stride=(1,), padding=(3,))
+      (4): ReLU(inplace=True)
+      (5): BatchNorm1d(120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (ucc3): UCC(
+    (activate): ReLU(inplace=True)
+    (up): Sequential(
+      (0): ConvTranspose1d(120, 60, kernel_size=(4,), stride=(4,))
+    )
+    (blocks): Sequential(
+      (0): Conv1d(120, 60, kernel_size=(7,), stride=(1,), padding=(3,))
+      (1): ReLU(inplace=True)
+      (2): BatchNorm1d(60, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (3): Conv1d(60, 60, kernel_size=(7,), stride=(1,), padding=(3,))
+      (4): ReLU(inplace=True)
+      (5): BatchNorm1d(60, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (ucc4): UCC(
+    (activate): ReLU(inplace=True)
+    (up): Sequential(
+      (0): ConvTranspose1d(60, 30, kernel_size=(4,), stride=(4,))
+    )
+    (blocks): Sequential(
+      (0): Conv1d(60, 30, kernel_size=(7,), stride=(1,), padding=(3,))
+      (1): ReLU(inplace=True)
+      (2): BatchNorm1d(30, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (3): Conv1d(30, 30, kernel_size=(7,), stride=(1,), padding=(3,))
+      (4): ReLU(inplace=True)
+      (5): BatchNorm1d(30, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (ucc5): UCC(
+    (activate): ReLU(inplace=True)
+    (up): Sequential(
+      (0): ConvTranspose1d(30, 25, kernel_size=(4,), stride=(4,))
+    )
+    (blocks): Sequential(
+      (0): Conv1d(50, 25, kernel_size=(7,), stride=(1,), padding=(3,))
+      (1): ReLU(inplace=True)
+      (2): BatchNorm1d(25, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (3): Conv1d(25, 25, kernel_size=(7,), stride=(1,), padding=(3,))
+      (4): ReLU(inplace=True)
+      (5): BatchNorm1d(25, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (ucc6): UCC(
+    (activate): ReLU(inplace=True)
+    (up): Sequential(
+      (0): ConvTranspose1d(25, 21, kernel_size=(4,), stride=(4,))
+    )
+    (blocks): Sequential(
+      (0): Conv1d(42, 21, kernel_size=(7,), stride=(1,), padding=(3,))
+      (1): ReLU(inplace=True)
+      (2): BatchNorm1d(21, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (3): Conv1d(21, 21, kernel_size=(7,), stride=(1,), padding=(3,))
+      (4): ReLU(inplace=True)
+      (5): BatchNorm1d(21, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (ucc7): UCC(
+    (activate): ReLU(inplace=True)
+    (up): Sequential(
+      (0): ConvTranspose1d(21, 18, kernel_size=(4,), stride=(4,))
+    )
+    (blocks): Sequential(
+      (0): Conv1d(36, 18, kernel_size=(7,), stride=(1,), padding=(3,))
+      (1): ReLU(inplace=True)
+      (2): BatchNorm1d(18, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (3): Conv1d(18, 18, kernel_size=(7,), stride=(1,), padding=(3,))
+      (4): ReLU(inplace=True)
+      (5): BatchNorm1d(18, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (ucc8): UCC(
+    (activate): ReLU(inplace=True)
+    (up): Sequential(
+      (0): ConvTranspose1d(18, 15, kernel_size=(4,), stride=(2,), padding=(1,))
+    )
+    (blocks): Sequential(
+      (0): Conv1d(30, 15, kernel_size=(7,), stride=(1,), padding=(3,))
+      (1): ReLU(inplace=True)
+      (2): BatchNorm1d(15, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (3): Conv1d(15, 15, kernel_size=(7,), stride=(1,), padding=(3,))
+      (4): ReLU(inplace=True)
+      (5): BatchNorm1d(15, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (arousal_classifier): Sequential(
+    (0): Conv1d(15, 3, kernel_size=(1,), stride=(1,))
+  )
+  (sleep_classifier): Sequential(
+    (0): Conv1d(15, 6, kernel_size=(1,), stride=(1,))
+  )
+)
+Tesla T4
+Max Mem GB   6.31115264
+
+
+Epoch  0 phase:  train
+PRC  0.004620600439644356
+ROC  0.5013276291409781
+loss  1.2764142751693726
+acc arousal  0.47302393322453784
+acc sleep  0.14706440123781164
+              precision    recall  f1-score   support
+
+  not_scored       0.00      0.00      0.00         0
+ not_arousal       1.00      0.47      0.64  23254100
+     Arousal       0.00      0.53      0.01    107775
+
+   micro avg       0.47      0.47      0.47  23361875
+   macro avg       0.33      0.33      0.22  23361875
+weighted avg       0.99      0.47      0.64  23361875
+
+Max Mem GB   6.31115264
+
+
+Epoch  0 phase:  val
+PRC  0.004935757841785878
+ROC  0.49771263143353667
+loss  1.2332866191864014
+acc arousal  0.9699329296243576
+acc sleep  0.06089284823756092
+              precision    recall  f1-score   support
+
+  not_scored       0.00      0.00      0.00         0
+ not_arousal       1.00      0.97      0.98  12379275
+     Arousal       0.01      0.03      0.01     55425
+
+   micro avg       0.97      0.97      0.97  12434700
+   macro avg       0.33      0.34      0.33  12434700
+weighted avg       0.99      0.97      0.98  12434700
+
+Max Mem GB   6.31115264
+
+
+Epoch  1 phase:  train
+PRC  0.0045741926265566715
+ROC  0.49915544759116576
+loss  1.15732741355896
+acc arousal  0.649337392653629
+acc sleep  0.14817058445728967
+Max Mem GB   6.31115264
+
+
+Epoch  1 phase:  val
+PRC  0.004820302977358779
+ROC  0.4961963187590696
+loss  1.2046791315078735
+acc arousal  0.9618713760685823
+acc sleep  0.06594419131814576
+Max Mem GB   6.31115264
+
+
+Epoch  2 phase:  train
+PRC  0.004591185139794821
+ROC  0.5004884045991861
+loss  1.0443816184997559
+acc arousal  0.7938784879210252
+acc sleep  0.14732144567057862
+Max Mem GB   6.31115264
+
+
+Epoch  2 phase:  val
+PRC  0.00438135915918927
+ROC  0.4797404300447752
+loss  1.1766774654388428
+acc arousal  0.7850117815468005
+acc sleep  0.06322348407571121
+Max Mem GB   6.31115264
+
+
+Epoch  3 phase:  train
+PRC  0.004572798871070827
+ROC  0.4997409618581629
+loss  1.0462112426757812
+acc arousal  0.8930694989165039
+acc sleep  0.14896890290185089
+Max Mem GB   6.31115264
+
+
+Epoch  3 phase:  val
+PRC  0.004201009479323769
+ROC  0.4785020118742533
+loss  1.2610480785369873
+acc arousal  0.8381517849244453
+acc sleep  0.06568233027314972
+Max Mem GB   6.31115264
+
+
+Epoch  4 phase:  train
+PRC  0.004543447108035296
+ROC  0.496708499540907
+loss  0.8769806027412415
+acc arousal  0.9362680863586506
+acc sleep  0.15052508904069598
+Max Mem GB   6.31115264
+
+
+Epoch  4 phase:  val
+PRC  0.004270153008098404
+ROC  0.4832676286989762
+loss  0.9875733256340027
+acc arousal  0.9665404875067352
+acc sleep  0.1106637651592429
+Max Mem GB   6.31115264
+
+
+Epoch  5 phase:  train
+PRC  0.004534306727760486
+ROC  0.4966468931983252
+loss  0.8292637467384338
+acc arousal  0.9682644907568421
+acc sleep  0.16052207625386816
+Max Mem GB   6.31115264
+
+
+Epoch  5 phase:  val
+PRC  0.004493692044314577
+ROC  0.4915779288715021
+loss  0.8771970272064209
+acc arousal  0.9888219257400661
+acc sleep  0.1878017001020061
+Max Mem GB   6.31115264
+
+
+Epoch  6 phase:  train
+PRC  0.004508540343649554
+ROC  0.49454966200641054
+loss  0.7898415327072144
+acc arousal  0.980111955911073
+acc sleep  0.18515733053074093
+Max Mem GB   6.31115264
+
+
+Epoch  6 phase:  val
+PRC  0.00457373213076226
+ROC  0.49541383212325824
+loss  0.8089840412139893
+acc arousal  0.9909408349216307
+acc sleep  0.26187364841890515
+Max Mem GB   6.31115264
+
+
+Epoch  7 phase:  train
+PRC  0.004426023895257335
+ROC  0.49035273249634337
+loss  0.8273869752883911
+acc arousal  0.98197426362396
+acc sleep  0.22816516611198692
+Max Mem GB   6.31115264
+
+
+Epoch  7 phase:  val
+PRC  0.004599996596356213
+ROC  0.4956823696733506
+loss  0.7769837379455566
+acc arousal  0.9906375706691758
+acc sleep  0.3045877365975292
+Max Mem GB   6.31115264
+
+
+Epoch  8 phase:  train
+PRC  0.004456006279833839
+ROC  0.49294222607951943
+loss  0.7789626121520996
+acc arousal  0.9864019904224297
+acc sleep  0.26379200093419747
+Max Mem GB   6.31115264
+
+
+Epoch  8 phase:  val
+PRC  0.004638249289490978
+ROC  0.4969600379397919
+loss  0.788731575012207
+acc arousal  0.9909095514970204
+acc sleep  0.3337634818089085
+Max Mem GB   6.31115264
+
+
+Epoch  9 phase:  train
+PRC  0.004442400985860664
+ROC  0.49101664490966634
+loss  0.7455281019210815
+acc arousal  0.9883582974397389
+acc sleep  0.31446478659426635
+Max Mem GB   6.31115264
+
+
+Epoch  9 phase:  val
+PRC  0.004802796882134318
+ROC  0.499952725876311
+loss  0.7075779438018799
+acc arousal  0.9909061738522039
+acc sleep  0.4029443046582795
+Max Mem GB   6.31115264
+
+
+Epoch  10 phase:  train
+PRC  0.004426489821670489
+ROC  0.490099065964479
+loss  0.7207181453704834
+acc arousal  0.9880770272077904
+acc sleep  0.3609123839551585
+              precision    recall  f1-score   support
+
+  not_scored       0.00      0.00      0.00         0
+ not_arousal       1.00      0.99      0.99  23254100
+     Arousal       0.00      0.01      0.00    107775
+
+   micro avg       0.99      0.99      0.99  23361875
+   macro avg       0.33      0.33      0.33  23361875
+weighted avg       0.99      0.99      0.99  23361875
+
+Max Mem GB   6.31115264
+
+
+Epoch  10 phase:  val
+PRC  0.004957850260107404
+ROC  0.506809647034114
+loss  0.7116168141365051
+acc arousal  0.9910309054500712
+acc sleep  0.4390634478068684
+              precision    recall  f1-score   support
+
+  not_scored       0.00      0.00      0.00         0
+ not_arousal       1.00      1.00      1.00  12379275
+     Arousal       0.01      0.01      0.01     55425
+
+   micro avg       0.99      0.99      0.99  12434700
+   macro avg       0.34      0.34      0.34  12434700
+weighted avg       0.99      0.99      0.99  12434700
+
+Max Mem GB   6.31115264
+
+
+Epoch  11 phase:  train
+PRC  0.004447336803917325
+ROC  0.4912250130271625
+loss  0.7338725924491882
+acc arousal  0.9899609941410953
+acc sleep  0.38030006422607576
+Max Mem GB   6.31115264
+
+
+Epoch  11 phase:  val
+PRC  0.0049149616202182255
+ROC  0.5015351870567105
+loss  0.66302090883255
+acc arousal  0.9911879659340395
+acc sleep  0.4442992179530772
+Max Mem GB   6.31115264
+
+
+Epoch  12 phase:  train
+PRC  0.0044989222592832275
+ROC  0.49635584036820946
+loss  0.6702107787132263
+acc arousal  0.9906296476631263
+acc sleep  0.3933819583114381
+Max Mem GB   6.31115264
+
+
+Epoch  12 phase:  val
+PRC  0.005044388993450829
+ROC  0.5068299514265839
+loss  0.6570827960968018
+acc arousal  0.9912260046482826
+acc sleep  0.45817495183044316
+Max Mem GB   6.31115264
+
+
+Epoch  13 phase:  train
+PRC  0.004412871594090842
+ROC  0.488677834234625
+loss  0.6886979937553406
+acc arousal  0.9903865592980016
+acc sleep  0.4071575407251708
+Max Mem GB   6.31115264
+
+
+Epoch  13 phase:  val
+PRC  0.00518863710334512
+ROC  0.5082348246265467
+loss  0.6476274132728577
+acc arousal  0.9910892904533282
+acc sleep  0.4662623597415845
+Max Mem GB   6.31115264
+
+
+Epoch  14 phase:  train
+PRC  0.004438975961572722
+ROC  0.49090258848305823
+loss  0.643031656742096
+acc arousal  0.990013472805586
+acc sleep  0.4164585508261809
+Max Mem GB   6.31115264
+
+
+Epoch  14 phase:  val
+PRC  0.005230880469464646
+ROC  0.5097963810774947
+loss  0.6712288856506348
+acc arousal  0.9915309577231457
+acc sleep  0.4742593675620537
+Max Mem GB   6.31115264
+
+
+Epoch  15 phase:  train
+PRC  0.004400485402651839
+ROC  0.4886255118086637
+loss  0.6726675629615784
+acc arousal  0.9906146659889242
+acc sleep  0.4233053774741636
+Max Mem GB   6.31115264
+
+
+Epoch  15 phase:  val
+PRC  0.00524792414303329
+ROC  0.5112526204522606
+loss  0.6348934769630432
+acc arousal  0.991267501427457
+acc sleep  0.4642398277229967
+Max Mem GB   6.31115264
+
+
+Epoch  16 phase:  train
+PRC  0.004447862422510611
+ROC  0.4899262910481376
+loss  0.6690583825111389
+acc arousal  0.9907219775809947
+acc sleep  0.42226594266363054
+Max Mem GB   6.31115264
+
+
+Epoch  16 phase:  val
+PRC  0.0052391646602281275
+ROC  0.5087699398000141
+loss  0.657981812953949
+acc arousal  0.9918522360812887
+acc sleep  0.4684393063583815
+Max Mem GB   6.31115264
+
+
+Epoch  17 phase:  train
+PRC  0.004436603881423003
+ROC  0.491000475560588
+loss  0.6569299101829529
+acc arousal  0.9892630193424116
+acc sleep  0.43570329888480175
+Max Mem GB   6.31115264
+
+
+Epoch  17 phase:  val
+PRC  0.005211907331068475
+ROC  0.5094196022890476
+loss  0.6498936414718628
+acc arousal  0.9915027302628934
+acc sleep  0.45449484302391474
+Max Mem GB   6.31115264
+
+
+Epoch  18 phase:  train
+PRC  0.00452245560990258
+ROC  0.49738746359757025
+loss  0.6271322965621948
+acc arousal  0.9918680328526713
+acc sleep  0.42880322298125767
+Max Mem GB   6.31115264
+
+
+Epoch  18 phase:  val
+PRC  0.0051653531945509866
+ROC  0.5053011278844476
+loss  0.6369506120681763
+acc arousal  0.9924142922627808
+acc sleep  0.4708537232233934
+Max Mem GB   6.31115264
+
+
+Epoch  19 phase:  train
+PRC  0.00449375824081308
+ROC  0.4938679780821817
+loss  0.6122610569000244
+acc arousal  0.9921653120736242
+acc sleep  0.42420089916506104
+Max Mem GB   6.31115264
+
+
+Epoch  19 phase:  val
+PRC  0.005218221967072408
+ROC  0.5044580219653153
+loss  0.6398029327392578
+acc arousal  0.9926872381320015
+acc sleep  0.4784125127507651
+Max Mem GB   6.31115264
+
+
+Epoch  20 phase:  train
+PRC  0.004506667094676247
+ROC  0.49473829900296296
+loss  0.6187670826911926
+acc arousal  0.9910041467133952
+acc sleep  0.4296453552869738
+              precision    recall  f1-score   support
+
+  not_scored       0.00      0.00      0.00         0
+ not_arousal       1.00      1.00      1.00  23254100
+     Arousal       0.00      0.00      0.00    107775
+
+   micro avg       0.99      0.99      0.99  23361875
+   macro avg       0.33      0.33      0.33  23361875
+weighted avg       0.99      0.99      0.99  23361875
+
+Max Mem GB   6.31115264
+
+
+Epoch  20 phase:  val
+PRC  0.0053600039006411
+ROC  0.5076092461487406
+loss  0.5873244404792786
+acc arousal  0.9926185593540656
+acc sleep  0.490058438172957
+              precision    recall  f1-score   support
+
+  not_scored       0.00      0.00      0.00         0
+ not_arousal       1.00      1.00      1.00  12379275
+     Arousal       0.02      0.01      0.02     55425
+
+   micro avg       0.99      0.99      0.99  12434700
+   macro avg       0.34      0.34      0.34  12434700
+weighted avg       0.99      0.99      0.99  12434700
+
+Max Mem GB   6.31115264
+
+
+Epoch  21 phase:  train
+PRC  0.004492943000142215
+ROC  0.49218567279158204
+loss  0.6459253430366516
+acc arousal  0.9922680007490837
+acc sleep  0.43393276113738544
+Max Mem GB   6.31115264
+
+
+Epoch  21 phase:  val
+PRC  0.0051522146838339136
+ROC  0.503247654001116
+loss  0.6055501699447632
+acc arousal  0.9925572792266801
+acc sleep  0.4611956024028108
+Max Mem GB   6.31115264
+
+
+Epoch  22 phase:  train
+PRC  0.0045067738124440655
+ROC  0.49449322283587654
+loss  0.6219502091407776
+acc arousal  0.992526798469729
+acc sleep  0.43405369299935775
+Max Mem GB   6.31115264
+
+
+Epoch  22 phase:  val
+PRC  0.005188197556489387
+ROC  0.5024821719615948
+loss  0.5935865640640259
+acc arousal  0.9931007583616814
+acc sleep  0.4635973251728437
+Max Mem GB   6.31115264
+
+
+Epoch  23 phase:  train
+PRC  0.004523239368164765
+ROC  0.4960386013371895
+loss  0.6347823143005371
+acc arousal  0.9930134888573798
+acc sleep  0.4328393297133182
+Max Mem GB   6.31115264
+
+
+Epoch  23 phase:  val
+PRC  0.0051957747823820994
+ROC  0.5030849549605023
+loss  0.550456702709198
+acc arousal  0.9929870443195252
+acc sleep  0.43915992292870903
+Max Mem GB   6.31115264
+
+
+Epoch  24 phase:  train
+PRC  0.004530369458336329
+ROC  0.49654824387560376
+loss  0.6145707964897156
+acc arousal  0.9931094571818401
+acc sleep  0.44234390144216734
+Max Mem GB   6.31115264
+
+
+Epoch  24 phase:  val
+PRC  0.005295804989237317
+ROC  0.5053777053354138
+loss  0.6254115104675293
+acc arousal  0.993156730761498
+acc sleep  0.45912855037968947
+Max Mem GB   6.31115264
+
+
+Epoch  25 phase:  train
+PRC  0.004539524841728681
+ROC  0.49655277716996277
+loss  0.6431444883346558
+acc arousal  0.9919292864977661
+acc sleep  0.4329649325626204
+Max Mem GB   6.31115264
+
+
+Epoch  25 phase:  val
+PRC  0.0052293844733272855
+ROC  0.5056226327744353
+loss  0.6327847838401794
+acc arousal  0.9928862779158323
+acc sleep  0.4337156069364162
+Max Mem GB   6.31115264
+
+
+Epoch  26 phase:  train
+PRC  0.004544670308144766
+ROC  0.49599464590790826
+loss  0.6113777160644531
+acc arousal  0.9929297198961984
+acc sleep  0.435331021194605
+Max Mem GB   6.31115264
+
+
+Epoch  26 phase:  val
+PRC  0.005168669204572467
+ROC  0.5020041308995655
+loss  0.6201575994491577
+acc arousal  0.9933229591385397
+acc sleep  0.43954292190864785
+Max Mem GB   6.31115264
+
+
+Epoch  27 phase:  train
+PRC  0.004529043854573147
+ROC  0.49454655738806186
+loss  0.600380003452301
+acc arousal  0.992747542737901
+acc sleep  0.4292194546622292
+Max Mem GB   6.31115264
+
+
+Epoch  27 phase:  val
+PRC  0.005143380688203818
+ROC  0.5031695643358017
+loss  0.609682023525238
+acc arousal  0.9935682404883109
+acc sleep  0.46823429672447014
+Max Mem GB   6.31115264
+
+
+Epoch  28 phase:  train
+PRC  0.00454011475805164
+ROC  0.4948029209139163
+loss  0.611644446849823
+acc arousal  0.9936999063645362
+acc sleep  0.44998049862789746
+Max Mem GB   6.31115264
+
+
+Epoch  28 phase:  val
+PRC  0.005161080872628436
+ROC  0.50344508166029
+loss  0.5817393064498901
+acc arousal  0.9936078071847331
+acc sleep  0.47337631191204804
+Max Mem GB   6.31115264
+
+
+Epoch  29 phase:  train
+PRC  0.00458729703584555
+ROC  0.4982162472936447
+loss  0.6193646788597107
+acc arousal  0.9933046041895182
+acc sleep  0.439772896596018
+Max Mem GB   6.31115264
+
+
+Epoch  29 phase:  val
+PRC  0.005105821109632147
+ROC  0.50436182641086
+loss  0.6184300184249878
+acc arousal  0.993657185135146
+acc sleep  0.44320598435906156
+weights_1_20
+Created model : Deep_Sleep(
+  (pcc1): PCC(
+    (activate): ReLU(inplace=True)
+    (blocks): Sequential(
+      (0): MaxPool1d(kernel_size=1, stride=1, padding=0, dilation=1, ceil_mode=False)
+      (1): Conv1d(1, 15, kernel_size=(7,), stride=(1,), padding=(3,))
+      (2): ReLU(inplace=True)
+      (3): BatchNorm1d(15, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (4): Conv1d(15, 15, kernel_size=(7,), stride=(1,), padding=(3,))
+      (5): ReLU(inplace=True)
+      (6): BatchNorm1d(15, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (pcc2): PCC(
+    (activate): ReLU(inplace=True)
+    (blocks): Sequential(
+      (0): MaxPool1d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+      (1): Conv1d(15, 18, kernel_size=(7,), stride=(1,), padding=(3,))
+      (2): ReLU(inplace=True)
+      (3): BatchNorm1d(18, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (4): Conv1d(18, 18, kernel_size=(7,), stride=(1,), padding=(3,))
+      (5): ReLU(inplace=True)
+      (6): BatchNorm1d(18, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (pcc3): PCC(
+    (activate): ReLU(inplace=True)
+    (blocks): Sequential(
+      (0): MaxPool1d(kernel_size=4, stride=4, padding=0, dilation=1, ceil_mode=False)
+      (1): Conv1d(18, 21, kernel_size=(7,), stride=(1,), padding=(3,))
+      (2): ReLU(inplace=True)
+      (3): BatchNorm1d(21, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (4): Conv1d(21, 21, kernel_size=(7,), stride=(1,), padding=(3,))
+      (5): ReLU(inplace=True)
+      (6): BatchNorm1d(21, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (pcc4): PCC(
+    (activate): ReLU(inplace=True)
+    (blocks): Sequential(
+      (0): MaxPool1d(kernel_size=4, stride=4, padding=0, dilation=1, ceil_mode=False)
+      (1): Conv1d(21, 25, kernel_size=(7,), stride=(1,), padding=(3,))
+      (2): ReLU(inplace=True)
+      (3): BatchNorm1d(25, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (4): Conv1d(25, 25, kernel_size=(7,), stride=(1,), padding=(3,))
+      (5): ReLU(inplace=True)
+      (6): BatchNorm1d(25, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (pcc5): PCC(
+    (activate): ReLU(inplace=True)
+    (blocks): Sequential(
+      (0): MaxPool1d(kernel_size=4, stride=4, padding=0, dilation=1, ceil_mode=False)
+      (1): Conv1d(25, 30, kernel_size=(7,), stride=(1,), padding=(3,))
+      (2): ReLU(inplace=True)
+      (3): BatchNorm1d(30, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (4): Conv1d(30, 30, kernel_size=(7,), stride=(1,), padding=(3,))
+      (5): ReLU(inplace=True)
+      (6): BatchNorm1d(30, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (pcc6): PCC(
+    (activate): ReLU(inplace=True)
+    (blocks): Sequential(
+      (0): MaxPool1d(kernel_size=4, stride=4, padding=0, dilation=1, ceil_mode=False)
+      (1): Conv1d(30, 60, kernel_size=(7,), stride=(1,), padding=(3,))
+      (2): ReLU(inplace=True)
+      (3): BatchNorm1d(60, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (4): Conv1d(60, 60, kernel_size=(7,), stride=(1,), padding=(3,))
+      (5): ReLU(inplace=True)
+      (6): BatchNorm1d(60, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (pcc7): PCC(
+    (activate): ReLU(inplace=True)
+    (blocks): Sequential(
+      (0): MaxPool1d(kernel_size=4, stride=4, padding=0, dilation=1, ceil_mode=False)
+      (1): Conv1d(60, 120, kernel_size=(7,), stride=(1,), padding=(3,))
+      (2): ReLU(inplace=True)
+      (3): BatchNorm1d(120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (4): Conv1d(120, 120, kernel_size=(7,), stride=(1,), padding=(3,))
+      (5): ReLU(inplace=True)
+      (6): BatchNorm1d(120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (pcc8): PCC(
+    (activate): ReLU(inplace=True)
+    (blocks): Sequential(
+      (0): MaxPool1d(kernel_size=4, stride=4, padding=0, dilation=1, ceil_mode=False)
+      (1): Conv1d(120, 240, kernel_size=(7,), stride=(1,), padding=(3,))
+      (2): ReLU(inplace=True)
+      (3): BatchNorm1d(240, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (4): Conv1d(240, 240, kernel_size=(7,), stride=(1,), padding=(3,))
+      (5): ReLU(inplace=True)
+      (6): BatchNorm1d(240, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (pcc9): PCC(
+    (activate): ReLU(inplace=True)
+    (blocks): Sequential(
+      (0): MaxPool1d(kernel_size=4, stride=4, padding=0, dilation=1, ceil_mode=False)
+      (1): Conv1d(240, 480, kernel_size=(7,), stride=(1,), padding=(3,))
+      (2): ReLU(inplace=True)
+      (3): BatchNorm1d(480, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (4): Conv1d(480, 480, kernel_size=(7,), stride=(1,), padding=(3,))
+      (5): ReLU(inplace=True)
+      (6): BatchNorm1d(480, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (ucc1): UCC(
+    (activate): ReLU(inplace=True)
+    (up): Sequential(
+      (0): ConvTranspose1d(480, 240, kernel_size=(4,), stride=(4,))
+    )
+    (blocks): Sequential(
+      (0): Conv1d(480, 240, kernel_size=(7,), stride=(1,), padding=(3,))
+      (1): ReLU(inplace=True)
+      (2): BatchNorm1d(240, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (3): Conv1d(240, 240, kernel_size=(7,), stride=(1,), padding=(3,))
+      (4): ReLU(inplace=True)
+      (5): BatchNorm1d(240, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (ucc2): UCC(
+    (activate): ReLU(inplace=True)
+    (up): Sequential(
+      (0): ConvTranspose1d(240, 120, kernel_size=(4,), stride=(4,))
+    )
+    (blocks): Sequential(
+      (0): Conv1d(240, 120, kernel_size=(7,), stride=(1,), padding=(3,))
+      (1): ReLU(inplace=True)
+      (2): BatchNorm1d(120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (3): Conv1d(120, 120, kernel_size=(7,), stride=(1,), padding=(3,))
+      (4): ReLU(inplace=True)
+      (5): BatchNorm1d(120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (ucc3): UCC(
+    (activate): ReLU(inplace=True)
+    (up): Sequential(
+      (0): ConvTranspose1d(120, 60, kernel_size=(4,), stride=(4,))
+    )
+    (blocks): Sequential(
+      (0): Conv1d(120, 60, kernel_size=(7,), stride=(1,), padding=(3,))
+      (1): ReLU(inplace=True)
+      (2): BatchNorm1d(60, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (3): Conv1d(60, 60, kernel_size=(7,), stride=(1,), padding=(3,))
+      (4): ReLU(inplace=True)
+      (5): BatchNorm1d(60, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (ucc4): UCC(
+    (activate): ReLU(inplace=True)
+    (up): Sequential(
+      (0): ConvTranspose1d(60, 30, kernel_size=(4,), stride=(4,))
+    )
+    (blocks): Sequential(
+      (0): Conv1d(60, 30, kernel_size=(7,), stride=(1,), padding=(3,))
+      (1): ReLU(inplace=True)
+      (2): BatchNorm1d(30, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (3): Conv1d(30, 30, kernel_size=(7,), stride=(1,), padding=(3,))
+      (4): ReLU(inplace=True)
+      (5): BatchNorm1d(30, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (ucc5): UCC(
+    (activate): ReLU(inplace=True)
+    (up): Sequential(
+      (0): ConvTranspose1d(30, 25, kernel_size=(4,), stride=(4,))
+    )
+    (blocks): Sequential(
+      (0): Conv1d(50, 25, kernel_size=(7,), stride=(1,), padding=(3,))
+      (1): ReLU(inplace=True)
+      (2): BatchNorm1d(25, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (3): Conv1d(25, 25, kernel_size=(7,), stride=(1,), padding=(3,))
+      (4): ReLU(inplace=True)
+      (5): BatchNorm1d(25, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (ucc6): UCC(
+    (activate): ReLU(inplace=True)
+    (up): Sequential(
+      (0): ConvTranspose1d(25, 21, kernel_size=(4,), stride=(4,))
+    )
+    (blocks): Sequential(
+      (0): Conv1d(42, 21, kernel_size=(7,), stride=(1,), padding=(3,))
+      (1): ReLU(inplace=True)
+      (2): BatchNorm1d(21, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (3): Conv1d(21, 21, kernel_size=(7,), stride=(1,), padding=(3,))
+      (4): ReLU(inplace=True)
+      (5): BatchNorm1d(21, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (ucc7): UCC(
+    (activate): ReLU(inplace=True)
+    (up): Sequential(
+      (0): ConvTranspose1d(21, 18, kernel_size=(4,), stride=(4,))
+    )
+    (blocks): Sequential(
+      (0): Conv1d(36, 18, kernel_size=(7,), stride=(1,), padding=(3,))
+      (1): ReLU(inplace=True)
+      (2): BatchNorm1d(18, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (3): Conv1d(18, 18, kernel_size=(7,), stride=(1,), padding=(3,))
+      (4): ReLU(inplace=True)
+      (5): BatchNorm1d(18, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (ucc8): UCC(
+    (activate): ReLU(inplace=True)
+    (up): Sequential(
+      (0): ConvTranspose1d(18, 15, kernel_size=(4,), stride=(2,), padding=(1,))
+    )
+    (blocks): Sequential(
+      (0): Conv1d(30, 15, kernel_size=(7,), stride=(1,), padding=(3,))
+      (1): ReLU(inplace=True)
+      (2): BatchNorm1d(15, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (3): Conv1d(15, 15, kernel_size=(7,), stride=(1,), padding=(3,))
+      (4): ReLU(inplace=True)
+      (5): BatchNorm1d(15, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (arousal_classifier): Sequential(
+    (0): Conv1d(15, 3, kernel_size=(1,), stride=(1,))
+  )
+  (sleep_classifier): Sequential(
+    (0): Conv1d(15, 6, kernel_size=(1,), stride=(1,))
+  )
+)
+Tesla T4
+Max Mem GB   6.31115264
+
+
+Epoch  0 phase:  train
+PRC  0.004555911346294372
+ROC  0.49788270291958897
+loss  1.1718924045562744
+acc arousal  0.5297966023703149
+acc sleep  0.330571098265896
+              precision    recall  f1-score   support
+
+  not_scored       0.00      0.00      0.00         0
+ not_arousal       1.00      0.53      0.69  23254100
+     Arousal       0.00      0.47      0.01    107775
+
+   micro avg       0.53      0.53      0.53  23361875
+   macro avg       0.33      0.33      0.23  23361875
+weighted avg       0.99      0.53      0.69  23361875
+
+Max Mem GB   6.31115264
+
+
+Epoch  0 phase:  val
+PRC  0.004557243386115065
+ROC  0.49096525111224704
+loss  1.2406071424484253
+acc arousal  0.01301414589817205
+acc sleep  0.5926845744077978
+              precision    recall  f1-score   support
+
+  not_scored       0.00      0.00      0.00         0
+ not_arousal       0.98      0.01      0.02  12379275
+     Arousal       0.00      0.97      0.01     55425
+
+   micro avg       0.01      0.01      0.01  12434700
+   macro avg       0.33      0.33      0.01  12434700
+weighted avg       0.98      0.01      0.02  12434700
+
+Max Mem GB   6.31115264
+
+
+Epoch  1 phase:  train
+PRC  0.00457929810336466
+ROC  0.4999160555359193
+loss  1.1352671384811401
+acc arousal  0.5942062441477836
+acc sleep  0.33413179190751446
+Max Mem GB   6.31115264
+
+
+Epoch  1 phase:  val
+PRC  0.004656180997659121
+ROC  0.4966743812502538
+loss  1.2472898960113525
+acc arousal  0.05166123830892583
+acc sleep  0.5898663039782387
+Max Mem GB   6.31115264
+
+
+Epoch  2 phase:  train
+PRC  0.004590781374346331
+ROC  0.49939773473408977
+loss  1.0276750326156616
+acc arousal  0.6454830787340485
+acc sleep  0.33164495825305074
+Max Mem GB   6.31115264
+
+
+Epoch  2 phase:  val
+PRC  0.0046133429358836495
+ROC  0.49171044293026045
+loss  1.320749044418335
+acc arousal  0.08524097887363587
+acc sleep  0.11372168196758473
+Max Mem GB   6.31115264
+
+
+Epoch  3 phase:  train
+PRC  0.004532848128000539
+ROC  0.49753294534419595
+loss  1.0316500663757324
+acc arousal  0.701637090344846
+acc sleep  0.3321032755298651
+Max Mem GB   6.31115264
+
+
+Epoch  3 phase:  val
+PRC  0.0045629900798923
+ROC  0.4860838756992888
+loss  1.3486742973327637
+acc arousal  0.2806474623432813
+acc sleep  0.15680961124334128
+Max Mem GB   6.31115264
+
+
+Epoch  4 phase:  train
+PRC  0.004539933436961615
+ROC  0.4976518305967888
+loss  1.0167078971862793
+acc arousal  0.7575484416383531
+acc sleep  0.33659872715595257
+Max Mem GB   6.31115264
+
+
+Epoch  4 phase:  val
+PRC  0.004558914014386358
+ROC  0.4910758302563923
+loss  1.1371368169784546
+acc arousal  0.7148788470972359
+acc sleep  0.28678762325739543
+Max Mem GB   6.31115264
+
+
+Epoch  5 phase:  train
+PRC  0.004569736637186944
+ROC  0.4965494604172088
+loss  0.9920294284820557
+acc arousal  0.811150346451216
+acc sleep  0.3339889064050914
+Max Mem GB   6.31115264
+
+
+Epoch  5 phase:  val
+PRC  0.004855592052707492
+ROC  0.5015529507723985
+loss  0.9287284016609192
+acc arousal  0.8808262362582129
+acc sleep  0.3339071064263856
+Max Mem GB   6.31115264
+
+
+Epoch  6 phase:  train
+PRC  0.004508891546298972
+ROC  0.49553828493251906
+loss  0.7855247259140015
+acc arousal  0.8756936675673507
+acc sleep  0.32236029660769544
+Max Mem GB   6.31115264
+
+
+Epoch  6 phase:  val
+PRC  0.004884462347002934
+ROC  0.50643023972946
+loss  0.856309711933136
+acc arousal  0.9287657120799054
+acc sleep  0.322819721183271
+Max Mem GB   6.31115264
+
+
+Epoch  7 phase:  train
+PRC  0.00445826072852693
+ROC  0.49124302283108856
+loss  0.8221442699432373
+acc arousal  0.9169652264640573
+acc sleep  0.29410526069948034
+Max Mem GB   6.31115264
+
+
+Epoch  7 phase:  val
+PRC  0.005007410163429509
+ROC  0.5069711501047438
+loss  0.7984010577201843
+acc arousal  0.9463872067681568
+acc sleep  0.28222527484982435
+Max Mem GB   6.31115264
+
+
+Epoch  8 phase:  train
+PRC  0.004469421722113002
+ROC  0.4929535013946073
+loss  0.7384406328201294
+acc arousal  0.9424364696754862
+acc sleep  0.26361721258831083
+Max Mem GB   6.31115264
+
+
+Epoch  8 phase:  val
+PRC  0.005194183488879667
+ROC  0.5071330870672998
+loss  0.5953847169876099
+acc arousal  0.9575994595768293
+acc sleep  0.21395071970984925
+Max Mem GB   6.31115264
+
+
+Epoch  9 phase:  train
+PRC  0.004485363220043339
+ROC  0.49255978192858446
+loss  0.743219792842865
+acc arousal  0.9559531501645309
+acc sleep  0.22054669235709698
+Max Mem GB   6.31115264
+
+
+Epoch  9 phase:  val
+PRC  0.0052847454652066445
+ROC  0.5068835316194671
+loss  0.6128919124603271
+acc arousal  0.9680465149943304
+acc sleep  0.1692220786580528
+Max Mem GB   6.31115264
+
+
+Epoch  10 phase:  train
+PRC  0.004399581556866737
+ROC  0.4863876205544498
+loss  0.677109956741333
+acc arousal  0.9647852751544985
+acc sleep  0.1823219945115899
+              precision    recall  f1-score   support
+
+  not_scored       0.00      0.00      0.00         0
+ not_arousal       1.00      0.97      0.98  23254100
+     Arousal       0.00      0.03      0.01    107775
+
+   micro avg       0.96      0.96      0.96  23361875
+   macro avg       0.33      0.33      0.33  23361875
+weighted avg       0.99      0.96      0.98  23361875
+
+Max Mem GB   6.31115264
+
+
+Epoch  10 phase:  val
+PRC  0.005374603573415932
+ROC  0.509764255919075
+loss  0.6178328990936279
+acc arousal  0.97605812765889
+acc sleep  0.1553098945936756
+              precision    recall  f1-score   support
+
+  not_scored       0.00      0.00      0.00         0
+ not_arousal       1.00      0.98      0.99  12379275
+     Arousal       0.01      0.04      0.01     55425
+
+   micro avg       0.98      0.98      0.98  12434700
+   macro avg       0.33      0.34      0.33  12434700
+weighted avg       0.99      0.98      0.98  12434700
+
+Max Mem GB   6.31115264
+
+
+Epoch  11 phase:  train
+PRC  0.00443581509309391
+ROC  0.4891154221107054
+loss  0.5984747409820557
+acc arousal  0.9779787367238288
+acc sleep  0.152000934197466
+Max Mem GB   6.31115264
+
+
+Epoch  11 phase:  val
+PRC  0.005695408446535558
+ROC  0.5116925578082008
+loss  0.5334931015968323
+acc arousal  0.9823341134084457
+acc sleep  0.14483762892440213
+Max Mem GB   6.31115264
+
+
+Epoch  12 phase:  train
+PRC  0.004395778422049615
+ROC  0.48494802133904036
+loss  0.5194499492645264
+acc arousal  0.9843016025040798
+acc sleep  0.1442907222514159
+Max Mem GB   6.31115264
+
+
+Epoch  12 phase:  val
+PRC  0.005555887439657026
+ROC  0.5104468281005264
+loss  0.5066252946853638
+acc arousal  0.9889805946263279
+acc sleep  0.13953013714156182
+Max Mem GB   6.31115264
+
+
+Epoch  13 phase:  train
+PRC  0.004422430464152896
+ROC  0.48883260826109515
+loss  0.5785803198814392
+acc arousal  0.9855408437892934
+acc sleep  0.14304127985052842
+Max Mem GB   6.31115264
+
+
+Epoch  13 phase:  val
+PRC  0.005639394790472321
+ROC  0.515180178905442
+loss  0.5056681036949158
+acc arousal  0.9892799182931635
+acc sleep  0.13887675393856966
+Max Mem GB   6.31115264
+
+
+Epoch  14 phase:  train
+PRC  0.004414619653658777
+ROC  0.4872279235010148
+loss  0.4528636336326599
+acc arousal  0.9866151154391504
+acc sleep  0.1430133473462953
+Max Mem GB   6.31115264
+
+
+Epoch  14 phase:  val
+PRC  0.005723800365545215
+ROC  0.5174886734974975
+loss  0.477273553609848
+acc arousal  0.9900773641503213
+acc sleep  0.1386187011220673
+Max Mem GB   6.31115264
+
+
+Epoch  15 phase:  train
+PRC  0.004440033332933567
+ROC  0.4894427995070826
+loss  0.5464379191398621
+acc arousal  0.9890384654485139
+acc sleep  0.14134379634495242
+Max Mem GB   6.31115264
+
+
+Epoch  15 phase:  val
+PRC  0.005767084598954262
+ROC  0.5198553535576598
+loss  0.4759332537651062
+acc arousal  0.9904754437179828
+acc sleep  0.1383003513544146
+Max Mem GB   6.31115264
+
+
+Epoch  16 phase:  train
+PRC  0.004490243056226582
+ROC  0.49100837750936366
+loss  0.4824286997318268
+acc arousal  0.9881454292517189
+acc sleep  0.13951958895311498
+Max Mem GB   6.31115264
+
+
+Epoch  16 phase:  val
+PRC  0.005916808071477973
+ROC  0.5204269932135835
+loss  0.4836329519748688
+acc arousal  0.9902599982307575
+acc sleep  0.13810549699648644
+Max Mem GB   6.31115264
+
+
+Epoch  17 phase:  train
+PRC  0.004498706868844307
+ROC  0.49402087156978225
+loss  0.5268893837928772
+acc arousal  0.9900002889322882
+acc sleep  0.1383369416710457
+Max Mem GB   6.31115264
+
+
+Epoch  17 phase:  val
+PRC  0.005682229950920358
+ROC  0.5174321434108407
+loss  0.45641279220581055
+acc arousal  0.9910321921719061
+acc sleep  0.1375567494049643
+Max Mem GB   6.31115264
+
+
+Epoch  18 phase:  train
+PRC  0.004495030207986393
+ROC  0.492457306250689
+loss  0.45617595314979553
+acc arousal  0.9912917948580754
+acc sleep  0.1381285222163835
+Max Mem GB   6.31115264
+
+
+Epoch  18 phase:  val
+PRC  0.005648332324327499
+ROC  0.5165160375232376
+loss  0.4510806202888489
+acc arousal  0.9917267002822746
+acc sleep  0.13713521477955343
+Max Mem GB   6.31115264
+
+
+Epoch  19 phase:  train
+PRC  0.004448034607527476
+ROC  0.48868685996384836
+loss  0.4851877689361572
+acc arousal  0.991557912196688
+acc sleep  0.13473061248321364
+Max Mem GB   6.31115264
+
+
+Epoch  19 phase:  val
+PRC  0.00590804151869454
+ROC  0.5193724814600416
+loss  0.44997990131378174
+acc arousal  0.991848375915784
+acc sleep  0.13602656692734896
+Max Mem GB   6.31115264
+
+
+Epoch  20 phase:  train
+PRC  0.004468065747013105
+ROC  0.49306514407337
+loss  0.5142278671264648
+acc arousal  0.9918192782043393
+acc sleep  0.13207478250715246
+              precision    recall  f1-score   support
+
+  not_scored       0.00      0.00      0.00         0
+ not_arousal       1.00      1.00      1.00  23254100
+     Arousal       0.00      0.00      0.00    107775
+
+   micro avg       0.99      0.99      0.99  23361875
+   macro avg       0.33      0.33      0.33  23361875
+weighted avg       0.99      0.99      0.99  23361875
+
+Max Mem GB   6.31115264
+
+
+Epoch  20 phase:  val
+PRC  0.0058700750532069065
+ROC  0.5163332105246938
+loss  0.434065043926239
+acc arousal  0.9918573025485135
+acc sleep  0.13528378102686162
+              precision    recall  f1-score   support
+
+  not_scored       0.00      0.00      0.00         0
+ not_arousal       1.00      1.00      1.00  12379275
+     Arousal       0.02      0.02      0.02     55425
+
+   micro avg       0.99      0.99      0.99  12434700
+   macro avg       0.34      0.34      0.34  12434700
+weighted avg       0.99      0.99      0.99  12434700
+
+Max Mem GB   6.31115264
+
+
+Epoch  21 phase:  train
+PRC  0.004542031031462713
+ROC  0.49549869532583823
+loss  0.45483461022377014
+acc arousal  0.9917963776452019
+acc sleep  0.13404229579027266
+Max Mem GB   6.31115264
+
+
+Epoch  21 phase:  val
+PRC  0.005618561988081207
+ROC  0.5181525201850989
+loss  0.43697673082351685
+acc arousal  0.9921098217086057
+acc sleep  0.13504948430239147
+Max Mem GB   6.31115264
+
+
+Epoch  22 phase:  train
+PRC  0.004534797012837617
+ROC  0.4935863705234403
+loss  0.47663414478302
+acc arousal  0.9914567216886487
+acc sleep  0.13073981432825363
+Max Mem GB   6.31115264
+
+
+Epoch  22 phase:  val
+PRC  0.005434512812979089
+ROC  0.5120023963342337
+loss  0.42303216457366943
+acc arousal  0.9923259909768631
+acc sleep  0.13495582001586762
+Max Mem GB   6.31115264
+
+
+Epoch  23 phase:  train
+PRC  0.004545357625162984
+ROC  0.4933330788403574
+loss  0.4476500153541565
+acc arousal  0.9924001819203296
+acc sleep  0.13443970339230454
+Max Mem GB   6.31115264
+
+
+Epoch  23 phase:  val
+PRC  0.005622984256291096
+ROC  0.5154143231078577
+loss  0.4279172420501709
+acc arousal  0.9929518203092957
+acc sleep  0.13522974045109373
+Max Mem GB   6.31115264
+
+
+Epoch  24 phase:  train
+PRC  0.004578543813286719
+ROC  0.496850826137517
+loss  0.43488046526908875
+acc arousal  0.9924333556274914
+acc sleep  0.13321104688503532
+Max Mem GB   6.31115264
+
+
+Epoch  24 phase:  val
+PRC  0.005409666778307801
+ROC  0.5104724225217572
+loss  0.43178391456604004
+acc arousal  0.9927324342364512
+acc sleep  0.13390320752578488
+Max Mem GB   6.31115264
+
+
+Epoch  25 phase:  train
+PRC  0.004477528876030322
+ROC  0.4905066906284996
+loss  0.47546708583831787
+acc arousal  0.9928319537708339
+acc sleep  0.1358512757634145
+Max Mem GB   6.31115264
+
+
+Epoch  25 phase:  val
+PRC  0.005215115123328784
+ROC  0.5063680189961158
+loss  0.4364257752895355
+acc arousal  0.9931140276806034
+acc sleep  0.13537798934602743
+Max Mem GB   6.31115264
+
+
+Epoch  26 phase:  train
+PRC  0.004482080857745954
+ROC  0.4921658459342718
+loss  0.4480225741863251
+acc arousal  0.9930358757591161
+acc sleep  0.13666916564488818
+Max Mem GB   6.31115264
+
+
+Epoch  26 phase:  val
+PRC  0.00541421946938753
+ROC  0.5104801928793737
+loss  0.4276984632015228
+acc arousal  0.9930858806404658
+acc sleep  0.13512456080698176
+Max Mem GB   6.31115264
+
+
+Epoch  27 phase:  train
+PRC  0.0044940362478461116
+ROC  0.4916625860038576
+loss  0.3896046578884125
+acc arousal  0.9930979854998796
+acc sleep  0.13800035032404975
+Max Mem GB   6.31115264
+
+
+Epoch  27 phase:  val
+PRC  0.0052292063704190445
+ROC  0.5066055818833061
+loss  0.41414153575897217
+acc arousal  0.9931859232631266
+acc sleep  0.13553349200952058
+Max Mem GB   6.31115264
+
+
+Epoch  28 phase:  train
+PRC  0.004531254857720247
+ROC  0.49629910670347266
+loss  0.515751838684082
+acc arousal  0.9928161160009631
+acc sleep  0.13562641443335086
+Max Mem GB   6.31115264
+
+
+Epoch  28 phase:  val
+PRC  0.00535237025326178
+ROC  0.5101948249601962
+loss  0.4179844260215759
+acc arousal  0.9933534383620031
+acc sleep  0.13640231213872833
+Max Mem GB   6.31115264
+
+
+Epoch  29 phase:  train
+PRC  0.004533833253254873
+ROC  0.49538755308426297
+loss  0.4185999035835266
+acc arousal  0.9932920195831885
+acc sleep  0.13698978221521574
+Max Mem GB   6.31115264
+
+
+Epoch  29 phase:  val
+PRC  0.005409422685381974
+ROC  0.5096731124201602
+loss  0.4232073724269867
+acc arousal  0.9934029771526455
+acc sleep  0.13547872605689676
+weights_1_10
+Created model : Deep_Sleep(
+  (pcc1): PCC(
+    (activate): ReLU(inplace=True)
+    (blocks): Sequential(
+      (0): MaxPool1d(kernel_size=1, stride=1, padding=0, dilation=1, ceil_mode=False)
+      (1): Conv1d(1, 15, kernel_size=(7,), stride=(1,), padding=(3,))
+      (2): ReLU(inplace=True)
+      (3): BatchNorm1d(15, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (4): Conv1d(15, 15, kernel_size=(7,), stride=(1,), padding=(3,))
+      (5): ReLU(inplace=True)
+      (6): BatchNorm1d(15, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (pcc2): PCC(
+    (activate): ReLU(inplace=True)
+    (blocks): Sequential(
+      (0): MaxPool1d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+      (1): Conv1d(15, 18, kernel_size=(7,), stride=(1,), padding=(3,))
+      (2): ReLU(inplace=True)
+      (3): BatchNorm1d(18, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (4): Conv1d(18, 18, kernel_size=(7,), stride=(1,), padding=(3,))
+      (5): ReLU(inplace=True)
+      (6): BatchNorm1d(18, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (pcc3): PCC(
+    (activate): ReLU(inplace=True)
+    (blocks): Sequential(
+      (0): MaxPool1d(kernel_size=4, stride=4, padding=0, dilation=1, ceil_mode=False)
+      (1): Conv1d(18, 21, kernel_size=(7,), stride=(1,), padding=(3,))
+      (2): ReLU(inplace=True)
+      (3): BatchNorm1d(21, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (4): Conv1d(21, 21, kernel_size=(7,), stride=(1,), padding=(3,))
+      (5): ReLU(inplace=True)
+      (6): BatchNorm1d(21, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (pcc4): PCC(
+    (activate): ReLU(inplace=True)
+    (blocks): Sequential(
+      (0): MaxPool1d(kernel_size=4, stride=4, padding=0, dilation=1, ceil_mode=False)
+      (1): Conv1d(21, 25, kernel_size=(7,), stride=(1,), padding=(3,))
+      (2): ReLU(inplace=True)
+      (3): BatchNorm1d(25, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (4): Conv1d(25, 25, kernel_size=(7,), stride=(1,), padding=(3,))
+      (5): ReLU(inplace=True)
+      (6): BatchNorm1d(25, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (pcc5): PCC(
+    (activate): ReLU(inplace=True)
+    (blocks): Sequential(
+      (0): MaxPool1d(kernel_size=4, stride=4, padding=0, dilation=1, ceil_mode=False)
+      (1): Conv1d(25, 30, kernel_size=(7,), stride=(1,), padding=(3,))
+      (2): ReLU(inplace=True)
+      (3): BatchNorm1d(30, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (4): Conv1d(30, 30, kernel_size=(7,), stride=(1,), padding=(3,))
+      (5): ReLU(inplace=True)
+      (6): BatchNorm1d(30, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (pcc6): PCC(
+    (activate): ReLU(inplace=True)
+    (blocks): Sequential(
+      (0): MaxPool1d(kernel_size=4, stride=4, padding=0, dilation=1, ceil_mode=False)
+      (1): Conv1d(30, 60, kernel_size=(7,), stride=(1,), padding=(3,))
+      (2): ReLU(inplace=True)
+      (3): BatchNorm1d(60, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (4): Conv1d(60, 60, kernel_size=(7,), stride=(1,), padding=(3,))
+      (5): ReLU(inplace=True)
+      (6): BatchNorm1d(60, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (pcc7): PCC(
+    (activate): ReLU(inplace=True)
+    (blocks): Sequential(
+      (0): MaxPool1d(kernel_size=4, stride=4, padding=0, dilation=1, ceil_mode=False)
+      (1): Conv1d(60, 120, kernel_size=(7,), stride=(1,), padding=(3,))
+      (2): ReLU(inplace=True)
+      (3): BatchNorm1d(120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (4): Conv1d(120, 120, kernel_size=(7,), stride=(1,), padding=(3,))
+      (5): ReLU(inplace=True)
+      (6): BatchNorm1d(120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (pcc8): PCC(
+    (activate): ReLU(inplace=True)
+    (blocks): Sequential(
+      (0): MaxPool1d(kernel_size=4, stride=4, padding=0, dilation=1, ceil_mode=False)
+      (1): Conv1d(120, 240, kernel_size=(7,), stride=(1,), padding=(3,))
+      (2): ReLU(inplace=True)
+      (3): BatchNorm1d(240, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (4): Conv1d(240, 240, kernel_size=(7,), stride=(1,), padding=(3,))
+      (5): ReLU(inplace=True)
+      (6): BatchNorm1d(240, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (pcc9): PCC(
+    (activate): ReLU(inplace=True)
+    (blocks): Sequential(
+      (0): MaxPool1d(kernel_size=4, stride=4, padding=0, dilation=1, ceil_mode=False)
+      (1): Conv1d(240, 480, kernel_size=(7,), stride=(1,), padding=(3,))
+      (2): ReLU(inplace=True)
+      (3): BatchNorm1d(480, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (4): Conv1d(480, 480, kernel_size=(7,), stride=(1,), padding=(3,))
+      (5): ReLU(inplace=True)
+      (6): BatchNorm1d(480, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (ucc1): UCC(
+    (activate): ReLU(inplace=True)
+    (up): Sequential(
+      (0): ConvTranspose1d(480, 240, kernel_size=(4,), stride=(4,))
+    )
+    (blocks): Sequential(
+      (0): Conv1d(480, 240, kernel_size=(7,), stride=(1,), padding=(3,))
+      (1): ReLU(inplace=True)
+      (2): BatchNorm1d(240, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (3): Conv1d(240, 240, kernel_size=(7,), stride=(1,), padding=(3,))
+      (4): ReLU(inplace=True)
+      (5): BatchNorm1d(240, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (ucc2): UCC(
+    (activate): ReLU(inplace=True)
+    (up): Sequential(
+      (0): ConvTranspose1d(240, 120, kernel_size=(4,), stride=(4,))
+    )
+    (blocks): Sequential(
+      (0): Conv1d(240, 120, kernel_size=(7,), stride=(1,), padding=(3,))
+      (1): ReLU(inplace=True)
+      (2): BatchNorm1d(120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (3): Conv1d(120, 120, kernel_size=(7,), stride=(1,), padding=(3,))
+      (4): ReLU(inplace=True)
+      (5): BatchNorm1d(120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (ucc3): UCC(
+    (activate): ReLU(inplace=True)
+    (up): Sequential(
+      (0): ConvTranspose1d(120, 60, kernel_size=(4,), stride=(4,))
+    )
+    (blocks): Sequential(
+      (0): Conv1d(120, 60, kernel_size=(7,), stride=(1,), padding=(3,))
+      (1): ReLU(inplace=True)
+      (2): BatchNorm1d(60, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (3): Conv1d(60, 60, kernel_size=(7,), stride=(1,), padding=(3,))
+      (4): ReLU(inplace=True)
+      (5): BatchNorm1d(60, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (ucc4): UCC(
+    (activate): ReLU(inplace=True)
+    (up): Sequential(
+      (0): ConvTranspose1d(60, 30, kernel_size=(4,), stride=(4,))
+    )
+    (blocks): Sequential(
+      (0): Conv1d(60, 30, kernel_size=(7,), stride=(1,), padding=(3,))
+      (1): ReLU(inplace=True)
+      (2): BatchNorm1d(30, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (3): Conv1d(30, 30, kernel_size=(7,), stride=(1,), padding=(3,))
+      (4): ReLU(inplace=True)
+      (5): BatchNorm1d(30, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (ucc5): UCC(
+    (activate): ReLU(inplace=True)
+    (up): Sequential(
+      (0): ConvTranspose1d(30, 25, kernel_size=(4,), stride=(4,))
+    )
+    (blocks): Sequential(
+      (0): Conv1d(50, 25, kernel_size=(7,), stride=(1,), padding=(3,))
+      (1): ReLU(inplace=True)
+      (2): BatchNorm1d(25, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (3): Conv1d(25, 25, kernel_size=(7,), stride=(1,), padding=(3,))
+      (4): ReLU(inplace=True)
+      (5): BatchNorm1d(25, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (ucc6): UCC(
+    (activate): ReLU(inplace=True)
+    (up): Sequential(
+      (0): ConvTranspose1d(25, 21, kernel_size=(4,), stride=(4,))
+    )
+    (blocks): Sequential(
+      (0): Conv1d(42, 21, kernel_size=(7,), stride=(1,), padding=(3,))
+      (1): ReLU(inplace=True)
+      (2): BatchNorm1d(21, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (3): Conv1d(21, 21, kernel_size=(7,), stride=(1,), padding=(3,))
+      (4): ReLU(inplace=True)
+      (5): BatchNorm1d(21, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (ucc7): UCC(
+    (activate): ReLU(inplace=True)
+    (up): Sequential(
+      (0): ConvTranspose1d(21, 18, kernel_size=(4,), stride=(4,))
+    )
+    (blocks): Sequential(
+      (0): Conv1d(36, 18, kernel_size=(7,), stride=(1,), padding=(3,))
+      (1): ReLU(inplace=True)
+      (2): BatchNorm1d(18, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (3): Conv1d(18, 18, kernel_size=(7,), stride=(1,), padding=(3,))
+      (4): ReLU(inplace=True)
+      (5): BatchNorm1d(18, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (ucc8): UCC(
+    (activate): ReLU(inplace=True)
+    (up): Sequential(
+      (0): ConvTranspose1d(18, 15, kernel_size=(4,), stride=(2,), padding=(1,))
+    )
+    (blocks): Sequential(
+      (0): Conv1d(30, 15, kernel_size=(7,), stride=(1,), padding=(3,))
+      (1): ReLU(inplace=True)
+      (2): BatchNorm1d(15, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (3): Conv1d(15, 15, kernel_size=(7,), stride=(1,), padding=(3,))
+      (4): ReLU(inplace=True)
+      (5): BatchNorm1d(15, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (arousal_classifier): Sequential(
+    (0): Conv1d(15, 3, kernel_size=(1,), stride=(1,))
+  )
+  (sleep_classifier): Sequential(
+    (0): Conv1d(15, 6, kernel_size=(1,), stride=(1,))
+  )
+)
+Tesla T4
+Max Mem GB   6.31115264
+
+
+Epoch  0 phase:  train
+PRC  0.0045372588996207735
+ROC  0.4993850296355428
+loss  1.0084508657455444
+acc arousal  0.7150955135236363
+acc sleep  0.12193696502598236
+              precision    recall  f1-score   support
+
+  not_scored       0.00      0.00      0.00         0
+ not_arousal       1.00      0.72      0.83  23254100
+     Arousal       0.00      0.28      0.01    107775
+
+   micro avg       0.72      0.72      0.72  23361875
+   macro avg       0.33      0.33      0.28  23361875
+weighted avg       0.99      0.72      0.83  23361875
+
+Max Mem GB   6.31115264
+
+
+Epoch  0 phase:  val
+PRC  0.005108782136905151
+ROC  0.5092309009051731
+loss  0.9853208065032959
+acc arousal  0.9735367158033568
+acc sleep  0.12817644792020855
+              precision    recall  f1-score   support
+
+  not_scored       0.00      0.00      0.00         0
+ not_arousal       1.00      0.98      0.99  12379275
+     Arousal       0.01      0.04      0.01     55425
+
+   micro avg       0.97      0.97      0.97  12434700
+   macro avg       0.33      0.34      0.33  12434700
+weighted avg       0.99      0.97      0.98  12434700
+
+Max Mem GB   6.31115264
+
+
+Epoch  1 phase:  train
+PRC  0.004543748846396721
+ROC  0.49947040151536487
+loss  0.9077914953231812
+acc arousal  0.8583363278846411
+acc sleep  0.09682830618321948
+Max Mem GB   6.31115264
+
+
+Epoch  1 phase:  val
+PRC  0.005073263198349684
+ROC  0.5089754369825564
+loss  0.9944558143615723
+acc arousal  0.9582011628748582
+acc sleep  0.011893188257962144
+Max Mem GB   6.31115264
+
+
+Epoch  2 phase:  train
+PRC  0.004546834111059796
+ROC  0.500186610913252
+loss  0.8511340618133545
+acc arousal  0.9275264078760802
+acc sleep  0.09138226192561452
+Max Mem GB   6.31115264
+
+
+Epoch  2 phase:  val
+PRC  0.004950869439584438
+ROC  0.49845191156523505
+loss  1.0262033939361572
+acc arousal  0.39979822593227016
+acc sleep  0.023391318145755412
+Max Mem GB   6.31115264
+
+
+Epoch  3 phase:  train
+PRC  0.004497225543905867
+ROC  0.4958983661841088
+loss  0.7212445735931396
+acc arousal  0.9678424355921774
+acc sleep  0.09226218251882992
+Max Mem GB   6.31115264
+
+
+Epoch  3 phase:  val
+PRC  0.0048203848139869564
+ROC  0.49372303885103636
+loss  0.9858643412590027
+acc arousal  0.8186597183687584
+acc sleep  0.026870860251615097
+Max Mem GB   6.31115264
+
+
+Epoch  4 phase:  train
+PRC  0.0045190035103689396
+ROC  0.4975137608269518
+loss  0.7379682660102844
+acc arousal  0.981096594344418
+acc sleep  0.09758388509371169
+Max Mem GB   6.31115264
+
+
+Epoch  4 phase:  val
+PRC  0.005239747582476883
+ROC  0.4999391641587671
+loss  0.789030909538269
+acc arousal  0.9771528062599018
+acc sleep  0.07809661113000113
+Max Mem GB   6.31115264
+
+
+Epoch  5 phase:  train
+PRC  0.00445174190281473
+ROC  0.4935746820880482
+loss  0.6196933388710022
+acc arousal  0.9833005698386795
+acc sleep  0.0991733753722193
+Max Mem GB   6.31115264
+
+
+Epoch  5 phase:  val
+PRC  0.00524351411519191
+ROC  0.5030851711008503
+loss  0.6656028628349304
+acc arousal  0.9870598406073328
+acc sleep  0.10439922928709056
+Max Mem GB   6.31115264
+
+
+Epoch  6 phase:  train
+PRC  0.004445543645109998
+ROC  0.4937880749278719
+loss  0.629157304763794
+acc arousal  0.9842876909494636
+acc sleep  0.09371004846149354
+Max Mem GB   6.31115264
+
+
+Epoch  6 phase:  val
+PRC  0.005074886515212258
+ROC  0.5043718693556438
+loss  0.6352016925811768
+acc arousal  0.9843080251232438
+acc sleep  0.10535119573841097
+Max Mem GB   6.31115264
+
+
+Epoch  7 phase:  train
+PRC  0.004432154966605485
+ROC  0.4922048249392396
+loss  0.5928775668144226
+acc arousal  0.983129222290591
+acc sleep  0.09556587843755474
+Max Mem GB   6.31115264
+
+
+Epoch  7 phase:  val
+PRC  0.005287899037468375
+ROC  0.508478224449423
+loss  0.5879045128822327
+acc arousal  0.9846078313107675
+acc sleep  0.10815323586081832
+Max Mem GB   6.31115264
+
+
+Epoch  8 phase:  train
+PRC  0.00440932157390819
+ROC  0.48999522932335837
+loss  0.5711278915405273
+acc arousal  0.9822682896813719
+acc sleep  0.10126429614059672
+Max Mem GB   6.31115264
+
+
+Epoch  8 phase:  val
+PRC  0.005331596744887445
+ROC  0.5121380441587665
+loss  0.5541056990623474
+acc arousal  0.9840207644736101
+acc sleep  0.11051506290377423
+Max Mem GB   6.31115264
+
+
+Epoch  9 phase:  train
+PRC  0.004412340817923281
+ROC  0.4910980324027058
+loss  0.44999977946281433
+acc arousal  0.980429139356323
+acc sleep  0.10438091901675717
+Max Mem GB   6.31115264
+
+
+Epoch  9 phase:  val
+PRC  0.0056961912816810715
+ROC  0.5149090565777651
+loss  0.5149886608123779
+acc arousal  0.9848223921767313
+acc sleep  0.11374879292757566
+Max Mem GB   6.31115264
+
+
+Epoch  10 phase:  train
+PRC  0.004393149683501785
+ROC  0.48805633492510564
+loss  0.4641178548336029
+acc arousal  0.9801151662698306
+acc sleep  0.10351206866351376
+              precision    recall  f1-score   support
+
+  not_scored       0.00      0.00      0.00         0
+ not_arousal       1.00      0.98      0.99  23254100
+     Arousal       0.00      0.01      0.01    107775
+
+   micro avg       0.98      0.98      0.98  23361875
+   macro avg       0.33      0.33      0.33  23361875
+weighted avg       0.99      0.98      0.99  23361875
+
+Max Mem GB   6.31115264
+
+
+Epoch  10 phase:  val
+PRC  0.005423454922211754
+ROC  0.5152821580464177
+loss  0.4781804382801056
+acc arousal  0.9796866832332103
+acc sleep  0.11365168310098606
+              precision    recall  f1-score   support
+
+  not_scored       0.00      0.00      0.00         0
+ not_arousal       1.00      0.98      0.99  12379275
+     Arousal       0.01      0.04      0.02     55425
+
+   micro avg       0.98      0.98      0.98  12434700
+   macro avg       0.34      0.34      0.34  12434700
+weighted avg       0.99      0.98      0.99  12434700
+
+Max Mem GB   6.31115264
+
+
+Epoch  11 phase:  train
+PRC  0.0044301642208659725
+ROC  0.4935391825448242
+loss  0.5246473550796509
+acc arousal  0.9819780304449022
+acc sleep  0.10301801833362527
+Max Mem GB   6.31115264
+
+
+Epoch  11 phase:  val
+PRC  0.00542854154000331
+ROC  0.5162150423691427
+loss  0.5131714940071106
+acc arousal  0.9789284823920159
+acc sleep  0.11044261589028675
+Max Mem GB   6.31115264
+
+
+Epoch  12 phase:  train
+PRC  0.004413465917319515
+ROC  0.4915552581898868
+loss  0.4962647259235382
+acc arousal  0.9850788089569009
+acc sleep  0.0986277573422082
+Max Mem GB   6.31115264
+
+
+Epoch  12 phase:  val
+PRC  0.0055581081057155595
+ROC  0.5198117086507549
+loss  0.4791892170906067
+acc arousal  0.9875377773488705
+acc sleep  0.11195176243907967
+Max Mem GB   6.31115264
+
+
+Epoch  13 phase:  train
+PRC  0.0044020970049133785
+ROC  0.48787884797942765
+loss  0.45478183031082153
+acc arousal  0.9874815698654325
+acc sleep  0.09165486074619023
+Max Mem GB   6.31115264
+
+
+Epoch  13 phase:  val
+PRC  0.005997451795246149
+ROC  0.517946972310355
+loss  0.43816691637039185
+acc arousal  0.9892067359888055
+acc sleep  0.10811687634591409
+Max Mem GB   6.31115264
+
+
+Epoch  14 phase:  train
+PRC  0.004370790668927888
+ROC  0.4878730798175905
+loss  0.45817896723747253
+acc arousal  0.9877532090211081
+acc sleep  0.08487875284638291
+Max Mem GB   6.31115264
+
+
+Epoch  14 phase:  val
+PRC  0.0056724172699391985
+ROC  0.5204781699670754
+loss  0.4339219331741333
+acc arousal  0.9898917545256419
+acc sleep  0.10535536665533266
+Max Mem GB   6.31115264
+
+
+Epoch  15 phase:  train
+PRC  0.004405391447308789
+ROC  0.487885603419818
+loss  0.450176477432251
+acc arousal  0.9891307097568153
+acc sleep  0.07932929292929293
+Max Mem GB   6.31115264
+
+
+Epoch  15 phase:  val
+PRC  0.0055597537860549535
+ROC  0.5177875949731253
+loss  0.4566577672958374
+acc arousal  0.9892300578220624
+acc sleep  0.09888518644452
+Max Mem GB   6.31115264
+
+
+Epoch  16 phase:  train
+PRC  0.004395424547973272
+ROC  0.4895831345845251
+loss  0.4178546965122223
+acc arousal  0.990198560689157
+acc sleep  0.07560847784200385
+Max Mem GB   6.31115264
+
+
+Epoch  16 phase:  val
+PRC  0.0053564411128139856
+ROC  0.5149047756074349
+loss  0.43603602051734924
+acc arousal  0.9898573347165593
+acc sleep  0.0958886546526125
+Max Mem GB   6.31115264
+
+
+Epoch  17 phase:  train
+PRC  0.004436765298170868
+ROC  0.4917722940599099
+loss  0.44884344935417175
+acc arousal  0.9917381203349475
+acc sleep  0.06366205406667834
+Max Mem GB   6.31115264
+
+
+Epoch  17 phase:  val
+PRC  0.005449665442769232
+ROC  0.5139739605419471
+loss  0.42025741934776306
+acc arousal  0.9920343072209221
+acc sleep  0.0927776946616797
+Max Mem GB   6.31115264
+
+
+Epoch  18 phase:  train
+PRC  0.004392343912508362
+ROC  0.4885241115190348
+loss  0.48945391178131104
+acc arousal  0.9917996736135263
+acc sleep  0.05772195947918491
+Max Mem GB   6.31115264
+
+
+Epoch  18 phase:  val
+PRC  0.005466185441576942
+ROC  0.5163524518070671
+loss  0.40887224674224854
+acc arousal  0.9932077171142046
+acc sleep  0.08083953303864899
+Max Mem GB   6.31115264
+
+
+Epoch  19 phase:  train
+PRC  0.004362764423485102
+ROC  0.4847273612504862
+loss  0.5181302428245544
+acc arousal  0.9926657427967576
+acc sleep  0.04912290535411923
+Max Mem GB   6.31115264
+
+
+Epoch  19 phase:  val
+PRC  0.00537638779208324
+ROC  0.5111127469384389
+loss  0.4215504229068756
+acc arousal  0.9936433528754212
+acc sleep  0.07240022668026748
+Max Mem GB   6.31115264
+
+
+Epoch  20 phase:  train
+PRC  0.004448107014322548
+ROC  0.49132703344224465
+loss  0.3770526647567749
+acc arousal  0.9935136627518125
+acc sleep  0.04684332340748526
+              precision    recall  f1-score   support
+
+  not_scored       0.00      0.00      0.00         0
+ not_arousal       1.00      1.00      1.00  23254100
+     Arousal       0.00      0.00      0.00    107775
+
+   micro avg       0.99      0.99      0.99  23361875
+   macro avg       0.33      0.33      0.33  23361875
+weighted avg       0.99      0.99      0.99  23361875
+
+Max Mem GB   6.31115264
+
+
+Epoch  20 phase:  val
+PRC  0.005359795780862419
+ROC  0.5099264271601709
+loss  0.3821466565132141
+acc arousal  0.9942611401963859
+acc sleep  0.06263946503456874
+              precision    recall  f1-score   support
+
+  not_scored       0.00      0.00      0.00         0
+ not_arousal       1.00      1.00      1.00  12379275
+     Arousal       0.02      0.01      0.01     55425
+
+   micro avg       0.99      0.99      0.99  12434700
+   macro avg       0.34      0.33      0.34  12434700
+weighted avg       0.99      0.99      0.99  12434700
+
+Max Mem GB   6.31115264
+
+
+Epoch  21 phase:  train
+PRC  0.004423244327285183
+ROC  0.49029302692596605
+loss  0.4481911361217499
+acc arousal  0.9939703469862757
+acc sleep  0.04368526887370818
+Max Mem GB   6.31115264
+
+
+Epoch  21 phase:  val
+PRC  0.005306542346497407
+ROC  0.5100130799066137
+loss  0.3831929564476013
+acc arousal  0.9945587750408132
+acc sleep  0.061455015300918056
+Max Mem GB   6.31115264
+
+
+Epoch  22 phase:  train
+PRC  0.00445529927011889
+ROC  0.4916899848566301
+loss  0.4036352038383484
+acc arousal  0.9945206024773269
+acc sleep  0.04407123255678169
+Max Mem GB   6.31115264
+
+
+Epoch  22 phase:  val
+PRC  0.005353587565947139
+ROC  0.5089895204926617
+loss  0.3803538382053375
+acc arousal  0.9949084416994378
+acc sleep  0.05262926442253202
+Max Mem GB   6.31115264
+
+
+Epoch  23 phase:  train
+PRC  0.004463893136664455
+ROC  0.49021564913921023
+loss  0.3388015925884247
+acc arousal  0.9948480162658178
+acc sleep  0.04696747825071525
+Max Mem GB   6.31115264
+
+
+Epoch  23 phase:  val
+PRC  0.005412489129931277
+ROC  0.5108951957083148
+loss  0.36365875601768494
+acc arousal  0.9951670727882458
+acc sleep  0.049965680607503116
+Max Mem GB   6.31115264
+
+
+Epoch  24 phase:  train
+PRC  0.0044186818572745515
+ROC  0.48904972179976913
+loss  0.4132075309753418
+acc arousal  0.9948680489044651
+acc sleep  0.055078227360308284
+Max Mem GB   6.31115264
+
+
+Epoch  24 phase:  val
+PRC  0.005413590837238467
+ROC  0.5136000510033711
+loss  0.36930954456329346
+acc arousal  0.9951686811905394
+acc sleep  0.06827246968151422
+Max Mem GB   6.31115264
+
+
+Epoch  25 phase:  train
+PRC  0.004473491266641102
+ROC  0.49154740001975383
+loss  0.3245156407356262
+acc arousal  0.9950759945423902
+acc sleep  0.06830903252174929
+Max Mem GB   6.31115264
+
+
+Epoch  25 phase:  val
+PRC  0.005427545512122889
+ROC  0.5139332308141088
+loss  0.3225291669368744
+acc arousal  0.9953004093383837
+acc sleep  0.07188611583361669
+Max Mem GB   6.31115264
+
+
+Epoch  26 phase:  train
+PRC  0.0044546753900351595
+ROC  0.48965940651630235
+loss  0.3210938274860382
+acc arousal  0.9950516386206159
+acc sleep  0.07288006072283529
+Max Mem GB   6.31115264
+
+
+Epoch  26 phase:  val
+PRC  0.005443350913650349
+ROC  0.5130346424197006
+loss  0.33610013127326965
+acc arousal  0.995341182336526
+acc sleep  0.08589658846197439
+Max Mem GB   6.31115264
+
+
+Epoch  27 phase:  train
+PRC  0.004458612308705056
+ROC  0.49074811564516035
+loss  0.37353113293647766
+acc arousal  0.9951468364589743
+acc sleep  0.06988633152332574
+Max Mem GB   6.31115264
+
+
+Epoch  27 phase:  val
+PRC  0.005420845708054958
+ROC  0.5135968074421435
+loss  0.3248255252838135
+acc arousal  0.9953217206687737
+acc sleep  0.08807435112773433
+Max Mem GB   6.31115264
+
+
+Epoch  28 phase:  train
+PRC  0.0044454775363517215
+ROC  0.4905777596869204
+loss  0.3382394015789032
+acc arousal  0.995176757002595
+acc sleep  0.06955179541075494
+Max Mem GB   6.31115264
+
+
+Epoch  28 phase:  val
+PRC  0.0053745338444153605
+ROC  0.5136223691687205
+loss  0.3283401429653168
+acc arousal  0.9953082100895075
+acc sleep  0.096904907627791
+Max Mem GB   6.31115264
+
+
+Epoch  29 phase:  train
+PRC  0.004478302504752649
+ROC  0.49055441455169535
+loss  0.3493236303329468
+acc arousal  0.9952421199068996
+acc sleep  0.06198161966485666
+Max Mem GB   6.31115264
+
+
+Epoch  29 phase:  val
+PRC  0.0054582351441156965
+ROC  0.5152601361930974
+loss  0.3344244360923767
+acc arousal  0.9953956267541637
+acc sleep  0.08302373342400544
+weights_1_5
+Created model : Deep_Sleep(
+  (pcc1): PCC(
+    (activate): ReLU(inplace=True)
+    (blocks): Sequential(
+      (0): MaxPool1d(kernel_size=1, stride=1, padding=0, dilation=1, ceil_mode=False)
+      (1): Conv1d(1, 15, kernel_size=(7,), stride=(1,), padding=(3,))
+      (2): ReLU(inplace=True)
+      (3): BatchNorm1d(15, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (4): Conv1d(15, 15, kernel_size=(7,), stride=(1,), padding=(3,))
+      (5): ReLU(inplace=True)
+      (6): BatchNorm1d(15, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (pcc2): PCC(
+    (activate): ReLU(inplace=True)
+    (blocks): Sequential(
+      (0): MaxPool1d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+      (1): Conv1d(15, 18, kernel_size=(7,), stride=(1,), padding=(3,))
+      (2): ReLU(inplace=True)
+      (3): BatchNorm1d(18, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (4): Conv1d(18, 18, kernel_size=(7,), stride=(1,), padding=(3,))
+      (5): ReLU(inplace=True)
+      (6): BatchNorm1d(18, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (pcc3): PCC(
+    (activate): ReLU(inplace=True)
+    (blocks): Sequential(
+      (0): MaxPool1d(kernel_size=4, stride=4, padding=0, dilation=1, ceil_mode=False)
+      (1): Conv1d(18, 21, kernel_size=(7,), stride=(1,), padding=(3,))
+      (2): ReLU(inplace=True)
+      (3): BatchNorm1d(21, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (4): Conv1d(21, 21, kernel_size=(7,), stride=(1,), padding=(3,))
+      (5): ReLU(inplace=True)
+      (6): BatchNorm1d(21, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (pcc4): PCC(
+    (activate): ReLU(inplace=True)
+    (blocks): Sequential(
+      (0): MaxPool1d(kernel_size=4, stride=4, padding=0, dilation=1, ceil_mode=False)
+      (1): Conv1d(21, 25, kernel_size=(7,), stride=(1,), padding=(3,))
+      (2): ReLU(inplace=True)
+      (3): BatchNorm1d(25, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (4): Conv1d(25, 25, kernel_size=(7,), stride=(1,), padding=(3,))
+      (5): ReLU(inplace=True)
+      (6): BatchNorm1d(25, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (pcc5): PCC(
+    (activate): ReLU(inplace=True)
+    (blocks): Sequential(
+      (0): MaxPool1d(kernel_size=4, stride=4, padding=0, dilation=1, ceil_mode=False)
+      (1): Conv1d(25, 30, kernel_size=(7,), stride=(1,), padding=(3,))
+      (2): ReLU(inplace=True)
+      (3): BatchNorm1d(30, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (4): Conv1d(30, 30, kernel_size=(7,), stride=(1,), padding=(3,))
+      (5): ReLU(inplace=True)
+      (6): BatchNorm1d(30, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (pcc6): PCC(
+    (activate): ReLU(inplace=True)
+    (blocks): Sequential(
+      (0): MaxPool1d(kernel_size=4, stride=4, padding=0, dilation=1, ceil_mode=False)
+      (1): Conv1d(30, 60, kernel_size=(7,), stride=(1,), padding=(3,))
+      (2): ReLU(inplace=True)
+      (3): BatchNorm1d(60, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (4): Conv1d(60, 60, kernel_size=(7,), stride=(1,), padding=(3,))
+      (5): ReLU(inplace=True)
+      (6): BatchNorm1d(60, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (pcc7): PCC(
+    (activate): ReLU(inplace=True)
+    (blocks): Sequential(
+      (0): MaxPool1d(kernel_size=4, stride=4, padding=0, dilation=1, ceil_mode=False)
+      (1): Conv1d(60, 120, kernel_size=(7,), stride=(1,), padding=(3,))
+      (2): ReLU(inplace=True)
+      (3): BatchNorm1d(120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (4): Conv1d(120, 120, kernel_size=(7,), stride=(1,), padding=(3,))
+      (5): ReLU(inplace=True)
+      (6): BatchNorm1d(120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (pcc8): PCC(
+    (activate): ReLU(inplace=True)
+    (blocks): Sequential(
+      (0): MaxPool1d(kernel_size=4, stride=4, padding=0, dilation=1, ceil_mode=False)
+      (1): Conv1d(120, 240, kernel_size=(7,), stride=(1,), padding=(3,))
+      (2): ReLU(inplace=True)
+      (3): BatchNorm1d(240, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (4): Conv1d(240, 240, kernel_size=(7,), stride=(1,), padding=(3,))
+      (5): ReLU(inplace=True)
+      (6): BatchNorm1d(240, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (pcc9): PCC(
+    (activate): ReLU(inplace=True)
+    (blocks): Sequential(
+      (0): MaxPool1d(kernel_size=4, stride=4, padding=0, dilation=1, ceil_mode=False)
+      (1): Conv1d(240, 480, kernel_size=(7,), stride=(1,), padding=(3,))
+      (2): ReLU(inplace=True)
+      (3): BatchNorm1d(480, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (4): Conv1d(480, 480, kernel_size=(7,), stride=(1,), padding=(3,))
+      (5): ReLU(inplace=True)
+      (6): BatchNorm1d(480, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (ucc1): UCC(
+    (activate): ReLU(inplace=True)
+    (up): Sequential(
+      (0): ConvTranspose1d(480, 240, kernel_size=(4,), stride=(4,))
+    )
+    (blocks): Sequential(
+      (0): Conv1d(480, 240, kernel_size=(7,), stride=(1,), padding=(3,))
+      (1): ReLU(inplace=True)
+      (2): BatchNorm1d(240, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (3): Conv1d(240, 240, kernel_size=(7,), stride=(1,), padding=(3,))
+      (4): ReLU(inplace=True)
+      (5): BatchNorm1d(240, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (ucc2): UCC(
+    (activate): ReLU(inplace=True)
+    (up): Sequential(
+      (0): ConvTranspose1d(240, 120, kernel_size=(4,), stride=(4,))
+    )
+    (blocks): Sequential(
+      (0): Conv1d(240, 120, kernel_size=(7,), stride=(1,), padding=(3,))
+      (1): ReLU(inplace=True)
+      (2): BatchNorm1d(120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (3): Conv1d(120, 120, kernel_size=(7,), stride=(1,), padding=(3,))
+      (4): ReLU(inplace=True)
+      (5): BatchNorm1d(120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (ucc3): UCC(
+    (activate): ReLU(inplace=True)
+    (up): Sequential(
+      (0): ConvTranspose1d(120, 60, kernel_size=(4,), stride=(4,))
+    )
+    (blocks): Sequential(
+      (0): Conv1d(120, 60, kernel_size=(7,), stride=(1,), padding=(3,))
+      (1): ReLU(inplace=True)
+      (2): BatchNorm1d(60, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (3): Conv1d(60, 60, kernel_size=(7,), stride=(1,), padding=(3,))
+      (4): ReLU(inplace=True)
+      (5): BatchNorm1d(60, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (ucc4): UCC(
+    (activate): ReLU(inplace=True)
+    (up): Sequential(
+      (0): ConvTranspose1d(60, 30, kernel_size=(4,), stride=(4,))
+    )
+    (blocks): Sequential(
+      (0): Conv1d(60, 30, kernel_size=(7,), stride=(1,), padding=(3,))
+      (1): ReLU(inplace=True)
+      (2): BatchNorm1d(30, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (3): Conv1d(30, 30, kernel_size=(7,), stride=(1,), padding=(3,))
+      (4): ReLU(inplace=True)
+      (5): BatchNorm1d(30, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (ucc5): UCC(
+    (activate): ReLU(inplace=True)
+    (up): Sequential(
+      (0): ConvTranspose1d(30, 25, kernel_size=(4,), stride=(4,))
+    )
+    (blocks): Sequential(
+      (0): Conv1d(50, 25, kernel_size=(7,), stride=(1,), padding=(3,))
+      (1): ReLU(inplace=True)
+      (2): BatchNorm1d(25, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (3): Conv1d(25, 25, kernel_size=(7,), stride=(1,), padding=(3,))
+      (4): ReLU(inplace=True)
+      (5): BatchNorm1d(25, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (ucc6): UCC(
+    (activate): ReLU(inplace=True)
+    (up): Sequential(
+      (0): ConvTranspose1d(25, 21, kernel_size=(4,), stride=(4,))
+    )
+    (blocks): Sequential(
+      (0): Conv1d(42, 21, kernel_size=(7,), stride=(1,), padding=(3,))
+      (1): ReLU(inplace=True)
+      (2): BatchNorm1d(21, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (3): Conv1d(21, 21, kernel_size=(7,), stride=(1,), padding=(3,))
+      (4): ReLU(inplace=True)
+      (5): BatchNorm1d(21, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (ucc7): UCC(
+    (activate): ReLU(inplace=True)
+    (up): Sequential(
+      (0): ConvTranspose1d(21, 18, kernel_size=(4,), stride=(4,))
+    )
+    (blocks): Sequential(
+      (0): Conv1d(36, 18, kernel_size=(7,), stride=(1,), padding=(3,))
+      (1): ReLU(inplace=True)
+      (2): BatchNorm1d(18, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (3): Conv1d(18, 18, kernel_size=(7,), stride=(1,), padding=(3,))
+      (4): ReLU(inplace=True)
+      (5): BatchNorm1d(18, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (ucc8): UCC(
+    (activate): ReLU(inplace=True)
+    (up): Sequential(
+      (0): ConvTranspose1d(18, 15, kernel_size=(4,), stride=(2,), padding=(1,))
+    )
+    (blocks): Sequential(
+      (0): Conv1d(30, 15, kernel_size=(7,), stride=(1,), padding=(3,))
+      (1): ReLU(inplace=True)
+      (2): BatchNorm1d(15, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (3): Conv1d(15, 15, kernel_size=(7,), stride=(1,), padding=(3,))
+      (4): ReLU(inplace=True)
+      (5): BatchNorm1d(15, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (arousal_classifier): Sequential(
+    (0): Conv1d(15, 3, kernel_size=(1,), stride=(1,))
+  )
+  (sleep_classifier): Sequential(
+    (0): Conv1d(15, 6, kernel_size=(1,), stride=(1,))
+  )
+)
+Tesla T4
+Max Mem GB   6.31115264
+
+
+Epoch  0 phase:  train
+PRC  0.004535524897786169
+ROC  0.497986112940542
+loss  0.9785137176513672
+acc arousal  0.8947743278311351
+acc sleep  0.2658731593390553
+              precision    recall  f1-score   support
+
+  not_scored       0.00      0.00      0.00         0
+ not_arousal       1.00      0.90      0.94  23254100
+     Arousal       0.00      0.10      0.01    107775
+
+   micro avg       0.89      0.89      0.89  23361875
+   macro avg       0.33      0.33      0.32  23361875
+weighted avg       0.99      0.89      0.94  23361875
+
+Max Mem GB   6.31115264
+
+
+Epoch  0 phase:  val
+PRC  0.005418354334795953
+ROC  0.5183032128672194
+loss  0.9963940978050232
+acc arousal  0.9939514423347567
+acc sleep  0.5905336506857078
+              precision    recall  f1-score   support
+
+  not_scored       0.00      0.00      0.00         0
+ not_arousal       1.00      1.00      1.00  12379275
+     Arousal       0.03      0.01      0.01     55425
+
+   micro avg       0.99      0.99      0.99  12434700
+   macro avg       0.34      0.34      0.34  12434700
+weighted avg       0.99      0.99      0.99  12434700
+
+Max Mem GB   6.31115264
+
+
+Epoch  1 phase:  train
+PRC  0.004590247786742781
+ROC  0.5011896502421963
+loss  0.9199513792991638
+acc arousal  0.9258137028812969
+acc sleep  0.2627421031120453
+Max Mem GB   6.31115264
+
+
+Epoch  1 phase:  val
+PRC  0.006064913512054368
+ROC  0.5196328519041689
+loss  0.9840419888496399
+acc arousal  0.9920968740701425
+acc sleep  0.4667909781253542
+Max Mem GB   6.31115264
+
+
+Epoch  2 phase:  train
+PRC  0.004648278380773933
+ROC  0.5039065457697658
+loss  0.8447889089584351
+acc arousal  0.9522444581181947
+acc sleep  0.2555130962807263
+Max Mem GB   6.31115264
+
+
+Epoch  2 phase:  val
+PRC  0.005468426940647956
+ROC  0.5093320647493693
+loss  0.9714041948318481
+acc arousal  0.9910581678689474
+acc sleep  0.3587183497676527
+Max Mem GB   6.31115264
+
+
+Epoch  3 phase:  train
+PRC  0.004645162438854218
+ROC  0.5035811733752615
+loss  0.7935828566551208
+acc arousal  0.9647807806522379
+acc sleep  0.24406600105097215
+Max Mem GB   6.31115264
+
+
+Epoch  3 phase:  val
+PRC  0.0053054269331188775
+ROC  0.5054148176512294
+loss  0.9038606882095337
+acc arousal  0.9899080798089218
+acc sleep  0.32422278136688204
+Max Mem GB   6.31115264
+
+
+Epoch  4 phase:  train
+PRC  0.004586762502421779
+ROC  0.49975622082904936
+loss  0.7918252944946289
+acc arousal  0.9718868455549907
+acc sleep  0.2305841770304198
+Max Mem GB   6.31115264
+
+
+Epoch  4 phase:  val
+PRC  0.005708734437951664
+ROC  0.5091037729959323
+loss  0.8046051263809204
+acc arousal  0.9867864926375385
+acc sleep  0.26516803808228495
+Max Mem GB   6.31115264
+
+
+Epoch  5 phase:  train
+PRC  0.004559707366834245
+ROC  0.4979395793466687
+loss  0.704733669757843
+acc arousal  0.9756562347842371
+acc sleep  0.20416997722893676
+Max Mem GB   6.31115264
+
+
+Epoch  5 phase:  val
+PRC  0.005428732589519536
+ROC  0.5090781769875168
+loss  0.7430440783500671
+acc arousal  0.9867710519755201
+acc sleep  0.1977624844157316
+Max Mem GB   6.31115264
+
+
+Epoch  6 phase:  train
+PRC  0.004538609278211282
+ROC  0.4968246305956171
+loss  0.7909125089645386
+acc arousal  0.9772229754675085
+acc sleep  0.18104714193962748
+Max Mem GB   6.31115264
+
+
+Epoch  6 phase:  val
+PRC  0.005419701702778166
+ROC  0.510208180832947
+loss  0.7193044424057007
+acc arousal  0.9856223310574441
+acc sleep  0.16259331293210927
+Max Mem GB   6.31115264
+
+
+Epoch  7 phase:  train
+PRC  0.004490065442770313
+ROC  0.49209139216631953
+loss  0.6815557479858398
+acc arousal  0.9798718638807887
+acc sleep  0.1663540374846733
+Max Mem GB   6.31115264
+
+
+Epoch  7 phase:  val
+PRC  0.005428234492993987
+ROC  0.5120675647234098
+loss  0.6690077781677246
+acc arousal  0.9871980827844661
+acc sleep  0.14212272469681514
+Max Mem GB   6.31115264
+
+
+Epoch  8 phase:  train
+PRC  0.004454169753431719
+ROC  0.4899928670691911
+loss  0.5675711631774902
+acc arousal  0.9840028251157067
+acc sleep  0.15665585333099785
+Max Mem GB   6.31115264
+
+
+Epoch  8 phase:  val
+PRC  0.0055780653773645945
+ROC  0.5103008718584792
+loss  0.6009502410888672
+acc arousal  0.9879612696727705
+acc sleep  0.13031902980845517
+Max Mem GB   6.31115264
+
+
+Epoch  9 phase:  train
+PRC  0.004471689707475268
+ROC  0.4922248257097056
+loss  0.681429922580719
+acc arousal  0.9872334733406458
+acc sleep  0.14184405908798972
+Max Mem GB   6.31115264
+
+
+Epoch  9 phase:  val
+PRC  0.005354808513436968
+ROC  0.508358844879098
+loss  0.5417451858520508
+acc arousal  0.9899024504008943
+acc sleep  0.12378410971324946
+Max Mem GB   6.31115264
+
+
+Epoch  10 phase:  train
+PRC  0.004486538792305111
+ROC  0.4937928083744035
+loss  0.6357207894325256
+acc arousal  0.9893101046041896
+acc sleep  0.12659309861622
+              precision    recall  f1-score   support
+
+  not_scored       0.00      0.00      0.00         0
+ not_arousal       1.00      0.99      0.99  23254100
+     Arousal       0.00      0.01      0.01    107775
+
+   micro avg       0.99      0.99      0.99  23361875
+   macro avg       0.33      0.33      0.33  23361875
+weighted avg       0.99      0.99      0.99  23361875
+
+Max Mem GB   6.31115264
+
+
+Epoch  10 phase:  val
+PRC  0.0051784930150977435
+ROC  0.5082658293774204
+loss  0.5474896430969238
+acc arousal  0.9911515356220898
+acc sleep  0.11898211492689562
+              precision    recall  f1-score   support
+
+  not_scored       0.00      0.00      0.00         0
+ not_arousal       1.00      1.00      1.00  12379275
+     Arousal       0.02      0.02      0.02     55425
+
+   micro avg       0.99      0.99      0.99  12434700
+   macro avg       0.34      0.34      0.34  12434700
+weighted avg       0.99      0.99      0.99  12434700
+
+Max Mem GB   6.31115264
+
+
+Epoch  11 phase:  train
+PRC  0.004478212075342225
+ROC  0.49262866493869734
+loss  0.5093945264816284
+acc arousal  0.9915336846892641
+acc sleep  0.11813459449991241
+Max Mem GB   6.31115264
+
+
+Epoch  11 phase:  val
+PRC  0.005204851692594862
+ROC  0.5081834404454496
+loss  0.4907010495662689
+acc arousal  0.9922476617851657
+acc sleep  0.11805390456760739
+Max Mem GB   6.31115264
+
+
+Epoch  12 phase:  train
+PRC  0.004490819890336506
+ROC  0.49389919079915834
+loss  0.48503199219703674
+acc arousal  0.9924586532545012
+acc sleep  0.11615918724820459
+Max Mem GB   6.31115264
+
+
+Epoch  12 phase:  val
+PRC  0.005204960093028843
+ROC  0.5077899699907948
+loss  0.4626760482788086
+acc arousal  0.9929962926327133
+acc sleep  0.1187567040689108
+Max Mem GB   6.31115264
+
+
+Epoch  13 phase:  train
+PRC  0.004485264111157026
+ROC  0.4925539731717942
+loss  0.4205133616924286
+acc arousal  0.9927280237566548
+acc sleep  0.11209879138202837
+Max Mem GB   6.31115264
+
+
+Epoch  13 phase:  val
+PRC  0.005126275228165813
+ROC  0.5069181233752059
+loss  0.4190451204776764
+acc arousal  0.9934325717548473
+acc sleep  0.11760308285163777
+Max Mem GB   6.31115264
+
+
+Epoch  14 phase:  train
+PRC  0.004520658706211932
+ROC  0.4953458758922688
+loss  0.4911971092224121
+acc arousal  0.9935777843173975
+acc sleep  0.10745265370467683
+Max Mem GB   6.31115264
+
+
+Epoch  14 phase:  val
+PRC  0.004979315214053891
+ROC  0.5054253085976903
+loss  0.3693133294582367
+acc arousal  0.9940834921630598
+acc sleep  0.11323812762099059
+Max Mem GB   6.31115264
+
+
+Epoch  15 phase:  train
+PRC  0.0045316485605672065
+ROC  0.49475592922027806
+loss  0.45558178424835205
+acc arousal  0.9941169105647556
+acc sleep  0.09605684591580545
+Max Mem GB   6.31115264
+
+
+Epoch  15 phase:  val
+PRC  0.004806701397543089
+ROC  0.505303471026192
+loss  0.33877071738243103
+acc arousal  0.9941303770899177
+acc sleep  0.10105007367108693
+Max Mem GB   6.31115264
+
+
+Epoch  16 phase:  train
+PRC  0.004496539646327043
+ROC  0.49375376602400073
+loss  0.45699629187583923
+acc arousal  0.9945649054281815
+acc sleep  0.08288241957143691
+Max Mem GB   6.31115264
+
+
+Epoch  16 phase:  val
+PRC  0.004762801217923414
+ROC  0.5036293048565256
+loss  0.32113707065582275
+acc arousal  0.9947017620047126
+acc sleep  0.081534353394537
+Max Mem GB   6.31115264
+
+
+Epoch  17 phase:  train
+PRC  0.004479989745465812
+ROC  0.49234025508775797
+loss  0.2911145091056824
+acc arousal  0.9948416383530859
+acc sleep  0.07100783558124599
+Max Mem GB   6.31115264
+
+
+Epoch  17 phase:  val
+PRC  0.004757782605911494
+ROC  0.5041857070227475
+loss  0.30197060108184814
+acc arousal  0.9948767561742543
+acc sleep  0.06130776379916128
+Max Mem GB   6.31115264
+
+
+Epoch  18 phase:  train
+PRC  0.004484780389692842
+ROC  0.4934026446847386
+loss  0.3112812042236328
+acc arousal  0.994871088044089
+acc sleep  0.06133333333333333
+Max Mem GB   6.31115264
+
+
+Epoch  18 phase:  val
+PRC  0.004750936862191369
+ROC  0.497841765470508
+loss  0.2885507345199585
+acc arousal  0.9951525971676035
+acc sleep  0.046143669953530544
+Max Mem GB   6.31115264
+
+
+Epoch  19 phase:  train
+PRC  0.0045001758485278456
+ROC  0.49406998205979846
+loss  0.2603697180747986
+acc arousal  0.9950248856309692
+acc sleep  0.04999040112103696
+Max Mem GB   6.31115264
+
+
+Epoch  19 phase:  val
+PRC  0.004835653957980752
+ROC  0.5035397109312413
+loss  0.2841000258922577
+acc arousal  0.9951994820944615
+acc sleep  0.03426897880539499
+Max Mem GB   6.31115264
+
+
+Epoch  20 phase:  train
+PRC  0.004525346355509394
+ROC  0.49545952964821177
+loss  0.22249920666217804
+acc arousal  0.9950975253484577
+acc sleep  0.041003655047585685
+              precision    recall  f1-score   support
+
+  not_scored       0.00      0.00      0.00         0
+ not_arousal       1.00      1.00      1.00  23254100
+     Arousal       0.00      0.00      0.00    107775
+
+   micro avg       1.00      1.00      1.00  23361875
+   macro avg       0.33      0.33      0.33  23361875
+weighted avg       0.99      1.00      0.99  23361875
+
+Max Mem GB   6.31115264
+
+
+Epoch  20 phase:  val
+PRC  0.004962359718015191
+ROC  0.5067670763752786
+loss  0.22726218402385712
+acc arousal  0.9952824756528103
+acc sleep  0.02576076164569874
+              precision    recall  f1-score   support
+
+  not_scored       0.00      0.00      0.00         0
+ not_arousal       1.00      1.00      1.00  12379275
+     Arousal       0.02      0.00      0.00     55425
+
+   micro avg       1.00      1.00      1.00  12434700
+   macro avg       0.34      0.33      0.33  12434700
+weighted avg       0.99      1.00      0.99  12434700
+
+Max Mem GB   6.31115264
+
+
+Epoch  21 phase:  train
+PRC  0.004477555081110749
+ROC  0.493683106983792
+loss  0.24998615682125092
+acc arousal  0.9951188421306081
+acc sleep  0.03252529923512582
+Max Mem GB   6.31115264
+
+
+Epoch  21 phase:  val
+PRC  0.005019184222725177
+ROC  0.5078971478552498
+loss  0.22545073926448822
+acc arousal  0.9952783742269616
+acc sleep  0.022166156636064832
+Max Mem GB   6.31115264
+
+
+Epoch  22 phase:  train
+PRC  0.004470623344567717
+ROC  0.4917955365720755
+loss  0.33400481939315796
+acc arousal  0.9951609192327242
+acc sleep  0.02657413440766042
+Max Mem GB   6.31115264
+
+
+Epoch  22 phase:  val
+PRC  0.005133289392220677
+ROC  0.511893874746769
+loss  0.25527724623680115
+acc arousal  0.995247734163269
+acc sleep  0.020742604556273376
+Max Mem GB   6.31115264
+
+
+Epoch  23 phase:  train
+PRC  0.004515861893948829
+ROC  0.49685240335670894
+loss  0.2511557936668396
+acc arousal  0.9951617753283929
+acc sleep  0.02363421498219186
+Max Mem GB   6.31115264
+
+
+Epoch  23 phase:  val
+PRC  0.005250149121334916
+ROC  0.5169881127117402
+loss  0.22983941435813904
+acc arousal  0.995278776327535
+acc sleep  0.017892689561373683
+Max Mem GB   6.31115264
+
+
+Epoch  24 phase:  train
+PRC  0.00450347674372509
+ROC  0.4952195190461902
+loss  0.31726136803627014
+acc arousal  0.9952056074266299
+acc sleep  0.02158944356863432
+Max Mem GB   6.31115264
+
+
+Epoch  24 phase:  val
+PRC  0.005309707526753915
+ROC  0.5169414924250443
+loss  0.23542852699756622
+acc arousal  0.9952775700258149
+acc sleep  0.015253043182590955
+Max Mem GB   6.31115264
+
+
+Epoch  25 phase:  train
+PRC  0.004427455234036867
+ROC  0.4918470836186728
+loss  0.23361815512180328
+acc arousal  0.99520984510019
+acc sleep  0.018065697436795702
+Max Mem GB   6.31115264
+
+
+Epoch  25 phase:  val
+PRC  0.005490236713719136
+ROC  0.5266070760520124
+loss  0.23515670001506805
+acc arousal  0.9953064408469846
+acc sleep  0.014567924742151196
+Max Mem GB   6.31115264
+
+
+Epoch  26 phase:  train
+PRC  0.004515039716512468
+ROC  0.49616248361312154
+loss  0.2624836564064026
+acc arousal  0.9951927231868162
+acc sleep  0.01686586092135225
+Max Mem GB   6.31115264
+
+
+Epoch  26 phase:  val
+PRC  0.005563810716242306
+ROC  0.528351664830351
+loss  0.22221793234348297
+acc arousal  0.9953625740870307
+acc sleep  0.01309495636404851
+Max Mem GB   6.31115264
+
+
+Epoch  27 phase:  train
+PRC  0.004496681315699823
+ROC  0.4966195565639867
+loss  0.36880138516426086
+acc arousal  0.9952508520827202
+acc sleep  0.014199100834938985
+Max Mem GB   6.31115264
+
+
+Epoch  27 phase:  val
+PRC  0.005541720983984128
+ROC  0.527190917841574
+loss  0.2298658937215805
+acc arousal  0.9953760846662967
+acc sleep  0.01301679700782047
+Max Mem GB   6.31115264
+
+
+Epoch  28 phase:  train
+PRC  0.004478211570242707
+ROC  0.4918629900724496
+loss  0.2508331835269928
+acc arousal  0.9952619813264132
+acc sleep  0.013315069772873242
+Max Mem GB   6.31115264
+
+
+Epoch  28 phase:  val
+PRC  0.005561782042496851
+ROC  0.5267249336006865
+loss  0.2157004177570343
+acc arousal  0.9953896756656775
+acc sleep  0.011650277683327666
+Max Mem GB   6.31115264
+
+
+Epoch  29 phase:  train
+PRC  0.004565568080933681
+ROC  0.5016550841303944
+loss  0.23140433430671692
+acc arousal  0.9952795740924049
+acc sleep  0.012208139195422433
+Max Mem GB   6.31115264
+
+
+Epoch  29 phase:  val
+PRC  0.005607597896162626
+ROC  0.531815596984253
+loss  0.21161898970603943
+acc arousal  0.9954141233805399
+acc sleep  0.010543805961691034
+weights_1_1
+Created model : Deep_Sleep(
+  (pcc1): PCC(
+    (activate): ReLU(inplace=True)
+    (blocks): Sequential(
+      (0): MaxPool1d(kernel_size=1, stride=1, padding=0, dilation=1, ceil_mode=False)
+      (1): Conv1d(1, 15, kernel_size=(7,), stride=(1,), padding=(3,))
+      (2): ReLU(inplace=True)
+      (3): BatchNorm1d(15, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (4): Conv1d(15, 15, kernel_size=(7,), stride=(1,), padding=(3,))
+      (5): ReLU(inplace=True)
+      (6): BatchNorm1d(15, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (pcc2): PCC(
+    (activate): ReLU(inplace=True)
+    (blocks): Sequential(
+      (0): MaxPool1d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+      (1): Conv1d(15, 18, kernel_size=(7,), stride=(1,), padding=(3,))
+      (2): ReLU(inplace=True)
+      (3): BatchNorm1d(18, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (4): Conv1d(18, 18, kernel_size=(7,), stride=(1,), padding=(3,))
+      (5): ReLU(inplace=True)
+      (6): BatchNorm1d(18, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (pcc3): PCC(
+    (activate): ReLU(inplace=True)
+    (blocks): Sequential(
+      (0): MaxPool1d(kernel_size=4, stride=4, padding=0, dilation=1, ceil_mode=False)
+      (1): Conv1d(18, 21, kernel_size=(7,), stride=(1,), padding=(3,))
+      (2): ReLU(inplace=True)
+      (3): BatchNorm1d(21, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (4): Conv1d(21, 21, kernel_size=(7,), stride=(1,), padding=(3,))
+      (5): ReLU(inplace=True)
+      (6): BatchNorm1d(21, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (pcc4): PCC(
+    (activate): ReLU(inplace=True)
+    (blocks): Sequential(
+      (0): MaxPool1d(kernel_size=4, stride=4, padding=0, dilation=1, ceil_mode=False)
+      (1): Conv1d(21, 25, kernel_size=(7,), stride=(1,), padding=(3,))
+      (2): ReLU(inplace=True)
+      (3): BatchNorm1d(25, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (4): Conv1d(25, 25, kernel_size=(7,), stride=(1,), padding=(3,))
+      (5): ReLU(inplace=True)
+      (6): BatchNorm1d(25, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (pcc5): PCC(
+    (activate): ReLU(inplace=True)
+    (blocks): Sequential(
+      (0): MaxPool1d(kernel_size=4, stride=4, padding=0, dilation=1, ceil_mode=False)
+      (1): Conv1d(25, 30, kernel_size=(7,), stride=(1,), padding=(3,))
+      (2): ReLU(inplace=True)
+      (3): BatchNorm1d(30, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (4): Conv1d(30, 30, kernel_size=(7,), stride=(1,), padding=(3,))
+      (5): ReLU(inplace=True)
+      (6): BatchNorm1d(30, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (pcc6): PCC(
+    (activate): ReLU(inplace=True)
+    (blocks): Sequential(
+      (0): MaxPool1d(kernel_size=4, stride=4, padding=0, dilation=1, ceil_mode=False)
+      (1): Conv1d(30, 60, kernel_size=(7,), stride=(1,), padding=(3,))
+      (2): ReLU(inplace=True)
+      (3): BatchNorm1d(60, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (4): Conv1d(60, 60, kernel_size=(7,), stride=(1,), padding=(3,))
+      (5): ReLU(inplace=True)
+      (6): BatchNorm1d(60, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (pcc7): PCC(
+    (activate): ReLU(inplace=True)
+    (blocks): Sequential(
+      (0): MaxPool1d(kernel_size=4, stride=4, padding=0, dilation=1, ceil_mode=False)
+      (1): Conv1d(60, 120, kernel_size=(7,), stride=(1,), padding=(3,))
+      (2): ReLU(inplace=True)
+      (3): BatchNorm1d(120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (4): Conv1d(120, 120, kernel_size=(7,), stride=(1,), padding=(3,))
+      (5): ReLU(inplace=True)
+      (6): BatchNorm1d(120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (pcc8): PCC(
+    (activate): ReLU(inplace=True)
+    (blocks): Sequential(
+      (0): MaxPool1d(kernel_size=4, stride=4, padding=0, dilation=1, ceil_mode=False)
+      (1): Conv1d(120, 240, kernel_size=(7,), stride=(1,), padding=(3,))
+      (2): ReLU(inplace=True)
+      (3): BatchNorm1d(240, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (4): Conv1d(240, 240, kernel_size=(7,), stride=(1,), padding=(3,))
+      (5): ReLU(inplace=True)
+      (6): BatchNorm1d(240, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (pcc9): PCC(
+    (activate): ReLU(inplace=True)
+    (blocks): Sequential(
+      (0): MaxPool1d(kernel_size=4, stride=4, padding=0, dilation=1, ceil_mode=False)
+      (1): Conv1d(240, 480, kernel_size=(7,), stride=(1,), padding=(3,))
+      (2): ReLU(inplace=True)
+      (3): BatchNorm1d(480, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (4): Conv1d(480, 480, kernel_size=(7,), stride=(1,), padding=(3,))
+      (5): ReLU(inplace=True)
+      (6): BatchNorm1d(480, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (ucc1): UCC(
+    (activate): ReLU(inplace=True)
+    (up): Sequential(
+      (0): ConvTranspose1d(480, 240, kernel_size=(4,), stride=(4,))
+    )
+    (blocks): Sequential(
+      (0): Conv1d(480, 240, kernel_size=(7,), stride=(1,), padding=(3,))
+      (1): ReLU(inplace=True)
+      (2): BatchNorm1d(240, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (3): Conv1d(240, 240, kernel_size=(7,), stride=(1,), padding=(3,))
+      (4): ReLU(inplace=True)
+      (5): BatchNorm1d(240, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (ucc2): UCC(
+    (activate): ReLU(inplace=True)
+    (up): Sequential(
+      (0): ConvTranspose1d(240, 120, kernel_size=(4,), stride=(4,))
+    )
+    (blocks): Sequential(
+      (0): Conv1d(240, 120, kernel_size=(7,), stride=(1,), padding=(3,))
+      (1): ReLU(inplace=True)
+      (2): BatchNorm1d(120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (3): Conv1d(120, 120, kernel_size=(7,), stride=(1,), padding=(3,))
+      (4): ReLU(inplace=True)
+      (5): BatchNorm1d(120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (ucc3): UCC(
+    (activate): ReLU(inplace=True)
+    (up): Sequential(
+      (0): ConvTranspose1d(120, 60, kernel_size=(4,), stride=(4,))
+    )
+    (blocks): Sequential(
+      (0): Conv1d(120, 60, kernel_size=(7,), stride=(1,), padding=(3,))
+      (1): ReLU(inplace=True)
+      (2): BatchNorm1d(60, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (3): Conv1d(60, 60, kernel_size=(7,), stride=(1,), padding=(3,))
+      (4): ReLU(inplace=True)
+      (5): BatchNorm1d(60, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (ucc4): UCC(
+    (activate): ReLU(inplace=True)
+    (up): Sequential(
+      (0): ConvTranspose1d(60, 30, kernel_size=(4,), stride=(4,))
+    )
+    (blocks): Sequential(
+      (0): Conv1d(60, 30, kernel_size=(7,), stride=(1,), padding=(3,))
+      (1): ReLU(inplace=True)
+      (2): BatchNorm1d(30, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (3): Conv1d(30, 30, kernel_size=(7,), stride=(1,), padding=(3,))
+      (4): ReLU(inplace=True)
+      (5): BatchNorm1d(30, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (ucc5): UCC(
+    (activate): ReLU(inplace=True)
+    (up): Sequential(
+      (0): ConvTranspose1d(30, 25, kernel_size=(4,), stride=(4,))
+    )
+    (blocks): Sequential(
+      (0): Conv1d(50, 25, kernel_size=(7,), stride=(1,), padding=(3,))
+      (1): ReLU(inplace=True)
+      (2): BatchNorm1d(25, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (3): Conv1d(25, 25, kernel_size=(7,), stride=(1,), padding=(3,))
+      (4): ReLU(inplace=True)
+      (5): BatchNorm1d(25, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (ucc6): UCC(
+    (activate): ReLU(inplace=True)
+    (up): Sequential(
+      (0): ConvTranspose1d(25, 21, kernel_size=(4,), stride=(4,))
+    )
+    (blocks): Sequential(
+      (0): Conv1d(42, 21, kernel_size=(7,), stride=(1,), padding=(3,))
+      (1): ReLU(inplace=True)
+      (2): BatchNorm1d(21, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (3): Conv1d(21, 21, kernel_size=(7,), stride=(1,), padding=(3,))
+      (4): ReLU(inplace=True)
+      (5): BatchNorm1d(21, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (ucc7): UCC(
+    (activate): ReLU(inplace=True)
+    (up): Sequential(
+      (0): ConvTranspose1d(21, 18, kernel_size=(4,), stride=(4,))
+    )
+    (blocks): Sequential(
+      (0): Conv1d(36, 18, kernel_size=(7,), stride=(1,), padding=(3,))
+      (1): ReLU(inplace=True)
+      (2): BatchNorm1d(18, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (3): Conv1d(18, 18, kernel_size=(7,), stride=(1,), padding=(3,))
+      (4): ReLU(inplace=True)
+      (5): BatchNorm1d(18, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (ucc8): UCC(
+    (activate): ReLU(inplace=True)
+    (up): Sequential(
+      (0): ConvTranspose1d(18, 15, kernel_size=(4,), stride=(2,), padding=(1,))
+    )
+    (blocks): Sequential(
+      (0): Conv1d(30, 15, kernel_size=(7,), stride=(1,), padding=(3,))
+      (1): ReLU(inplace=True)
+      (2): BatchNorm1d(15, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (3): Conv1d(15, 15, kernel_size=(7,), stride=(1,), padding=(3,))
+      (4): ReLU(inplace=True)
+      (5): BatchNorm1d(15, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (arousal_classifier): Sequential(
+    (0): Conv1d(15, 3, kernel_size=(1,), stride=(1,))
+  )
+  (sleep_classifier): Sequential(
+    (0): Conv1d(15, 6, kernel_size=(1,), stride=(1,))
+  )
+)
+Tesla T4
+Max Mem GB   6.31115264
+
+
+Epoch  0 phase:  train
+PRC  0.0045861966514056315
+ROC  0.49917940181905185
+loss  1.2126662731170654
+acc arousal  0.6710265336151315
+acc sleep  0.13791304957085304
+              precision    recall  f1-score   support
+
+  not_scored       0.00      0.00      0.00         0
+ not_arousal       1.00      0.67      0.80  23254100
+     Arousal       0.00      0.33      0.01    107775
+
+   micro avg       0.67      0.67      0.67  23361875
+   macro avg       0.33      0.33      0.27  23361875
+weighted avg       0.99      0.67      0.80  23361875
+
+Max Mem GB   6.31115264
+
+
+Epoch  0 phase:  val
+PRC  0.0053295367739872165
+ROC  0.507728214500973
+loss  1.2479228973388672
+acc arousal  0.9758475073785455
+acc sleep  0.06016647398843931
+              precision    recall  f1-score   support
+
+  not_scored       0.00      0.00      0.00         0
+ not_arousal       1.00      0.98      0.99  12379275
+     Arousal       0.01      0.04      0.02     55425
+
+   micro avg       0.98      0.98      0.98  12434700
+   macro avg       0.33      0.34      0.33  12434700
+weighted avg       0.99      0.98      0.98  12434700
+
+Max Mem GB   6.31115264
+
+
+Epoch  1 phase:  train
+PRC  0.004607033850621546
+ROC  0.5012672060269604
+loss  1.0319613218307495
+acc arousal  0.7358358008507451
+acc sleep  0.12376738483096865
+Max Mem GB   6.31115264
+
+
+Epoch  1 phase:  val
+PRC  0.0049596616019193995
+ROC  0.4985166531712853
+loss  1.2742605209350586
+acc arousal  0.9874909728421273
+acc sleep  0.06002647625524198
+Max Mem GB   6.31115264
+
+
+Epoch  2 phase:  train
+PRC  0.00464270326624034
+ROC  0.5015868057883334
+loss  1.105440378189087
+acc arousal  0.8192063779127318
+acc sleep  0.11854185788521049
+Max Mem GB   6.31115264
+
+
+Epoch  2 phase:  val
+PRC  0.004822933414490766
+ROC  0.4944401268512184
+loss  1.210047721862793
+acc arousal  0.9777360933516691
+acc sleep  0.05974385129774453
+Max Mem GB   6.31115264
+
+
+Epoch  3 phase:  train
+PRC  0.004597226649717489
+ROC  0.5010314324894071
+loss  0.875059962272644
+acc arousal  0.8920450948393484
+acc sleep  0.11974954165936826
+Max Mem GB   6.31115264
+
+
+Epoch  3 phase:  val
+PRC  0.004859842434275019
+ROC  0.49619397699463125
+loss  1.3334171772003174
+acc arousal  0.914339308547854
+acc sleep  0.07807158562847104
+Max Mem GB   6.31115264
+
+
+Epoch  4 phase:  train
+PRC  0.004604563418623223
+ROC  0.500774662392377
+loss  0.9048067927360535
+acc arousal  0.9458806281601969
+acc sleep  0.12246987797045601
+Max Mem GB   6.31115264
+
+
+Epoch  4 phase:  val
+PRC  0.004628649671355902
+ROC  0.492868823747111
+loss  0.9558047652244568
+acc arousal  0.9245303867403315
+acc sleep  0.11070502096792474
+Max Mem GB   6.31115264
+
+
+Epoch  5 phase:  train
+PRC  0.004567229073554273
+ROC  0.49751478326815124
+loss  0.5942402482032776
+acc arousal  0.9717666497231066
+acc sleep  0.12102341332399136
+Max Mem GB   6.31115264
+
+
+Epoch  5 phase:  val
+PRC  0.004671280720421388
+ROC  0.49863344907898915
+loss  0.8831329941749573
+acc arousal  0.9792849043402736
+acc sleep  0.11081110733310666
+Max Mem GB   6.31115264
+
+
+Epoch  6 phase:  train
+PRC  0.004567054535081974
+ROC  0.49645222388675697
+loss  0.7431390285491943
+acc arousal  0.9870955991332031
+acc sleep  0.11488741752787995
+Max Mem GB   6.31115264
+
+
+Epoch  6 phase:  val
+PRC  0.0046606463998203765
+ROC  0.5013109223731692
+loss  0.6821432709693909
+acc arousal  0.9897798901461233
+acc sleep  0.10571524424798821
+Max Mem GB   6.31115264
+
+
+Epoch  7 phase:  train
+PRC  0.004533703397081192
+ROC  0.495905411387056
+loss  0.608291745185852
+acc arousal  0.9911977099440863
+acc sleep  0.1070323582647282
+Max Mem GB   6.31115264
+
+
+Epoch  7 phase:  val
+PRC  0.004624706949422859
+ROC  0.5018342515099694
+loss  0.5694872736930847
+acc arousal  0.9932110143389065
+acc sleep  0.09851207072424345
+Max Mem GB   6.31115264
+
+
+Epoch  8 phase:  train
+PRC  0.004544066163428449
+ROC  0.49596766569792267
+loss  0.5185505151748657
+acc arousal  0.9941041119345086
+acc sleep  0.09690084661645355
+Max Mem GB   6.31115264
+
+
+Epoch  8 phase:  val
+PRC  0.004694873450055971
+ROC  0.5049643863675799
+loss  0.5520766377449036
+acc arousal  0.9944779528255607
+acc sleep  0.09106571460954324
+Max Mem GB   6.31115264
+
+
+Epoch  9 phase:  train
+PRC  0.0044883269096195645
+ROC  0.49456999648845407
+loss  0.47663596272468567
+acc arousal  0.9944216806228096
+acc sleep  0.08529703976177964
+Max Mem GB   6.31115264
+
+
+Epoch  9 phase:  val
+PRC  0.004688884372938258
+ROC  0.5039808741367193
+loss  0.49008920788764954
+acc arousal  0.9948465986312497
+acc sleep  0.08142998979938797
+Max Mem GB   6.31115264
+
+
+Epoch  10 phase:  train
+PRC  0.004461439384872815
+ROC  0.49272740595642506
+loss  0.5007712841033936
+acc arousal  0.9945599828780867
+acc sleep  0.0737150931278099
+              precision    recall  f1-score   support
+
+  not_scored       0.00      0.00      0.00         0
+ not_arousal       1.00      1.00      1.00  23254100
+     Arousal       0.00      0.00      0.00    107775
+
+   micro avg       0.99      0.99      0.99  23361875
+   macro avg       0.33      0.33      0.33  23361875
+weighted avg       0.99      0.99      0.99  23361875
+
+Max Mem GB   6.31115264
+
+
+Epoch  10 phase:  val
+PRC  0.0046967471666299904
+ROC  0.5051790805497551
+loss  0.43193504214286804
+acc arousal  0.9948724939081763
+acc sleep  0.07277551853111186
+              precision    recall  f1-score   support
+
+  not_scored       0.00      0.00      0.00         0
+ not_arousal       1.00      1.00      1.00  12379275
+     Arousal       0.01      0.00      0.00     55425
+
+   micro avg       0.99      0.99      0.99  12434700
+   macro avg       0.34      0.33      0.33  12434700
+weighted avg       0.99      0.99      0.99  12434700
+
+Max Mem GB   6.31115264
+
+
+Epoch  11 phase:  train
+PRC  0.004437236569955609
+ROC  0.49113100421963624
+loss  0.387056440114975
+acc arousal  0.9946365178308676
+acc sleep  0.06517307175804285
+Max Mem GB   6.31115264
+
+
+Epoch  11 phase:  val
+PRC  0.00475343184142343
+ROC  0.5041840669337816
+loss  0.44781312346458435
+acc arousal  0.9950078409611812
+acc sleep  0.06533351467754732
+Max Mem GB   6.31115264
+
+
+Epoch  12 phase:  train
+PRC  0.004445220640737134
+ROC  0.4898718205912241
+loss  0.5405691266059875
+acc arousal  0.9947050910939298
+acc sleep  0.05961090675541542
+Max Mem GB   6.31115264
+
+
+Epoch  12 phase:  val
+PRC  0.004797856635163053
+ROC  0.5073520330376485
+loss  0.39707061648368835
+acc arousal  0.9951622475813651
+acc sleep  0.06108425705542333
+Max Mem GB   6.31115264
+
+
+Epoch  13 phase:  train
+PRC  0.00441103725969395
+ROC  0.491376385237996
+loss  0.4260750710964203
+acc arousal  0.9948836298456353
+acc sleep  0.05648713726864016
+Max Mem GB   6.31115264
+
+
+Epoch  13 phase:  val
+PRC  0.0049089962029832965
+ROC  0.5079341221568425
+loss  0.38568001985549927
+acc arousal  0.9952834406941864
+acc sleep  0.05885435792814236
+Max Mem GB   6.31115264
+
+
+Epoch  14 phase:  train
+PRC  0.004430114616195165
+ROC  0.4918207930546332
+loss  0.40273717045783997
+acc arousal  0.9950463736322535
+acc sleep  0.05660919016757167
+Max Mem GB   6.31115264
+
+
+Epoch  14 phase:  val
+PRC  0.004859814362021559
+ROC  0.5026597486167775
+loss  0.36181020736694336
+acc arousal  0.9953709377789572
+acc sleep  0.058291828176357245
+Max Mem GB   6.31115264
+
+
+Epoch  15 phase:  train
+PRC  0.004438166521458942
+ROC  0.4909128632443724
+loss  0.33477699756622314
+acc arousal  0.9951822788196582
+acc sleep  0.05629473930051965
+Max Mem GB   6.31115264
+
+
+Epoch  15 phase:  val
+PRC  0.004731992804338166
+ROC  0.5020316685857378
+loss  0.344928503036499
+acc arousal  0.9954214416109758
+acc sleep  0.058124900827382975
+Max Mem GB   6.31115264
+
+
+Epoch  16 phase:  train
+PRC  0.0044435598727708405
+ROC  0.48966996803224616
+loss  0.4225839078426361
+acc arousal  0.9952891195591107
+acc sleep  0.056624417586267295
+Max Mem GB   6.31115264
+
+
+Epoch  16 phase:  val
+PRC  0.004699369165323237
+ROC  0.5028860400053137
+loss  0.345904678106308
+acc arousal  0.9954753230878107
+acc sleep  0.0582898333900034
+Max Mem GB   6.31115264
+
+
+Epoch  17 phase:  train
+PRC  0.00446336952705986
+ROC  0.49213206673627835
+loss  0.43218645453453064
+acc arousal  0.995325888868081
+acc sleep  0.057580195013721025
+Max Mem GB   6.31115264
+
+
+Epoch  17 phase:  val
+PRC  0.004701221314711718
+ROC  0.5055584105262458
+loss  0.33135557174682617
+acc arousal  0.9955082149147144
+acc sleep  0.05866258642185198
+Max Mem GB   6.31115264
+
+
+Epoch  18 phase:  train
+PRC  0.004417237168300416
+ROC  0.48760289270579243
+loss  0.23426377773284912
+acc arousal  0.9953604323283127
+acc sleep  0.05736420855958428
+Max Mem GB   6.31115264
+
+
+Epoch  18 phase:  val
+PRC  0.004583727077684568
+ROC  0.5001383446493575
+loss  0.2924492359161377
+acc arousal  0.9955263094405172
+acc sleep  0.05883459140881786
+Max Mem GB   6.31115264
+
+
+Epoch  19 phase:  train
+PRC  0.004450051617152388
+ROC  0.491534916385634
+loss  0.30857589840888977
+acc arousal  0.9953804221621766
+acc sleep  0.05793874000116775
+Max Mem GB   6.31115264
+
+
+Epoch  19 phase:  val
+PRC  0.004635979874304472
+ROC  0.5029646361925678
+loss  0.28140154480934143
+acc arousal  0.9955339493514118
+acc sleep  0.05898855264649212
+Max Mem GB   6.31115264
+
+
+Epoch  20 phase:  train
+PRC  0.00444670868262226
+ROC  0.4924371123982876
+loss  0.3748815059661865
+acc arousal  0.9953821771582975
+acc sleep  0.05793542360016348
+              precision    recall  f1-score   support
+
+  not_scored       0.00      0.00      0.00         0
+ not_arousal       1.00      1.00      1.00  23254100
+     Arousal       0.01      0.00      0.00    107775
+
+   micro avg       1.00      1.00      1.00  23361875
+   macro avg       0.33      0.33      0.33  23361875
+weighted avg       0.99      1.00      0.99  23361875
+
+Max Mem GB   6.31115264
+
+
+Epoch  20 phase:  val
+PRC  0.004659600042276372
+ROC  0.49948250699728
+loss  0.28842151165008545
+acc arousal  0.9955366032151962
+acc sleep  0.058923812762099056
+              precision    recall  f1-score   support
+
+  not_scored       0.00      0.00      0.00         0
+ not_arousal       1.00      1.00      1.00  12379275
+     Arousal       0.00      0.00      0.00     55425
+
+   micro avg       1.00      1.00      1.00  12434700
+   macro avg       0.33      0.33      0.33  12434700
+weighted avg       0.99      1.00      0.99  12434700
+
+Max Mem GB   6.31115264
+
+
+Epoch  21 phase:  train
+PRC  0.004432440626291306
+ROC  0.489681323916779
+loss  0.3677077889442444
+acc arousal  0.9953838465448513
+acc sleep  0.05778058037017575
+Max Mem GB   6.31115264
+
+
+Epoch  21 phase:  val
+PRC  0.004728162431415592
+ROC  0.5027390207945431
+loss  0.28575530648231506
+acc arousal  0.995537648676687
+acc sleep  0.059085027768332764
+Max Mem GB   6.31115264
+
+
+Epoch  22 phase:  train
+PRC  0.004452342377282233
+ROC  0.4907844368060803
+loss  0.38177579641342163
+acc arousal  0.9953837609352845
+acc sleep  0.057962842295790275
+Max Mem GB   6.31115264
+
+
+Epoch  22 phase:  val
+PRC  0.004826461925105702
+ROC  0.5051737904750837
+loss  0.2792617082595825
+acc arousal  0.9955390158186366
+acc sleep  0.05913190524764819
+Max Mem GB   6.31115264
+
+
+Epoch  23 phase:  train
+PRC  0.004501840747776926
+ROC  0.4934652038187481
+loss  0.374282568693161
+acc arousal  0.9953844458118195
+acc sleep  0.058105727798213345
+Max Mem GB   6.31115264
+
+
+Epoch  23 phase:  val
+PRC  0.004821280833091962
+ROC  0.5037614301524032
+loss  0.26928412914276123
+acc arousal  0.9955390962387513
+acc sleep  0.05901584495069704
+Max Mem GB   6.31115264
+
+
+Epoch  24 phase:  train
+PRC  0.004451533784506241
+ROC  0.49027486357528843
+loss  0.25868043303489685
+acc arousal  0.9953850022740042
+acc sleep  0.05840373678986396
+Max Mem GB   6.31115264
+
+
+Epoch  24 phase:  val
+PRC  0.004865971305929134
+ROC  0.5076048696610468
+loss  0.25213050842285156
+acc arousal  0.9955383724577191
+acc sleep  0.0592930295817749
+Max Mem GB   6.31115264
+
+
+Epoch  25 phase:  train
+PRC  0.004477148072701767
+ROC  0.49367471147713815
+loss  0.25034019351005554
+acc arousal  0.9953853875170551
+acc sleep  0.058563904945407835
+Max Mem GB   6.31115264
+
+
+Epoch  25 phase:  val
+PRC  0.004799207379424479
+ROC  0.505716548092929
+loss  0.2538815438747406
+acc arousal  0.9955386137180632
+acc sleep  0.059252227133628016
+Max Mem GB   6.31115264
+
+
+Epoch  26 phase:  train
+PRC  0.004486718109976834
+ROC  0.49077469374149807
+loss  0.2597402334213257
+acc arousal  0.9953846598357367
+acc sleep  0.058748735914053836
+Max Mem GB   6.31115264
+
+
+Epoch  26 phase:  val
+PRC  0.004811257178394078
+ROC  0.5037367830884155
+loss  0.24684201180934906
+acc arousal  0.9955385332979485
+acc sleep  0.05953820695908421
+Max Mem GB   6.31115264
+
+
+Epoch  27 phase:  train
+PRC  0.004540710750765547
+ROC  0.49875575302618913
+loss  0.3296026587486267
+acc arousal  0.9953855159314053
+acc sleep  0.0586723185613359
+Max Mem GB   6.31115264
+
+
+Epoch  27 phase:  val
+PRC  0.004767915086807746
+ROC  0.5019035234883074
+loss  0.24504299461841583
+acc arousal  0.995539900439898
+acc sleep  0.0590859344894027
+Max Mem GB   6.31115264
+
+
+Epoch  28 phase:  train
+PRC  0.004510671642773421
+ROC  0.4935989636433701
+loss  0.21512527763843536
+acc arousal  0.9953850450787876
+acc sleep  0.05870861213288959
+Max Mem GB   6.31115264
+
+
+Epoch  28 phase:  val
+PRC  0.0048039749403131484
+ROC  0.5037994868019456
+loss  0.23428374528884888
+acc arousal  0.9955397395996687
+acc sleep  0.05944952963844497
+Max Mem GB   6.31115264
+
+
+Epoch  29 phase:  train
+PRC  0.004519401508810061
+ROC  0.4955151716044265
+loss  0.17678281664848328
+acc arousal  0.9953856871505391
+acc sleep  0.05868936766509021
+Max Mem GB   6.31115264
+
+
+Epoch  29 phase:  val
+PRC  0.004880101090999075
+ROC  0.5063337061138002
+loss  0.2231239527463913
+acc arousal  0.9955389353985219
+acc sleep  0.05964520004533606
+INFO - hello - Completed after 7:04:47

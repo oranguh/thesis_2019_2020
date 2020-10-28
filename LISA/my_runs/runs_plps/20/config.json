@@ -1,0 +1,35 @@
+{
+  "channel_id": 0,
+  "channels_to_use": 1,
+  "comment": "C3_A2_(sec)_norm_off",
+  "data_folder": "/project/marcoh/shhs/polysomnography/shh1_numpy/",
+  "data_name": "SHHS",
+  "dataloader_params": {
+    "batch_size": 3,
+    "num_workers": 4,
+    "shuffle": true
+  },
+  "lr": 0.0001,
+  "max_epochs": 30,
+  "model_name": "Deep_Sleep",
+  "optimizer_params": {
+    "lr": 0.0001,
+    "optim": "Adam"
+  },
+  "pretrained": false,
+  "seed": 564243509,
+  "sleep_stage_importance": 0,
+  "weights_arousal": [
+    0.0,
+    0.5,
+    0.5
+  ],
+  "weights_sleep": [
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.0,
+    0.2
+  ]
+}

@@ -1,0 +1,112 @@
+{
+  "AUPRC_arousal_arousal/train": {
+    "steps": [
+      0
+    ],
+    "timestamps": [
+      "2020-10-02T15:35:55.337149"
+    ],
+    "values": [
+      0.004604517640633024
+    ]
+  },
+  "AUPRC_arousal_arousal/val": {
+    "steps": [
+      0
+    ],
+    "timestamps": [
+      "2020-10-02T15:38:03.103345"
+    ],
+    "values": [
+      0.004868469648107778
+    ]
+  },
+  "AUROC_arousal/train": {
+    "steps": [
+      0
+    ],
+    "timestamps": [
+      "2020-10-02T15:35:55.329892"
+    ],
+    "values": [
+      0.5007658618196085
+    ]
+  },
+  "AUROC_arousal/val": {
+    "steps": [
+      0
+    ],
+    "timestamps": [
+      "2020-10-02T15:38:03.094314"
+    ],
+    "values": [
+      0.49704662620856993
+    ]
+  },
+  "Accuracy_arousal/train": {
+    "steps": [
+      0
+    ],
+    "timestamps": [
+      "2020-10-02T15:35:55.322039"
+    ],
+    "values": [
+      0.7245310575456807
+    ]
+  },
+  "Accuracy_arousal/val": {
+    "steps": [
+      0
+    ],
+    "timestamps": [
+      "2020-10-02T15:38:03.084763"
+    ],
+    "values": [
+      0.9947306328258824
+    ]
+  },
+  "Accuracy_sleep_staging/train": {
+    "steps": [
+      0
+    ],
+    "timestamps": [
+      "2020-10-02T15:35:55.322070"
+    ],
+    "values": [
+      0.11181068488351725
+    ]
+  },
+  "Accuracy_sleep_staging/val": {
+    "steps": [
+      0
+    ],
+    "timestamps": [
+      "2020-10-02T15:38:03.084801"
+    ],
+    "values": [
+      0.07574040575767879
+    ]
+  },
+  "Loss/train": {
+    "steps": [
+      0
+    ],
+    "timestamps": [
+      "2020-10-02T15:35:55.321979"
+    ],
+    "values": [
+      1.183914014787385
+    ]
+  },
+  "Loss/val": {
+    "steps": [
+      0
+    ],
+    "timestamps": [
+      "2020-10-02T15:38:03.084674"
+    ],
+    "values": [
+      1.1190986493054558
+    ]
+  }
+}

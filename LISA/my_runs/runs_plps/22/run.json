@@ -1,0 +1,156 @@
+{
+  "artifacts": [],
+  "command": "run",
+  "experiment": {
+    "base_dir": "/home/320086129/PycharmProjects/thesis_2019_2020/LISA",
+    "dependencies": [
+      "numpy==1.19.1",
+      "sacred==0.8.1",
+      "scikit-learn==0.23.2",
+      "torch==1.4.0"
+    ],
+    "mainfile": "train.py",
+    "name": "hello",
+    "repositories": [
+      {
+        "commit": "29a45d32c424b82a5333e799f8a942c132f7aa09",
+        "dirty": true,
+        "url": "https://github.com/oranguh/thesis_2019_2020.git"
+      },
+      {
+        "commit": "29a45d32c424b82a5333e799f8a942c132f7aa09",
+        "dirty": true,
+        "url": "https://github.com/oranguh/thesis_2019_2020.git"
+      },
+      {
+        "commit": "29a45d32c424b82a5333e799f8a942c132f7aa09",
+        "dirty": true,
+        "url": "https://github.com/oranguh/thesis_2019_2020.git"
+      },
+      {
+        "commit": "29a45d32c424b82a5333e799f8a942c132f7aa09",
+        "dirty": true,
+        "url": "https://github.com/oranguh/thesis_2019_2020.git"
+      },
+      {
+        "commit": "29a45d32c424b82a5333e799f8a942c132f7aa09",
+        "dirty": true,
+        "url": "https://github.com/oranguh/thesis_2019_2020.git"
+      },
+      {
+        "commit": "29a45d32c424b82a5333e799f8a942c132f7aa09",
+        "dirty": true,
+        "url": "https://github.com/oranguh/thesis_2019_2020.git"
+      },
+      {
+        "commit": "29a45d32c424b82a5333e799f8a942c132f7aa09",
+        "dirty": true,
+        "url": "https://github.com/oranguh/thesis_2019_2020.git"
+      }
+    ],
+    "sources": [
+      [
+        "ConvNet_IID.py",
+        "_sources/ConvNet_IID_b2d9d5204eaf760536c0625d42486171.py"
+      ],
+      [
+        "dataset.py",
+        "_sources/dataset_817a80b33aaee14f0e533b23dd869683.py"
+      ],
+      [
+        "deep_sleep.py",
+        "_sources/deep_sleep_6c6a2a099cd655482d7e40482915b0d8.py"
+      ],
+      [
+        "patterson_model.py",
+        "_sources/patterson_model_95368e227eb05a36d86ac2031b163674.py"
+      ],
+      [
+        "score2018.py",
+        "_sources/score2018_f3cfe6482b9d6a9381085c1d485ed11a.py"
+      ],
+      [
+        "tools.py",
+        "_sources/tools_589b4b2ac10a0629cc4dd72a5568dbe7.py"
+      ],
+      [
+        "train.py",
+        "_sources/train_2407ccd790439e720cf791634e60e0be.py"
+      ]
+    ]
+  },
+  "heartbeat": "2020-10-02T15:39:20.412837",
+  "host": {
+    "ENV": {},
+    "cpu": "Intel(R) Xeon(R) Gold 5218 CPU @ 2.30GHz",
+    "gpus": {
+      "driver_version": "418.87.00",
+      "gpus": [
+        {
+          "model": "Tesla T4",
+          "persistence_mode": true,
+          "total_memory": 15079
+        },
+        {
+          "model": "Tesla T4",
+          "persistence_mode": true,
+          "total_memory": 15079
+        },
+        {
+          "model": "Tesla T4",
+          "persistence_mode": true,
+          "total_memory": 15079
+        },
+        {
+          "model": "Tesla T4",
+          "persistence_mode": true,
+          "total_memory": 15079
+        },
+        {
+          "model": "Tesla T4",
+          "persistence_mode": true,
+          "total_memory": 15079
+        }
+      ]
+    },
+    "hostname": "ghildes",
+    "os": [
+      "Linux",
+      "Linux-3.10.0-1062.12.1.el7.x86_64-x86_64-with-redhat-7.7-Nitrogen"
+    ],
+    "python_version": "3.6.12"
+  },
+  "meta": {
+    "command": "run",
+    "options": {
+      "--beat-interval": null,
+      "--capture": null,
+      "--comment": null,
+      "--debug": false,
+      "--enforce_clean": false,
+      "--file_storage": null,
+      "--force": false,
+      "--help": false,
+      "--loglevel": null,
+      "--mongo_db": null,
+      "--name": null,
+      "--pdb": false,
+      "--print-config": false,
+      "--priority": null,
+      "--queue": false,
+      "--s3": null,
+      "--sql": null,
+      "--tiny_db": null,
+      "--unobserved": false,
+      "COMMAND": null,
+      "UPDATE": [],
+      "help": false,
+      "with": false
+    }
+  },
+  "resources": [],
+  "result": null,
+  "start_time": "2020-10-02T15:35:02.856151",
+  "status": "INTERRUPTED",
+  "stop_time": "2020-10-02T15:39:20.432357"
+}
