@@ -35,7 +35,10 @@ def main():
     # pre_traineds += sorted(Path("models/frequency").glob("*"))
     # pre_traineds += sorted(Path("models/Convnet").glob("*"))
 
-    pre_traineds += sorted(Path("models/weights").glob("*"))
+    pre_traineds += sorted(Path("models/weights").glob("*SHHS*"))
+    # pre_traineds += sorted(Path("models/Convnet").glob("Oct*"))
+    # pre_traineds += sorted(Path("models/Convnet").glob("Oct*"))
+    # pre_traineds += sorted(Path("models/howe_lstm").glob("*"))
 
     # print(pre_traineds)
     model_name = "Deep_Sleep"
@@ -46,8 +49,9 @@ def main():
     # pass
 
     for pre_trained_model in pre_traineds:
-        for data_name in ["snooze", "SHHS", "HMC"]:
-        # for data_name in ["HMC"]:
+        # for data_name in ["snooze", "SHHS", "HMC"]:
+        # for data_name in ["snooze", "SHHS"]:
+        for data_name in ["snooze"]:
 
             comment = pre_trained_model.name + "_to_" + data_name
             print(comment)
@@ -110,13 +114,13 @@ def validate(data_name, model_name, pre_trained_model, channel_index, comment):
             weights_sleep = [.2, .1, .3, .2, .0, .2]  # for Snooze
             weights_arousal = [.0, .05, .95]  # Snooze
         elif data_name == "HMC":
-            data_folder = 'E:\\HMC22\\test\\numpy'
+            data_folder = 'K:\\combined_HMC'
         else:
             print("{} wrong data for dataloader".format(data_name))
             exit()
 
         # Parameters for dataloader
-        dataloader_params = {'batch_size': 7,
+        dataloader_params = {'batch_size': 4,
                              'shuffle': False,
                              'num_workers': 4}
     else:
@@ -138,6 +142,7 @@ def validate(data_name, model_name, pre_trained_model, channel_index, comment):
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
     _, validation_set = get_dataloader(data_folder, model_name, data_name, size="default")
+    del _
     validation_generator = data.DataLoader(validation_set, **dataloader_params)
 
     dataloaders = {"val": validation_generator}
@@ -227,7 +232,8 @@ def validate(data_name, model_name, pre_trained_model, channel_index, comment):
 
 
             do_auroc(Challenge2018Scorer, true_array_, prediction_prob_arousal, ID, comment, epoch)
-            make_sleep_chart(true_array_, prediction_prob_arousal, annotations_sleep_, ID, comment, epoch)
+            if model_name != "ConvNet_IID" and model_name != "Howe_Patterson":
+                make_sleep_chart(true_array_, prediction_prob_arousal, annotations_sleep_, ID, comment, epoch)
 
             # set all 0 (unscored) to predictions to 1 (not-arousal)
             pred_array_[pred_array_ == 0] = 1
@@ -266,6 +272,7 @@ def validate(data_name, model_name, pre_trained_model, channel_index, comment):
 
             counters += 1
 
+            # print(asas)
             if counters == 1:
                 print("Max Mem GB  ", torch.cuda.max_memory_allocated(device=device) * 1e-9)
                 print("epoch ", epoch)
@@ -277,11 +284,10 @@ def validate(data_name, model_name, pre_trained_model, channel_index, comment):
                 pred_array = np.empty(0)
                 true_array_sleep = np.empty(0)
                 pred_array_sleep = np.empty(0)
+                # print(Challenge2018Scorer.gross_auprc(), Challenge2018Scorer.gross_auroc())
 
-                print(Challenge2018Scorer.gross_auprc(), Challenge2018Scorer.gross_auroc())
-
-                del Challenge2018Scorer
-                Challenge2018Scorer = Challenge2018Score()
+                # del Challenge2018Scorer
+                # Challenge2018Scorer = Challenge2018Score()
 
                 running_loss = 0.0
                 counters = 0
@@ -296,18 +302,29 @@ def validate(data_name, model_name, pre_trained_model, channel_index, comment):
             Path("statistics").mkdir(parents=True, exist_ok=True)
             Path("statistics/accuracies").mkdir(parents=True, exist_ok=True)
             Path("statistics/kappas").mkdir(parents=True, exist_ok=True)
+            Path("statistics/AUROC").mkdir(parents=True, exist_ok=True)
+            Path("statistics/AUPRC").mkdir(parents=True, exist_ok=True)
             np.save(Path("statistics/accuracies") / comment, accuracies)
             np.save(Path("statistics/kappas") / comment, kappas)
+            np.save(Path("statistics/AUROC") / comment, [x[0] for x in Challenge2018Scorer._record_auc.values()])
+            np.save(Path("statistics/AUPRC") / comment, [x[1] for x in Challenge2018Scorer._record_auc.values()])
+
             fig_confusion = sleep_staging_confusion(sleep_confusions, title=comment)
             writer.add_figure("Confusion Matrix/{}".format(phase), fig_confusion)
             break
     fig_confusion = sleep_staging_confusion(sleep_confusions, title=comment)
     writer.add_figure("Confusion Matrix/{}".format(phase), fig_confusion)
+
     Path("statistics").mkdir(parents=True, exist_ok=True)
     Path("statistics/accuracies").mkdir(parents=True, exist_ok=True)
     Path("statistics/kappas").mkdir(parents=True, exist_ok=True)
+    Path("statistics/AUROC").mkdir(parents=True, exist_ok=True)
+    Path("statistics/AUPRC").mkdir(parents=True, exist_ok=True)
     np.save(Path("statistics/accuracies") / comment, accuracies)
     np.save(Path("statistics/kappas") / comment, kappas)
+    np.save(Path("statistics/AUROC") / comment, [x[0] for x in Challenge2018Scorer._record_auc.values()])
+    np.save(Path("statistics/AUPRC") / comment, [x[1] for x in Challenge2018Scorer._record_auc.values()])
+
     print("END")
 
 
